@@ -399,6 +399,38 @@ public class BullFightScript : MonoBehaviour
         {
             Skill3.SetActive(true);
         }
+        if(YelloCowClear)
+        {
+            Skill4.SetActive(true);
+        }
+        if(KangKeonCowClear)
+        {
+            Skill5.SetActive(true);
+        }
+        if(BurningCowClear)
+        {
+            Skill6.SetActive(true);
+        }
+        if(MadCowClear)
+        {
+            Skill7.SetActive(true);
+        }
+        if(RockerCowClear)
+        {
+            Skill8.SetActive(true);
+        }
+        if(SeesawCowClear)
+        {
+            Skill9.SetActive(true);
+        }
+        if(WoodCowClear)
+        {
+            Skill10.SetActive(true);
+        }
+        if(CowboyCowClear)
+        {
+            Skill11.SetActive(true);
+        }
     }
 
     public Text BattleLog;
