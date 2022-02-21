@@ -376,6 +376,7 @@ public class BullFightScript : MonoBehaviour
             if(cowOnFireLeftInt == 0)
             {
                 cowOnFire.SetActive(false);
+                OnFire("MyCow", false);
             }
         }
         if(enemyCowOnFire.activeSelf)
@@ -386,6 +387,7 @@ public class BullFightScript : MonoBehaviour
             if(enemyCowOnFireLeftInt == 0)
             {
                 enemyCowOnFire.SetActive(false);
+                OnFire("EnemyCow", false);
             }
         }
 
@@ -433,12 +435,42 @@ public class BullFightScript : MonoBehaviour
         }
     }
 
+    // Status activity
+    public void OnFire(string cow, bool onoff)
+    {
+        Debug.Log("OnFire " + cow + ", " + onoff);
+        if(cow == "MyCow")
+        {
+            if(onoff)
+            {
+                MyCow.armor -= 50;
+            }
+            else
+            {
+                MyCow.armor += 50;
+            }
+        }
+        else
+        {
+            if(onoff)
+            {
+                EnemyCow.armor -= 50;
+            }
+            else
+            {
+                EnemyCow.armor += 50;
+            }
+
+        }
+    }
+
+
     public Text BattleLog;
     public Text WarningMessage;
 
 
     public void OnClickSkill(){
-        Debug.Log("스킬클릭"+myTurn);
+        Debug.Log("enemy armor " + EnemyCow.armor);
         if(myTurn == true)
         {
             StatusCheck();
@@ -457,17 +489,8 @@ public class BullFightScript : MonoBehaviour
                     }
                     else
                     {
-                        if(enemyCowOnFire.activeSelf)
-                        {
-                            BattleLog.text += MyCow.cowName + "의 박치기!" + EnemyCow.enemyName + "에게 <color=red>" + (MyCow.atkDmg - EnemyCow.armor - 50) + "</color>의 피해를 입혔다!\n";
-                            EnemyCow.nowHP -= (MyCow.atkDmg - EnemyCow.armor - 50);
-
-                        }
-                        else
-                        {
-                            BattleLog.text += MyCow.cowName + "의 박치기!" + EnemyCow.enemyName + "에게 <color=red>" + (MyCow.atkDmg - EnemyCow.armor) + "</color>의 피해를 입혔다!\n";
-                            EnemyCow.nowHP -= (MyCow.atkDmg - EnemyCow.armor);
-                        }
+                        BattleLog.text += MyCow.cowName + "의 박치기!" + EnemyCow.enemyName + "에게 <color=red>" + (MyCow.atkDmg - EnemyCow.armor) + "</color>의 피해를 입혔다!\n";
+                        EnemyCow.nowHP -= (MyCow.atkDmg - EnemyCow.armor);
                     }
                 }
                 turnEnd = true;
@@ -493,16 +516,8 @@ public class BullFightScript : MonoBehaviour
                         }
                         else
                         {
-                            if(enemyCowOnFire.activeSelf)
-                            {
-                                BattleLog.text += MyCow.cowName + "의 핵꿀밤! " + EnemyCow.enemyName + "에게 <color=red>" + (MyCow.atkDmg * 2 - EnemyCow.armor) + "</color>의 피해를 입혔다!\n";
-                                EnemyCow.nowHP -= (MyCow.atkDmg * 2 - EnemyCow.armor);
-                            }
-                            else
-                            {
-                                BattleLog.text += MyCow.cowName + "의 핵꿀밤! " + EnemyCow.enemyName + "에게 <color=red>" + (MyCow.atkDmg * 2 - EnemyCow.armor - 50) + "</color>의 피해를 입혔다!\n";
-                                EnemyCow.nowHP -= (MyCow.atkDmg * 2 - EnemyCow.armor - 50);
-                            }
+                            BattleLog.text += MyCow.cowName + "의 핵꿀밤! " + EnemyCow.enemyName + "에게 <color=red>" + (MyCow.atkDmg * 2 - EnemyCow.armor - 50) + "</color>의 피해를 입혔다!\n";
+                            EnemyCow.nowHP -= (MyCow.atkDmg * 2 - EnemyCow.armor - 50);
                         }
                     }
                     turnEnd = true;
@@ -523,8 +538,12 @@ public class BullFightScript : MonoBehaviour
                 }
                 cowBlindLeft.text = "<color=red>0</color>";
                 cowBlind.SetActive(false);
-                cowOnFireLeft.text = "<color=red>0</color>";
-                cowOnFire.SetActive(false);
+                if(cowOnFire.activeSelf)
+                {
+                    cowOnFireLeft.text = "<color=red>0</color>";
+                    cowOnFire.SetActive(false);
+                    OnFire("EnemyCow", false);
+                }
                 turnEnd = true;
             }
             else if(Skill_Name.text == "거름차기")
@@ -579,16 +598,8 @@ public class BullFightScript : MonoBehaviour
                             }
                             else
                             {
-                                if(enemyCowOnFire.activeSelf)
-                                {
-                                    BattleLog.text += MyCow.cowName + "의 3단컴보! " + EnemyCow.enemyName + "에게 " + (MyCow.atkDmg - EnemyCow.armor - 50) +"의 데미지를 입혔다!\n";
-                                    EnemyCow.nowHP -= (MyCow.atkDmg - EnemyCow.armor - 50);
-                                }
-                                else
-                                {
-                                    BattleLog.text += MyCow.cowName + "의 3단컴보! " + EnemyCow.enemyName + "에게 " + (MyCow.atkDmg - EnemyCow.armor) +"의 데미지를 입혔다!\n";
-                                    EnemyCow.nowHP -= (MyCow.atkDmg - EnemyCow.armor);
-                                }
+                                BattleLog.text += MyCow.cowName + "의 3단컴보! " + EnemyCow.enemyName + "에게 " + (MyCow.atkDmg - EnemyCow.armor) +"의 데미지를 입혔다!\n";
+                                EnemyCow.nowHP -= (MyCow.atkDmg - EnemyCow.armor);
                             }
                         }
                     }
@@ -600,6 +611,7 @@ public class BullFightScript : MonoBehaviour
                 BattleLog.text += MyCow.cowName + "의 불고기!" + EnemyCow.enemyName + "에게 <color=red>500</color>의 피해를 입혔다!\n";
                 EnemyCow.nowHP -= 500;
                 enemyCowOnFire.SetActive(true);
+                OnFire("EnemyCow", true);
                 enemyCowOnFireLeft.text = "<color=red>4</color>";
                 turnEnd = true;
             }
