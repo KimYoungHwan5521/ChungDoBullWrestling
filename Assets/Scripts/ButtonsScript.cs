@@ -82,6 +82,9 @@ public class ButtonsScript : MonoBehaviour
     // market
     public GameObject Food_Market;
     public GameObject Confirm_Purchase;
+    public GameObject Alert;
+    public Text Alert_Text;
+    public GameObject Alert_Confirm;
     public void OnClickFoodVendor(){
         Food_Market.SetActive(true);
     }
@@ -90,14 +93,34 @@ public class ButtonsScript : MonoBehaviour
     }
     public Text Merchandise_Text;
     public Text Purchase_Text;
+    public Text Merchandise_Price;
+    public static int price = 0;
     public void OnClickFoodMarchandise(){
         Purchase_Text.text = Merchandise_Text.text + "을(를) 구매 합니까?";
+        string[] spMP = Merchandise_Price.text.Split('냥');
+        price = int.Parse(spMP[0]);
+        
         Confirm_Purchase.SetActive(true);
     }
     public void OnClickConfirmPurchaseConfirm(){
-        //
+        Debug.Log(price);
+        if(Player.gold < price)
+        {
+            Alert_Text.text = "소지금이 부족합니다.";
+            Alert.SetActive(true);
+        }
+        else
+        {
+            Player.gold -= price;
+            Alert_Text.text = "성공적으로 구매하였습니다.";
+            Alert.SetActive(true);
+        }
     }
     public void OnClickConfirmPurchaseDeny(){
+        Confirm_Purchase.SetActive(false);
+    }
+    public void OnClickAlertCinfirm(){
+        Alert.SetActive(false);
         Confirm_Purchase.SetActive(false);
     }
 
