@@ -32,7 +32,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         GoldText.text = gold.ToString();
-        Debug.Log("slot size: "+Slot.Length);
         for(int i=0; i<Slot.Length; i++)
         {
             Slot[i].SetActive(i<inventory.Count);
