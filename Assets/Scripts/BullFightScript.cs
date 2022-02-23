@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class BullFightScript : MonoBehaviour
 {
-    public Text Mouse_Overed_Skill;
+    // public Text Mouse_Overed_Skill;
     public Text Skill_Name;
     public Text Mana_Required;
     public Text Skill_Explanation;
@@ -60,62 +60,103 @@ public class BullFightScript : MonoBehaviour
     public GameObject Skill11;
 
     public ScrollRect scroll_rect;
-    public void MouseOverToSkill(){
-        Skill_Name.text = Mouse_Overed_Skill.text;
-        if(Skill_Name.text == "박치기")
+    public void MouseOverToSkill(int skillID){
+        Debug.Log(skillID);
+        if(skillID == 0)
         {
+            Skill_Name.text = "박치기";
             Mana_Required.text = "<color=blue>활력 0</color>";
             Skill_Explanation.text = "머리를 받아 피해를 입힌다.";
         }
-        else if(Skill_Name.text == "핵꿀밤")
+        else if(skillID == 1)
         {
+            Skill_Name.text = "핵꿀밤";
             Mana_Required.text = "<color=blue>활력 20</color>";
             Skill_Explanation.text = "머리를 쥐어박아 큰 피해를 입힌다.";
         }
-        else if(Skill_Name.text == "우유마시기")
+        else if(skillID == 2)
         {
+            Skill_Name.text = "우유마시기";
             Mana_Required.text = "<color=blue>활력 0</color>";
             Skill_Explanation.text = "우유를 마셔 모든 해로운 상태이상을 회복하고, 체력과 활력을 조금 회복한다.";
         }
-        else if(Skill_Name.text == "거름차기")
+        else if(skillID == 3)
         {
+            Skill_Name.text = "거름차기";
             Mana_Required.text = "<color=blue>활력 20</color>";
             Skill_Explanation.text = "뒷발로 거름을 발로차 상대의 눈을 멀게한다.";
         }
-        else if(Skill_Name.text == "3단컴보")
+        else if(skillID == 4)
         {
+            Skill_Name.text = "3단컴보";
             Mana_Required.text = "<color=blue>활력 30</color>";
             Skill_Explanation.text = "3단컴보로 3번 공격한다.";
         }
-        else if(Skill_Name.text == "불고기")
+        else if(skillID == 5)
         {
+            Skill_Name.text = "불고기";
             Mana_Required.text = "<color=blue>활력 40</color>";
             Skill_Explanation.text = "상대에게 불을질러 방어력을 무시하고 고정피해를 입힌다.";
         }
-        else if(Skill_Name.text == "크로이츠펠트 야곱병")
+        else if(skillID == 6)
         {
+            Skill_Name.text = "크로이츠펠트 야곱병";
             Mana_Required.text = "<color=blue>활력 30</color>";
             Skill_Explanation.text = "광우병의 일종. 광폭 상태에 돌입한다.";
         }
-        else if(Skill_Name.text == "샤우팅")
+        else if(skillID == 7)
         {
+            Skill_Name.text = "샤우팅";
             Mana_Required.text = "<color=blue>활력 20</color>";
             Skill_Explanation.text = "강력한 샤우팅으로 상대의 이로운 상태를 날려버린다.";
         }
-        else if(Skill_Name.text == "균형잡기")
+        else if(skillID == 8)
         {
+            Skill_Name.text = "균형잡기";
             Mana_Required.text = "<color=blue>활력 50</color>";
             Skill_Explanation.text = "균형을 잡아 상대의 스킬을 회피할 수 있는 상태가 된다.";
         }
-        else if(Skill_Name.text == "운기조식")
+        else if(skillID == 9)
         {
+            Skill_Name.text = "운기조식";
             Mana_Required.text = "<color=blue>활력 0</color>";
             Skill_Explanation.text = "정신을 집중해 모든 상태이상을 제거하고 면역상태가 되고 활력을 회복한다.";
         }
-        else if(Skill_Name.text == "총쏘기")
+        else if(skillID == 10)
         {
+            Skill_Name.text = "총쏘기";
             Mana_Required.text = "<color=blue>활력 50</color>";
             Skill_Explanation.text = "총을 쏜다.";
+        }
+        else if(skillID == 1000)
+        {
+            Skill_Name.text = "<color=red>실명</color>";
+            Mana_Required.text = "";
+            Skill_Explanation.text = "눈이 보이지 않아 물리공격을 맞출 수 없게된다.";
+        }
+        else if(skillID == 1001)
+        {
+            Skill_Name.text = "<color=blue>광폭</color>";
+            Mana_Required.text = "";
+            Skill_Explanation.text = "공격력과 방어력이 증가한다.";
+        }
+        else if(skillID == 1002)
+        {
+            Skill_Name.text = "<color=blue>균형</color>";
+            Mana_Required.text = "";
+            Skill_Explanation.text = "균형을 잡아 물리공격을 피할 수 있다.";
+        }
+        else if(skillID == 1003)
+        {
+            Skill_Name.text = "<color=red>불붙음</color>";
+            Mana_Required.text = "";
+            Skill_Explanation.text = "몸에 불이 붙어 지속피해를 입고, 방어력이 낮아진다.";
+        }
+        else if(skillID == 1004)
+        {
+            Skill_Name.text = "<color=blue>면역</color>";
+            Mana_Required.text = "";
+            Skill_Explanation.text = "해로운 상태이상에 걸리지 않는다.";
         }
         else
         {
@@ -123,40 +164,9 @@ public class BullFightScript : MonoBehaviour
         }
     }
 
-    public void MouseOverToStatus(){
-        Debug.Log("mouse overed");
-        Skill_Name.text = Mouse_Overed_Skill.text;
-        Mana_Required.text = "";
-        if(Skill_Name.text == "<color=red>실명</color>")
-        {
-            Skill_Explanation.text = "눈이 보이지 않아 물리공격을 맞출 수 없게된다.";
-        }
-        else if(Skill_Name.text == "<color=blue>광폭</color>")
-        {
-            Skill_Explanation.text = "공격력과 방어력이 증가한다.";
-        }
-        if(Skill_Name.text == "<color=blue>균형</color>")
-        {
-            Skill_Explanation.text = "균형을 잡아 물리공격을 피할 수 있다.";
-        }
-        if(Skill_Name.text == "<color=red>불붙음</color>")
-        {
-            Skill_Explanation.text = "몸에 불이 붙어 지속피해를 입고, 방어력이 낮아진다.";
-        }
-        if(Skill_Name.text == "<color=blue>면역</color>")
-        {
-            Skill_Explanation.text = "해로운 상태이상에 걸리지 않는다.";
-        }
-
-    }
-
-    // public MyCow myCow;
-    // public EnemyCow enemyCow;
     public bool myTurn;
     public bool turnEnd;
     public Text turn;
-    // public string[] statusName = new string[5] {"<color=red>실명</color>", "", "", "", ""};
-    // public bool battleWin = false;
 
     // Start is called before the first frame update
     void Start()
@@ -520,13 +530,12 @@ public class BullFightScript : MonoBehaviour
     public Text WarningMessage;
 
 
-    public void OnClickSkill(){
+    public void OnClickSkill(int skillID){
         Debug.Log("enemy armor " + EnemyCow.armor);
         if(myTurn == true)
         {
             StatusCheck();
-            Debug.Log(Skill_Name.text);
-            if(Skill_Name.text == "박치기")
+            if(skillID == 0)
             {
                 if(cowBlind.activeSelf)
                 {
@@ -555,7 +564,7 @@ public class BullFightScript : MonoBehaviour
                 }
                 turnEnd = true;
             }
-            else if(Skill_Name.text == "핵꿀밤")
+            else if(skillID == 1)
             {
                 if(MyCow.nowMP < 20)
                 {
@@ -592,7 +601,7 @@ public class BullFightScript : MonoBehaviour
                     turnEnd = true;
                 }
             }
-            else if(Skill_Name.text == "우유마시기")
+            else if(skillID == 2)
             {
                 BattleLog.text += MyCow.cowName + "의 우유마시기! <color=green>" + (int)((float)EnemyCow.maxHP / 10) + "</color>의 체력과 <color=blue>50</color>의 활력을 회복!\n";
                 MyCow.nowHP += (int)((float)EnemyCow.maxHP / 10);
@@ -615,7 +624,7 @@ public class BullFightScript : MonoBehaviour
                 }
                 turnEnd = true;
             }
-            else if(Skill_Name.text == "거름차기")
+            else if(skillID == 3)
             {
                 if(MyCow.nowMP < 20)
                 {
@@ -644,7 +653,7 @@ public class BullFightScript : MonoBehaviour
                     turnEnd = true;
                 }
             }
-            else if(Skill_Name.text == "3단컴보")
+            else if(skillID == 4)
             {
                 if(MyCow.nowMP < 30)
                 {
@@ -684,7 +693,7 @@ public class BullFightScript : MonoBehaviour
                     turnEnd = true;
                 }
             }
-            else if(Skill_Name.text == "불고기")
+            else if(skillID == 5)
             {
                 BattleLog.text += MyCow.cowName + "의 불고기! " + EnemyCow.enemyName + "에게 <color=red>500</color>의 피해를 입혔다!\n";
                 EnemyCow.nowHP -= 500;
@@ -696,7 +705,7 @@ public class BullFightScript : MonoBehaviour
                 enemyCowOnFireLeft.text = "<color=red>4</color>";
                 turnEnd = true;
             }
-            else if(Skill_Name.text == "크로이츠펠트 야곱병")
+            else if(skillID == 6)
             {
                 BattleLog.text += MyCow.cowName + "의 크로이츠펠트 야곱병! " + MyCow.cowName + "은(는) 광폭 상태가 되었다!\n";
                 if(!cowRage.activeSelf)
@@ -882,7 +891,7 @@ public class BullFightScript : MonoBehaviour
     {
         MyCow.nowHP = MyCow.maxHP;
         MyCow.nowMP = MyCow.maxMP;
-        SceneManager.LoadScene("CowshedScene");
+        SceneManager.LoadScene("VillageScene");
     }
 
 }
