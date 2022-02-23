@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
         public string itemName;
         public string itemType;
         public int itemPrice;
+        public string itemExplain;
         // public Sprite itemImage;
         public int count = 1;
     }
@@ -22,7 +23,8 @@ public class Player : MonoBehaviour
         Item item = new Item();
         item.itemName = "할아버지의 유품";
         item.itemType = "기타";
-        item.itemPrice = 30000;
+        item.itemPrice = 60000;
+        item.itemExplain = "할아버지가 남긴 유품이자 집안의 가보이다. 비싸보인다.";
         inventory.Add(item);
     }
 
@@ -41,5 +43,25 @@ public class Player : MonoBehaviour
             itemInfo[1].text = i < inventory.Count ? inventory[i].count.ToString() : "";
 
         }
+    }
+    
+    public GameObject ItemExplain;
+    public RectTransform ItemExplainRect;
+    public Text ItemExplainName;
+    public Text ItemExplainType;
+    public Text ItemExplainExplain;
+    public void MouseOverToInventory(int slotNum)
+    {
+        ItemExplainName.text = inventory[slotNum].itemName;
+        ItemExplainType.text = inventory[slotNum].itemType;
+        ItemExplainExplain.text = inventory[slotNum].itemExplain;
+
+        Vector2 mousePos = Input.mousePosition;
+        ItemExplainRect.position = mousePos + new Vector2(ItemExplainRect.rect.width / 2, -ItemExplainRect.rect.height / 2);
+        ItemExplain.SetActive(true);
+    }
+    public void MouseExitToInventory()
+    {
+        ItemExplain.SetActive(false);
     }
 }

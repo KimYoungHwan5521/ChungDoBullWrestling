@@ -8,15 +8,17 @@ using Newtonsoft.Json;
 [System.Serializable]
 public class Item
 {
-    public Item(string _Name, string _Type, string _Price)
+    public Item(string _Name, string _Type, string _Price, string _Explain)
     {
         itemName = _Name;
         itemType = _Type;
         itemPrice = _Price;
+        itemExplain = _Explain;
     }
     public string itemName;
     public string itemType;
     public string itemPrice;
+    public string itemExplain;
     // public Sprite itemImage;
     // public int count = 1;
 }
@@ -25,7 +27,6 @@ public class GameManager : MonoBehaviour
 {
     public TextAsset ItemDB;
     public List<Item> AllItemList, MyItemList, CurItemList;
-    // public Item MyItem;
 
     // Start is called before the first frame update
     void Start()
@@ -36,11 +37,11 @@ public class GameManager : MonoBehaviour
             string[] row = line[i].Split('\t');
             if(i == 0)
             {
-                AllItemList.Add(new Item(row[0], row[1], row[2]));
+                AllItemList.Add(new Item(row[0], row[1], row[2], row[3]));
             }
             else
             {
-                AllItemList.Add(new Item(row[0].Substring(1), row[1], row[2]));
+                AllItemList.Add(new Item(row[0].Substring(1), row[1], row[2], row[3]));
             }
         }
         SetMarketType("FoodMarket");
@@ -81,9 +82,7 @@ public class GameManager : MonoBehaviour
     }
 
     public GameObject[] Marchandise;
-    // public Text Merchandise_Text;
     public Text Purchase_Text;
-    // public Text Merchandise_Price;
 
     public void SetMarketType(string market)
     {
@@ -94,25 +93,41 @@ public class GameManager : MonoBehaviour
             {
                 Marchandise[i].SetActive(i<CurItemList.Count);
                 Text[] itemInfo = Marchandise[i].GetComponentsInChildren<Text>();
-                // Debug.Log(itemInfo.Length);
                 itemInfo[0].text = i < CurItemList.Count ? CurItemList[i].itemName : "";
                 itemInfo[1].text = i < CurItemList.Count ? CurItemList[i].itemPrice : "";
 
             }
         }
     }
+
+    public GameObject ItemExplain;
+    public RectTransform ItemExplainRect;
+    public Text ItemExplainName;
+    public Text ItemExplainType;
+    public Text ItemExplainExplain;
+    public void MouseOverToMarchandise(int slotNum)
+    {
+        ItemExplainName.text = CurItemList[slotNum].itemName;
+        ItemExplainType.text = CurItemList[slotNum].itemType;
+        ItemExplainExplain.text = CurItemList[slotNum].itemExplain;
+
+        Vector2 mousePos = Input.mousePosition;
+        ItemExplainRect.position = mousePos + new Vector2(ItemExplainRect.rect.width / 2, -ItemExplainRect.rect.height / 2);
+        ItemExplain.SetActive(true);
+    }
+    public void MouseExitToMarchandise()
+    {
+        ItemExplain.SetActive(false);
+    }
+
     public void OnClickFoodMarchandise(int slotNum)
     {
         slotnum = slotNum;
         Purchase_Text.text = CurItemList[slotNum].itemName + "을(를) 구매 합니까?";
-        // merchandiseText = Merchandise_Text.text;
-        // string[] spMP = Merchandise_Price.text.Split('냥');
-        // price = int.Parse(spMP[0]);
         Confirm_Purchase.SetActive(true);
         
     }
     public void OnClickConfirmPurchaseConfirm(){
-        // Debug.Log(price);
         int price = int.Parse(CurItemList[slotnum].itemPrice);
         if(Player.gold < price)
         {
@@ -138,6 +153,7 @@ public class GameManager : MonoBehaviour
                 item.itemName = CurItemList[slotnum].itemName;
                 item.itemType = CurItemList[slotnum].itemType;
                 item.itemPrice = price;
+                item.itemExplain = CurItemList[slotnum].itemExplain;
                 Player.inventory.Add(item);
             }
             Alert_Text.text = "성공적으로 구매하였습니다.";
