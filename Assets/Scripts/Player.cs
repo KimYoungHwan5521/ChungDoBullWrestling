@@ -44,6 +44,10 @@ public class Player : MonoBehaviour
 
         }
     }
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
     
     public GameObject ItemExplain;
     public RectTransform ItemExplainRect;

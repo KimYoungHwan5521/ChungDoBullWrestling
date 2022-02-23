@@ -45,6 +45,12 @@ public class ButtonsScript : MonoBehaviour
         Debug.Log("Skip");
     }
 
+    // ingame
+    public GameObject Cowshed;
+    public GameObject Village;
+    public GameObject Market;
+    public GameObject Stadium;
+
     // cowshed
     public GameObject Cow_Status;
     public void OnClickCow(){
@@ -55,6 +61,7 @@ public class ButtonsScript : MonoBehaviour
         Cow_Status.SetActive(false);
     }
 
+    public GameObject ToVillage;
     public GameObject To_Village;
     public void MouseOverToVillage(){
         To_Village.SetActive(true);
@@ -65,18 +72,36 @@ public class ButtonsScript : MonoBehaviour
     }
 
     public void OnClickToVillage(){
-        SceneManager.LoadScene("VillageScene");
+        // SceneManager.LoadScene("VillageScene");
+        Cowshed.SetActive(false);
+        Market.SetActive(false);
+        Stadium.SetActive(false);
+        Village.SetActive(true);
+        ToVillage.SetActive(false);
+
     }
 
     // village
     public void OnClickCowshed(){
-        SceneManager.LoadScene("CowshedScene");
+        // SceneManager.LoadScene("CowshedScene");
+        Village.SetActive(false);
+        Cowshed.SetActive(true);
+        ToVillage.SetActive(true);
+        To_Village.SetActive(false);
     }
     public void OnClickMarket(){
-        SceneManager.LoadScene("MarketScene");
+        // SceneManager.LoadScene("MarketScene");
+        Village.SetActive(false);
+        Market.SetActive(true);
+        ToVillage.SetActive(true);
+        To_Village.SetActive(false);
     }
     public void OnClickStadium(){
-        SceneManager.LoadScene("StadiumScene");
+        // SceneManager.LoadScene("StadiumScene");
+        Village.SetActive(false);
+        Stadium.SetActive(true);
+        ToVillage.SetActive(true);
+        To_Village.SetActive(false);
     }
 
     // market
