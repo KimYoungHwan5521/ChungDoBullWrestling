@@ -171,7 +171,7 @@ public class BullFightScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scroll_rect = GameObject.FindObjectOfType<ScrollRect>();
+        // scroll_rect = GameObject.FindObjectOfType<ScrollRect>();
         myTurn = true;
 
     }
@@ -190,6 +190,7 @@ public class BullFightScript : MonoBehaviour
                 if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '우유마시기'를 배웠다!";
                 if(dialogIndex==2)
                 {
+                    WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
                     dialogIndex = 0;
@@ -205,6 +206,7 @@ public class BullFightScript : MonoBehaviour
                 if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '거름차기'를 배웠다!";
                 if(dialogIndex==2)
                 {
+                    WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
                     dialogIndex = 0;
@@ -220,6 +222,7 @@ public class BullFightScript : MonoBehaviour
                 if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '3단컴보'를 배웠다!";
                 if(dialogIndex==2)
                 {
+                    WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
                     dialogIndex = 0;
@@ -236,6 +239,7 @@ public class BullFightScript : MonoBehaviour
                 if(dialogIndex==2) WarningMessage.text = MyCow.cowName + "은(는) 기술 '불고기'를 배웠다!";
                 if(dialogIndex==3)
                 {
+                    WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
                     dialogIndex = 0;
@@ -251,6 +255,7 @@ public class BullFightScript : MonoBehaviour
                 if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '크로이츠펠트 야곱병'을 배웠다!";
                 if(dialogIndex==2)
                 {
+                    WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
                     dialogIndex = 0;
@@ -266,6 +271,7 @@ public class BullFightScript : MonoBehaviour
                 if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '샤우팅'을 배웠다!";
                 if(dialogIndex==2)
                 {
+                    WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
                     dialogIndex = 0;
@@ -281,6 +287,7 @@ public class BullFightScript : MonoBehaviour
                 if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '균형잡기'를 배웠다!";
                 if(dialogIndex==2)
                 {
+                    WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
                     dialogIndex = 0;
@@ -297,6 +304,7 @@ public class BullFightScript : MonoBehaviour
                 if(dialogIndex==2) WarningMessage.text = MyCow.cowName + "은(는) 기술 '운기조식'을 배웠다!";
                 if(dialogIndex==3)
                 {
+                    WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
                     dialogIndex = 0;
@@ -312,6 +320,7 @@ public class BullFightScript : MonoBehaviour
                 if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '총쏘기'를 배웠다!";
                 if(dialogIndex==2)
                 {
+                    WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
                     dialogIndex = 0;
@@ -327,6 +336,7 @@ public class BullFightScript : MonoBehaviour
                 if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '우유20L마시기'를 배웠다!";
                 if(dialogIndex==2)
                 {
+                    WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
                     dialogIndex = 0;
@@ -343,6 +353,7 @@ public class BullFightScript : MonoBehaviour
                 if(dialogIndex==2) WarningMessage.text = MyCow.cowName + "은(는) 기술 '뿔미사일'을 배웠다!";
                 if(dialogIndex==3)
                 {
+                    WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
                     dialogIndex = 0;
@@ -353,10 +364,6 @@ public class BullFightScript : MonoBehaviour
 
     }
     
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
 
     public void StatusCheck()
     {
@@ -887,11 +894,22 @@ public class BullFightScript : MonoBehaviour
 
         
     }
+    public GameObject Cowshed;
+    public GameObject BullFight;
+    public GameObject TopMenuBar;
+    public GameObject ToVillage;
+    public GameObject To_Village;
     public void BattleOver()
     {
         MyCow.nowHP = MyCow.maxHP;
         MyCow.nowMP = MyCow.maxMP;
-        SceneManager.LoadScene("VillageScene");
+        BattleLog.text = "";
+        // SceneManager.LoadScene("VillageScene");
+        ToVillage.SetActive(true);
+        To_Village.SetActive(false);
+        Cowshed.SetActive(true);
+        BullFight.SetActive(false);
+        TopMenuBar.SetActive(true);
     }
 
 }

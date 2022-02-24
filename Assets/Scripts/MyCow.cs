@@ -29,8 +29,4 @@ public class MyCow : MonoBehaviour
         MPbar.fillAmount = (float)nowMP / (float)maxMP;
     }
     
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
 }

@@ -33,8 +33,4 @@ public class EnemyCow : MonoBehaviour
         HPbar.fillAmount = (float)nowHP / (float)maxHP;
     }
 
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
 }

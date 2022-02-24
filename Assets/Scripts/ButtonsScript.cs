@@ -50,11 +50,24 @@ public class ButtonsScript : MonoBehaviour
     public GameObject Village;
     public GameObject Market;
     public GameObject Stadium;
+    public GameObject BullFight;
+    public GameObject ImageVS;
+    public GameObject TopMenuBar;
 
     // cowshed
     public GameObject Cow_Status;
+    public Text CowName;
+    public Text CowMaxHP;
+    public Text CowMaxMP;
+    public Text CowAtkDmg;
+    public Text CowArmor;
     public void OnClickCow(){
         Cow_Status.SetActive(true);
+        CowName.text = MyCow.cowName;
+        CowMaxHP.text = MyCow.maxHP.ToString();
+        CowMaxMP.text = MyCow.maxMP.ToString();
+        CowAtkDmg.text = MyCow.atkDmg.ToString();
+        CowArmor.text = MyCow.armor.ToString();
     }
 
     public void OnClickCowStatusClose(){
@@ -108,7 +121,12 @@ public class ButtonsScript : MonoBehaviour
 
     // stadium
     public void OnClickFight(){
-        SceneManager.LoadScene("BullFightScene");
+        // SceneManager.LoadScene("BullFightScene");
+        ToVillage.SetActive(false);
+        Stadium.SetActive(false);
+        BullFight.SetActive(true);
+        ImageVS.SetActive(true);
+        TopMenuBar.SetActive(false);
     }
 
     // Top menu bar
