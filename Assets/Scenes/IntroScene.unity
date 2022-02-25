@@ -367,7 +367,20 @@ MonoBehaviour:
   imageSprite1: {fileID: 21300000, guid: 1a282da77a1c2fb48b197991d8ddd3aa, type: 3}
   imageSprite2: {fileID: 21300000, guid: 3d54cea8504c09842bda568753c9ed98, type: 3}
   count: 0
+  Cowshed: {fileID: 0}
+  Village: {fileID: 0}
+  Market: {fileID: 0}
+  Stadium: {fileID: 0}
+  BullFight: {fileID: 0}
+  ImageVS: {fileID: 0}
+  TopMenuBar: {fileID: 0}
   Cow_Status: {fileID: 0}
+  CowName: {fileID: 0}
+  CowMaxHP: {fileID: 0}
+  CowMaxMP: {fileID: 0}
+  CowAtkDmg: {fileID: 0}
+  CowArmor: {fileID: 0}
+  ToVillage: {fileID: 0}
   To_Village: {fileID: 0}
   Inventory: {fileID: 0}
 --- !u!4 &1227511397
@@ -648,10 +661,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 2560, y: 1440}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3

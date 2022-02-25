@@ -34,14 +34,14 @@ public class ButtonsScript : MonoBehaviour
         }else if(count == 1){
             introImage.sprite = imageSprite2;
         }else{
-            SceneManager.LoadScene("CowshedScene");
+            SceneManager.LoadScene("IngameScene");
             Debug.Log("Cowshed");
         }
         count += 1;
     }
 
     public void OnClickIntroSkip(){
-        SceneManager.LoadScene("CowshedScene");
+        SceneManager.LoadScene("IngameScene");
         Debug.Log("Skip");
     }
 
