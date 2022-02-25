@@ -68,9 +68,9 @@ public class GameManager : MonoBehaviour
     // market system
     public GameObject Food_Market;
     public GameObject Confirm_Purchase;
+    public Text Purchase_Text;
     public GameObject Alert;
     public Text Alert_Text;
-    public GameObject Alert_Confirm;
     public static int slotnum = 0;
 
     public void OnClickFoodVendor(){
@@ -82,7 +82,6 @@ public class GameManager : MonoBehaviour
     }
 
     public GameObject[] Marchandise;
-    public Text Purchase_Text;
 
     public void SetMarketType(string market)
     {

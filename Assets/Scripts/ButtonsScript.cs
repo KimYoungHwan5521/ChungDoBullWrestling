@@ -61,6 +61,9 @@ public class ButtonsScript : MonoBehaviour
     public Text CowMaxMP;
     public Text CowAtkDmg;
     public Text CowArmor;
+    public Text CowHunger;
+    public Text CowCleanliness;
+    public Text CowCondition;
     public void OnClickCow(){
         Cow_Status.SetActive(true);
         CowName.text = MyCow.cowName;
@@ -68,6 +71,9 @@ public class ButtonsScript : MonoBehaviour
         CowMaxMP.text = MyCow.maxMP.ToString();
         CowAtkDmg.text = MyCow.atkDmg.ToString();
         CowArmor.text = MyCow.armor.ToString();
+        CowHunger.text = MyCow.hunger.ToString();
+        CowCleanliness.text = MyCow.cleanliness.ToString();
+        CowCondition.text = MyCow.condition.ToString();
     }
 
     public void OnClickCowStatusClose(){
