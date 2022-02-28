@@ -38,7 +38,6 @@ public class Player : MonoBehaviour
         {
             Slot[i].SetActive(i<inventory.Count);
             Text[] itemInfo = Slot[i].GetComponentsInChildren<Text>();
-            Debug.Log(itemInfo.Length);
             itemInfo[0].text = i < inventory.Count ? inventory[i].itemName : "";
             itemInfo[1].text = i < inventory.Count ? inventory[i].count.ToString() : "";
 

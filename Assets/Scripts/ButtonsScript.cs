@@ -71,9 +71,54 @@ public class ButtonsScript : MonoBehaviour
         CowMaxMP.text = MyCow.maxMP.ToString();
         CowAtkDmg.text = MyCow.atkDmg.ToString();
         CowArmor.text = MyCow.armor.ToString();
-        CowHunger.text = MyCow.hunger.ToString();
-        CowCleanliness.text = MyCow.cleanliness.ToString();
-        CowCondition.text = MyCow.condition.ToString();
+        if(MyCow.hunger > 70)
+        {
+            CowHunger.text = "<color=lime>" + MyCow.hunger.ToString() + "</color>";
+        }
+        else if(MyCow.hunger > 40)
+        {
+            CowHunger.text = "<color=orange>" + MyCow.hunger.ToString() + "</color>";
+        }
+        else if(MyCow.hunger > 10)
+        {
+            CowHunger.text = "<color=red>" + MyCow.hunger.ToString() + "</color>";
+        }
+        else
+        {
+            CowHunger.text = "<color=maroon>" + MyCow.hunger.ToString() + "</color>";
+        }
+        if(MyCow.cleanliness > 70)
+        {
+            CowCleanliness.text = "<color=lime>" + MyCow.cleanliness.ToString() + "</color>";
+        }
+        else if(MyCow.cleanliness > 40)
+        {
+            CowCleanliness.text = "<color=orange>" + MyCow.cleanliness.ToString() + "</color>";
+        }
+        else if(MyCow.cleanliness > 10)
+        {
+            CowCleanliness.text = "<color=red>" + MyCow.cleanliness.ToString() + "</color>";
+        }
+        else
+        {
+            CowCleanliness.text = "<color=maroon>" + MyCow.condition.ToString() + "</color>";
+        }
+        if(MyCow.condition > 70)
+        {
+            CowCondition.text = "<color=lime>" + MyCow.condition.ToString() + "</color>";
+        }
+        else if(MyCow.condition > 40)
+        {
+            CowCondition.text = "<color=orange>" + MyCow.condition.ToString() + "</color>";
+        }
+        else if(MyCow.condition > 10)
+        {
+            CowCondition.text = "<color=red>" + MyCow.condition.ToString() + "</color>";
+        }
+        else
+        {
+            CowCondition.text = "<color=maroon>" + MyCow.condition.ToString() + "</color>";
+        }
     }
 
     public void OnClickCowStatusClose(){

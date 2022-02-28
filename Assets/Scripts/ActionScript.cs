@@ -35,26 +35,75 @@ public class ActionScript : MonoBehaviour
     public GameObject Alert;
     public Text AlertText;
     public static int ActionID = 0;
+
+    public GameObject FoodSelect;
+    public GameObject[] FoodSlot;
     public void OnClickAction(int actionID)
     {
         ActionID = actionID;
         ConfirmAction.SetActive(true);
         if(ActionID == 0)
         {
-            ConfirmText.text = "행동을 소모하여 '먹이주기' 행동을 하시겠습니까?";
+            ConfirmAction.SetActive(false);
+            FoodSelect.SetActive(true);
+            int count = 0;
+            for(int i=0; i<Player.inventory.Count; i++)
+            {
+                if(Player.inventory[i].itemType == "먹이") count++;
+            } 
+            if(count == 0)
+            {
+                FoodSelect.SetActive(false);
+                AlertText.text = "줄 수 있는 먹이가 없습니다. 장터에서 구매해보세요!";
+                Alert.SetActive(true);
+            }
+            for(int i=0; i<FoodSlot.Length; i++)
+            {
+                Text[] itemInfo = FoodSlot[i].GetComponentsInChildren<Text>();
+                if(i<Player.inventory.Count)
+                {
+                    if(Player.inventory[i].itemType == "먹이")
+                    {
+                        FoodSlot[i].SetActive(true);
+                        itemInfo[0].text = Player.inventory[i].itemName;
+                        itemInfo[1].text = Player.inventory[i].count.ToString();
+                    }
+                    else
+                    {
+                        FoodSlot[i].SetActive(false);
+                    }
+                }
+                else
+                {
+                    FoodSlot[i].SetActive(false);
+                }
+            }
         }
         else if(ActionID == 1)
         {
-            ConfirmText.text = "행동을 소모하여 '털 빗겨주기' 행동을 하시겠습니까?";
+            ConfirmText.text = "행동을 소모하여 '털 빗겨주기' 행동을 하시겠습니까? (컨디션 +15)";
+            ConfirmAction.SetActive(true);
         }
         else if(ActionID == 2)
         {
-            ConfirmText.text = "행동을 소모하여 '사육장 청소하기' 행동을 하시겠습니까?";
+            ConfirmText.text = "행동을 소모하여 '사육장 청소하기' 행동을 하시겠습니까? (청결도 +100)";
+            ConfirmAction.SetActive(true);
         }
         else if(ActionID == 3)
         {
             // 훈련하기 선택지
         }
+    }
+    public void OnClickFoodSelectClose()
+    {
+        FoodSelect.SetActive(false);
+    }
+    public static int foodnum;
+    public void OnClickFoodSelect(int slotNum)
+    {
+        foodnum = slotNum;
+        ConfirmText.text = "행동을 소모하여 '먹이주기' 행동을 하시겠습니까? (허기 +30)";
+        ConfirmAction.SetActive(true);
     }
     public void OnClickConfirmActionConfirm()
     {
@@ -62,7 +111,16 @@ public class ActionScript : MonoBehaviour
         CowStatus.SetActive(false);
         if(ActionID == 0)
         {
-            // 먹이주기
+            MyCow.hunger += 30;
+            FoodSelect.SetActive(false);
+            if(Player.inventory[foodnum].count == 1)
+            {
+                Player.inventory.RemoveAt(foodnum);
+            }
+            else
+            {
+                Player.inventory[foodnum].count--;
+            }
         }
         else if(ActionID == 1)
         {
