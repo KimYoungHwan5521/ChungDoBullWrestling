@@ -171,9 +171,7 @@ public class BullFightScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // scroll_rect = GameObject.FindObjectOfType<ScrollRect>();
         myTurn = true;
-
     }
 
     // Update is called once per frame
@@ -186,7 +184,11 @@ public class BullFightScript : MonoBehaviour
         {
             if(Input.anyKeyDown)
             {
-                if(dialogIndex==0) WarningMessage.text = "승리 상금 3000냥을 획득했다!";
+                if(dialogIndex==0)
+                {
+                    WarningMessage.text = "승리 상금 3000냥을 획득했다!";
+                    Player.gold += 3000;
+                } 
                 if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '우유마시기'를 배웠다!";
                 if(dialogIndex==2)
                 {
@@ -202,7 +204,11 @@ public class BullFightScript : MonoBehaviour
         {
             if(Input.anyKeyDown)
             {
-                if(dialogIndex==0) WarningMessage.text = "승리 상금 3000냥을 획득했다!";
+                if(dialogIndex==0) 
+                {
+                    WarningMessage.text = "승리 상금 3000냥을 획득했다!";
+                    Player.gold += 3000;
+                }
                 if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '거름차기'를 배웠다!";
                 if(dialogIndex==2)
                 {
@@ -218,7 +224,11 @@ public class BullFightScript : MonoBehaviour
         {
             if(Input.anyKeyDown)
             {
-                if(dialogIndex==0) WarningMessage.text = "승리 상금 3000냥을 획득했다!";
+                if(dialogIndex==0) 
+                {
+                    WarningMessage.text = "승리 상금 3000냥을 획득했다!";
+                    Player.gold += 3000;
+                }
                 if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '3단컴보'를 배웠다!";
                 if(dialogIndex==2)
                 {
@@ -234,8 +244,21 @@ public class BullFightScript : MonoBehaviour
         {
             if(Input.anyKeyDown)
             {
-                if(dialogIndex==0) WarningMessage.text = "승리 상금 3000냥을 획득했다!";
-                if(dialogIndex==1) WarningMessage.text = "지역대회 우승상금 5000냥을 획득했다!";
+                if(dialogIndex==0) 
+                {
+                    WarningMessage.text = "승리 상금 3000냥을 획득했다!";
+                    Player.gold += 3000;
+                }
+                if(dialogIndex==1) 
+                {
+                    WarningMessage.text = "지역대회 우승 트로피를 획득했다!";
+                    Player.Item item = new Player.Item();
+                    item.itemName = "지역대회 우승 트로피";
+                    item.itemType = "기타";
+                    item.itemPrice = 10000;
+                    item.itemExplain = "지역대회 우승 트로피";
+                    Player.inventory.Add(item);
+                }
                 if(dialogIndex==2) WarningMessage.text = MyCow.cowName + "은(는) 기술 '불고기'를 배웠다!";
                 if(dialogIndex==3)
                 {
@@ -251,7 +274,11 @@ public class BullFightScript : MonoBehaviour
         {
             if(Input.anyKeyDown)
             {
-                if(dialogIndex==0) WarningMessage.text = "승리 상금 6000냥을 획득했다!";
+                if(dialogIndex==0) 
+                {
+                    WarningMessage.text = "승리 상금 5000냥을 획득했다!";
+                    Player.gold += 5000;
+                }
                 if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '크로이츠펠트 야곱병'을 배웠다!";
                 if(dialogIndex==2)
                 {
@@ -267,7 +294,11 @@ public class BullFightScript : MonoBehaviour
         {
             if(Input.anyKeyDown)
             {
-                if(dialogIndex==0) WarningMessage.text = "승리 상금 6000냥을 획득했다!";
+                if(dialogIndex==0) 
+                {
+                    WarningMessage.text = "승리 상금 5000냥을 획득했다!";
+                    Player.gold += 5000;
+                }
                 if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '샤우팅'을 배웠다!";
                 if(dialogIndex==2)
                 {
@@ -283,7 +314,11 @@ public class BullFightScript : MonoBehaviour
         {
             if(Input.anyKeyDown)
             {
-                if(dialogIndex==0) WarningMessage.text = "승리 상금 6000냥을 획득했다!";
+                if(dialogIndex==0) 
+                {
+                    WarningMessage.text = "승리 상금 5000냥을 획득했다!";
+                    Player.gold += 5000;
+                }
                 if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '균형잡기'를 배웠다!";
                 if(dialogIndex==2)
                 {
@@ -299,8 +334,21 @@ public class BullFightScript : MonoBehaviour
         {
             if(Input.anyKeyDown)
             {
-                if(dialogIndex==0) WarningMessage.text = "승리 상금 6000냥을 획득했다!";
-                if(dialogIndex==1) WarningMessage.text = "전국대회 우승상금 10000냥을 획득했다!";
+                if(dialogIndex==0) 
+                {
+                    WarningMessage.text = "승리 상금 5000냥을 획득했다!";
+                    Player.gold += 5000;
+                }
+                if(dialogIndex==1) 
+                {
+                    WarningMessage.text = "전국대회 우승 트로피를 획득했다!";
+                    Player.Item item = new Player.Item();
+                    item.itemName = "전국대회 우승 트로피";
+                    item.itemType = "기타";
+                    item.itemPrice = 14000;
+                    item.itemExplain = "전국대회 우승 트로피";
+                    Player.inventory.Add(item);
+                }
                 if(dialogIndex==2) WarningMessage.text = MyCow.cowName + "은(는) 기술 '운기조식'을 배웠다!";
                 if(dialogIndex==3)
                 {
@@ -316,7 +364,11 @@ public class BullFightScript : MonoBehaviour
         {
             if(Input.anyKeyDown)
             {
-                if(dialogIndex==0) WarningMessage.text = "승리 상금 10000냥을 획득했다!";
+                if(dialogIndex==0) 
+                {
+                    WarningMessage.text = "승리 상금 7000냥을 획득했다!";
+                    Player.gold += 7000;
+                }
                 if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '총쏘기'를 배웠다!";
                 if(dialogIndex==2)
                 {
@@ -332,7 +384,11 @@ public class BullFightScript : MonoBehaviour
         {
             if(Input.anyKeyDown)
             {
-                if(dialogIndex==0) WarningMessage.text = "승리 상금 10000냥을 획득했다!";
+                if(dialogIndex==0) 
+                {
+                    WarningMessage.text = "승리 상금 7000냥을 획득했다!";
+                    Player.gold += 7000;
+                }
                 if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '우유20L마시기'를 배웠다!";
                 if(dialogIndex==2)
                 {
@@ -348,10 +404,13 @@ public class BullFightScript : MonoBehaviour
         {
             if(Input.anyKeyDown)
             {
-                if(dialogIndex==0) WarningMessage.text = "승리 상금 10000냥을 획득했다!";
-                if(dialogIndex==1) WarningMessage.text = "세계대회 우승상금 20000냥을 획득했다!";
-                if(dialogIndex==2) WarningMessage.text = MyCow.cowName + "은(는) 기술 '뿔미사일'을 배웠다!";
-                if(dialogIndex==3)
+                if(dialogIndex==0) 
+                {
+                    WarningMessage.text = "승리 상금 7000냥을 획득했다!";
+                    Player.gold += 7000;
+                }
+                if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '뿔미사일'을 배웠다!";
+                if(dialogIndex==2)
                 {
                     WarningMessage.text = "";
                     BattleOver();
@@ -812,11 +871,9 @@ public class BullFightScript : MonoBehaviour
         }
     }
 
-    // public bool battleOver;
     public void BattleWin()
     {
         Debug.Log("승리!");
-        // battleOver = false;
         if(EnemyCow.enemyName == "젖소")
         {
             MilkCowClear = true;
@@ -829,10 +886,10 @@ public class BullFightScript : MonoBehaviour
         {
             YelloCowClear = true;
             WarningMessage.text = "승리!";
-            EnemyCow.SetEnemyStatus("강건우", 2000, 150, 50);
+            EnemyCow.SetEnemyStatus("우건마", 2000, 150, 50);
             dialogID = 2;
         }
-        else if(EnemyCow.enemyName == "강건우")
+        else if(EnemyCow.enemyName == "우건마")
         {
             KangKeonCowClear = true;
             WarningMessage.text = "승리!";
@@ -885,7 +942,7 @@ public class BullFightScript : MonoBehaviour
         {
             ElephantCowClear = true;
             WarningMessage.text = "승리!";
-            EnemyCow.SetEnemyStatus("중국산소", 15000, 1200, 500);
+            EnemyCow.SetEnemyStatus("독일소", 15000, 1200, 500);
             dialogID = 10;
         }
             // Debug.Log("클리어!");

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public static int gold = 2000;
+    public static int gold = 200000;
     public class Item
     {
         public string itemName;
@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
         public string itemExplain;
         // public Sprite itemImage;
         public int count = 1;
+        public bool isEquiped = false;
     }
     public static List<Item> inventory = new List<Item>();
 

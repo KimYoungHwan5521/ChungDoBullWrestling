@@ -26,7 +26,7 @@ public class Item
 public class GameManager : MonoBehaviour
 {
     public TextAsset ItemDB;
-    public List<Item> AllItemList, MyItemList, CurItemList;
+    public List<Item> AllItemList, CurItemList;
 
     // Start is called before the first frame update
     void Start()
@@ -45,25 +45,7 @@ public class GameManager : MonoBehaviour
             }
         }
         SetMarketType("FoodMarket");
-
-        // Save();
-        // Load();
-        
     }
-
-    // void Save()
-    // {
-    //     string jdata = JsonConvert.SerializeObject(AllItemList);
-    //     File.WriteAllText(Application.dataPath + "/Resources/MyItemText.txt", jdata);
-    // }
-
-    // void Load()
-    // {
-    //     string jdata = File.ReadAllText(Application.dataPath + "/Resources/MyItemText.txt");
-    //     MyItemList = JsonConvert.DeserializeObject<List<Item>>(jdata);
-    // }
-
-
 
     // market system
     public GameObject Food_Market;
@@ -73,9 +55,16 @@ public class GameManager : MonoBehaviour
     public Text Alert_Text;
     public static int slotnum = 0;
 
-    public void OnClickFoodVendor(){
+    public void OnClickFoodVendor(int marketID){
         Food_Market.SetActive(true);
-        SetMarketType("FoodMarket");
+        if(marketID == 1)
+        {
+            SetMarketType("FoodMarket");
+        }
+        else if(marketID == 2)
+        {
+            SetMarketType("TrinketsMarket");
+        }
     }
     public void OnClickFoodMarketClose(){
         Food_Market.SetActive(false);
@@ -95,6 +84,19 @@ public class GameManager : MonoBehaviour
                 itemInfo[0].text = i < CurItemList.Count ? CurItemList[i].itemName : "";
                 itemInfo[1].text = i < CurItemList.Count ? CurItemList[i].itemPrice : "";
 
+            }
+        }
+        else if(market == "TrinketsMarket")
+        {
+            CurItemList = AllItemList.FindAll(x => x.itemType == "장비(머리)");
+            CurItemList.AddRange(AllItemList.FindAll(x => x.itemType == "장비(몸)"));
+            CurItemList.AddRange(AllItemList.FindAll(x => x.itemType == "장비(다리)"));
+            for(int i=0; i<Marchandise.Length; i++)
+            {
+                Marchandise[i].SetActive(i<CurItemList.Count);
+                Text[] itemInfo = Marchandise[i].GetComponentsInChildren<Text>();
+                itemInfo[0].text = i < CurItemList.Count ? CurItemList[i].itemName : "";
+                itemInfo[1].text = i < CurItemList.Count ? CurItemList[i].itemPrice : "";
             }
         }
     }

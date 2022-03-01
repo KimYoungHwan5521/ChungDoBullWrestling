@@ -12,61 +12,8 @@ public class ButtonsScript : MonoBehaviour
     public Sprite imageSprite2;
     public int count = 0;
 
-    // title
-    public void OnClickStart(){
-        Debug.Log("Start");
-        SceneManager.LoadScene("IntroScene");
-    }
-
-    public void OnClickLoad(){
-        Debug.Log("Load");
-    }
-
-    public void OnClickQuit(){
-        Debug.Log("Quit");
-        Application.Quit();
-    }
-
-    // intro
-    public void OnClickIntro(){
-        if(count == 0){
-            introImage.sprite = imageSprite1;
-        }else if(count == 1){
-            introImage.sprite = imageSprite2;
-        }else{
-            SceneManager.LoadScene("IngameScene");
-            Debug.Log("Cowshed");
-        }
-        count += 1;
-    }
-
-    public void OnClickIntroSkip(){
-        SceneManager.LoadScene("IngameScene");
-        Debug.Log("Skip");
-    }
-
-    // ingame
-    public GameObject Cowshed;
-    public GameObject Village;
-    public GameObject Market;
-    public GameObject Stadium;
-    public GameObject Field;
-    public GameObject BullFight;
-    public GameObject ImageVS;
-    public GameObject TopMenuBar;
-
-    // cowshed
-    public GameObject Cow_Status;
-    public Text CowName;
-    public Text CowMaxHP;
-    public Text CowMaxMP;
-    public Text CowAtkDmg;
-    public Text CowArmor;
-    public Text CowHunger;
-    public Text CowCleanliness;
-    public Text CowCondition;
-    public void OnClickCow(){
-        Cow_Status.SetActive(true);
+    void Update()
+    {
         CowName.text = MyCow.cowName;
         CowMaxHP.text = MyCow.maxHP.ToString();
         CowMaxMP.text = MyCow.maxMP.ToString();
@@ -120,10 +67,272 @@ public class ButtonsScript : MonoBehaviour
         {
             CowCondition.text = "<color=maroon>" + MyCow.condition.ToString() + "</color>";
         }
+
+    }
+
+    // title
+    public void OnClickStart(){
+        Debug.Log("Start");
+        SceneManager.LoadScene("IntroScene");
+    }
+
+    public void OnClickLoad(){
+        Debug.Log("Load");
+    }
+
+    public void OnClickQuit(){
+        Debug.Log("Quit");
+        Application.Quit();
+    }
+
+    // intro
+    public void OnClickIntro(){
+        if(count == 0){
+            introImage.sprite = imageSprite1;
+        }else if(count == 1){
+            introImage.sprite = imageSprite2;
+        }else{
+            SceneManager.LoadScene("IngameScene");
+        }
+        count += 1;
+    }
+
+    public void OnClickIntroSkip(){
+        SceneManager.LoadScene("IngameScene");
+    }
+
+    // ingame
+    public GameObject Cowshed;
+    public GameObject Village;
+    public GameObject Market;
+    public GameObject Stadium;
+    public GameObject Field;
+    public GameObject BullFight;
+    public GameObject ImageVS;
+    public GameObject TopMenuBar;
+    public GameObject Alert;
+    public Text AlertText;
+
+    // cowshed
+    public GameObject Cow_Status;
+    public Text CowName;
+    public Text CowMaxHP;
+    public Text CowMaxMP;
+    public Text CowAtkDmg;
+    public Text CowArmor;
+    public Text CowHunger;
+    public Text CowCleanliness;
+    public Text CowCondition;
+    public void OnClickCow(){
+        Cow_Status.SetActive(true);
     }
 
     public void OnClickCowStatusClose(){
         Cow_Status.SetActive(false);
+    }
+
+    public GameObject EquipmentSetting;
+    public GameObject EquipmentSelect;
+    public GameObject[] EquipmentSlot, IsEquiped;
+
+    public void OnClickEquipmentSetting()
+    {
+        EquipmentSetting.SetActive(true);
+    }
+    public void OnClickEquipmentSettingClose()
+    {
+        EquipmentSetting.SetActive(false);
+    }
+    public void OnClickEquipmentSettingHead()
+    {
+        EquipmentSelect.SetActive(true);
+        int count = 0;
+        for(int i=0; i<Player.inventory.Count; i++)
+        {
+            if(Player.inventory[i].itemType == "장비(머리)") count++;
+        } 
+        if(count == 0)
+        {
+            EquipmentSelect.SetActive(false);
+            AlertText.text = "머리에 장착 할 수 있는 장비가 없습니다. 장터에서 구매해보세요!";
+            Alert.SetActive(true);
+        }
+        for(int i=0; i<EquipmentSlot.Length; i++)
+        {
+            Text[] itemInfo = EquipmentSlot[i].GetComponentsInChildren<Text>();
+            if(i<Player.inventory.Count)
+            {
+                if(Player.inventory[i].itemType == "장비(머리)")
+                {
+                    EquipmentSlot[i].SetActive(true);
+                    itemInfo[0].text = Player.inventory[i].itemName;
+                    itemInfo[1].text = Player.inventory[i].count.ToString();
+                    IsEquiped[i].SetActive(Player.inventory[i].isEquiped);  
+                }
+                else
+                {
+                    EquipmentSlot[i].SetActive(false);
+                }
+            }
+            else
+            {
+                EquipmentSlot[i].SetActive(false);
+            }
+        }
+    }
+    public void OnClickEquipmentSettingBody()
+    {
+        EquipmentSelect.SetActive(true);
+        int count = 0;
+        for(int i=0; i<Player.inventory.Count; i++)
+        {
+            if(Player.inventory[i].itemType == "장비(몸)") count++;
+        } 
+        if(count == 0)
+        {
+            EquipmentSelect.SetActive(false);
+            AlertText.text = "몸에 장착 할 수 있는 장비가 없습니다. 장터에서 구매해보세요!";
+            Alert.SetActive(true);
+        }
+        for(int i=0; i<EquipmentSlot.Length; i++)
+        {
+            Text[] itemInfo = EquipmentSlot[i].GetComponentsInChildren<Text>();
+            if(i<Player.inventory.Count)
+            {
+                if(Player.inventory[i].itemType == "장비(몸)")
+                {
+                    EquipmentSlot[i].SetActive(true);
+                    itemInfo[0].text = Player.inventory[i].itemName;
+                    itemInfo[1].text = Player.inventory[i].count.ToString();
+                    IsEquiped[i].SetActive(Player.inventory[i].isEquiped);  
+                }
+                else
+                {
+                    EquipmentSlot[i].SetActive(false);
+                }
+            }
+            else
+            {
+                EquipmentSlot[i].SetActive(false);
+            }
+        }
+    }
+    public void OnClickEquipmentSettingLegs()
+    {
+        EquipmentSelect.SetActive(true);
+        int count = 0;
+        for(int i=0; i<Player.inventory.Count; i++)
+        {
+            if(Player.inventory[i].itemType == "장비(다리)") count++;
+        } 
+        if(count == 0)
+        {
+            EquipmentSelect.SetActive(false);
+            AlertText.text = "다리에 장착 할 수 있는 장비가 없습니다. 장터에서 구매해보세요!";
+            Alert.SetActive(true);
+        }
+        for(int i=0; i<EquipmentSlot.Length; i++)
+        {
+            Text[] itemInfo = EquipmentSlot[i].GetComponentsInChildren<Text>();
+            if(i<Player.inventory.Count)
+            {
+                if(Player.inventory[i].itemType == "장비(다리)")
+                {
+                    EquipmentSlot[i].SetActive(true);
+                    itemInfo[0].text = Player.inventory[i].itemName;
+                    itemInfo[1].text = Player.inventory[i].count.ToString();
+                    IsEquiped[i].SetActive(Player.inventory[i].isEquiped);  
+                }
+                else
+                {
+                    EquipmentSlot[i].SetActive(false);
+                }
+            }
+            else
+            {
+                EquipmentSlot[i].SetActive(false);
+            }
+        }
+    }
+    
+    public Text EquipmentNameHead;
+    public Text EquipmentNameBody;
+    public Text EquipmentNameLegs;
+    public GameObject UnEquipHead;
+    public GameObject UnEquipBody;
+    public GameObject UnEquipLegs;
+    public void OnClickEquipmentSelect(int equipmentNum)
+    {
+        if(Player.inventory[equipmentNum].itemType == "장비(머리)")
+        {
+            EquipmentNameHead.text = Player.inventory[equipmentNum].itemName;
+            UnEquipHead.SetActive(true);
+            List<Player.Item> equipedItems = Player.inventory.FindAll(x => x.itemType == "장비(머리)");
+            Player.Item equipedItem = equipedItems.Find(x => x.isEquiped == true);
+            if(equipedItem != null)
+            {
+                equipedItem.isEquiped = false;
+                MyCow.Equiped(false, equipedItem.itemName);
+            }
+        }
+        else if(Player.inventory[equipmentNum].itemType == "장비(몸)")
+        {
+            EquipmentNameBody.text = Player.inventory[equipmentNum].itemName;
+            UnEquipBody.SetActive(true);
+            List<Player.Item> equipedItems = Player.inventory.FindAll(x => x.itemType == "장비(몸)");
+            Player.Item equipedItem = equipedItems.Find(x => x.isEquiped == true);
+            if(equipedItem != null)
+            {
+                equipedItem.isEquiped = false;
+                MyCow.Equiped(false, equipedItem.itemName);
+            }
+        }
+        else if(Player.inventory[equipmentNum].itemType == "장비(다리)")
+        {
+            EquipmentNameLegs.text = Player.inventory[equipmentNum].itemName;
+            UnEquipLegs.SetActive(true);
+            List<Player.Item> equipedItems = Player.inventory.FindAll(x => x.itemType == "장비(다리)");
+            Player.Item equipedItem = equipedItems.Find(x => x.isEquiped == true);
+            if(equipedItem != null)
+            {
+                equipedItem.isEquiped = false;
+                MyCow.Equiped(false, equipedItem.itemName);
+            }
+        }
+        Player.inventory[equipmentNum].isEquiped = true;
+        MyCow.Equiped(true, Player.inventory[equipmentNum].itemName);
+        EquipmentSelect.SetActive(false);
+    }
+    public void OnClickUnEquipHead()
+    {
+        List<Player.Item> equipedItems = Player.inventory.FindAll(x => x.itemType == "장비(머리)");
+        Player.Item equipedItem = equipedItems.Find(x => x.isEquiped == true);
+        equipedItem.isEquiped = false;
+        MyCow.Equiped(false, equipedItem.itemName);
+        EquipmentNameHead.text = "없음";
+        UnEquipHead.SetActive(false);
+    }
+    public void OnClickUnEquipBody()
+    {
+        List<Player.Item> equipedItems = Player.inventory.FindAll(x => x.itemType == "장비(몸)");
+        Player.Item equipedItem = equipedItems.Find(x => x.isEquiped == true);
+        equipedItem.isEquiped = false;
+        MyCow.Equiped(false, equipedItem.itemName);
+        EquipmentNameBody.text = "없음";
+        UnEquipBody.SetActive(false);
+    }
+    public void OnClickUnEquipLegs()
+    {
+        List<Player.Item> equipedItems = Player.inventory.FindAll(x => x.itemType == "장비(다리)");
+        Player.Item equipedItem = equipedItems.Find(x => x.isEquiped == true);
+        equipedItem.isEquiped = false;
+        MyCow.Equiped(false, equipedItem.itemName);
+        EquipmentNameLegs.text = "없음";
+        UnEquipLegs.SetActive(false);
+    }
+    public void OnClickEquipmentSelectClose()
+    {
+        EquipmentSelect.SetActive(false);
     }
 
     public GameObject ToVillage;

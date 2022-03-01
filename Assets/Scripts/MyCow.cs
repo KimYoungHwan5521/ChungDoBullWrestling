@@ -31,5 +31,75 @@ public class MyCow : MonoBehaviour
         HPbar.fillAmount = (float)nowHP / (float)maxHP;
         MPbar.fillAmount = (float)nowMP / (float)maxMP;
     }
+
+    public static void Equiped(bool equiped, string equipmentName)
+    {
+        if(equipmentName == "은투구")
+        {
+            if(equiped)
+            {
+                armor += 50;
+            }
+            else
+            {
+                armor -= 50;
+            }
+        }
+        else if(equipmentName == "금투구")
+        {
+            if(equiped)
+            {
+                armor += 100;
+            }
+            else
+            {
+                armor -= 100;
+            }
+        }
+        else if(equipmentName == "은갑옷")
+        {
+            if(equiped)
+            {
+                armor += 50;
+            }
+            else
+            {
+                armor -= 50;
+            }
+        }
+        else if(equipmentName == "금갑옷")
+        {
+            if(equiped)
+            {
+                armor += 100;
+            }
+            else
+            {
+                armor -= 100;
+            }
+        }
+        else if(equipmentName == "운동화")
+        {
+            if(equiped)
+            {
+                atkDmg += 50;
+            }
+            else
+            {
+                atkDmg -= 50;
+            }
+        }
+        else if(equipmentName == "구두")
+        {
+            if(equiped)
+            {
+                atkDmg += 100;
+            }
+            else
+            {
+                atkDmg -= 100;
+            }
+        }
+    }
     
 }
