@@ -89,9 +89,35 @@ public class ActionScript : MonoBehaviour
             ConfirmText.text = "행동을 소모하여 '사육장 청소하기' 행동을 하시겠습니까? (청결도 +100)";
             ConfirmAction.SetActive(true);
         }
-        else if(ActionID == 3)
+        else if(ActionID == 301)
         {
-            // 훈련하기 선택지
+            ConfirmText.text = "행동을 소모하여 '훈련하기' 행동을 하시겠습니까?\n";
+            ConfirmText.text += "'뿔 다듬기' 선택됨";
+            ConfirmAction.SetActive(true);
+        }
+        else if(ActionID == 302)
+        {
+            ConfirmText.text = "행동을 소모하여 '훈련하기' 행동을 하시겠습니까?\n";
+            ConfirmText.text += "'오래 달리기' 선택됨";
+            ConfirmAction.SetActive(true);
+        }
+        else if(ActionID == 303)
+        {
+            ConfirmText.text = "행동을 소모하여 '훈련하기' 행동을 하시겠습니까?\n";
+            ConfirmText.text += "'차력' 선택됨";
+            ConfirmAction.SetActive(true);
+        }
+        else if(ActionID == 304)
+        {
+            ConfirmText.text = "행동을 소모하여 '훈련하기' 행동을 하시겠습니까?\n";
+            ConfirmText.text += "'미트치기' 선택됨";
+            ConfirmAction.SetActive(true);
+        }
+        else if(ActionID == 305)
+        {
+            ConfirmText.text = "행동을 소모하여 '훈련하기' 행동을 하시겠습니까?\n";
+            ConfirmText.text += "'철사장' 선택됨";
+            ConfirmAction.SetActive(true);
         }
         else if(ActionID == 401)
         {
@@ -180,9 +206,34 @@ public class ActionScript : MonoBehaviour
         {
             MyCow.cleanliness = 100;
         }
-        else if(ActionID == 3)
+        else if(ActionID == 301)
         {
-            // 훈련
+            MyCow.atkDmg += 10;
+            TrainingSelect.SetActive(false);
+        }
+        else if(ActionID == 302)
+        {
+            MyCow.maxMP += 5;
+            MyCow.nowMP = MyCow.maxMP;
+            TrainingSelect.SetActive(false);
+        }
+        else if(ActionID == 303)
+        {
+            MyCow.armor += 10;
+            MyCow.condition -= 5;
+            TrainingSelect.SetActive(false);
+        }
+        else if(ActionID == 304)
+        {
+            MyCow.atkDmg += 20;
+            MyCow.condition -= 15;
+            TrainingSelect.SetActive(false);
+        }
+        else if(ActionID == 305)
+        {
+            MyCow.armor += 20;
+            MyCow.condition -= 20;
+            TrainingSelect.SetActive(false);
         }
         else if(ActionID == 401)
         {
@@ -223,6 +274,15 @@ public class ActionScript : MonoBehaviour
             if(MyCow.cleanliness < 0) MyCow.cleanliness = 0;
         }
         if(MyCow.condition < 0) MyCow.condition = 0;
+    }
+    public GameObject TrainingSelect;
+    public void OnClickTrainingSelect()
+    {
+        TrainingSelect.SetActive(true);
+    }
+    public void OnClickTrainingSelectClose()
+    {
+        TrainingSelect.SetActive(false);
     }
     public void OnClickConfirmActionDeny()
     {
