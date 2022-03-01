@@ -95,27 +95,28 @@ public class ActionScript : MonoBehaviour
         }
         else if(ActionID == 401)
         {
-            ConfirmText.text = "행동을 소모하여 '밭매기 알바' 행동을 하시겠습니까? (청결도 +100)\n";
+            ConfirmText.text = "행동을 소모하여 '밭매기 알바' 행동을 하시겠습니까?\n";
             ConfirmText.text += "'기름진 비옥한 땅' 선택됨";
             ConfirmAction.SetActive(true);
         }
         else if(ActionID == 402)
         {
-            ConfirmText.text = "행동을 소모하여 '밭매기 알바' 행동을 하시겠습니까? (청결도 +100)\n";
+            ConfirmText.text = "행동을 소모하여 '밭매기 알바' 행동을 하시겠습니까?\n";
             ConfirmText.text += "'건조한 땅' 선택됨";
             ConfirmAction.SetActive(true);
         }
         else if(ActionID == 403)
         {
-            ConfirmText.text = "행동을 소모하여 '밭매기 알바' 행동을 하시겠습니까? (청결도 +100)\n";
+            ConfirmText.text = "행동을 소모하여 '밭매기 알바' 행동을 하시겠습니까?\n";
             ConfirmText.text += "'돌 많은 척박한 땅' 선택됨";
             ConfirmAction.SetActive(true);
         }
-        else if(ActionID == 5)
+        else if(ActionID == 501)
         {
-            // 장터 알바
+            ConfirmText.text = "행동을 소모하여 '장터 알바' 행동을 하시겠습니까?\n";
+            ConfirmAction.SetActive(true);
         }
-        else if(ActionID == 6)
+        else if(ActionID == 502)
         {
             // 장터 야간알바
         }
@@ -179,6 +180,10 @@ public class ActionScript : MonoBehaviour
             Player.gold += 2000;
             MyCow.condition -= 30;
             if(MyCow.condition < 0) MyCow.condition = 0;
+        }
+        else if(ActionID == 501)
+        {
+            Player.gold += 500;
         }
 
         // end action
