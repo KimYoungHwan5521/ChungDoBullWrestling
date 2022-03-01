@@ -140,6 +140,27 @@ public class ActionScript : MonoBehaviour
         if(ActionID == 0)
         {
             MyCow.hunger += 30;
+            if(MyCow.hunger > 100) MyCow.hunger = 100;
+            if(Player.inventory[foodnum].itemName == "건초")
+            {
+                MyCow.maxHP += 50;
+                MyCow.nowHP = MyCow.maxHP;
+            }
+            else if(Player.inventory[foodnum].itemName == "비료")
+            {
+                MyCow.maxHP += 100;
+                MyCow.nowHP = MyCow.maxHP;
+            }
+            else if(Player.inventory[foodnum].itemName == "고기")
+            {
+                MyCow.maxHP += 150;
+                MyCow.nowHP = MyCow.maxHP;
+            }
+            else if(Player.inventory[foodnum].itemName == "소고기")
+            {
+                MyCow.maxHP += 200;
+                MyCow.nowHP = MyCow.maxHP;
+            }
             FoodSelect.SetActive(false);
             if(Player.inventory[foodnum].count == 1)
             {
