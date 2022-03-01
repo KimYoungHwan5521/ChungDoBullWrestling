@@ -93,6 +93,32 @@ public class ActionScript : MonoBehaviour
         {
             // 훈련하기 선택지
         }
+        else if(ActionID == 401)
+        {
+            ConfirmText.text = "행동을 소모하여 '밭매기 알바' 행동을 하시겠습니까? (청결도 +100)\n";
+            ConfirmText.text += "'기름진 비옥한 땅' 선택됨";
+            ConfirmAction.SetActive(true);
+        }
+        else if(ActionID == 402)
+        {
+            ConfirmText.text = "행동을 소모하여 '밭매기 알바' 행동을 하시겠습니까? (청결도 +100)\n";
+            ConfirmText.text += "'건조한 땅' 선택됨";
+            ConfirmAction.SetActive(true);
+        }
+        else if(ActionID == 403)
+        {
+            ConfirmText.text = "행동을 소모하여 '밭매기 알바' 행동을 하시겠습니까? (청결도 +100)\n";
+            ConfirmText.text += "'돌 많은 척박한 땅' 선택됨";
+            ConfirmAction.SetActive(true);
+        }
+        else if(ActionID == 5)
+        {
+            // 장터 알바
+        }
+        else if(ActionID == 6)
+        {
+            // 장터 야간알바
+        }
     }
     public void OnClickFoodSelectClose()
     {
@@ -102,7 +128,8 @@ public class ActionScript : MonoBehaviour
     public void OnClickFoodSelect(int slotNum)
     {
         foodnum = slotNum;
-        ConfirmText.text = "행동을 소모하여 '먹이주기' 행동을 하시겠습니까? (허기 +30)";
+        ConfirmText.text = "행동을 소모하여 '먹이주기' 행동을 하시겠습니까? (허기 +30)\n";
+        ConfirmText.text += "'" + Player.inventory[slotNum].itemName + "' 선택됨";
         ConfirmAction.SetActive(true);
     }
     public void OnClickConfirmActionConfirm()
@@ -135,6 +162,26 @@ public class ActionScript : MonoBehaviour
         {
             // 훈련
         }
+        else if(ActionID == 401)
+        {
+            Player.gold += 1000;
+            MyCow.condition -= 15;
+            if(MyCow.condition < 0) MyCow.condition = 0;
+        }
+        else if(ActionID == 402)
+        {
+            Player.gold += 1500;
+            MyCow.condition -= 20;
+            if(MyCow.condition < 0) MyCow.condition = 0;
+        }
+        else if(ActionID == 403)
+        {
+            Player.gold += 2000;
+            MyCow.condition -= 30;
+            if(MyCow.condition < 0) MyCow.condition = 0;
+        }
+
+        // end action
         intAction += 1;
         if(MyCow.hunger <= 70) MyCow.condition -= 5;
         if(MyCow.hunger <= 40) MyCow.condition -= 5;

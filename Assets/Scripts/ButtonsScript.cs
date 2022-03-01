@@ -50,6 +50,7 @@ public class ButtonsScript : MonoBehaviour
     public GameObject Village;
     public GameObject Market;
     public GameObject Stadium;
+    public GameObject Field;
     public GameObject BullFight;
     public GameObject ImageVS;
     public GameObject TopMenuBar;
@@ -136,34 +137,41 @@ public class ButtonsScript : MonoBehaviour
     }
 
     public void OnClickToVillage(){
-        // SceneManager.LoadScene("VillageScene");
         Cowshed.SetActive(false);
         Market.SetActive(false);
         Stadium.SetActive(false);
+        Field.SetActive(false);
         Village.SetActive(true);
         ToVillage.SetActive(false);
 
     }
 
     // village
-    public void OnClickCowshed(){
-        // SceneManager.LoadScene("CowshedScene");
+    public void OnClickCowshed()
+    {
         Village.SetActive(false);
         Cowshed.SetActive(true);
         ToVillage.SetActive(true);
         To_Village.SetActive(false);
     }
-    public void OnClickMarket(){
-        // SceneManager.LoadScene("MarketScene");
+    public void OnClickMarket()
+    {
         Village.SetActive(false);
         Market.SetActive(true);
         ToVillage.SetActive(true);
         To_Village.SetActive(false);
     }
-    public void OnClickStadium(){
-        // SceneManager.LoadScene("StadiumScene");
+    public void OnClickStadium()
+    {
         Village.SetActive(false);
         Stadium.SetActive(true);
+        ToVillage.SetActive(true);
+        To_Village.SetActive(false);
+    }
+    public void OnClickField()
+    {
+        Village.SetActive(false);
+        Field.SetActive(true);
         ToVillage.SetActive(true);
         To_Village.SetActive(false);
     }
@@ -171,13 +179,25 @@ public class ButtonsScript : MonoBehaviour
     // market
 
     // stadium
-    public void OnClickFight(){
-        // SceneManager.LoadScene("BullFightScene");
+    public void OnClickFight()
+    {
         ToVillage.SetActive(false);
         Stadium.SetActive(false);
         BullFight.SetActive(true);
         ImageVS.SetActive(true);
         TopMenuBar.SetActive(false);
+    }
+
+    // field
+    public GameObject Farmer;
+    public GameObject PlowingSelect;
+    public void OnClickFarmer()
+    {
+        PlowingSelect.SetActive(true);
+    }
+    public void OnClickPlowingSelectClose()
+    {
+        PlowingSelect.SetActive(false);
     }
 
     // Top menu bar
