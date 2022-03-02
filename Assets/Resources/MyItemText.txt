@@ -1,1 +1,0 @@
-[{"itemName":"건초","itemType":"먹이","itemPrice":"200"},{"itemName":"비료","itemType":"먹이","itemPrice":"400"},{"itemName":"고기","itemType":"먹이","itemPrice":"600"},{"itemName":"소고기","itemType":"먹이","itemPrice":"600"}]

@@ -411,6 +411,8 @@ public class ButtonsScript : MonoBehaviour
 
     // Top menu bar
     public GameObject Inventory;
+    public GameObject Calender;
+    public GameObject[] CalenderDates, IsTheDateExpired;
     public void OnClickInventory()
     {
         Inventory.SetActive(true);
@@ -418,5 +420,17 @@ public class ButtonsScript : MonoBehaviour
     public void OnClickInventoryClose()
     {
         Inventory.SetActive(false);
+    }
+    public void OnClickCalender()
+    {
+        Calender.SetActive(true);
+        for(int i=0;i<CalenderDates.Length;i++)
+        {
+            IsTheDateExpired[i].SetActive(i < ActionScript.intDate);
+        }
+    }
+    public void OnClickCalenderClose()
+    {
+        Calender.SetActive(false);
     }
 }
