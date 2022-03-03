@@ -22,6 +22,12 @@ public class BullFightScript : MonoBehaviour
     public GameObject enemyCowOnFire;
     public GameObject cowImmune;
     public GameObject enemyCowImmune;
+    public GameObject cowSealed;
+    public GameObject enemyCowSealed;
+    public GameObject cowSteelization;
+    public GameObject enemyCowSteelization;
+    public GameObject cowSuperSaiyan;
+    public GameObject enemyCowSuperSaiyan;
     
     // Buff/Debuffs left turns
     public Text cowBlindLeft;
@@ -34,6 +40,12 @@ public class BullFightScript : MonoBehaviour
     public Text enemyCowOnFireLeft;
     public Text cowImmuneLeft;
     public Text enemyCowImmuneLeft;
+    public Text cowSealedLeft;
+    public Text enemyCowSealedLeft;
+    public Text cowSteelizationLeft;
+    public Text enemyCowSteelizationLeft;
+    public Text cowSuperSaiyanLeft;
+    public Text enemyCowSuperSaiyanLeft;
 
     // Progress
     public static bool MilkCowClear = false;
@@ -63,6 +75,10 @@ public class BullFightScript : MonoBehaviour
     public GameObject Skill9;
     public GameObject Skill10;
     public GameObject Skill11;
+    public GameObject Skill12;
+    public GameObject Skill13;
+    public GameObject Skill14;
+    public GameObject Skill15;
 
     public ScrollRect scroll_rect;
     public void MouseOverToSkill(int skillID){
@@ -101,7 +117,7 @@ public class BullFightScript : MonoBehaviour
         {
             Skill_Name.text = "불고기";
             Mana_Required.text = "<color=blue>활력 40</color>";
-            Skill_Explanation.text = "상대에게 불을질러 방어력을 무시하고 고정피해를 입힌다.";
+            Skill_Explanation.text = "상대에게 불을질러 방어력을 낮추고 고정피해를 입힌다.";
         }
         else if(skillID == 6)
         {
@@ -113,7 +129,7 @@ public class BullFightScript : MonoBehaviour
         {
             Skill_Name.text = "샤우팅";
             Mana_Required.text = "<color=blue>활력 20</color>";
-            Skill_Explanation.text = "강력한 샤우팅으로 상대의 이로운 상태를 날려버린다.";
+            Skill_Explanation.text = "강력한 샤우팅으로 상대에게 고정피해를 입히고 이로운 상태를 날려버린다.";
         }
         else if(skillID == 8)
         {
@@ -163,6 +179,24 @@ public class BullFightScript : MonoBehaviour
             Mana_Required.text = "";
             Skill_Explanation.text = "해로운 상태이상에 걸리지 않는다.";
         }
+        else if(skillID == 1005)
+        {
+            Skill_Name.text = "<color=blue>봉인</color>";
+            Mana_Required.text = "";
+            Skill_Explanation.text = "공격력과 방어력이 낮아진다.";
+        }
+        else if(skillID == 1006)
+        {
+            Skill_Name.text = "<color=blue>철괴</color>";
+            Mana_Required.text = "";
+            Skill_Explanation.text = "모든 피해를 감소시켜준다.";
+        }
+        else if(skillID == 1007)
+        {
+            Skill_Name.text = "<color=blue>초사이언</color>";
+            Mana_Required.text = "";
+            Skill_Explanation.text = "공격력과 방어력이 증가하고, 해로운 상태이상에 걸리지 않는다.";
+        }
         else
         {
             Skill_Explanation.text = "(알 수 없음)";
@@ -202,7 +236,7 @@ public class BullFightScript : MonoBehaviour
                     WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
-                    dialogIndex = 0;
+                    dialogIndex = -1;
                 }
                 dialogIndex++;
             }
@@ -222,7 +256,7 @@ public class BullFightScript : MonoBehaviour
                     WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
-                    dialogIndex = 0;
+                    dialogIndex = -1;
                 }
                 dialogIndex++;
             }
@@ -242,7 +276,7 @@ public class BullFightScript : MonoBehaviour
                     WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
-                    dialogIndex = 0;
+                    dialogIndex = -1;
                 }
                 dialogIndex++;
             }
@@ -272,7 +306,7 @@ public class BullFightScript : MonoBehaviour
                     WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
-                    dialogIndex = 0;
+                    dialogIndex = -1;
                 }
                 dialogIndex++;
             }
@@ -292,7 +326,7 @@ public class BullFightScript : MonoBehaviour
                     WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
-                    dialogIndex = 0;
+                    dialogIndex = -1;
                 }
                 dialogIndex++;
             }
@@ -312,7 +346,7 @@ public class BullFightScript : MonoBehaviour
                     WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
-                    dialogIndex = 0;
+                    dialogIndex = -1;
                 }
                 dialogIndex++;
             }
@@ -332,7 +366,7 @@ public class BullFightScript : MonoBehaviour
                     WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
-                    dialogIndex = 0;
+                    dialogIndex = -1;
                 }
                 dialogIndex++;
             }
@@ -362,7 +396,7 @@ public class BullFightScript : MonoBehaviour
                     WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
-                    dialogIndex = 0;
+                    dialogIndex = -1;
                 }
                 dialogIndex++;
             }
@@ -382,12 +416,32 @@ public class BullFightScript : MonoBehaviour
                     WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
-                    dialogIndex = 0;
+                    dialogIndex = -1;
                 }
                 dialogIndex++;
             }
         }
         else if(dialogID == 10)
+        {
+            if(Input.anyKeyDown)
+            {
+                if(dialogIndex==0) 
+                {
+                    WarningMessage.text = "승리 상금 7000냥을 획득했다!";
+                    Player.gold += 7000;
+                }
+                if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '봉인'를 배웠다!";
+                if(dialogIndex==2)
+                {
+                    WarningMessage.text = "";
+                    BattleOver();
+                    dialogID = 0;
+                    dialogIndex = -1;
+                }
+                dialogIndex++;
+            }
+        }
+        else if(dialogID == 11)
         {
             if(Input.anyKeyDown)
             {
@@ -402,12 +456,12 @@ public class BullFightScript : MonoBehaviour
                     WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
-                    dialogIndex = 0;
+                    dialogIndex = -1;
                 }
                 dialogIndex++;
             }
         }
-        else if(dialogID == 11)
+        else if(dialogID == 12)
         {
             if(Input.anyKeyDown)
             {
@@ -416,13 +470,23 @@ public class BullFightScript : MonoBehaviour
                     WarningMessage.text = "승리 상금 7000냥을 획득했다!";
                     Player.gold += 7000;
                 }
-                if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '뿔미사일'을 배웠다!";
-                if(dialogIndex==2)
+                if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '철과 같은 단단함'을 배웠다!";
+                if(dialogIndex==2) 
+                {
+                    WarningMessage.text = "세계대회 우승 트로피를 획득했다!";
+                    Player.Item item = new Player.Item();
+                    item.itemName = "세계대회 우승 트로피";
+                    item.itemType = "기타";
+                    item.itemPrice = 20000;
+                    item.itemExplain = "세계대회 우승 트로피";
+                    Player.inventory.Add(item);
+                }
+                if(dialogIndex==3)
                 {
                     WarningMessage.text = "";
                     BattleOver();
                     dialogID = 0;
-                    dialogIndex = 0;
+                    dialogIndex = -1;
                 }
                 dialogIndex++;
             }
@@ -430,75 +494,10 @@ public class BullFightScript : MonoBehaviour
 
     }
     
-
-    public void StatusCheck()
-    {
-        if(cowBlind.activeSelf)
-        {
-            int cowBlindLeftInt = int.Parse(cowBlindLeft.text.Substring(11,1)) - 1;
-            cowBlindLeft.text = "<color=red>" + cowBlindLeftInt.ToString() + "</color>";
-            if(cowBlindLeftInt == 0)
-            {
-                cowBlind.SetActive(false);
-            }
-        }
-        if(enemyCowBlind.activeSelf)
-        {
-            int enemyCowBlindLeftInt = int.Parse(enemyCowBlindLeft.text.Substring(11,1)) - 1;
-            enemyCowBlindLeft.text = "<color=red>" + enemyCowBlindLeftInt.ToString() + "</color>";
-            if(enemyCowBlindLeftInt == 0)
-            {
-                enemyCowBlind.SetActive(false);
-            }
-        }
-        if(cowOnFire.activeSelf)
-        {
-            int cowOnFireLeftInt = int.Parse(cowOnFireLeft.text.Substring(11,1)) - 1;
-            cowOnFireLeft.text = "<color=red>" + cowOnFireLeftInt.ToString() + "</color>";
-            MyCow.nowHP -= 50;
-            if(cowOnFireLeftInt == 0)
-            {
-                cowOnFire.SetActive(false);
-                StatusActivity("onFire", "MyCow", false);
-            }
-        }
-        if(enemyCowOnFire.activeSelf)
-        {
-            int enemyCowOnFireLeftInt = int.Parse(enemyCowOnFireLeft.text.Substring(11,1)) - 1;
-            enemyCowOnFireLeft.text = "<color=red>" + enemyCowOnFireLeftInt.ToString() + "</color>";
-            EnemyCow.nowHP -= 50;
-            if(enemyCowOnFireLeftInt == 0)
-            {
-                enemyCowOnFire.SetActive(false);
-                StatusActivity("onFire", "EnemyCow", false);
-            }
-        }
-        if(cowRage.activeSelf)
-        {
-            int cowRageLeftInt = int.Parse(cowRageLeft.text.Substring(12,1)) - 1;
-            cowRageLeft.text = "<color=blue>" + cowRageLeftInt.ToString() + "</color>";
-            if(cowRageLeftInt == 0)
-            {
-                cowRage.SetActive(false);
-                StatusActivity("rage", "MyCow", false);
-            }
-        }
-        if(enemyCowRage.activeSelf)
-        {
-            int enemyCowRageLeftInt = int.Parse(enemyCowRageLeft.text.Substring(12,1)) - 1;
-            enemyCowRageLeft.text = "<color=blue>" + enemyCowRageLeftInt.ToString() + "</color>";
-            if(enemyCowRageLeftInt == 0)
-            {
-                enemyCowRage.SetActive(false);
-                StatusActivity("rage", "MyCow", false);
-            }
-        }
-
-    }
-
     public void OnClickOK()
     {
         ImageVS.SetActive(false);
+        turn = 1;
 
         if(MilkCowClear)
         {
@@ -535,6 +534,184 @@ public class BullFightScript : MonoBehaviour
         if(CowboyCowClear)
         {
             Skill11.SetActive(true);
+        }
+        if(JapaneseCowClear)
+        {
+            Skill12.SetActive(true);
+        }
+        if(ElephantCowClear)
+        {
+            Skill13.SetActive(true);
+        }
+        if(GermanCowClear)
+        {
+            Skill14.SetActive(true);
+        }
+        if(SuperSaiyanCowClear)
+        {
+            Skill15.SetActive(true);
+        }
+    }
+
+    public void StatusCheck()
+    {
+        if(cowBlind.activeSelf)
+        {
+            int cowBlindLeftInt = int.Parse(cowBlindLeft.text.Substring(11,1)) - 1;
+            cowBlindLeft.text = "<color=red>" + cowBlindLeftInt.ToString() + "</color>";
+            if(cowBlindLeftInt == 0)
+            {
+                cowBlind.SetActive(false);
+            }
+        }
+        if(enemyCowBlind.activeSelf)
+        {
+            int enemyCowBlindLeftInt = int.Parse(enemyCowBlindLeft.text.Substring(11,1)) - 1;
+            enemyCowBlindLeft.text = "<color=red>" + enemyCowBlindLeftInt.ToString() + "</color>";
+            if(enemyCowBlindLeftInt == 0)
+            {
+                enemyCowBlind.SetActive(false);
+            }
+        }
+        if(cowRage.activeSelf)
+        {
+            int cowRageLeftInt = int.Parse(cowRageLeft.text.Substring(12,1)) - 1;
+            cowRageLeft.text = "<color=blue>" + cowRageLeftInt.ToString() + "</color>";
+            if(cowRageLeftInt == 0)
+            {
+                cowRage.SetActive(false);
+                StatusActivity("rage", "MyCow", false);
+            }
+        }
+        if(enemyCowRage.activeSelf)
+        {
+            int enemyCowRageLeftInt = int.Parse(enemyCowRageLeft.text.Substring(12,1)) - 1;
+            enemyCowRageLeft.text = "<color=blue>" + enemyCowRageLeftInt.ToString() + "</color>";
+            if(enemyCowRageLeftInt == 0)
+            {
+                enemyCowRage.SetActive(false);
+                StatusActivity("rage", "MyCow", false);
+            }
+        }
+        if(cowBalanced.activeSelf)
+        {
+            int cowBalancedLeftInt = int.Parse(cowBalancedLeft.text.Substring(12,1)) - 1;
+            cowBalancedLeft.text = "<color=blue>" + cowBalancedLeftInt.ToString() + "</color>";
+            if(cowBalancedLeftInt == 0)
+            {
+                cowBalanced.SetActive(false);
+            }
+        }
+        if(enemyCowBalanced.activeSelf)
+        {
+            int enemyCowBalancedLeftInt = int.Parse(enemyCowBalancedLeft.text.Substring(12,1)) - 1;
+            enemyCowBalancedLeft.text = "<color=blue>" + enemyCowBalancedLeftInt.ToString() + "</color>";
+            if(enemyCowBalancedLeftInt == 0)
+            {
+                enemyCowBalanced.SetActive(false);
+            }
+        }
+        if(cowOnFire.activeSelf)
+        {
+            int cowOnFireLeftInt = int.Parse(cowOnFireLeft.text.Substring(11,1)) - 1;
+            cowOnFireLeft.text = "<color=red>" + cowOnFireLeftInt.ToString() + "</color>";
+            int dmg = 50;
+            if(cowSteelization.activeSelf) dmg /= 2;
+            MyCow.nowHP -= dmg;
+            if(cowOnFireLeftInt == 0)
+            {
+                cowOnFire.SetActive(false);
+                StatusActivity("onFire", "MyCow", false);
+            }
+        }
+        if(enemyCowOnFire.activeSelf)
+        {
+            int enemyCowOnFireLeftInt = int.Parse(enemyCowOnFireLeft.text.Substring(11,1)) - 1;
+            enemyCowOnFireLeft.text = "<color=red>" + enemyCowOnFireLeftInt.ToString() + "</color>";
+            int dmg = 50;
+            if(enemyCowSteelization.activeSelf) dmg /= 2;
+            EnemyCow.nowHP -= dmg;
+            if(enemyCowOnFireLeftInt == 0)
+            {
+                enemyCowOnFire.SetActive(false);
+                StatusActivity("onFire", "EnemyCow", false);
+            }
+        }
+        if(cowImmune.activeSelf)
+        {
+            int cowImmuneLeftInt = int.Parse(cowImmuneLeft.text.Substring(12,1)) - 1;
+            cowImmuneLeft.text = "<color=blue>" + cowImmuneLeftInt.ToString() + "</color>";
+            if(cowImmuneLeftInt == 0)
+            {
+                cowImmune.SetActive(false);
+            }
+        }
+        if(enemyCowImmune.activeSelf)
+        {
+            int enemyCowImmuneLeftInt = int.Parse(enemyCowImmuneLeft.text.Substring(12,1)) - 1;
+            enemyCowImmuneLeft.text = "<color=blue>" + enemyCowImmuneLeftInt.ToString() + "</color>";
+            if(enemyCowImmuneLeftInt == 0)
+            {
+                enemyCowImmune.SetActive(false);
+            }
+        }
+        if(cowSealed.activeSelf)
+        {
+            int cowSealedLeftInt = int.Parse(cowSealedLeft.text.Substring(11,1)) - 1;
+            cowSealedLeft.text = "<color=red>" + cowSealedLeftInt.ToString() + "</color>";
+            if(cowSealedLeftInt == 0)
+            {
+                cowSealed.SetActive(false);
+                StatusActivity("sealed", "MyCow", false);
+            }
+        }
+        if(enemyCowSealed.activeSelf)
+        {
+            int enemyCowSealedLeftInt = int.Parse(enemyCowSealedLeft.text.Substring(11,1)) - 1;
+            enemyCowSealedLeft.text = "<color=red>" + enemyCowSealedLeftInt.ToString() + "</color>";
+            if(enemyCowSealedLeftInt == 0)
+            {
+                enemyCowSealed.SetActive(false);
+                StatusActivity("sealed", "EnemyCow", false);
+            }
+        }
+        if(cowSteelization.activeSelf)
+        {
+            int cowSteelizationLeftInt = int.Parse(cowSteelizationLeft.text.Substring(12,1)) - 1;
+            cowSteelizationLeft.text = "<color=blue>" + cowSteelizationLeftInt.ToString() + "</color>";
+            if(cowSteelizationLeftInt == 0)
+            {
+                cowSteelization.SetActive(false);
+            }
+        }
+        if(enemyCowSteelization.activeSelf)
+        {
+            int enemyCowSteelizationLeftInt = int.Parse(enemyCowSteelizationLeft.text.Substring(12,1)) - 1;
+            enemyCowSteelizationLeft.text = "<color=blue>" + enemyCowSteelizationLeftInt.ToString() + "</color>";
+            if(enemyCowSteelizationLeftInt == 0)
+            {
+                enemyCowSteelization.SetActive(false);
+            }
+        }
+        if(cowSuperSaiyan.activeSelf)
+        {
+            int cowSuperSaiyanLeftInt = int.Parse(cowSuperSaiyanLeft.text.Substring(12,1)) - 1;
+            cowSuperSaiyanLeft.text = "<color=blue>" + cowSuperSaiyanLeftInt.ToString() + "</color>";
+            if(cowSuperSaiyanLeftInt == 0)
+            {
+                cowSuperSaiyan.SetActive(false);
+                StatusActivity("superSaiyan", "MyCow", false);
+            }
+        }
+        if(enemyCowSuperSaiyan.activeSelf)
+        {
+            int enemyCowSuperSaiyanLeftInt = int.Parse(enemyCowSuperSaiyanLeft.text.Substring(12,1)) - 1;
+            enemyCowSuperSaiyanLeft.text = "<color=blue>" + enemyCowSuperSaiyanLeftInt.ToString() + "</color>";
+            if(enemyCowSuperSaiyanLeftInt == 0)
+            {
+                enemyCowSuperSaiyan.SetActive(false);
+                StatusActivity("superSaiyan", "EnemyCow", false);
+            }
         }
     }
 
@@ -590,18 +767,74 @@ public class BullFightScript : MonoBehaviour
                 }
                 else
                 {
-                    EnemyCow.atkDmg += 100;
-                    EnemyCow.armor += 100;
+                    EnemyCow.atkDmg -= 100;
+                    EnemyCow.armor -= 100;
+                }
+            }
+        }
+        else if(status == "sealed")
+        {
+            if(cow == "MyCow")
+            {
+                if(onoff)
+                {
+                    MyCow.atkDmg -= 200;
+                    MyCow.armor -= 200;
+                }
+                else
+                {
+                    MyCow.atkDmg += 200;
+                    MyCow.armor += 200;
+                }
+            }
+            else
+            {
+                if(onoff)
+                {
+                    EnemyCow.atkDmg -= 200;
+                    EnemyCow.armor -= 200;
+                }
+                else
+                {
+                    EnemyCow.atkDmg += 200;
+                    EnemyCow.armor += 200;
+                }
+            }
+        }
+        else if(status == "superSaiyan")
+        {
+            if(cow == "MyCow")
+            {
+                if(onoff)
+                {
+                    MyCow.atkDmg += 300;
+                    MyCow.armor += 200;
+                }
+                else
+                {
+                    MyCow.atkDmg -= 300;
+                    MyCow.armor -= 200;
+                }
+            }
+            else
+            {
+                if(onoff)
+                {
+                    EnemyCow.atkDmg += 300;
+                    EnemyCow.armor += 200;
+                }
+                else
+                {
+                    EnemyCow.atkDmg -= 300;
+                    EnemyCow.armor -= 200;
                 }
             }
         }
             
     }
 
-
     public Text BattleLog;
     public Text WarningMessage;
-
 
     public void OnClickSkill(int skillID){
         Debug.Log("enemy armor " + EnemyCow.armor);
@@ -631,6 +864,7 @@ public class BullFightScript : MonoBehaviour
                         {
                             dmg = 0;
                         }
+                        if(enemyCowSteelization.activeSelf) dmg /= 2;
                         BattleLog.text += MyCow.cowName + "의 박치기!" + EnemyCow.enemyName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
                         EnemyCow.nowHP -= dmg;
                     }
@@ -667,6 +901,7 @@ public class BullFightScript : MonoBehaviour
                             {
                                 dmg = 0;
                             }
+                            if(enemyCowSteelization.activeSelf) dmg /= 2;
                             BattleLog.text += MyCow.cowName + "의 핵꿀밤! " + EnemyCow.enemyName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
                             EnemyCow.nowHP -= dmg;
                         }
@@ -718,9 +953,16 @@ public class BullFightScript : MonoBehaviour
                         }
                         else
                         {
-                            BattleLog.text += MyCow.cowName + "의 거름차기! " + EnemyCow.enemyName + "은(는) 실명에 걸렸다!\n";
-                            enemyCowBlind.SetActive(true);
-                            enemyCowBlindLeft.text = "<color=red>4</color>";
+                            if(enemyCowImmune.activeSelf || enemyCowSuperSaiyan.activeSelf)
+                            {
+                                BattleLog.text += MyCow.cowName + "의 거름차기! 하지만 " + EnemyCow.enemyName + "은(는) 면역!\n";
+                            }
+                            else
+                            {
+                                BattleLog.text += MyCow.cowName + "의 거름차기! " + EnemyCow.enemyName + "은(는) 실명에 걸렸다!\n";
+                                enemyCowBlind.SetActive(true);
+                                enemyCowBlindLeft.text = "<color=red>4</color>";
+                            }
                         }
                     }
                     turnEnd = true;
@@ -758,6 +1000,7 @@ public class BullFightScript : MonoBehaviour
                                 {
                                     dmg = 0;
                                 }
+                                if(enemyCowSteelization.activeSelf) dmg /= 2;
                                 BattleLog.text += MyCow.cowName + "의 3단컴보! " + EnemyCow.enemyName + "에게 " + dmg +"의 데미지를 입혔다!\n";
                                 EnemyCow.nowHP -= dmg;
                             }
@@ -768,9 +1011,11 @@ public class BullFightScript : MonoBehaviour
             }
             else if(skillID == 5)
             {
-                BattleLog.text += MyCow.cowName + "의 불고기! " + EnemyCow.enemyName + "에게 <color=red>500</color>의 피해를 입혔다!\n";
-                EnemyCow.nowHP -= 500;
-                if(!enemyCowOnFire.activeSelf && !enemyCowImmune.activeSelf)
+                int dmg = 500;
+                if(enemyCowSteelization.activeSelf) dmg /= 2;
+                BattleLog.text += MyCow.cowName + "의 불고기! " + EnemyCow.enemyName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+                EnemyCow.nowHP -= dmg;
+                if(!enemyCowOnFire.activeSelf && !enemyCowImmune.activeSelf && !enemyCowSuperSaiyan.activeSelf)
                 {
                     enemyCowOnFire.SetActive(true);
                     StatusActivity("onFire", "EnemyCow", true);
@@ -940,15 +1185,22 @@ public class BullFightScript : MonoBehaviour
         {
             ElephantCowClear = true;
             WarningMessage.text = "승리!";
-            EnemyCow.SetEnemyStatus("인도소", 15000, 1000, 300);
+            EnemyCow.SetEnemyStatus("마법'소'녀", 12000, 1000, 300);
             dialogID = 9;
+        }
+        else if(EnemyCow.enemyName == "마법'소'녀")
+        {
+            ElephantCowClear = true;
+            WarningMessage.text = "승리!";
+            EnemyCow.SetEnemyStatus("인도소", 15000, 1000, 500);
+            dialogID = 10;
         }
         else if(EnemyCow.enemyName == "인도소")
         {
             ElephantCowClear = true;
             WarningMessage.text = "승리!";
-            EnemyCow.SetEnemyStatus("독일소", 15000, 1200, 500);
-            dialogID = 10;
+            EnemyCow.SetEnemyStatus("독일소", 15000, 1200, 800);
+            dialogID = 11;
         }
             // Debug.Log("클리어!");
             // SceneManager.LoadScene("EndingScene");
