@@ -99,7 +99,7 @@ public class BullFightScript : MonoBehaviour
         {
             Skill_Name.text = "우유마시기";
             Mana_Required.text = "<color=blue>활력 0</color>";
-            Skill_Explanation.text = "우유를 마셔 모든 해로운 상태이상을 회복하고, 체력과 활력을 조금 회복한다.";
+            Skill_Explanation.text = "우유를 마셔 모든 해로운 상태이상을 제거하고, 체력과 활력을 조금 회복한다.";
         }
         else if(skillID == 3)
         {
@@ -128,7 +128,7 @@ public class BullFightScript : MonoBehaviour
         else if(skillID == 7)
         {
             Skill_Name.text = "샤우팅";
-            Mana_Required.text = "<color=blue>활력 20</color>";
+            Mana_Required.text = "<color=blue>활력 40</color>";
             Skill_Explanation.text = "강력한 샤우팅으로 상대에게 고정피해를 입히고 이로운 상태를 날려버린다.";
         }
         else if(skillID == 8)
@@ -141,13 +141,37 @@ public class BullFightScript : MonoBehaviour
         {
             Skill_Name.text = "운기조식";
             Mana_Required.text = "<color=blue>활력 0</color>";
-            Skill_Explanation.text = "정신을 집중해 모든 상태이상을 제거하고 면역상태가 되고 활력을 회복한다.";
+            Skill_Explanation.text = "정신을 집중해 모든 해로운 상태이상을 제거하고 면역상태가 되고 활력을 회복한다.";
         }
         else if(skillID == 10)
         {
             Skill_Name.text = "총쏘기";
             Mana_Required.text = "<color=blue>활력 50</color>";
             Skill_Explanation.text = "총을 쏜다.";
+        }
+        else if(skillID == 11)
+        {
+            Skill_Name.text = "봉인";
+            Mana_Required.text = "<color=blue>활력 80</color>";
+            Skill_Explanation.text = "적을 봉인하여 고정피해를 입히고 공격력과 방어력을 감소시킨다.";
+        }
+        else if(skillID == 12)
+        {
+            Skill_Name.text = "우유 20L 마시기";
+            Mana_Required.text = "<color=blue>활력 50</color>";
+            Skill_Explanation.text = "우유를 엄청나게 들이켜 체력을 크게 회복하고 모든 해로운 상태이상을 제거한다.";
+        }
+        else if(skillID == 13)
+        {
+            Skill_Name.text = "철과 같은 단단함";
+            Mana_Required.text = "<color=blue>활력 0</color>";
+            Skill_Explanation.text = "방어를 준비해 적의 다음공격의 피해를 절반으로 줄인다.";
+        }
+        else if(skillID == 14)
+        {
+            Skill_Name.text = "초사이언 변신";
+            Mana_Required.text = "<color=blue>활력 100</color>";
+            Skill_Explanation.text = "초사이언으로 변신해 모든 해로운 상태이상을 제거하고 면역상태가 되며 공격력과 방어력이 증가한다.";
         }
         else if(skillID == 1000)
         {
@@ -430,7 +454,7 @@ public class BullFightScript : MonoBehaviour
                     WarningMessage.text = "승리 상금 7000냥을 획득했다!";
                     Player.gold += 7000;
                 }
-                if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '봉인'를 배웠다!";
+                if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '우유20L마시기'를 배웠다!";
                 if(dialogIndex==2)
                 {
                     WarningMessage.text = "";
@@ -450,7 +474,7 @@ public class BullFightScript : MonoBehaviour
                     WarningMessage.text = "승리 상금 7000냥을 획득했다!";
                     Player.gold += 7000;
                 }
-                if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '우유20L마시기'를 배웠다!";
+                if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '봉인'를 배웠다!";
                 if(dialogIndex==2)
                 {
                     WarningMessage.text = "";
@@ -895,7 +919,7 @@ public class BullFightScript : MonoBehaviour
                             int dmg = 0;
                             if(MyCow.atkDmg * 2 - EnemyCow.armor > 0)
                             {
-                                dmg = MyCow.atkDmg - EnemyCow.armor;
+                                dmg = MyCow.atkDmg * 2 - EnemyCow.armor;
                             }
                             else
                             {
@@ -911,24 +935,24 @@ public class BullFightScript : MonoBehaviour
             }
             else if(skillID == 2)
             {
-                BattleLog.text += MyCow.cowName + "의 우유마시기! <color=green>" + (int)((float)EnemyCow.maxHP / 10) + "</color>의 체력과 <color=blue>50</color>의 활력을 회복!\n";
-                MyCow.nowHP += (int)((float)EnemyCow.maxHP / 10);
+                BattleLog.text += MyCow.cowName + "의 우유마시기! <color=green>" + (MyCow.maxHP / 10) + "</color>의 체력과 <color=blue>50</color>의 활력을 회복!\n";
+                MyCow.nowHP += (EnemyCow.maxHP / 10);
                 MyCow.nowMP += 50;
-                if(MyCow.nowHP > MyCow.maxHP)
-                {
-                    MyCow.nowHP = MyCow.maxHP;
-                }
-                if(MyCow.nowMP > MyCow.maxMP)
-                {
-                    MyCow.nowMP = MyCow.maxMP;
-                }
+                if(MyCow.nowHP > MyCow.maxHP) MyCow.nowHP = MyCow.maxHP;
+                if(MyCow.nowMP > MyCow.maxMP) MyCow.nowMP = MyCow.maxMP;
                 cowBlindLeft.text = "<color=red>0</color>";
                 cowBlind.SetActive(false);
                 if(cowOnFire.activeSelf)
                 {
                     cowOnFireLeft.text = "<color=red>0</color>";
                     cowOnFire.SetActive(false);
-                    StatusActivity("onFire", "EnemyCow", false);
+                    StatusActivity("onFire", "MyCow", false);
+                }
+                if(cowSealed.activeSelf)
+                {
+                    cowSealedLeft.text = "<color=red>0</color>";
+                    cowSealed.SetActive(false);
+                    StatusActivity("sealed", "MyCow", false);
                 }
                 turnEnd = true;
             }
@@ -1011,29 +1035,238 @@ public class BullFightScript : MonoBehaviour
             }
             else if(skillID == 5)
             {
-                int dmg = 500;
-                if(enemyCowSteelization.activeSelf) dmg /= 2;
-                BattleLog.text += MyCow.cowName + "의 불고기! " + EnemyCow.enemyName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
-                EnemyCow.nowHP -= dmg;
-                if(!enemyCowOnFire.activeSelf && !enemyCowImmune.activeSelf && !enemyCowSuperSaiyan.activeSelf)
+                if(MyCow.nowMP < 40)
                 {
-                    enemyCowOnFire.SetActive(true);
-                    StatusActivity("onFire", "EnemyCow", true);
+                    WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
                 }
-                enemyCowOnFireLeft.text = "<color=red>4</color>";
-                turnEnd = true;
+                else
+                {
+                    MyCow.nowMP -= 40;
+                    int dmg = 500;
+                    if(enemyCowSteelization.activeSelf) dmg /= 2;
+                    BattleLog.text += MyCow.cowName + "의 불고기! " + EnemyCow.enemyName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+                    EnemyCow.nowHP -= dmg;
+                    if(!enemyCowOnFire.activeSelf && !enemyCowImmune.activeSelf && !enemyCowSuperSaiyan.activeSelf)
+                    {
+                        enemyCowOnFire.SetActive(true);
+                        StatusActivity("onFire", "EnemyCow", true);
+                    }
+                    enemyCowOnFireLeft.text = "<color=red>4</color>";
+                    turnEnd = true;
+
+                }
             }
             else if(skillID == 6)
             {
-                BattleLog.text += MyCow.cowName + "의 크로이츠펠트 야곱병! " + MyCow.cowName + "은(는) 광폭 상태가 되었다!\n";
-                if(!cowRage.activeSelf)
+                if(MyCow.nowMP < 30)
                 {
-                    Debug.Log("cowRage");
-                    cowRage.SetActive(true);
-                    StatusActivity("rage", "MyCow", true);
+                    WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
                 }
-                cowRageLeft.text = "<color=blue>6</color>";
+                else
+                {
+                    MyCow.nowMP -= 30;
+                    BattleLog.text += MyCow.cowName + "의 크로이츠펠트 야곱병! " + MyCow.cowName + "은(는) 광폭 상태가 되었다!\n";
+                    if(!cowRage.activeSelf)
+                    {
+                        cowRage.SetActive(true);
+                        StatusActivity("rage", "MyCow", true);
+                    }
+                    cowRageLeft.text = "<color=blue>6</color>";
+                    turnEnd = true;
+                }
+            }
+            else if(skillID == 7)
+            {
+                if(MyCow.nowMP < 40)
+                {
+                    WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                }
+                else
+                {
+                    MyCow.nowMP -= 40;
+                    int dmg = 500;
+                    if(enemyCowSteelization.activeSelf) dmg /= 2;
+                    BattleLog.text += MyCow.cowName + "의 샤우팅! " + EnemyCow.enemyName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+                    EnemyCow.nowHP -= dmg;
+                    if(enemyCowRage.activeSelf)
+                    {
+                        enemyCowRage.SetActive(false);
+                        StatusActivity("rage", "EnemyCow", false);
+                    }
+                    enemyCowBalanced.SetActive(false);
+                    enemyCowBalancedLeft.text = "<color=blue>0</color>";
+                    enemyCowImmune.SetActive(false);
+                    enemyCowImmuneLeft.text = "<color=blue>0</color>";
+                    enemyCowSteelization.SetActive(false);
+                    enemyCowSteelizationLeft.text = "<color=blue>0</color>";
+                    if(enemyCowSuperSaiyan.activeSelf)
+                    {
+                        enemyCowSuperSaiyan.SetActive(false);
+                        StatusActivity("superSaiyan", "EnemyCow", false);
+                    }
+                    turnEnd = true;
+
+                }
+            }
+            else if(skillID == 8)
+            {
+                if(MyCow.nowMP < 50)
+                {
+                    WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                }
+                else
+                {
+                    BattleLog.text += MyCow.cowName + "의 균형잡기! " + MyCow.cowName + "은(는) 균형 상태가 되었다!\n";
+                    cowBalancedLeft.text = "<color=blue>6</color>";
+                    cowBalanced.SetActive(true);
+                    turnEnd = true;
+                }
+            }
+            else if(skillID == 9)
+            {
+                BattleLog.text += MyCow.cowName + "의 운기조식! <color=blue>200</color>의 활력을 회복!\n";
+                MyCow.nowMP += 200;
+                if(MyCow.nowMP > MyCow.maxMP) MyCow.nowMP = MyCow.maxMP;
+                cowBlindLeft.text = "<color=red>0</color>";
+                cowBlind.SetActive(false);
+                if(cowOnFire.activeSelf)
+                {
+                    cowOnFireLeft.text = "<color=red>0</color>";
+                    cowOnFire.SetActive(false);
+                    StatusActivity("onFire", "MyCow", false);
+                }
+                if(cowSealed.activeSelf)
+                {
+                    cowSealedLeft.text = "<color=red>0</color>";
+                    cowSealed.SetActive(false);
+                    StatusActivity("sealed", "MyCow", false);
+                }
+                cowImmuneLeft.text = "<color=blue>4</color>";
+                cowImmune.SetActive(true);
                 turnEnd = true;
+            }
+            else if(skillID == 10)
+            {
+                if(MyCow.nowMP < 50)
+                {
+                    WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                }
+                else
+                {
+                    MyCow.nowMP -= 50;
+                    if(cowBlind.activeSelf)
+                    {
+                        BattleLog.text += MyCow.cowName + "의 총쏘기! 하지만 빗나갔다!\n";
+                    }
+                    else
+                    {
+                        if(enemyCowBalanced.activeSelf)
+                        {
+                            BattleLog.text += MyCow.cowName + "의 총쏘기! 하지만" + EnemyCow.enemyName + "은(는) 회피했다!\n";
+                        }
+                        else
+                        {
+                            int dmg = 0;
+                            if(MyCow.atkDmg * 5 - EnemyCow.armor > 0)
+                            {
+                                dmg = MyCow.atkDmg * 5 - EnemyCow.armor;
+                            }
+                            else
+                            {
+                                dmg = 0;
+                            }
+                            if(enemyCowSteelization.activeSelf) dmg /= 2;
+                            BattleLog.text += MyCow.cowName + "의 총쏘기! " + EnemyCow.enemyName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+                            EnemyCow.nowHP -= dmg;
+                        }
+                    }
+                    turnEnd = true;
+                }
+            }
+            else if(skillID == 11)
+            {
+                if(MyCow.nowMP < 80)
+                {
+                    WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                }
+                else
+                {
+                    MyCow.nowMP -= 80;
+                    int dmg = 2500;
+                    if(enemyCowSteelization.activeSelf) dmg /= 2;
+                    BattleLog.text += MyCow.cowName + "의 봉인! " + EnemyCow.enemyName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+                    EnemyCow.nowHP -= dmg;
+                    if(!enemyCowSealed.activeSelf && !enemyCowImmune.activeSelf && !enemyCowSuperSaiyan.activeSelf)
+                    {
+                        enemyCowSealed.SetActive(true);
+                        StatusActivity("sealed", "EnemyCow", true);
+                    }
+                    enemyCowOnFireLeft.text = "<color=red>4</color>";
+                    turnEnd = true;
+                }
+            }
+            else if(skillID == 12)
+            {
+                if(MyCow.nowMP < 50)
+                {
+                    WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                }
+                else
+                {
+                    BattleLog.text += MyCow.cowName + "의 우유 20L 마시기! <color=green>" + (MyCow.maxHP * 3 / 10) + "</color>의 체력을 회복!\n";
+                    MyCow.nowHP += (EnemyCow.maxHP * 3 / 10);
+                    if(MyCow.nowHP > MyCow.maxHP) MyCow.nowHP = MyCow.maxHP;
+                    cowBlindLeft.text = "<color=red>0</color>";
+                    cowBlind.SetActive(false);
+                    if(cowOnFire.activeSelf)
+                    {
+                        cowOnFireLeft.text = "<color=red>0</color>";
+                        cowOnFire.SetActive(false);
+                        StatusActivity("onFire", "MyCow", false);
+                    }
+                    if(cowSealed.activeSelf)
+                    {
+                        cowSealedLeft.text = "<color=red>0</color>";
+                        cowSealed.SetActive(false);
+                        StatusActivity("sealed", "MyCow", false);
+                    }
+                    turnEnd = true;
+                }
+            }
+            else if(skillID == 13)
+            {
+                BattleLog.text += MyCow.cowName + "의 철과 같은 단단함!" + MyCow.cowName + "은(는) 단단해졌다!\n";
+                cowSteelizationLeft.text = "<color=blue>2</color>";
+                cowSteelization.SetActive(true);
+                turnEnd = true;
+            }
+            else if(skillID == 14)
+            {
+                if(MyCow.nowMP < 100)
+                {
+                    WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                }
+                else
+                {
+                    BattleLog.text += MyCow.cowName + "의 초사이언 변신!" + MyCow.cowName + "은(는) 초사이언이 되었다!\n";
+                    cowBlindLeft.text = "<color=red>0</color>";
+                    cowBlind.SetActive(false);
+                    if(cowOnFire.activeSelf)
+                    {
+                        cowOnFireLeft.text = "<color=red>0</color>";
+                        cowOnFire.SetActive(false);
+                        StatusActivity("onFire", "MyCow", false);
+                    }
+                    if(cowSealed.activeSelf)
+                    {
+                        cowSealedLeft.text = "<color=red>0</color>";
+                        cowSealed.SetActive(false);
+                        StatusActivity("sealed", "MyCow", false);
+                    }
+                    cowSuperSaiyanLeft.text = "<color=blue>8</color>";
+                    cowSuperSaiyan.SetActive(true);
+                    turnEnd = true;
+                }
             }
 
             if(EnemyCow.nowHP <= 0)
@@ -1104,6 +1337,7 @@ public class BullFightScript : MonoBehaviour
                     {
                         dmg = 0;
                     }
+                    if(cowSteelization.activeSelf) dmg /= 2;
                     BattleLog.text += EnemyCow.enemyName + "의 박치기! <color=red>" + dmg + "</color>의 피해를 입었다!\n";
                     MyCow.nowHP -= dmg;
 
@@ -1112,8 +1346,8 @@ public class BullFightScript : MonoBehaviour
         }
         else if(skill_name == "우유마시기")
         {
-            BattleLog.text += EnemyCow.enemyName + "의 우유마시기! <color=green>" + (int)((float)EnemyCow.maxHP / 10) + "</color>의 체력을 회복!\n";
-            EnemyCow.nowHP += (int)((float)EnemyCow.maxHP / 10);
+            BattleLog.text += EnemyCow.enemyName + "의 우유마시기! <color=green>" + (EnemyCow.maxHP / 10) + "</color>의 체력을 회복!\n";
+            EnemyCow.nowHP += (EnemyCow.maxHP / 10);
             if(EnemyCow.nowHP > EnemyCow.maxHP)
             {
                 EnemyCow.nowHP = EnemyCow.maxHP;
@@ -1183,21 +1417,21 @@ public class BullFightScript : MonoBehaviour
         }
         else if(EnemyCow.enemyName == "카우보이소")
         {
-            ElephantCowClear = true;
-            WarningMessage.text = "승리!";
-            EnemyCow.SetEnemyStatus("마법'소'녀", 12000, 1000, 300);
-            dialogID = 9;
-        }
-        else if(EnemyCow.enemyName == "마법'소'녀")
-        {
-            ElephantCowClear = true;
+            CowboyCowClear = true;
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("인도소", 15000, 1000, 500);
-            dialogID = 10;
+            dialogID = 9;
         }
         else if(EnemyCow.enemyName == "인도소")
         {
             ElephantCowClear = true;
+            WarningMessage.text = "승리!";
+            EnemyCow.SetEnemyStatus("마법'소'녀", 12000, 1000, 300);
+            dialogID = 10;
+        }
+        else if(EnemyCow.enemyName == "마법'소'녀")
+        {
+            JapaneseCowClear = true;
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("독일소", 15000, 1200, 800);
             dialogID = 11;
