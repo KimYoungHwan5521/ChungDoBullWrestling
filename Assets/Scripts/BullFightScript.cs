@@ -45,8 +45,13 @@ public class BullFightScript : MonoBehaviour
     public static bool SeesawCowClear = false;
     public static bool WoodCowClear = false;
     public static bool CowboyCowClear = false;
+    public static bool JapaneseCowClear = false;
     public static bool ElephantCowClear = false;
-    public static bool ChineseCowClear = false;
+    public static bool GermanCowClear = false;
+    public static bool SpaceshipRiderCowClear = false;
+    public static bool GalaxyCowClear = false;
+    public static bool SuperSaiyanCowClear = false;
+    public static bool NotCowClear = false;
 
     public GameObject ImageVS;
     public GameObject Skill3;
@@ -166,7 +171,8 @@ public class BullFightScript : MonoBehaviour
 
     public bool myTurn;
     public bool turnEnd;
-    public Text turn;
+    public Text turnText;
+    public int turn;
 
     // Start is called before the first frame update
     void Start()
@@ -179,6 +185,7 @@ public class BullFightScript : MonoBehaviour
     public int dialogIndex = 0;
     void Update()
     {
+        turnText.text = turn.ToString(); 
         // Dialogs
         if(dialogID == 1)
         {
@@ -795,8 +802,7 @@ public class BullFightScript : MonoBehaviour
                 WarningMessage.text = "";
                 scroll_rect.verticalNormalizedPosition = 0.0f;
                 myTurn = false;
-                int turnInt = int.Parse(turn.text);
-                turn.text = (turnInt + 1).ToString(); 
+                turn++;
                 // 시간 딜레이
                 Invoke("EnemyAct", 1.0f);
                 turnEnd = false;
@@ -824,8 +830,7 @@ public class BullFightScript : MonoBehaviour
                 EnemySkill("박치기");
             }
         }
-        int turnInt = int.Parse(turn.text);
-        turn.text = (turnInt + 1).ToString(); 
+        turn++;
         StatusCheck();
         myTurn = true;
     }
