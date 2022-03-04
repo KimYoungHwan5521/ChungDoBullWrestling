@@ -28,6 +28,7 @@ public class BullFightScript : MonoBehaviour
     public GameObject enemyCowSteelization;
     public GameObject cowSuperSaiyan;
     public GameObject enemyCowSuperSaiyan;
+    public GameObject cowElectricShock;
     
     // Buff/Debuffs left turns
     public Text cowBlindLeft;
@@ -46,6 +47,7 @@ public class BullFightScript : MonoBehaviour
     public Text enemyCowSteelizationLeft;
     public Text cowSuperSaiyanLeft;
     public Text enemyCowSuperSaiyanLeft;
+    public Text cowElectricShockLeft;
 
     // Progress
     public static bool MilkCowClear = false;
@@ -80,9 +82,40 @@ public class BullFightScript : MonoBehaviour
     public GameObject Skill14;
     public GameObject Skill15;
 
+    public Button btnSkill1;
+    public Button btnSkill2;
+    public Button btnSkill3;
+    public Button btnSkill4;
+    public Button btnSkill5;
+    public Button btnSkill6;
+    public Button btnSkill7;
+    public Button btnSkill8;
+    public Button btnSkill9;
+    public Button btnSkill10;
+    public Button btnSkill11;
+    public Button btnSkill12;
+    public Button btnSkill13;
+    public Button btnSkill14;
+    public Button btnSkill15;
+
+    public GameObject Skill1Blocked;
+    public GameObject Skill2Blocked;
+    public GameObject Skill3Blocked;
+    public GameObject Skill4Blocked;
+    public GameObject Skill5Blocked;
+    public GameObject Skill6Blocked;
+    public GameObject Skill7Blocked;
+    public GameObject Skill8Blocked;
+    public GameObject Skill9Blocked;
+    public GameObject Skill10Blocked;
+    public GameObject Skill11Blocked;
+    public GameObject Skill12Blocked;
+    public GameObject Skill13Blocked;
+    public GameObject Skill14Blocked;
+    public GameObject Skill15Blocked;
+
     public ScrollRect scroll_rect;
     public void MouseOverToSkill(int skillID){
-        Debug.Log(skillID);
         if(skillID == 0)
         {
             Skill_Name.text = "박치기";
@@ -103,7 +136,7 @@ public class BullFightScript : MonoBehaviour
         }
         else if(skillID == 3)
         {
-            Skill_Name.text = "거름차기";
+            Skill_Name.text = "뒷발로 거름차기";
             Mana_Required.text = "<color=blue>활력 20</color>";
             Skill_Explanation.text = "뒷발로 거름을 발로차 상대의 눈을 멀게한다.";
         }
@@ -128,20 +161,20 @@ public class BullFightScript : MonoBehaviour
         else if(skillID == 7)
         {
             Skill_Name.text = "샤우팅";
-            Mana_Required.text = "<color=blue>활력 40</color>";
+            Mana_Required.text = "<color=blue>활력 30</color>";
             Skill_Explanation.text = "강력한 샤우팅으로 상대에게 고정피해를 입히고 이로운 상태를 날려버린다.";
         }
         else if(skillID == 8)
         {
             Skill_Name.text = "균형잡기";
             Mana_Required.text = "<color=blue>활력 50</color>";
-            Skill_Explanation.text = "균형을 잡아 상대의 스킬을 회피할 수 있는 상태가 된다.";
+            Skill_Explanation.text = "균형을 잡아 상대의 스킬을 회피할 수 있는 상태가 되고, 모든 해로운 상태이상을 제거하고 면역상태가 된다.";
         }
         else if(skillID == 9)
         {
             Skill_Name.text = "운기조식";
             Mana_Required.text = "<color=blue>활력 0</color>";
-            Skill_Explanation.text = "정신을 집중해 모든 해로운 상태이상을 제거하고 면역상태가 되고 활력을 회복한다.";
+            Skill_Explanation.text = "정신을 집중해 활력을 회복한다.";
         }
         else if(skillID == 10)
         {
@@ -221,6 +254,12 @@ public class BullFightScript : MonoBehaviour
             Mana_Required.text = "";
             Skill_Explanation.text = "공격력과 방어력이 증가하고, 해로운 상태이상에 걸리지 않는다.";
         }
+        else if(skillID == 1008)
+        {
+            Skill_Name.text = "<color=red>감전</color>";
+            Mana_Required.text = "";
+            Skill_Explanation.text = "물리공격을 사용할 수 없게된다.";
+        }
         else
         {
             Skill_Explanation.text = "(알 수 없음)";
@@ -274,7 +313,7 @@ public class BullFightScript : MonoBehaviour
                     WarningMessage.text = "승리 상금 3000냥을 획득했다!";
                     Player.gold += 3000;
                 }
-                if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '거름차기'를 배웠다!";
+                if(dialogIndex==1) WarningMessage.text = MyCow.cowName + "은(는) 기술 '뒷발로 거름차기'를 배웠다!";
                 if(dialogIndex==2)
                 {
                     WarningMessage.text = "";
@@ -651,8 +690,14 @@ public class BullFightScript : MonoBehaviour
         if(enemyCowOnFire.activeSelf)
         {
             int enemyCowOnFireLeftInt = int.Parse(enemyCowOnFireLeft.text.Substring(11,1)) - 1;
+            if(EnemyCow.cowName == "조소")
+            {
+                enemyCowOnFireLeftInt += 2;
+                BattleLog.text += "조소의 불이 옮겨붙었다!\n";
+            }
             enemyCowOnFireLeft.text = "<color=red>" + enemyCowOnFireLeftInt.ToString() + "</color>";
             int dmg = 50;
+            if(EnemyCow.cowName == "조소") dmg *= 2;
             if(enemyCowSteelization.activeSelf) dmg /= 2;
             EnemyCow.nowHP -= dmg;
             if(enemyCowOnFireLeftInt == 0)
@@ -737,6 +782,16 @@ public class BullFightScript : MonoBehaviour
                 StatusActivity("superSaiyan", "EnemyCow", false);
             }
         }
+        if(cowElectricShock.activeSelf)
+        {
+            int cowElectricShockLeftInt = int.Parse(cowElectricShockLeft.text.Substring(11,1)) - 1;
+            cowElectricShockLeft.text = "<color=red>" + cowElectricShockLeftInt.ToString() + "</color>";
+            if(cowElectricShockLeftInt == 0)
+            {
+                cowElectricShock.SetActive(false);
+                StatusActivity("electricShock", "MyCow", false);
+            }
+        }
     }
 
     // Status activity
@@ -748,10 +803,12 @@ public class BullFightScript : MonoBehaviour
             {
                 if(onoff)
                 {
+                    Debug.Log("onFire, MyCow, on " + MyCow.armor);
                     MyCow.armor -= 50;
                 }
                 else
                 {
+                    Debug.Log("onFire, MyCow, off " + MyCow.armor);
                     MyCow.armor += 50;
                 }
             }
@@ -773,11 +830,13 @@ public class BullFightScript : MonoBehaviour
             {
                 if(onoff)
                 {
+                    Debug.Log("rage, MyCow, on " + MyCow.armor);
                     MyCow.atkDmg += 100;
                     MyCow.armor += 100;
                 }
                 else
                 {
+                    Debug.Log("rage, MyCow, off " + MyCow.armor);
                     MyCow.atkDmg -= 100;
                     MyCow.armor -= 100;
                 }
@@ -854,6 +913,35 @@ public class BullFightScript : MonoBehaviour
                 }
             }
         }
+        else if(status == "electricShock")
+        {
+            if(onoff)
+            {
+                Skill1Blocked.SetActive(true);
+                btnSkill1.interactable = false;
+                Skill2Blocked.SetActive(true);
+                btnSkill2.interactable = false;
+                Skill4Blocked.SetActive(true);
+                btnSkill4.interactable = false;
+                Skill5Blocked.SetActive(true);
+                btnSkill5.interactable = false;
+                Skill11Blocked.SetActive(true);
+                btnSkill11.interactable = false;
+            }
+            else
+            {
+                Skill1Blocked.SetActive(false);
+                btnSkill1.interactable = true;
+                Skill2Blocked.SetActive(false);
+                btnSkill2.interactable = true;
+                Skill4Blocked.SetActive(false);
+                btnSkill4.interactable = true;
+                Skill5Blocked.SetActive(false);
+                btnSkill5.interactable = true;
+                Skill11Blocked.SetActive(false);
+                btnSkill11.interactable = true;
+            }
+        }
             
     }
 
@@ -861,7 +949,6 @@ public class BullFightScript : MonoBehaviour
     public Text WarningMessage;
 
     public void OnClickSkill(int skillID){
-        Debug.Log("enemy armor " + EnemyCow.armor);
         if(myTurn == true)
         {
             StatusCheck();
@@ -875,7 +962,7 @@ public class BullFightScript : MonoBehaviour
                 {
                     if(enemyCowBalanced.activeSelf)
                     {
-                        BattleLog.text += MyCow.cowName + "의 박치기! 하지만" + EnemyCow.enemyName + "은(는) 회피했다!\n";
+                        BattleLog.text += MyCow.cowName + "의 박치기! 하지만" + EnemyCow.cowName + "은(는) 회피했다!\n";
                     }
                     else
                     {
@@ -889,7 +976,7 @@ public class BullFightScript : MonoBehaviour
                             dmg = 0;
                         }
                         if(enemyCowSteelization.activeSelf) dmg /= 2;
-                        BattleLog.text += MyCow.cowName + "의 박치기!" + EnemyCow.enemyName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+                        BattleLog.text += MyCow.cowName + "의 박치기!" + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
                         EnemyCow.nowHP -= dmg;
                     }
                 }
@@ -912,7 +999,7 @@ public class BullFightScript : MonoBehaviour
                     {
                         if(enemyCowBalanced.activeSelf)
                         {
-                            BattleLog.text += MyCow.cowName + "의 핵꿀밤! 하지만" + EnemyCow.enemyName + "은(는) 회피했다!\n";
+                            BattleLog.text += MyCow.cowName + "의 핵꿀밤! 하지만" + EnemyCow.cowName + "은(는) 회피했다!\n";
                         }
                         else
                         {
@@ -926,7 +1013,7 @@ public class BullFightScript : MonoBehaviour
                                 dmg = 0;
                             }
                             if(enemyCowSteelization.activeSelf) dmg /= 2;
-                            BattleLog.text += MyCow.cowName + "의 핵꿀밤! " + EnemyCow.enemyName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+                            BattleLog.text += MyCow.cowName + "의 핵꿀밤! " + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
                             EnemyCow.nowHP -= dmg;
                         }
                     }
@@ -967,23 +1054,23 @@ public class BullFightScript : MonoBehaviour
                     MyCow.nowMP -= 20;
                     if(cowBlind.activeSelf)
                     {
-                        BattleLog.text += MyCow.cowName + "의 거름차기! " + EnemyCow.enemyName + "에게" + MyCow.atkDmg + "하지만 빗나갔다!\n";
+                        BattleLog.text += MyCow.cowName + "의 거름차기! 하지만 빗나갔다!\n";
                     }
                     else
                     {
                         if(enemyCowBalanced.activeSelf)
                         {
-                            BattleLog.text += MyCow.cowName + "의 거름차기! 하지만" + EnemyCow.enemyName + "은(는) 회피했다!\n";
+                            BattleLog.text += MyCow.cowName + "의 거름차기! 하지만" + EnemyCow.cowName + "은(는) 회피했다!\n";
                         }
                         else
                         {
                             if(enemyCowImmune.activeSelf || enemyCowSuperSaiyan.activeSelf)
                             {
-                                BattleLog.text += MyCow.cowName + "의 거름차기! 하지만 " + EnemyCow.enemyName + "은(는) 면역!\n";
+                                BattleLog.text += MyCow.cowName + "의 거름차기! 하지만 " + EnemyCow.cowName + "은(는) 면역!\n";
                             }
                             else
                             {
-                                BattleLog.text += MyCow.cowName + "의 거름차기! " + EnemyCow.enemyName + "은(는) 실명에 걸렸다!\n";
+                                BattleLog.text += MyCow.cowName + "의 거름차기! " + EnemyCow.cowName + "은(는) 실명에 걸렸다!\n";
                                 enemyCowBlind.SetActive(true);
                                 enemyCowBlindLeft.text = "<color=red>4</color>";
                             }
@@ -1011,7 +1098,7 @@ public class BullFightScript : MonoBehaviour
                         {
                             if(enemyCowBalanced.activeSelf)
                             {
-                                BattleLog.text += MyCow.cowName + "의 3단컴보! 하지만" + EnemyCow.enemyName + "은(는) 회피했다!\n";
+                                BattleLog.text += MyCow.cowName + "의 3단컴보! 하지만" + EnemyCow.cowName + "은(는) 회피했다!\n";
                             }
                             else
                             {
@@ -1025,7 +1112,7 @@ public class BullFightScript : MonoBehaviour
                                     dmg = 0;
                                 }
                                 if(enemyCowSteelization.activeSelf) dmg /= 2;
-                                BattleLog.text += MyCow.cowName + "의 3단컴보! " + EnemyCow.enemyName + "에게 " + dmg +"의 데미지를 입혔다!\n";
+                                BattleLog.text += MyCow.cowName + "의 3단컴보! " + EnemyCow.cowName + "에게 <color=red>" + dmg +"</color>의 데미지를 입혔다!\n";
                                 EnemyCow.nowHP -= dmg;
                             }
                         }
@@ -1044,7 +1131,7 @@ public class BullFightScript : MonoBehaviour
                     MyCow.nowMP -= 40;
                     int dmg = 500;
                     if(enemyCowSteelization.activeSelf) dmg /= 2;
-                    BattleLog.text += MyCow.cowName + "의 불고기! " + EnemyCow.enemyName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+                    BattleLog.text += MyCow.cowName + "의 불고기! " + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
                     EnemyCow.nowHP -= dmg;
                     if(!enemyCowOnFire.activeSelf && !enemyCowImmune.activeSelf && !enemyCowSuperSaiyan.activeSelf)
                     {
@@ -1077,16 +1164,16 @@ public class BullFightScript : MonoBehaviour
             }
             else if(skillID == 7)
             {
-                if(MyCow.nowMP < 40)
+                if(MyCow.nowMP < 30)
                 {
                     WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
                 }
                 else
                 {
-                    MyCow.nowMP -= 40;
+                    MyCow.nowMP -= 30;
                     int dmg = 500;
                     if(enemyCowSteelization.activeSelf) dmg /= 2;
-                    BattleLog.text += MyCow.cowName + "의 샤우팅! " + EnemyCow.enemyName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+                    BattleLog.text += MyCow.cowName + "의 샤우팅! " + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
                     EnemyCow.nowHP -= dmg;
                     if(enemyCowRage.activeSelf)
                     {
@@ -1116,7 +1203,24 @@ public class BullFightScript : MonoBehaviour
                 }
                 else
                 {
+                    MyCow.nowMP -= 50;
                     BattleLog.text += MyCow.cowName + "의 균형잡기! " + MyCow.cowName + "은(는) 균형 상태가 되었다!\n";
+                    cowBlindLeft.text = "<color=red>0</color>";
+                    cowBlind.SetActive(false);
+                    if(cowOnFire.activeSelf)
+                    {
+                        cowOnFireLeft.text = "<color=red>0</color>";
+                        cowOnFire.SetActive(false);
+                        StatusActivity("onFire", "MyCow", false);
+                    }
+                    if(cowSealed.activeSelf)
+                    {
+                        cowSealedLeft.text = "<color=red>0</color>";
+                        cowSealed.SetActive(false);
+                        StatusActivity("sealed", "MyCow", false);
+                    }
+                    cowImmuneLeft.text = "<color=blue>6</color>";
+                    cowImmune.SetActive(true);
                     cowBalancedLeft.text = "<color=blue>6</color>";
                     cowBalanced.SetActive(true);
                     turnEnd = true;
@@ -1127,22 +1231,6 @@ public class BullFightScript : MonoBehaviour
                 BattleLog.text += MyCow.cowName + "의 운기조식! <color=blue>200</color>의 활력을 회복!\n";
                 MyCow.nowMP += 200;
                 if(MyCow.nowMP > MyCow.maxMP) MyCow.nowMP = MyCow.maxMP;
-                cowBlindLeft.text = "<color=red>0</color>";
-                cowBlind.SetActive(false);
-                if(cowOnFire.activeSelf)
-                {
-                    cowOnFireLeft.text = "<color=red>0</color>";
-                    cowOnFire.SetActive(false);
-                    StatusActivity("onFire", "MyCow", false);
-                }
-                if(cowSealed.activeSelf)
-                {
-                    cowSealedLeft.text = "<color=red>0</color>";
-                    cowSealed.SetActive(false);
-                    StatusActivity("sealed", "MyCow", false);
-                }
-                cowImmuneLeft.text = "<color=blue>4</color>";
-                cowImmune.SetActive(true);
                 turnEnd = true;
             }
             else if(skillID == 10)
@@ -1162,7 +1250,7 @@ public class BullFightScript : MonoBehaviour
                     {
                         if(enemyCowBalanced.activeSelf)
                         {
-                            BattleLog.text += MyCow.cowName + "의 총쏘기! 하지만" + EnemyCow.enemyName + "은(는) 회피했다!\n";
+                            BattleLog.text += MyCow.cowName + "의 총쏘기! 하지만" + EnemyCow.cowName + "은(는) 회피했다!\n";
                         }
                         else
                         {
@@ -1176,7 +1264,7 @@ public class BullFightScript : MonoBehaviour
                                 dmg = 0;
                             }
                             if(enemyCowSteelization.activeSelf) dmg /= 2;
-                            BattleLog.text += MyCow.cowName + "의 총쏘기! " + EnemyCow.enemyName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+                            BattleLog.text += MyCow.cowName + "의 총쏘기! " + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
                             EnemyCow.nowHP -= dmg;
                         }
                     }
@@ -1194,7 +1282,7 @@ public class BullFightScript : MonoBehaviour
                     MyCow.nowMP -= 80;
                     int dmg = 2500;
                     if(enemyCowSteelization.activeSelf) dmg /= 2;
-                    BattleLog.text += MyCow.cowName + "의 봉인! " + EnemyCow.enemyName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+                    BattleLog.text += MyCow.cowName + "의 봉인! " + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
                     EnemyCow.nowHP -= dmg;
                     if(!enemyCowSealed.activeSelf && !enemyCowImmune.activeSelf && !enemyCowSuperSaiyan.activeSelf)
                     {
@@ -1289,9 +1377,10 @@ public class BullFightScript : MonoBehaviour
     }
 
     public void EnemyAct(){
-        Debug.Log(EnemyCow.enemyName);
-        if(EnemyCow.enemyName == "젖소"){
-            if(((float)EnemyCow.nowHP/(float)EnemyCow.maxHP) <= 0.5)
+        Debug.Log(EnemyCow.cowName);
+        if(EnemyCow.cowName == "젖소")
+        {
+            if((EnemyCow.nowHP/EnemyCow.maxHP) < 0.5)
             {
                 int r = Random.Range(0,2);
                 if(r == 0)
@@ -1308,23 +1397,271 @@ public class BullFightScript : MonoBehaviour
                 EnemySkill("박치기");
             }
         }
+        else if(EnemyCow.cowName == "누렁이")
+        {
+            if(!cowBalanced.activeSelf)
+            {
+                int r = Random.Range(0,3);
+                if(r == 0)
+                {
+                    EnemySkill("뒷발로 거름차기");
+                }
+                else
+                {
+                    EnemySkill("박치기");
+                }
+            }
+        }
+        else if(EnemyCow.cowName == "우건마")
+        {
+            if(EnemyCow.nowHP / EnemyCow.maxHP < 0.2)
+            {
+                EnemySkill("8단컴보");
+            }
+            else
+            {
+                int r = Random.Range(0,2);
+                if(r == 0)
+                {
+                    EnemySkill("3단컴보");
+                }
+                else
+                {
+                    EnemySkill("박치기");
+                }
+            }
+        }
+        else if(EnemyCow.cowName == "불판에서 뛰쳐나온 소")
+        {
+            if(EnemyCow.nowHP / EnemyCow.maxHP < 0.5)
+            {
+                if(cowOnFire.activeSelf)
+                {
+                    int r = Random.Range(0,3);
+                    if(r == 0)
+                    {
+                        EnemySkill("우유마시기");
+                    }
+                    else if(r == 1)
+                    {
+                        EnemySkill("포크레인");
+                    }
+                    else
+                    {
+                        EnemySkill("박치기");
+                    }
+                }
+                else
+                {
+                    int r = Random.Range(0,4);
+                    if(r == 0)
+                    {
+                        EnemySkill("우유마시기");
+                    }
+                    else if(r == 1)
+                    {
+                        EnemySkill("포크레인");
+                    }
+                    else if(r == 2)
+                    {
+                        EnemySkill("박치기");
+                    }
+                    else
+                    {
+                        EnemySkill("불고기");
+                    }
+                }
+            }
+            else
+            {
+                if(cowOnFire.activeSelf)
+                {
+                    EnemySkill("박치기");
+                }
+                else
+                {
+                    int r = Random.Range(0,3);
+                    if(r == 0)
+                    {
+                        EnemySkill("불고기");
+                    }
+                    else
+                    {
+                        EnemySkill("박치기");
+                    }
+                }
+            }
+        }
+        else if(EnemyCow.cowName == "미친소")
+        {
+            if(enemyCowRage.activeSelf)
+            {
+                if(enemyCowBlind.activeSelf)
+                {
+                    EnemySkill("우유마시기");
+                }
+                else
+                {
+                    int r = Random.Range(0,3);
+                    if(r == 0)
+                    {
+                        EnemySkill("연속공격");
+                    }
+                    else
+                    {
+                        EnemySkill("박치기");
+                    }
+                }
+            }
+            else
+            {
+                EnemySkill("크로이츠펠트 야곱병");
+            }
+        }
+        else if(EnemyCow.cowName == "롹커소")
+        {
+            if(cowRage.activeSelf)
+            {
+                int r = Random.Range(0,2);
+                if(r == 0)
+                {
+                    EnemySkill("샤우팅");
+                }
+                else
+                {
+                    EnemySkill("날카로운 선율");
+                }
+            }
+            else
+            {
+                if(enemyCowRage.activeSelf)
+                {
+                    int r = Random.Range(0,3);
+                    if(r == 0)
+                    {
+                        EnemySkill("샤우팅");
+                    }
+                    else
+                    {
+                        EnemySkill("날카로운 선율");
+                    }
+                }
+                else
+                {
+                    int r = Random.Range(0,3);
+                    if(r == 0)
+                    {
+                        EnemySkill("데스메탈");
+                    }
+                    else
+                    {
+                        EnemySkill("날카로운 선율");
+                    }
+                }
+            }
+        }
+        else if(EnemyCow.cowName == "시소")
+        {
+            if(enemyCowBalanced.activeSelf)
+            {
+                int r = Random.Range(0,3);
+                if(r == 0)
+                {
+                    EnemySkill("박치기");
+                }
+                else if(r == 1)
+                {
+                    EnemySkill("연속공격");
+                }
+                else
+                {
+                    EnemySkill("뒷발로 거름차기");
+                }
+            }
+            else
+            {
+                int r = Random.Range(0,4);
+                if(r == 0)
+                {
+                    EnemySkill("박치기");
+                }
+                else if(r == 1)
+                {
+                    EnemySkill("연속공격");
+                }
+                else
+                {
+                    EnemySkill("균형잡기");
+                }
+            }
+        }
+        else if(EnemyCow.cowName == "조소")
+        {
+            if(EnemyCow.nowHP / EnemyCow.maxHP < 0.3)
+            {
+                int r = Random.Range(0,4);
+                if(r == 0)
+                {
+                    EnemySkill("천벌");
+                }
+                else if(r == 1)
+                {
+                    EnemySkill("몸통박치기");
+                }
+                else
+                {
+                    EnemySkill("운기조식");
+                }
+            }
+            else
+            {
+                if(enemyCowRage)
+                {
+                    int r = Random.Range(0,3);
+                    if(r == 0)
+                    {
+                        EnemySkill("천벌");
+                    }
+                    else
+                    {
+                        EnemySkill("몸통박치기");
+                    }
+                }
+                else
+                {
+                    int r = Random.Range(0,3);
+                    if(r == 0)
+                    {
+                        EnemySkill("천벌");
+                    }
+                    else if(r == 1)
+                    {
+                        EnemySkill("몸통박치기");
+                    }
+                    else
+                    {
+                        EnemySkill("자연의 분노");
+                    }
+                }
+            }
+        }
         turn++;
         StatusCheck();
         myTurn = true;
     }
 
     public void EnemySkill(string skill_name){
-        if(skill_name == "박치기")
+        if(skill_name == "박치기" || skill_name == "몸통박치기")
         {
             if(enemyCowBlind.activeSelf)
             {
-                BattleLog.text += EnemyCow.enemyName + "의 박치기! 하지만 빗나갔다!\n";
+                BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! 하지만 빗나갔다!\n";
             }
             else
             {
                 if(cowBalanced.activeSelf)
                 {
-                    BattleLog.text += EnemyCow.enemyName + "의 박치기! 하지만 " + MyCow.cowName + "은(는) 회피했다!\n";
+                    BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! 하지만 " + MyCow.cowName + "은(는) 회피했다!\n";
                 }
                 else
                 {
@@ -1338,27 +1675,257 @@ public class BullFightScript : MonoBehaviour
                         dmg = 0;
                     }
                     if(cowSteelization.activeSelf) dmg /= 2;
-                    BattleLog.text += EnemyCow.enemyName + "의 박치기! <color=red>" + dmg + "</color>의 피해를 입었다!\n";
+                    BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! <color=red>" + dmg + "</color>의 피해를 입었다!\n";
                     MyCow.nowHP -= dmg;
-
                 }
             }
         }
         else if(skill_name == "우유마시기")
         {
-            BattleLog.text += EnemyCow.enemyName + "의 우유마시기! <color=green>" + (EnemyCow.maxHP / 10) + "</color>의 체력을 회복!\n";
+            BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! <color=green>" + (EnemyCow.maxHP / 10) + "</color>의 체력을 회복!\n";
             EnemyCow.nowHP += (EnemyCow.maxHP / 10);
-            if(EnemyCow.nowHP > EnemyCow.maxHP)
+            if(EnemyCow.nowHP > EnemyCow.maxHP) EnemyCow.nowHP = EnemyCow.maxHP;
+            enemyCowBlindLeft.text = "<color=red>0</color>";
+            enemyCowBlind.SetActive(false);
+            if(enemyCowOnFire.activeSelf)
             {
-                EnemyCow.nowHP = EnemyCow.maxHP;
+                enemyCowOnFireLeft.text = "<color=red>0</color>";
+                enemyCowOnFire.SetActive(false);
+                StatusActivity("onFire", "EnemyCow", false);
             }
+            if(enemyCowSealed.activeSelf)
+            {
+                enemyCowSealedLeft.text = "<color=red>0</color>";
+                enemyCowSealed.SetActive(false);
+                StatusActivity("sealed", "EnemyCow", false);
+            }
+        }
+        else if(skill_name == "뒷발로 거름차기")
+        {
+            if(enemyCowBlind.activeSelf)
+            {
+                BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! 하지만 빗나갔다!\n";
+            }
+            else
+            {
+                if(cowBalanced.activeSelf)
+                {
+                    BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! 하지만" + MyCow.cowName + "은(는) 회피했다!\n";
+                }
+                else
+                {
+                    if(cowImmune.activeSelf || cowSuperSaiyan.activeSelf)
+                    {
+                        BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! 하지만 " + MyCow.cowName + "은(는) 면역!\n";
+                    }
+                    else
+                    {
+                        BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! " + MyCow.cowName + "은(는) 실명에 걸렸다!\n";
+                        cowBlind.SetActive(true);
+                        cowBlindLeft.text = "<color=red>4</color>";
+                    }
+                }
+            }
+        }
+        else if(skill_name == "3단컴보" || skill_name == "8단컴보" || skill_name == "연속공격")
+        {
+            int i=0;
+            if(skill_name == "3단컴보") i = 3;
+            else if(skill_name == "8단컴보") i = 8;
+            else i = 2;
+            for(int j = 0;j < i;j++)
+            {
+                if(enemyCowBlind.activeSelf)
+                {
+                    BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! 하지만 빗나갔다!\n";
+                }
+                else
+                {
+                    if(cowBalanced.activeSelf)
+                    {
+                        BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! 하지만" + MyCow.cowName + "은(는) 회피했다!\n";
+                    }
+                    else
+                    {
+                        int dmg = 0;
+                        if(EnemyCow.atkDmg - MyCow.armor > 0)
+                        {
+                            dmg = EnemyCow.atkDmg - MyCow.armor;
+                        }
+                        else
+                        {
+                            dmg = 0;
+                        }
+                        if(cowSteelization.activeSelf) dmg /= 2;
+                        BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! " + MyCow.cowName + "에게 <color=red>" + dmg +"</color>의 데미지를 입혔다!\n";
+                        MyCow.nowHP -= dmg;
+                    }
+                }
+            }
+        }
+        else if(skill_name == "불고기")
+        {
+            int dmg = 300;
+            if(cowSteelization.activeSelf) dmg /= 2;
+            BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! " + MyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+            MyCow.nowHP -= dmg;
+            if(!cowOnFire.activeSelf && !cowImmune.activeSelf && !cowSuperSaiyan.activeSelf)
+            {
+                cowOnFire.SetActive(true);
+                StatusActivity("onFire", "MyCow", true);
+            }
+            cowOnFireLeft.text = "<color=red>4</color>";
+        }
+        else if(skill_name == "포크레인" || skill_name == "날카로운 선율")
+        {
+            int dmg = 0;
+            if(EnemyCow.atkDmg * 2 - MyCow.armor > 0)
+            {
+                dmg = EnemyCow.atkDmg * 2 - MyCow.armor;
+            }
+            else
+            {
+                dmg = 0;
+            }
+            if(cowSteelization.activeSelf) dmg /= 2;
+            BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! <color=red>" + dmg + "</color>의 피해를 입었다!\n";
+            MyCow.nowHP -= dmg;
+        }
+        else if(skill_name == "크로이츠펠트 야곱병" || skill_name == "데스메탈" || skill_name == "자연의 분노")
+        {
+            BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! " + EnemyCow.cowName + "은(는) 광폭 상태가 되었다!\n";
+            if(!enemyCowRage.activeSelf)
+            {
+                enemyCowRage.SetActive(true);
+                StatusActivity("rage", "EnemyCow", true);
+            }
+            enemyCowRageLeft.text = "<color=blue>6</color>";
+        }
+        else if(skill_name == "샤우팅")
+        {
+            int dmg = 500;
+            if(cowSteelization.activeSelf) dmg /= 2;
+            BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! " + MyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+            MyCow.nowHP -= dmg;
+            if(cowRage.activeSelf)
+            {
+                cowRage.SetActive(false);
+                StatusActivity("rage", "MyCow", false);
+            }
+            cowBalanced.SetActive(false);
+            cowBalancedLeft.text = "<color=blue>0</color>";
+            cowImmune.SetActive(false);
+            cowImmuneLeft.text = "<color=blue>0</color>";
+            cowSteelization.SetActive(false);
+            cowSteelizationLeft.text = "<color=blue>0</color>";
+            if(cowSuperSaiyan.activeSelf)
+            {
+                cowSuperSaiyan.SetActive(false);
+                StatusActivity("superSaiyan", "MyCow", false);
+            }
+        }
+        else if(skill_name == "균형잡기")
+        {
+            BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! " + EnemyCow.cowName + "은(는) 균형 상태가 되었다!\n";
+            enemyCowBlindLeft.text = "<color=red>0</color>";
+            enemyCowBlind.SetActive(false);
+            if(enemyCowOnFire.activeSelf)
+            {
+                enemyCowOnFireLeft.text = "<color=red>0</color>";
+                enemyCowOnFire.SetActive(false);
+                StatusActivity("onFire", "EnemyCow", false);
+            }
+            if(enemyCowSealed.activeSelf)
+            {
+                enemyCowSealedLeft.text = "<color=red>0</color>";
+                enemyCowSealed.SetActive(false);
+                StatusActivity("sealed", "EnemyCow", false);
+            }
+            enemyCowImmuneLeft.text = "<color=blue>6</color>";
+            enemyCowImmune.SetActive(true);
+            enemyCowBalancedLeft.text = "<color=blue>6</color>";
+            enemyCowBalanced.SetActive(true);
+        }
+        else if(skill_name == "천벌")
+        {
+            int dmg = 500;
+            if(cowSteelization.activeSelf) dmg /= 2;
+            BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! " + MyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+            MyCow.nowHP -= dmg;
+            if(!cowElectricShock.activeSelf && !cowImmune.activeSelf && !cowSuperSaiyan.activeSelf)
+            {
+                cowElectricShock.SetActive(true);
+                StatusActivity("electricShock", "MyCow", true);
+            }
+            cowElectricShockLeft.text = "<color=red>2</color>";
+        }
+        else if(skill_name == "운기조식")
+        {
+            BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! <color=green>" + (EnemyCow.maxHP * 3 / 10) + "</color>의 체력을 회복!\n";
+            EnemyCow.nowHP += (EnemyCow.maxHP * 3 / 10);
+            if(EnemyCow.nowHP > EnemyCow.maxHP) EnemyCow.nowHP = EnemyCow.maxHP;
         }
     }
 
     public void BattleWin()
     {
         Debug.Log("승리!");
-        if(EnemyCow.enemyName == "젖소")
+        // cow status initialize
+        MyCow.nowHP = MyCow.maxHP;
+        MyCow.nowMP = MyCow.maxMP;
+        cowBlind.SetActive(false);
+        enemyCowBlind.SetActive(false);
+        if(cowOnFire.activeSelf)
+        {
+            StatusActivity("onFire", "MyCow", false);
+            cowOnFire.SetActive(false);
+        }
+        if(enemyCowOnFire.activeSelf)
+        {
+            StatusActivity("onFire", "EnemyCow", false);
+            enemyCowOnFire.SetActive(false);
+        }
+        if(cowRage.activeSelf)
+        {
+            StatusActivity("rage", "MyCow", false);
+            cowRage.SetActive(false);
+        }
+        if(enemyCowRage.activeSelf)
+        {
+            StatusActivity("rage", "EnemyCow", false);
+            enemyCowRage.SetActive(false);
+        }
+        cowBalanced.SetActive(false);
+        enemyCowBalanced.SetActive(false);
+        cowImmune.SetActive(false);
+        enemyCowImmune.SetActive(false);
+        if(cowSealed.activeSelf)
+        {
+            StatusActivity("sealed", "MyCow", false);
+            cowSealed.SetActive(false);
+        }
+        if(enemyCowSealed.activeSelf)
+        {
+            StatusActivity("sealed", "EnemyCow", false);
+            enemyCowSealed.SetActive(false);
+        }
+        if(cowSuperSaiyan.activeSelf)
+        {
+            StatusActivity("superSaiyan", "MyCow", false);
+            cowSuperSaiyan.SetActive(false);
+        }
+        if(enemyCowSuperSaiyan.activeSelf)
+        {
+            StatusActivity("superSaiyan", "EnemyCow", false);
+            enemyCowSuperSaiyan.SetActive(false);
+        }
+        if(cowElectricShock.activeSelf)
+        {
+            StatusActivity("electricShock", "MyCow", false);
+        }
+
+        // set EnemyCow
+        if(EnemyCow.cowName == "젖소")
         {
             MilkCowClear = true;
             WarningMessage.text = "승리!";
@@ -1366,70 +1933,70 @@ public class BullFightScript : MonoBehaviour
             dialogID = 1;
                 
         }
-        else if(EnemyCow.enemyName == "누렁이")
+        else if(EnemyCow.cowName == "누렁이")
         {
             YelloCowClear = true;
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("우건마", 2000, 150, 50);
             dialogID = 2;
         }
-        else if(EnemyCow.enemyName == "우건마")
+        else if(EnemyCow.cowName == "우건마")
         {
             KangKeonCowClear = true;
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("불판에서 뛰쳐나온 소", 3000, 200, 50);
             dialogID = 3;
         }
-        else if(EnemyCow.enemyName == "불판에서 뛰쳐나온 소")
+        else if(EnemyCow.cowName == "불판에서 뛰쳐나온 소")
         {
             BurningCowClear = true;
             WarningMessage.text = "승리!";
-            EnemyCow.SetEnemyStatus("광우병소", 4000, 200, 100);
+            EnemyCow.SetEnemyStatus("미친소", 4000, 200, 100);
             dialogID = 4;
         }
-        else if(EnemyCow.enemyName == "광우병소")
+        else if(EnemyCow.cowName == "미친소")
         {
             MadCowClear = true;
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("롹커소", 5000, 300, 100);
             dialogID = 5;
         }
-        else if(EnemyCow.enemyName == "롹커소")
+        else if(EnemyCow.cowName == "롹커소")
         {
             RockerCowClear = true;
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("시소", 6000, 500, 100);
             dialogID = 6;
         }
-        else if(EnemyCow.enemyName == "시소")
+        else if(EnemyCow.cowName == "시소")
         {
             SeesawCowClear = true;
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("조소", 8000, 700, 400);
             dialogID = 7;
         }
-        else if(EnemyCow.enemyName == "조소")
+        else if(EnemyCow.cowName == "조소")
         {
             WoodCowClear = true;
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("카우보이소", 10000, 700, 200);
             dialogID = 8;
         }
-        else if(EnemyCow.enemyName == "카우보이소")
+        else if(EnemyCow.cowName == "카우보이소")
         {
             CowboyCowClear = true;
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("인도소", 15000, 1000, 500);
             dialogID = 9;
         }
-        else if(EnemyCow.enemyName == "인도소")
+        else if(EnemyCow.cowName == "인도소")
         {
             ElephantCowClear = true;
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("마법'소'녀", 12000, 1000, 300);
             dialogID = 10;
         }
-        else if(EnemyCow.enemyName == "마법'소'녀")
+        else if(EnemyCow.cowName == "마법'소'녀")
         {
             JapaneseCowClear = true;
             WarningMessage.text = "승리!";
@@ -1449,10 +2016,8 @@ public class BullFightScript : MonoBehaviour
     public GameObject To_Village;
     public void BattleOver()
     {
-        MyCow.nowHP = MyCow.maxHP;
-        MyCow.nowMP = MyCow.maxMP;
+
         BattleLog.text = "";
-        // SceneManager.LoadScene("VillageScene");
         ToVillage.SetActive(true);
         To_Village.SetActive(false);
         Cowshed.SetActive(true);

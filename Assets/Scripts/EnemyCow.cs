@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class EnemyCow : MonoBehaviour
 {
-    public static string enemyName = "젖소";
+    public static string cowName = "젖소";
     public static int maxHP = 1000;
     public static int nowHP = 1000;
     public static int atkDmg = 100;
@@ -14,7 +14,7 @@ public class EnemyCow : MonoBehaviour
  
     public static void SetEnemyStatus(string _enemyName, int _maxHp, int _atkDmg, int _armor)
     {
-        enemyName = _enemyName;
+        cowName = _enemyName;
         maxHP = _maxHp;
         nowHP = _maxHp;
         atkDmg = _atkDmg;
