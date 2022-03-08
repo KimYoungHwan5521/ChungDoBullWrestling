@@ -27,6 +27,13 @@ public class Player : MonoBehaviour
         item.itemPrice = 60000;
         item.itemExplain = "할아버지가 남긴 유품이자 집안의 가보이다. 비싸보인다.";
         inventory.Add(item);
+
+        item = new Item();
+        item.itemName = "이빨 빠진 빗";
+        item.itemType = "빗";
+        item.itemPrice = 0;
+        item.itemExplain = "빗 LV 0. 낡아서 이가 다 빠진 빗. 소의 털을 겨우 빗을 수 있어보인다.";
+        inventory.Add(item);
     }
 
     public Text GoldText;

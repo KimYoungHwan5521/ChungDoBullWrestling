@@ -174,7 +174,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Purchase_Text.text = CurItemList[slotNum].itemName + "을(를) 구매 합니까?";
+            Purchase_Text.text = CurItemList[slotNum].itemName + "을(를)" + CurItemList[slotNum].itemPrice + "냥에 구매 합니까?";
         }
         Confirm_Purchase.SetActive(true);
         
@@ -196,12 +196,13 @@ public class GameManager : MonoBehaviour
                 if(Player.inventory[slotnum].count == 1)
                 {
                     Player.inventory.RemoveAt(slotnum);
+                    Alert_Text.text = "성공적으로 판매 하였습니다.";
                 }
                 else
                 {
                     Player.inventory[slotnum].count--;
+                    Alert_Text.text = "성공적으로 판매 하였습니다. (" + Player.inventory[slotnum].itemName + " " + Player.inventory[slotnum].count.ToString() + "개 남음)";
                 }
-                Alert_Text.text = "성공적으로 판매 하였습니다.";
             }
             SetMarketType("Junkman");
         }
@@ -238,14 +239,91 @@ public class GameManager : MonoBehaviour
             }
         }
         Alert.SetActive(true);
-        
     }
-    public void OnClickConfirmPurchaseDeny(){
+    public void OnClickConfirmPurchaseDeny()
+    {
         Confirm_Purchase.SetActive(false);
+    }
+
+    public GameObject HairbrushReinforcement;
+    public Text HairbrushNow;
+    public Text HairbrushAfter;
+    public Text HairbrushReinforcementCost;
+    public Text HairbrushReinforcementPerformance;
+    public Player.Item hairbrushNow, hairbrushAfter;
+
+    public GameObject ConfirmHairbrushReinforcement;
+    public Text ConfirmHairbrushReinforcementText;
+    public void OnClickHairbrushReinforcementMerchant()
+    {
+        hairbrushNow = Player.inventory.Find(x => x.itemType == "빗");
+        if(hairbrushNow.itemExplain.Substring(5,1) == "2")
+        {
+            Alert_Text.text = "이미 빗이 최고레벨 입니다.";
+            Alert.SetActive(true);
+        }
+        else
+        {
+            hairbrushAfter = new Player.Item();
+            int performance = 0;
+            if(hairbrushNow.itemExplain.Substring(5,1) == "0")
+            {
+                hairbrushAfter.itemName = "중고 빗";
+                hairbrushAfter.itemType = "빗";
+                hairbrushAfter.itemPrice = 2000;
+                hairbrushAfter.itemExplain = "빗 LV 1. 중고지만 적당히 빗질이 된다.";
+                performance = 25;
+            }
+            else if(hairbrushNow.itemExplain.Substring(5,1) == "1")
+            {
+                hairbrushAfter.itemName = "빛나는 빗";
+                hairbrushAfter.itemType = "빗";
+                hairbrushAfter.itemPrice = 4000;
+                hairbrushAfter.itemExplain = "빗 LV 2. 빗겨주기만 해도 기분이 좋아진다.";
+                performance = 40;
+            }
+            HairbrushNow.text = hairbrushNow.itemName;
+            HairbrushAfter.text = hairbrushAfter.itemName;
+            HairbrushReinforcementCost.text = (hairbrushAfter.itemPrice - hairbrushNow.itemPrice).ToString();
+            HairbrushReinforcementPerformance.text = performance.ToString();
+            HairbrushReinforcement.SetActive(true);
+        }
+    }
+    public void OnClickHairbrushReinforcementClose()
+    {
+        HairbrushReinforcement.SetActive(false);
+    }
+    public void OnClickHairbrushReinforcement()
+    {
+        ConfirmHairbrushReinforcementText.text = "빗을 " + (hairbrushAfter.itemPrice - hairbrushNow.itemPrice) + "냥에 업그레이드 합니까?";
+        ConfirmHairbrushReinforcement.SetActive(true);
+    }
+
+    public void OnClickHairbrushReinforcementConfirm()
+    {
+        if(Player.gold < hairbrushAfter.itemPrice - hairbrushNow.itemPrice)
+        {
+            Alert_Text.text = "소지금이 부족합니다.";
+        }
+        else
+        {
+            Player.gold -= hairbrushAfter.itemPrice - hairbrushNow.itemPrice;
+            Player.inventory.Remove(hairbrushNow);
+            Player.inventory.Add(hairbrushAfter);
+            Alert_Text.text = "성공적으로 강화했습니다.";
+        }
+        Alert.SetActive(true);
+    }
+    public void OnClickHairbrushReinforcementDeny()
+    {
+        ConfirmHairbrushReinforcement.SetActive(false);
     }
     public void OnClickAlertCinfirm(){
         Alert.SetActive(false);
         Confirm_Purchase.SetActive(false);
+        ConfirmHairbrushReinforcement.SetActive(false);
+        HairbrushReinforcement.SetActive(false);
     }
+
 
 }
