@@ -9,8 +9,14 @@ public class ActionScript : MonoBehaviour
     public static int intDayOfTheWeek = 0;
     public static int intDate = 0;
 
+    public GameObject DebtRepaymentEvent;
+    public Text DialogMessage;
+    public int debtRepaymentEventCheck = 0;
+    public GameObject InventoryToSell;
+    public GameObject[] Slot;
     // Update is called once per frame
     public Text TimeText;
+    public int dialogIndex = 0;
     void Update()
     {
         if(intAction % 3 == 0)
@@ -27,6 +33,135 @@ public class ActionScript : MonoBehaviour
         }
         intDate = intAction / 3;
         intDayOfTheWeek = intDate % 7;
+
+        if(intDate % 28 == 3 && debtRepaymentEventCheck == intDate / 28)
+        {
+            DebtRepaymentEvent.SetActive(true);
+            if(intDate == 3)
+            {
+                if(Input.anyKeyDown)
+                {
+                    if(dialogIndex==0) DialogMessage.text = "매달 첫째 주 수요일은 빚을 상환하는 날입니다.";
+                    if(dialogIndex==1) DialogMessage.text = "첫 달은 상환하지 않지만 돌아오는 다섯째 주 수요일에는 상환금 30000원을 마련해야합니다.";
+                    if(dialogIndex==2) DialogMessage.text = "그 때까지 알바나 대회 상금을 통해 돈을 마련해두세요!";
+                    if(dialogIndex==3)
+                    {
+                        DebtRepaymentEvent.SetActive(false);
+                        debtRepaymentEventCheck++;
+                        DialogMessage.text = "";
+                        dialogIndex = 0;
+                    }
+                    dialogIndex++;
+                }
+            }
+            else
+            {
+                if(Input.anyKeyDown)
+                {
+                    bool cont = true;
+                    if(dialogIndex==0) DialogMessage.text = "빚 상환일이 돌아왔습니다.";
+                    if(dialogIndex==1)
+                    {
+                        cont = false;
+                        if(Player.gold >= 30000)
+                        {
+                            InventoryToSell.SetActive(false);
+                            Player.gold -= 30000;
+                            DialogMessage.text = "빚을 상환했습니다. 빚쟁이는 돌아갔습니다.";
+                            cont = true;
+                        }
+                        else
+                        {
+                            int capital = 0;
+                            for(int i=0;i<Player.inventory.Count;i++)
+                            {
+                                if(Player.inventory[i].itemType != "빗")
+                                {
+                                    capital += Player.inventory[i].itemPrice / 2;
+                                }
+                            }
+                            if(Player.gold + capital < 30000)
+                            {
+                                DialogMessage.text = "빚 상환금을 갚지 못하였습니다..";
+                                // GameOver();
+                            }
+                            else
+                            {
+                                DialogMessage.text = "빚 상환금이 모자랍니다. 물건을 팔아 빚 상환금을 마련하세요.";
+                                for(int i=0; i<Slot.Length; i++)
+                                {
+                                    Slot[i].SetActive(i<Player.inventory.Count);
+                                    Text[] itemInfo = Slot[i].GetComponentsInChildren<Text>();
+                                    itemInfo[0].text = i < Player.inventory.Count ? Player.inventory[i].itemName : "";
+                                    if(i < Player.inventory.Count)
+                                    {
+                                        itemInfo[1].text = (Player.inventory[i].itemPrice / 2).ToString();
+                                    }
+                                    else
+                                    {
+                                        itemInfo[1].text = "";
+                                    }
+                                }
+                                InventoryToSell.SetActive(true);
+                            }
+                        }
+                    }
+                    if(dialogIndex == 2)
+                    {
+                        InventoryToSell.SetActive(false);
+                        DebtRepaymentEvent.SetActive(false);
+                        debtRepaymentEventCheck++;
+                        DialogMessage.text = "";
+                        dialogIndex = 0;
+                    }
+                    if(cont) dialogIndex++;
+                }
+            }
+        }
+    }
+    
+    public GameObject SellConfirm;
+    public Text SellText;
+    public static int slotNumToSell;
+    public void OnClickItem(int slotNum)
+    {
+        slotNumToSell = slotNum;
+        int priceInt = Player.inventory[slotNum].itemPrice / 2;
+        if(Player.inventory[slotNum].itemType == "빗")
+        {
+            AlertText.text = "빗은 판매 할 수 없습니다.";
+            Alert.SetActive(true);
+            return;
+        }
+        else if(Player.inventory[slotNum].isEquiped == true)
+        {
+            SellText.text = "그 아이템은 장착중입니다. 장착을 해제하고" + priceInt + "냥에 판매 하시겠습니까?";
+        }
+        else
+        {
+            SellText.text = Player.inventory[slotNum].itemName + "을(를) " + priceInt + "냥에 판매 합니까?";
+        }
+        SellConfirm.SetActive(true);
+        
+    }
+    public void OnClickConfirmSell()
+    {
+        Player.gold += Player.inventory[slotNumToSell].itemPrice / 2;
+        if(Player.inventory[slotNumToSell].count == 1)
+        {
+            Player.inventory.RemoveAt(slotNumToSell);
+            AlertText.text = "성공적으로 판매 하였습니다.";
+        }
+        else
+        {
+            Player.inventory[slotNumToSell].count--;
+            AlertText.text = "성공적으로 판매 하였습니다. (" + Player.inventory[slotNumToSell].itemName + " " + Player.inventory[slotNumToSell].count.ToString() + "개 남음)";
+        }
+        SellConfirm.SetActive(false);
+    }
+    public void OnClickSellDeny()
+    {
+        SellConfirm.SetActive(false);
     }
 
     public GameObject CowStatus;

@@ -137,6 +137,51 @@ public class ButtonsScript : MonoBehaviour
 
     public void OnClickEquipmentSetting()
     {
+            List<Player.Item> equipedItemsHead = Player.inventory.FindAll(x => x.itemType == "장비(머리)");
+            List<Player.Item> equipedItemsBody = Player.inventory.FindAll(x => x.itemType == "장비(몸)");
+            List<Player.Item> equipedItemsLegs = Player.inventory.FindAll(x => x.itemType == "장비(다리)");
+            if(equipedItemsHead != null)
+            {
+                Player.Item equipedItemHead = equipedItemsHead.Find(x => x.isEquiped == true);
+                if(equipedItemHead != null)
+                {
+                    EquipmentNameHead.text = equipedItemHead.itemName;
+                    UnEquipHead.SetActive(true);
+                }
+                else
+                {
+                    EquipmentNameHead.text = "없음";
+                    UnEquipHead.SetActive(false);
+                }
+            }
+            if(equipedItemsBody != null)
+            {
+                Player.Item equipedItemBody = equipedItemsBody.Find(x => x.isEquiped == true);
+                if(equipedItemBody != null)
+                {
+                    EquipmentNameBody.text = equipedItemBody.itemName;
+                    UnEquipBody.SetActive(true);
+                }
+                else
+                {
+                    EquipmentNameBody.text = "없음";
+                    UnEquipBody.SetActive(false);
+                }
+            }
+            if(equipedItemsLegs != null)
+            {
+                Player.Item equipedItemLegs = equipedItemsLegs.Find(x => x.isEquiped == true);
+                if(equipedItemLegs != null)
+                {
+                    EquipmentNameLegs.text = equipedItemLegs.itemName;
+                    UnEquipLegs.SetActive(true);
+                }
+                else
+                {
+                    EquipmentNameLegs.text = "없음";
+                    UnEquipLegs.SetActive(false);
+                }
+            }
         EquipmentSetting.SetActive(true);
     }
     public void OnClickEquipmentSettingClose()

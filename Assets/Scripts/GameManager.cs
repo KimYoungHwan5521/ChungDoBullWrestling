@@ -170,7 +170,20 @@ public class GameManager : MonoBehaviour
         if(marketID == 3)
         {
             int priceInt = int.Parse(CurItemList[slotNum].itemPrice) / 2;
-            Purchase_Text.text = CurItemList[slotNum].itemName + "을(를) " + priceInt + "냥에 판매 합니까?";
+            if(CurItemList[slotnum].itemType == "빗")
+            {
+                Alert_Text.text = "빗은 판매 할 수 없습니다.";
+                Alert.SetActive(true);
+                return;
+            }
+            else if(Player.inventory[slotNum].isEquiped == true)
+            {
+                Purchase_Text.text = "그 아이템은 장착중입니다. 장착을 해제하고" + priceInt + "냥에 판매 하시겠습니까?";
+            }
+            else
+            {
+                Purchase_Text.text = CurItemList[slotNum].itemName + "을(를) " + priceInt + "냥에 판매 합니까?";
+            }
         }
         else
         {
@@ -182,27 +195,16 @@ public class GameManager : MonoBehaviour
     public void OnClickConfirmPurchaseConfirm(){
         if(marketID == 3)
         {
-            if(CurItemList[slotnum].itemType == "빗")
+            Player.gold += int.Parse(CurItemList[slotnum].itemPrice) / 2;
+            if(Player.inventory[slotnum].count == 1)
             {
-                Alert_Text.text = "빗은 판매 할 수 없습니다.";
-            }
-            else if(Player.inventory[slotnum].isEquiped == true)
-            {
-                Alert_Text.text = "장착중인 아이템은 팔 수 없습니다.";
+                Player.inventory.RemoveAt(slotnum);
+                Alert_Text.text = "성공적으로 판매 하였습니다.";
             }
             else
             {
-                Player.gold += int.Parse(CurItemList[slotnum].itemPrice) / 2;
-                if(Player.inventory[slotnum].count == 1)
-                {
-                    Player.inventory.RemoveAt(slotnum);
-                    Alert_Text.text = "성공적으로 판매 하였습니다.";
-                }
-                else
-                {
-                    Player.inventory[slotnum].count--;
-                    Alert_Text.text = "성공적으로 판매 하였습니다. (" + Player.inventory[slotnum].itemName + " " + Player.inventory[slotnum].count.ToString() + "개 남음)";
-                }
+                Player.inventory[slotnum].count--;
+                Alert_Text.text = "성공적으로 판매 하였습니다. (" + Player.inventory[slotnum].itemName + " " + Player.inventory[slotnum].count.ToString() + "개 남음)";
             }
             SetMarketType("Junkman");
         }
