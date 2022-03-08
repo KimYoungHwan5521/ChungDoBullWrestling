@@ -54,9 +54,10 @@ public class GameManager : MonoBehaviour
     public GameObject Alert;
     public Text Alert_Text;
     public static int slotnum = 0;
+    public static int marketID = 0;
 
-    public void OnClickFoodVendor(int marketID){
-        Food_Market.SetActive(true);
+    public void OnClickFoodVendor(int MarketID){
+        marketID = MarketID;
         if(marketID == 1)
         {
             SetMarketType("FoodMarket");
@@ -65,6 +66,11 @@ public class GameManager : MonoBehaviour
         {
             SetMarketType("TrinketsMarket");
         }
+        else if(marketID == 3)
+        {
+            SetMarketType("Junkman");
+        }
+        Food_Market.SetActive(true);
     }
     public void OnClickFoodMarketClose(){
         Food_Market.SetActive(false);
@@ -99,6 +105,34 @@ public class GameManager : MonoBehaviour
                 itemInfo[1].text = i < CurItemList.Count ? CurItemList[i].itemPrice : "";
             }
         }
+        else if(market == "Junkman")
+        {
+            CurItemList = new List<Item>();
+            for(int i=0; i<Player.inventory.Count; i++)
+            {
+                CurItemList.Add(new Item(Player.inventory[i].itemName, Player.inventory[i].itemType, Player.inventory[i].itemPrice.ToString(), Player.inventory[i].itemExplain));
+            }
+            for(int i=0; i<Marchandise.Length; i++)
+            {
+                Marchandise[i].SetActive(i<CurItemList.Count);
+                Text[] itemInfo = Marchandise[i].GetComponentsInChildren<Text>();
+                itemInfo[0].text = i < CurItemList.Count ? CurItemList[i].itemName : "";
+                if(i < CurItemList.Count)
+                {
+                    int priceInt = int.Parse(CurItemList[i].itemPrice) / 2;
+                    string priceString = priceInt.ToString();
+                    itemInfo[1].text = priceString;
+                }
+                else
+                {
+                    itemInfo[1].text = "";
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("Wrong market name!");
+        }
     }
 
     public GameObject ItemExplain;
@@ -124,42 +158,77 @@ public class GameManager : MonoBehaviour
     public void OnClickFoodMarchandise(int slotNum)
     {
         slotnum = slotNum;
-        Purchase_Text.text = CurItemList[slotNum].itemName + "을(를) 구매 합니까?";
+        if(marketID == 3)
+        {
+            int priceInt = int.Parse(CurItemList[slotNum].itemPrice) / 2;
+            Purchase_Text.text = CurItemList[slotNum].itemName + "을(를) " + priceInt + "냥에 판매 합니까?";
+        }
+        else
+        {
+            Purchase_Text.text = CurItemList[slotNum].itemName + "을(를) 구매 합니까?";
+        }
         Confirm_Purchase.SetActive(true);
         
     }
     public void OnClickConfirmPurchaseConfirm(){
-        int price = int.Parse(CurItemList[slotnum].itemPrice);
-        if(Player.gold < price)
+        if(marketID == 3)
         {
-            Alert_Text.text = "소지금이 부족합니다.";
-            Alert.SetActive(true);
+            if(CurItemList[slotnum].itemType == "빗")
+            {
+                Alert_Text.text = "빗은 판매 할 수 없습니다.";
+            }
+            else if(Player.inventory[slotnum].isEquiped == true)
+            {
+                Alert_Text.text = "장착중인 아이템은 팔 수 없습니다.";
+            }
+            else
+            {
+                Player.gold += int.Parse(CurItemList[slotnum].itemPrice) / 2;
+                if(Player.inventory[slotnum].count == 1)
+                {
+                    Player.inventory.RemoveAt(slotnum);
+                }
+                else
+                {
+                    Player.inventory[slotnum].count--;
+                }
+                Alert_Text.text = "성공적으로 판매 하였습니다.";
+            }
+            SetMarketType("Junkman");
         }
         else
         {
-            Player.gold -= price;
-            bool chk = false;
-            for(int i=0;i<Player.inventory.Count;i++)
+            int price = int.Parse(CurItemList[slotnum].itemPrice);
+            if(Player.gold < price)
             {
-                if(Player.inventory[i].itemName == CurItemList[slotnum].itemName)
+                Alert_Text.text = "소지금이 부족합니다.";
+            }
+            else
+            {
+                Player.gold -= price;
+                bool chk = false;
+                for(int i=0;i<Player.inventory.Count;i++)
                 {
-                    Player.inventory[i].count++;
-                    chk = true;
-                    break;
+                    if(Player.inventory[i].itemName == CurItemList[slotnum].itemName)
+                    {
+                        Player.inventory[i].count++;
+                        chk = true;
+                        break;
+                    }
                 }
+                if(!chk)
+                {
+                    Player.Item item = new Player.Item();
+                    item.itemName = CurItemList[slotnum].itemName;
+                    item.itemType = CurItemList[slotnum].itemType;
+                    item.itemPrice = price;
+                    item.itemExplain = CurItemList[slotnum].itemExplain;
+                    Player.inventory.Add(item);
+                }
+                Alert_Text.text = "성공적으로 구매하였습니다.";
             }
-            if(!chk)
-            {
-                Player.Item item = new Player.Item();
-                item.itemName = CurItemList[slotnum].itemName;
-                item.itemType = CurItemList[slotnum].itemType;
-                item.itemPrice = price;
-                item.itemExplain = CurItemList[slotnum].itemExplain;
-                Player.inventory.Add(item);
-            }
-            Alert_Text.text = "성공적으로 구매하였습니다.";
-            Alert.SetActive(true);
         }
+        Alert.SetActive(true);
     }
     public void OnClickConfirmPurchaseDeny(){
         Confirm_Purchase.SetActive(false);
