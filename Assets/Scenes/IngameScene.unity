@@ -12736,6 +12736,7 @@ MonoBehaviour:
   - {fileID: 190978746}
   - {fileID: 1366725555}
   - {fileID: 1172364339}
+  PartTimeJobText: {fileID: 603661162}
   ItemExplain: {fileID: 1617136596}
   ItemExplainRect: {fileID: 1617136597}
   ItemExplainName: {fileID: 954819793}
@@ -12882,6 +12883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeText: {fileID: 1735351572}
   CowStatus: {fileID: 1061754144}
+  Market: {fileID: 1577802431}
   ConfirmAction: {fileID: 931855105}
   ConfirmText: {fileID: 1240822409}
   Alert: {fileID: 1448618752}

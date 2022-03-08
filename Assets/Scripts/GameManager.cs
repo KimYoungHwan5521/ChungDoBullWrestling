@@ -77,9 +77,18 @@ public class GameManager : MonoBehaviour
     }
 
     public GameObject[] Marchandise;
+    public Text PartTimeJobText;
 
     public void SetMarketType(string market)
     {
+        if(ActionScript.intAction % 3 == 2)
+        {
+            PartTimeJobText.text = "장터 알바 하기(야간)\n\n돈 +2500냥\n컨디션 -35";
+        }
+        else
+        {
+            PartTimeJobText.text = "장터 알바 하기\n\n돈 +500냥";
+        }
         if(market == "FoodMarket")
         {
             CurItemList = AllItemList.FindAll(x => x.itemType == "먹이");
@@ -229,6 +238,7 @@ public class GameManager : MonoBehaviour
             }
         }
         Alert.SetActive(true);
+        
     }
     public void OnClickConfirmPurchaseDeny(){
         Confirm_Purchase.SetActive(false);

@@ -30,6 +30,7 @@ public class ActionScript : MonoBehaviour
     }
 
     public GameObject CowStatus;
+    public GameObject Market;
     public GameObject ConfirmAction;
     public Text ConfirmText;
     public GameObject Alert;
@@ -139,7 +140,14 @@ public class ActionScript : MonoBehaviour
         }
         else if(ActionID == 501)
         {
-            ConfirmText.text = "행동을 소모하여 '장터 알바' 행동을 하시겠습니까?\n";
+            if(intAction % 3 == 2)
+            {
+                ConfirmText.text = "행동을 소모하여 '장터 알바(야간)' 행동을 하시겠습니까?\n";
+            }
+            else
+            {
+                ConfirmText.text = "행동을 소모하여 '장터 알바' 행동을 하시겠습니까?\n";
+            }
             ConfirmAction.SetActive(true);
         }
         else if(ActionID == 502)
@@ -163,6 +171,7 @@ public class ActionScript : MonoBehaviour
     {
         ConfirmAction.SetActive(false);
         CowStatus.SetActive(false);
+        Market.SetActive(false);
         if(ActionID == 0)
         {
             MyCow.hunger += 30;
@@ -255,7 +264,16 @@ public class ActionScript : MonoBehaviour
         }
         else if(ActionID == 501)
         {
-            Player.gold += 500;
+            if(intAction % 3 == 2)
+            {
+                Player.gold += 2500;
+                MyCow.condition -= 35;
+                if(MyCow.condition < 0) MyCow.condition = 0;
+            }
+            else
+            {
+                Player.gold += 500;
+            }
         }
 
         // end action
