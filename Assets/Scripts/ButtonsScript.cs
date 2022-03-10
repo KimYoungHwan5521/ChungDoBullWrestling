@@ -7,10 +7,24 @@ using UnityEngine.UI;
 public class ButtonsScript : MonoBehaviour
 {
 
-    public Image introImage;
-    public Sprite imageSprite1;
-    public Sprite imageSprite2;
-    public int count = 0;
+    public GameObject Cowshed;
+    public GameObject Village;
+    public GameObject Market;
+    public GameObject Stadium;
+    public GameObject Field;
+    public GameObject BullFight;
+    public GameObject ImageVS;
+    public GameObject TopMenuBar;
+    public GameObject Alert;
+    public Text AlertText;
+
+    public AudioPlayer AudioManager;
+    public AudioClip TownTheme;
+
+    void Start()
+    {
+        AudioManager.GetComponent<AudioPlayer>().PlayMusic(TownTheme);
+    }
 
     void Update()
     {
@@ -69,50 +83,6 @@ public class ButtonsScript : MonoBehaviour
         }
 
     }
-
-    // title
-    public void OnClickStart(){
-        Debug.Log("Start");
-        SceneManager.LoadScene("IntroScene");
-    }
-
-    public void OnClickLoad(){
-        Debug.Log("Load");
-    }
-
-    public void OnClickQuit(){
-        Debug.Log("Quit");
-        Application.Quit();
-    }
-
-    // intro
-    public void OnClickIntro(){
-        if(count == 0){
-            introImage.sprite = imageSprite1;
-        }else if(count == 1){
-            introImage.sprite = imageSprite2;
-        }else{
-            SceneManager.LoadScene("IngameScene");
-        }
-        count += 1;
-    }
-
-    public void OnClickIntroSkip(){
-        SceneManager.LoadScene("IngameScene");
-    }
-
-    // ingame
-    public GameObject Cowshed;
-    public GameObject Village;
-    public GameObject Market;
-    public GameObject Stadium;
-    public GameObject Field;
-    public GameObject BullFight;
-    public GameObject ImageVS;
-    public GameObject TopMenuBar;
-    public GameObject Alert;
-    public Text AlertText;
-
     // cowshed
     public GameObject Cow_Status;
     public Text CowName;
@@ -123,11 +93,13 @@ public class ButtonsScript : MonoBehaviour
     public Text CowHunger;
     public Text CowCleanliness;
     public Text CowCondition;
-    public void OnClickCow(){
+    public void OnClickCow()
+    {
         Cow_Status.SetActive(true);
     }
 
-    public void OnClickCowStatusClose(){
+    public void OnClickCowStatusClose()
+    {
         Cow_Status.SetActive(false);
     }
 

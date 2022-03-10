@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
 {
     public TextAsset ItemDB;
     public List<Item> AllItemList, CurItemList;
+    public AudioPlayer AudioManager;
+    public AudioClip sellingSound;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +57,8 @@ public class GameManager : MonoBehaviour
     public Text Alert_Text;
     public static int slotnum = 0;
     public static int marketID = 0;
+
+    public AudioClip sellingAudio;
 
     public void OnClickFoodVendor(int MarketID){
         marketID = MarketID;
@@ -206,6 +210,7 @@ public class GameManager : MonoBehaviour
                 Player.inventory[slotnum].count--;
                 Alert_Text.text = "성공적으로 판매 하였습니다. (" + Player.inventory[slotnum].itemName + " " + Player.inventory[slotnum].count.ToString() + "개 남음)";
             }
+            AudioManager.GetComponent<AudioPlayer>().PlaySound(sellingSound);
             SetMarketType("Junkman");
         }
         else
@@ -238,6 +243,7 @@ public class GameManager : MonoBehaviour
                     Player.inventory.Add(item);
                 }
                 Alert_Text.text = "성공적으로 구매하였습니다.";
+                AudioManager.GetComponent<AudioPlayer>().PlaySound(sellingSound);
             }
         }
         Alert.SetActive(true);
