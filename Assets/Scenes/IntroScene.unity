@@ -322,7 +322,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1227511396}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonsScript, Assembly-CSharp
         m_MethodName: OnClickIntro
         m_Mode: 1
@@ -360,29 +360,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1227511395}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f536d6015c6879c45821a1b8799d54fa, type: 3}
+  m_Script: {fileID: 11500000, guid: d8759912a0c63ef4cb51b9b7e6c9d308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   introImage: {fileID: 541987022}
   imageSprite1: {fileID: 21300000, guid: 1a282da77a1c2fb48b197991d8ddd3aa, type: 3}
   imageSprite2: {fileID: 21300000, guid: 3d54cea8504c09842bda568753c9ed98, type: 3}
   count: 0
-  Cowshed: {fileID: 0}
-  Village: {fileID: 0}
-  Market: {fileID: 0}
-  Stadium: {fileID: 0}
-  BullFight: {fileID: 0}
-  ImageVS: {fileID: 0}
-  TopMenuBar: {fileID: 0}
-  Cow_Status: {fileID: 0}
-  CowName: {fileID: 0}
-  CowMaxHP: {fileID: 0}
-  CowMaxMP: {fileID: 0}
-  CowAtkDmg: {fileID: 0}
-  CowArmor: {fileID: 0}
-  ToVillage: {fileID: 0}
-  To_Village: {fileID: 0}
-  Inventory: {fileID: 0}
 --- !u!4 &1227511397
 Transform:
   m_ObjectHideFlags: 0
@@ -563,7 +547,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1227511396}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonsScript, Assembly-CSharp
         m_MethodName: OnClickIntroSkip
         m_Mode: 1
