@@ -7,11 +7,11 @@ public class AudioPlayer : MonoBehaviour
     public AudioSource musicPlayer;
     public AudioSource soundPlayer;
 
-    public void PlayMusic(AudioClip clip)
+    public void PlayMusic(AudioClip clip, bool loop = true)
     {
         musicPlayer.Stop();
         musicPlayer.clip = clip;
-        musicPlayer.loop = true;
+        musicPlayer.loop = loop;
         musicPlayer.time = 0;
         musicPlayer.Play();
     }

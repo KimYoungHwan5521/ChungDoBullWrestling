@@ -6,7 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class BullFightScript : MonoBehaviour
 {
-    // public Text Mouse_Overed_Skill;
+    // AudioClips
+    public AudioPlayer AudioManager;
+    public AudioClip TownTheme;
+    public AudioClip Fanfare;
+    public AudioClip Hit, Hit2, Drinking, KickManure, Fire, Rage, Shouting, Heal, GunFire, Seal, SuperSaiyanTransformation;
+    public AudioClip AvoidSound, WarningSound;
+    
+    //
     public Text Skill_Name;
     public Text Mana_Required;
     public Text Skill_Explanation;
@@ -277,7 +284,8 @@ public class BullFightScript : MonoBehaviour
     public int dialogIndex = 0;
     void Update()
     {
-        turnText.text = turn.ToString(); 
+        if(turn % 2 == 1) turnText.text = "나의 턴!";
+        else turnText.text = "상대의 턴!";
         // Dialogs
         if(dialogID == 1)
         {
@@ -953,12 +961,14 @@ public class BullFightScript : MonoBehaviour
                 if(cowBlind.activeSelf)
                 {
                     BattleLog.text += MyCow.cowName + "의 박치기! 하지만 빗나갔다!\n";
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
                 }
                 else
                 {
                     if(enemyCowBalanced.activeSelf)
                     {
                         BattleLog.text += MyCow.cowName + "의 박치기! 하지만" + EnemyCow.cowName + "은(는) 회피했다!\n";
+                        AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
                     }
                     else
                     {
@@ -974,6 +984,7 @@ public class BullFightScript : MonoBehaviour
                         if(enemyCowSteelization.activeSelf) dmg /= 2;
                         BattleLog.text += MyCow.cowName + "의 박치기!" + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
                         EnemyCow.nowHP -= dmg;
+                        AudioManager.GetComponent<AudioPlayer>().PlaySound(Hit);
                     }
                 }
                 turnEnd = true;
@@ -983,6 +994,7 @@ public class BullFightScript : MonoBehaviour
                 if(MyCow.nowMP < 20)
                 {
                     WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
                 }
                 else
                 {
@@ -990,12 +1002,14 @@ public class BullFightScript : MonoBehaviour
                     if(cowBlind.activeSelf)
                     {
                         BattleLog.text += MyCow.cowName + "의 핵꿀밤! 하지만 빗나갔다!\n";
+                        AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
                     }
                     else
                     {
                         if(enemyCowBalanced.activeSelf)
                         {
                             BattleLog.text += MyCow.cowName + "의 핵꿀밤! 하지만" + EnemyCow.cowName + "은(는) 회피했다!\n";
+                            AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
                         }
                         else
                         {
@@ -1010,6 +1024,7 @@ public class BullFightScript : MonoBehaviour
                             }
                             if(enemyCowSteelization.activeSelf) dmg /= 2;
                             BattleLog.text += MyCow.cowName + "의 핵꿀밤! " + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+                            AudioManager.GetComponent<AudioPlayer>().PlaySound(Hit2);
                             EnemyCow.nowHP -= dmg;
                         }
                     }
@@ -1037,6 +1052,7 @@ public class BullFightScript : MonoBehaviour
                     cowSealed.SetActive(false);
                     StatusActivity("sealed", "MyCow", false);
                 }
+                AudioManager.GetComponent<AudioPlayer>().PlaySound(Drinking);
                 turnEnd = true;
             }
             else if(skillID == 3)
@@ -1044,6 +1060,7 @@ public class BullFightScript : MonoBehaviour
                 if(MyCow.nowMP < 20)
                 {
                     WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
                 }
                 else
                 {
@@ -1051,15 +1068,18 @@ public class BullFightScript : MonoBehaviour
                     if(cowBlind.activeSelf)
                     {
                         BattleLog.text += MyCow.cowName + "의 거름차기! 하지만 빗나갔다!\n";
+                        AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
                     }
                     else
                     {
                         if(enemyCowBalanced.activeSelf)
                         {
                             BattleLog.text += MyCow.cowName + "의 거름차기! 하지만" + EnemyCow.cowName + "은(는) 회피했다!\n";
+                            AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
                         }
                         else
                         {
+                            AudioManager.GetComponent<AudioPlayer>().PlaySound(KickManure);
                             if(enemyCowImmune.activeSelf || enemyCowSuperSaiyan.activeSelf)
                             {
                                 BattleLog.text += MyCow.cowName + "의 거름차기! 하지만 " + EnemyCow.cowName + "은(는) 면역!\n";
@@ -1080,6 +1100,7 @@ public class BullFightScript : MonoBehaviour
                 if(MyCow.nowMP < 30)
                 {
                     WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
                 }
                 else
                 {
@@ -1089,12 +1110,14 @@ public class BullFightScript : MonoBehaviour
                         if(cowBlind.activeSelf)
                         {
                             BattleLog.text += MyCow.cowName + "의 3단컴보! 하지만 빗나갔다!\n";
+                            AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
                         }
                         else
                         {
                             if(enemyCowBalanced.activeSelf)
                             {
                                 BattleLog.text += MyCow.cowName + "의 3단컴보! 하지만" + EnemyCow.cowName + "은(는) 회피했다!\n";
+                                AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
                             }
                             else
                             {
@@ -1110,6 +1133,7 @@ public class BullFightScript : MonoBehaviour
                                 if(enemyCowSteelization.activeSelf) dmg /= 2;
                                 BattleLog.text += MyCow.cowName + "의 3단컴보! " + EnemyCow.cowName + "에게 <color=red>" + dmg +"</color>의 데미지를 입혔다!\n";
                                 EnemyCow.nowHP -= dmg;
+                                StartCoroutine("Combo");
                             }
                         }
                     }
@@ -1121,6 +1145,7 @@ public class BullFightScript : MonoBehaviour
                 if(MyCow.nowMP < 40)
                 {
                     WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
                 }
                 else
                 {
@@ -1135,6 +1160,7 @@ public class BullFightScript : MonoBehaviour
                         StatusActivity("onFire", "EnemyCow", true);
                     }
                     enemyCowOnFireLeft.text = "<color=red>4</color>";
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(Fire);
                     turnEnd = true;
 
                 }
@@ -1144,6 +1170,7 @@ public class BullFightScript : MonoBehaviour
                 if(MyCow.nowMP < 30)
                 {
                     WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
                 }
                 else
                 {
@@ -1155,6 +1182,7 @@ public class BullFightScript : MonoBehaviour
                         StatusActivity("rage", "MyCow", true);
                     }
                     cowRageLeft.text = "<color=blue>6</color>";
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(Rage);
                     turnEnd = true;
                 }
             }
@@ -1163,6 +1191,7 @@ public class BullFightScript : MonoBehaviour
                 if(MyCow.nowMP < 30)
                 {
                     WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
                 }
                 else
                 {
@@ -1187,6 +1216,7 @@ public class BullFightScript : MonoBehaviour
                         enemyCowSuperSaiyan.SetActive(false);
                         StatusActivity("superSaiyan", "EnemyCow", false);
                     }
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(Shouting);
                     turnEnd = true;
 
                 }
@@ -1196,6 +1226,7 @@ public class BullFightScript : MonoBehaviour
                 if(MyCow.nowMP < 50)
                 {
                     WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
                 }
                 else
                 {
@@ -1227,6 +1258,7 @@ public class BullFightScript : MonoBehaviour
                 BattleLog.text += MyCow.cowName + "의 운기조식! <color=blue>200</color>의 활력을 회복!\n";
                 MyCow.nowMP += 200;
                 if(MyCow.nowMP > MyCow.maxMP) MyCow.nowMP = MyCow.maxMP;
+                AudioManager.GetComponent<AudioPlayer>().PlaySound(Heal);
                 turnEnd = true;
             }
             else if(skillID == 10)
@@ -1234,6 +1266,7 @@ public class BullFightScript : MonoBehaviour
                 if(MyCow.nowMP < 50)
                 {
                     WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
                 }
                 else
                 {
@@ -1241,12 +1274,14 @@ public class BullFightScript : MonoBehaviour
                     if(cowBlind.activeSelf)
                     {
                         BattleLog.text += MyCow.cowName + "의 총쏘기! 하지만 빗나갔다!\n";
+                        AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
                     }
                     else
                     {
                         if(enemyCowBalanced.activeSelf)
                         {
                             BattleLog.text += MyCow.cowName + "의 총쏘기! 하지만" + EnemyCow.cowName + "은(는) 회피했다!\n";
+                            AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
                         }
                         else
                         {
@@ -1262,6 +1297,7 @@ public class BullFightScript : MonoBehaviour
                             if(enemyCowSteelization.activeSelf) dmg /= 2;
                             BattleLog.text += MyCow.cowName + "의 총쏘기! " + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
                             EnemyCow.nowHP -= dmg;
+                            AudioManager.GetComponent<AudioPlayer>().PlaySound(GunFire);
                         }
                     }
                     turnEnd = true;
@@ -1272,6 +1308,7 @@ public class BullFightScript : MonoBehaviour
                 if(MyCow.nowMP < 80)
                 {
                     WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
                 }
                 else
                 {
@@ -1286,6 +1323,7 @@ public class BullFightScript : MonoBehaviour
                         StatusActivity("sealed", "EnemyCow", true);
                     }
                     enemyCowSealedLeft.text = "<color=red>4</color>";
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(Seal);
                     turnEnd = true;
                 }
             }
@@ -1294,6 +1332,7 @@ public class BullFightScript : MonoBehaviour
                 if(MyCow.nowMP < 50)
                 {
                     WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
                 }
                 else
                 {
@@ -1314,6 +1353,7 @@ public class BullFightScript : MonoBehaviour
                         cowSealed.SetActive(false);
                         StatusActivity("sealed", "MyCow", false);
                     }
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(Drinking);
                     turnEnd = true;
                 }
             }
@@ -1349,6 +1389,7 @@ public class BullFightScript : MonoBehaviour
                     }
                     cowSuperSaiyanLeft.text = "<color=blue>8</color>";
                     cowSuperSaiyan.SetActive(true);
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(SuperSaiyanTransformation);
                     turnEnd = true;
                 }
             }
@@ -1366,9 +1407,17 @@ public class BullFightScript : MonoBehaviour
                 myTurn = false;
                 turn++;
                 // 시간 딜레이
-                Invoke("EnemyAct", 1.0f);
+                Invoke("EnemyAct", 3.0f);
                 turnEnd = false;
             }
+        }
+    }
+    IEnumerator Combo()
+    {
+        for(int i=0; i<3; i++)
+        {
+            yield return new WaitForSeconds(0.5f);
+            AudioManager.GetComponent<AudioPlayer>().PlaySound(Hit);
         }
     }
 
@@ -2166,6 +2215,7 @@ public class BullFightScript : MonoBehaviour
     public void BattleWin()
     {
         Debug.Log("승리!");
+        AudioManager.GetComponent<AudioPlayer>().PlayMusic(Fanfare, false);
         // cow status initialize
         MyCow.nowHP = MyCow.maxHP;
         MyCow.nowMP = MyCow.maxMP;
@@ -2314,7 +2364,7 @@ public class BullFightScript : MonoBehaviour
     public GameObject To_Village;
     public void BattleOver()
     {
-
+        AudioManager.GetComponent<AudioPlayer>().PlayMusic(TownTheme);
         BattleLog.text = "";
         ToVillage.SetActive(true);
         To_Village.SetActive(false);

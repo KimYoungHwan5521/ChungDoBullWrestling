@@ -9,9 +9,9 @@ public class MyCow : MonoBehaviour
     public static string cowName = "소";
     public static int maxHP = 1000;
     public static int nowHP = 1000;
-    public static int maxMP = 100;
-    public static int nowMP = 100;
-    public static int atkDmg = 1000;
+    public static int maxMP = 10000;
+    public static int nowMP = 10000;
+    public static int atkDmg = 10;
     public static int armor = 10;
     public Image HPbar;
     public Image MPbar;

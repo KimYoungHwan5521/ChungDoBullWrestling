@@ -20,6 +20,13 @@ public class ButtonsScript : MonoBehaviour
 
     public AudioPlayer AudioManager;
     public AudioClip TownTheme;
+    public AudioClip BattleTheme;
+    public AudioClip CowboyCowTheme;
+    public AudioClip ElephantCowTheme;
+    public AudioClip JapaneseCowTheme;
+    public AudioClip GermanCowTheme;
+    public AudioClip BattleTheme2;
+
 
     void Start()
     {
@@ -407,6 +414,26 @@ public class ButtonsScript : MonoBehaviour
     // stadium
     public void OnClickFight()
     {
+        if(EnemyCow.cowName == "카우보이소")
+        {
+            AudioManager.GetComponent<AudioPlayer>().PlayMusic(CowboyCowTheme);
+        }
+        else if(EnemyCow.cowName == "인도소")
+        {
+            AudioManager.GetComponent<AudioPlayer>().PlayMusic(ElephantCowTheme);
+        }
+        else if(EnemyCow.cowName == "일본소")
+        {
+            AudioManager.GetComponent<AudioPlayer>().PlayMusic(JapaneseCowTheme);
+        }
+        else if(EnemyCow.cowName == "독일소" || EnemyCow.cowName == "롹커소")
+        {
+            AudioManager.GetComponent<AudioPlayer>().PlayMusic(GermanCowTheme);
+        }
+        else
+        {
+            AudioManager.GetComponent<AudioPlayer>().PlayMusic(BattleTheme);
+        }
         ToVillage.SetActive(false);
         Stadium.SetActive(false);
         BullFight.SetActive(true);

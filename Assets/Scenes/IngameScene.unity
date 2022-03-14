@@ -14821,6 +14821,12 @@ MonoBehaviour:
   AlertText: {fileID: 1862222730}
   AudioManager: {fileID: 2042886607}
   TownTheme: {fileID: 8300000, guid: ce8df09e087066042860fcf1413c6c9e, type: 3}
+  BattleTheme: {fileID: 8300000, guid: 53a4ef58f6a3cbf42b4453ac6d4b5e30, type: 3}
+  CowboyCowTheme: {fileID: 8300000, guid: 446776e761e839a4a9737270b2eff130, type: 3}
+  ElephantCowTheme: {fileID: 8300000, guid: ea62dcb5422f41c40bf335cd84cc9a39, type: 3}
+  JapaneseCowTheme: {fileID: 8300000, guid: da8a7218dd2cf8d419cb109648688d38, type: 3}
+  GermanCowTheme: {fileID: 8300000, guid: 3e8e52c083548eb46bdaf83be3096f7d, type: 3}
+  BattleTheme2: {fileID: 8300000, guid: 4aa9f591677572141bd93792e756518d, type: 3}
   Cow_Status: {fileID: 1061754144}
   CowName: {fileID: 2112287748}
   CowMaxHP: {fileID: 1853533250}
@@ -22156,7 +22162,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &901781637
 Transform:
   m_ObjectHideFlags: 0
@@ -22535,7 +22541,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &913130700
 Transform:
   m_ObjectHideFlags: 0
@@ -33113,6 +33119,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f1e55af0354b84c9b988cc31aa9061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AudioManager: {fileID: 2042886607}
+  TownTheme: {fileID: 8300000, guid: ce8df09e087066042860fcf1413c6c9e, type: 3}
+  Fanfare: {fileID: 8300000, guid: d1b0f55312dbf1a449b68e2961afb5bb, type: 3}
+  Hit: {fileID: 8300000, guid: 49a37e99a5812714d8be2b01db31def8, type: 3}
+  Hit2: {fileID: 8300000, guid: 0e10d046ec725cc44a55850041b9ef1f, type: 3}
+  Drinking: {fileID: 8300000, guid: 358737b2db083f041bd9162442df95d1, type: 3}
+  KickManure: {fileID: 8300000, guid: 7f1ea84417a206b4285ea4b566fe2075, type: 3}
+  Fire: {fileID: 8300000, guid: c0c15c1f4a378e2429bc6541cbb3148c, type: 3}
+  Rage: {fileID: 8300000, guid: 9da4ba80a0eaf9940a4eecfadf16df75, type: 3}
+  Shouting: {fileID: 8300000, guid: fb123445fb3ca6c449396fcd43152481, type: 3}
+  Heal: {fileID: 8300000, guid: 2b2b318c3b889b8449ca1962f7aea2ab, type: 3}
+  GunFire: {fileID: 8300000, guid: 6a553b83bcc51c8408fb86f27543a581, type: 3}
+  Seal: {fileID: 8300000, guid: cca92037f6fc8884a9a873cf50cf493c, type: 3}
+  SuperSaiyanTransformation: {fileID: 8300000, guid: fca8d5a984b226f4fade684613867335, type: 3}
+  AvoidSound: {fileID: 8300000, guid: 1fbb90290420a4e49b00fb28f662e499, type: 3}
+  WarningSound: {fileID: 8300000, guid: 697d7be3c12b541488bc5d464d0c524e, type: 3}
   Skill_Name: {fileID: 1480370452}
   Mana_Required: {fileID: 348788113}
   Skill_Explanation: {fileID: 1577900875}
@@ -33699,8 +33721,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -173.42383, y: 529}
-  m_SizeDelta: {x: 92.3408, y: 82.6238}
+  m_AnchoredPosition: {x: -166, y: 529}
+  m_SizeDelta: {x: 248.1415, y: 82.6238}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1298949207
 MonoBehaviour:
@@ -33729,7 +33751,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 5
     m_MaxSize: 50
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
