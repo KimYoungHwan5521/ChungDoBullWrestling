@@ -33135,6 +33135,15 @@ MonoBehaviour:
   SuperSaiyanTransformation: {fileID: 8300000, guid: fca8d5a984b226f4fade684613867335, type: 3}
   AvoidSound: {fileID: 8300000, guid: 1fbb90290420a4e49b00fb28f662e499, type: 3}
   WarningSound: {fileID: 8300000, guid: 697d7be3c12b541488bc5d464d0c524e, type: 3}
+  Chainsaw: {fileID: 8300000, guid: dec2cb8c9a6634e4b903efedb40b4fb1, type: 3}
+  Explosion: {fileID: 8300000, guid: 6e8c68d16e4289241aad06a33c62af24, type: 3}
+  DeathMetal: {fileID: 8300000, guid: b4d5681350e976249814ad37f86212f5, type: 3}
+  Earthquake: {fileID: 8300000, guid: c340a3f7a75916d4ab2226cbbd504862, type: 3}
+  ForkrainSound: {fileID: 8300000, guid: 5706a050fede26b4ab9c9171f1aeffe0, type: 3}
+  Elephant: {fileID: 8300000, guid: c75b34cdf7b064442ab13712301ff511, type: 3}
+  ElectricGuitar: {fileID: 8300000, guid: 89e3f9843cabb76489854acd7de4c879, type: 3}
+  Thunder: {fileID: 8300000, guid: c8c284730a732254493da7b1eadda5b2, type: 3}
+  RocketLunch: {fileID: 8300000, guid: a994b460839f0794898326deee9f049d, type: 3}
   Skill_Name: {fileID: 1480370452}
   Mana_Required: {fileID: 348788113}
   Skill_Explanation: {fileID: 1577900875}
