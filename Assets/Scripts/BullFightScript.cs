@@ -284,9 +284,7 @@ public class BullFightScript : MonoBehaviour
     public int dialogIndex = 0;
     void Update()
     {
-        if(turn % 2 == 1) turnText.text = "나의 턴!";
-        else turnText.text = "상대의 턴!";
-        // Dialogs
+        Debug.Log(turn);
         if(dialogID == 1)
         {
             if(Input.anyKeyDown)
@@ -565,6 +563,7 @@ public class BullFightScript : MonoBehaviour
         ImageVS.SetActive(false);
         myTurn = true;
         turn = 1;
+        turnText.text = "나의 턴!";
 
         if(MilkCowClear)
         {
@@ -955,89 +954,399 @@ public class BullFightScript : MonoBehaviour
     public void OnClickSkill(int skillID){
         if(myTurn == true)
         {
-            StatusCheck();
-            if(skillID == 0)
+            StartCoroutine(SkillActive(skillID));
+        }
+    }
+
+    IEnumerator SkillActive(int skillID)
+    {
+        myTurn = false;
+        if(skillID == 0)
+        {
+            if(cowBlind.activeSelf)
             {
+                BattleLog.text += MyCow.cowName + "의 박치기! 하지만 빗나갔다!\n";
+                AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
+            }
+            else
+            {
+                if(enemyCowBalanced.activeSelf)
+                {
+                    BattleLog.text += MyCow.cowName + "의 박치기! 하지만" + EnemyCow.cowName + "은(는) 회피했다!\n";
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
+                }
+                else
+                {
+                    int dmg = 0;
+                    if(MyCow.atkDmg - EnemyCow.armor > 0)
+                    {
+                        dmg = MyCow.atkDmg - EnemyCow.armor;
+                    }
+                    else
+                    {
+                        dmg = 0;
+                    }
+                    if(enemyCowSteelization.activeSelf) dmg /= 2;
+                    BattleLog.text += MyCow.cowName + "의 박치기!" + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+                    EnemyCow.nowHP -= dmg;
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(Hit);
+                }
+            }
+            turnEnd = true;
+        }
+        else if(skillID == 1)
+        {
+            if(MyCow.nowMP < 20)
+            {
+                WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
+            }
+            else
+            {
+                MyCow.nowMP -= 20;
                 if(cowBlind.activeSelf)
                 {
-                    BattleLog.text += MyCow.cowName + "의 박치기! 하지만 빗나갔다!\n";
+                    BattleLog.text += MyCow.cowName + "의 핵꿀밤! 하지만 빗나갔다!\n";
                     AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
                 }
                 else
                 {
                     if(enemyCowBalanced.activeSelf)
                     {
-                        BattleLog.text += MyCow.cowName + "의 박치기! 하지만" + EnemyCow.cowName + "은(는) 회피했다!\n";
+                        BattleLog.text += MyCow.cowName + "의 핵꿀밤! 하지만" + EnemyCow.cowName + "은(는) 회피했다!\n";
                         AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
                     }
                     else
                     {
                         int dmg = 0;
-                        if(MyCow.atkDmg - EnemyCow.armor > 0)
+                        if(MyCow.atkDmg * 2 - EnemyCow.armor > 0)
                         {
-                            dmg = MyCow.atkDmg - EnemyCow.armor;
+                            dmg = MyCow.atkDmg * 2 - EnemyCow.armor;
                         }
                         else
                         {
                             dmg = 0;
                         }
                         if(enemyCowSteelization.activeSelf) dmg /= 2;
-                        BattleLog.text += MyCow.cowName + "의 박치기!" + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+                        BattleLog.text += MyCow.cowName + "의 핵꿀밤! " + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+                        AudioManager.GetComponent<AudioPlayer>().PlaySound(Hit2);
                         EnemyCow.nowHP -= dmg;
-                        AudioManager.GetComponent<AudioPlayer>().PlaySound(Hit);
                     }
                 }
                 turnEnd = true;
             }
-            else if(skillID == 1)
+        }
+        else if(skillID == 2)
+        {
+            BattleLog.text += MyCow.cowName + "의 우유마시기! <color=green>" + (MyCow.maxHP / 10) + "</color>의 체력과 <color=blue>50</color>의 활력을 회복!\n";
+            MyCow.nowHP += (EnemyCow.maxHP / 10);
+            MyCow.nowMP += 50;
+            if(MyCow.nowHP > MyCow.maxHP) MyCow.nowHP = MyCow.maxHP;
+            if(MyCow.nowMP > MyCow.maxMP) MyCow.nowMP = MyCow.maxMP;
+            cowBlindLeft.text = "<color=red>0</color>";
+            cowBlind.SetActive(false);
+            if(cowOnFire.activeSelf)
             {
-                if(MyCow.nowMP < 20)
+                cowOnFireLeft.text = "<color=red>0</color>";
+                cowOnFire.SetActive(false);
+                StatusActivity("onFire", "MyCow", false);
+            }
+            if(cowSealed.activeSelf)
+            {
+                cowSealedLeft.text = "<color=red>0</color>";
+                cowSealed.SetActive(false);
+                StatusActivity("sealed", "MyCow", false);
+            }
+            AudioManager.GetComponent<AudioPlayer>().PlaySound(Drinking);
+            turnEnd = true;
+        }
+        else if(skillID == 3)
+        {
+            if(MyCow.nowMP < 20)
+            {
+                WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
+            }
+            else
+            {
+                MyCow.nowMP -= 20;
+                if(cowBlind.activeSelf)
                 {
-                    WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
-                    AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
+                    BattleLog.text += MyCow.cowName + "의 거름차기! 하지만 빗나갔다!\n";
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
                 }
                 else
                 {
-                    MyCow.nowMP -= 20;
+                    if(enemyCowBalanced.activeSelf)
+                    {
+                        BattleLog.text += MyCow.cowName + "의 거름차기! 하지만" + EnemyCow.cowName + "은(는) 회피했다!\n";
+                        AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
+                    }
+                    else
+                    {
+                        AudioManager.GetComponent<AudioPlayer>().PlaySound(KickManure);
+                        if(enemyCowImmune.activeSelf || enemyCowSuperSaiyan.activeSelf)
+                        {
+                            BattleLog.text += MyCow.cowName + "의 거름차기! 하지만 " + EnemyCow.cowName + "은(는) 면역!\n";
+                        }
+                        else
+                        {
+                            BattleLog.text += MyCow.cowName + "의 거름차기! " + EnemyCow.cowName + "은(는) 실명에 걸렸다!\n";
+                            enemyCowBlind.SetActive(true);
+                            enemyCowBlindLeft.text = "<color=red>4</color>";
+                        }
+                    }
+                }
+                turnEnd = true;
+            }
+        }
+        else if(skillID == 4)
+        {
+            if(MyCow.nowMP < 30)
+            {
+                WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
+            }
+            else
+            {
+                MyCow.nowMP -= 30;
+                for(int i=0; i<3; i++)
+                {
                     if(cowBlind.activeSelf)
                     {
-                        BattleLog.text += MyCow.cowName + "의 핵꿀밤! 하지만 빗나갔다!\n";
+                        BattleLog.text += MyCow.cowName + "의 3단컴보! 하지만 빗나갔다!\n";
                         AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
                     }
                     else
                     {
                         if(enemyCowBalanced.activeSelf)
                         {
-                            BattleLog.text += MyCow.cowName + "의 핵꿀밤! 하지만" + EnemyCow.cowName + "은(는) 회피했다!\n";
+                            BattleLog.text += MyCow.cowName + "의 3단컴보! 하지만" + EnemyCow.cowName + "은(는) 회피했다!\n";
                             AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
                         }
                         else
                         {
                             int dmg = 0;
-                            if(MyCow.atkDmg * 2 - EnemyCow.armor > 0)
+                            if(MyCow.atkDmg - EnemyCow.armor > 0)
                             {
-                                dmg = MyCow.atkDmg * 2 - EnemyCow.armor;
+                                dmg = MyCow.atkDmg - EnemyCow.armor;
                             }
                             else
                             {
                                 dmg = 0;
                             }
                             if(enemyCowSteelization.activeSelf) dmg /= 2;
-                            BattleLog.text += MyCow.cowName + "의 핵꿀밤! " + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
-                            AudioManager.GetComponent<AudioPlayer>().PlaySound(Hit2);
+                            BattleLog.text += MyCow.cowName + "의 3단컴보! " + EnemyCow.cowName + "에게 <color=red>" + dmg +"</color>의 데미지를 입혔다!\n";
                             EnemyCow.nowHP -= dmg;
+                            // yield return StartCoroutine(Combo());
+                            yield return new WaitForSeconds(0.5f);
+                            AudioManager.GetComponent<AudioPlayer>().PlaySound(Hit);
                         }
                     }
-                    turnEnd = true;
                 }
+                turnEnd = true;
             }
-            else if(skillID == 2)
+        }
+        else if(skillID == 5)
+        {
+            if(MyCow.nowMP < 40)
             {
-                BattleLog.text += MyCow.cowName + "의 우유마시기! <color=green>" + (MyCow.maxHP / 10) + "</color>의 체력과 <color=blue>50</color>의 활력을 회복!\n";
-                MyCow.nowHP += (EnemyCow.maxHP / 10);
-                MyCow.nowMP += 50;
+                WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
+            }
+            else
+            {
+                MyCow.nowMP -= 40;
+                int dmg = 500;
+                if(enemyCowSteelization.activeSelf) dmg /= 2;
+                BattleLog.text += MyCow.cowName + "의 불고기! " + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+                EnemyCow.nowHP -= dmg;
+                if(!enemyCowOnFire.activeSelf && !enemyCowImmune.activeSelf && !enemyCowSuperSaiyan.activeSelf)
+                {
+                    enemyCowOnFire.SetActive(true);
+                    StatusActivity("onFire", "EnemyCow", true);
+                }
+                enemyCowOnFireLeft.text = "<color=red>4</color>";
+                AudioManager.GetComponent<AudioPlayer>().PlaySound(Fire);
+                turnEnd = true;
+
+            }
+        }
+        else if(skillID == 6)
+        {
+            if(MyCow.nowMP < 30)
+            {
+                WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
+            }
+            else
+            {
+                MyCow.nowMP -= 30;
+                BattleLog.text += MyCow.cowName + "의 크로이츠펠트 야곱병! " + MyCow.cowName + "은(는) 광폭 상태가 되었다!\n";
+                if(!cowRage.activeSelf)
+                {
+                    cowRage.SetActive(true);
+                    StatusActivity("rage", "MyCow", true);
+                }
+                cowRageLeft.text = "<color=blue>6</color>";
+                AudioManager.GetComponent<AudioPlayer>().PlaySound(Rage);
+                turnEnd = true;
+            }
+        }
+        else if(skillID == 7)
+        {
+            if(MyCow.nowMP < 30)
+            {
+                WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
+            }
+            else
+            {
+                MyCow.nowMP -= 30;
+                int dmg = 500;
+                if(enemyCowSteelization.activeSelf) dmg /= 2;
+                BattleLog.text += MyCow.cowName + "의 샤우팅! " + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+                EnemyCow.nowHP -= dmg;
+                if(enemyCowRage.activeSelf)
+                {
+                    enemyCowRage.SetActive(false);
+                    StatusActivity("rage", "EnemyCow", false);
+                }
+                enemyCowBalanced.SetActive(false);
+                enemyCowBalancedLeft.text = "<color=blue>0</color>";
+                enemyCowImmune.SetActive(false);
+                enemyCowImmuneLeft.text = "<color=blue>0</color>";
+                enemyCowSteelization.SetActive(false);
+                enemyCowSteelizationLeft.text = "<color=blue>0</color>";
+                if(enemyCowSuperSaiyan.activeSelf)
+                {
+                    enemyCowSuperSaiyan.SetActive(false);
+                    StatusActivity("superSaiyan", "EnemyCow", false);
+                }
+                AudioManager.GetComponent<AudioPlayer>().PlaySound(Shouting);
+                turnEnd = true;
+
+            }
+        }
+        else if(skillID == 8)
+        {
+            if(MyCow.nowMP < 50)
+            {
+                WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
+            }
+            else
+            {
+                MyCow.nowMP -= 50;
+                BattleLog.text += MyCow.cowName + "의 균형잡기! " + MyCow.cowName + "은(는) 균형 상태가 되었다!\n";
+                cowBlindLeft.text = "<color=red>0</color>";
+                cowBlind.SetActive(false);
+                if(cowOnFire.activeSelf)
+                {
+                    cowOnFireLeft.text = "<color=red>0</color>";
+                    cowOnFire.SetActive(false);
+                    StatusActivity("onFire", "MyCow", false);
+                }
+                if(cowSealed.activeSelf)
+                {
+                    cowSealedLeft.text = "<color=red>0</color>";
+                    cowSealed.SetActive(false);
+                    StatusActivity("sealed", "MyCow", false);
+                }
+                cowImmuneLeft.text = "<color=blue>6</color>";
+                cowImmune.SetActive(true);
+                cowBalancedLeft.text = "<color=blue>6</color>";
+                cowBalanced.SetActive(true);
+                turnEnd = true;
+            }
+        }
+        else if(skillID == 9)
+        {
+            BattleLog.text += MyCow.cowName + "의 운기조식! <color=blue>200</color>의 활력을 회복!\n";
+            MyCow.nowMP += 200;
+            if(MyCow.nowMP > MyCow.maxMP) MyCow.nowMP = MyCow.maxMP;
+            AudioManager.GetComponent<AudioPlayer>().PlaySound(Heal);
+            turnEnd = true;
+        }
+        else if(skillID == 10)
+        {
+            if(MyCow.nowMP < 50)
+            {
+                WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
+            }
+            else
+            {
+                MyCow.nowMP -= 50;
+                if(cowBlind.activeSelf)
+                {
+                    BattleLog.text += MyCow.cowName + "의 총쏘기! 하지만 빗나갔다!\n";
+                    AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
+                }
+                else
+                {
+                    if(enemyCowBalanced.activeSelf)
+                    {
+                        BattleLog.text += MyCow.cowName + "의 총쏘기! 하지만" + EnemyCow.cowName + "은(는) 회피했다!\n";
+                        AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
+                    }
+                    else
+                    {
+                        int dmg = 0;
+                        if(MyCow.atkDmg * 5 - EnemyCow.armor > 0)
+                        {
+                            dmg = MyCow.atkDmg * 5 - EnemyCow.armor;
+                        }
+                        else
+                        {
+                            dmg = 0;
+                        }
+                        if(enemyCowSteelization.activeSelf) dmg /= 2;
+                        BattleLog.text += MyCow.cowName + "의 총쏘기! " + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+                        EnemyCow.nowHP -= dmg;
+                        AudioManager.GetComponent<AudioPlayer>().PlaySound(GunFire);
+                    }
+                }
+                turnEnd = true;
+            }
+        }
+        else if(skillID == 11)
+        {
+            if(MyCow.nowMP < 80)
+            {
+                WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
+            }
+            else
+            {
+                MyCow.nowMP -= 80;
+                int dmg = 2500;
+                if(enemyCowSteelization.activeSelf) dmg /= 2;
+                BattleLog.text += MyCow.cowName + "의 봉인! " + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+                EnemyCow.nowHP -= dmg;
+                if(!enemyCowSealed.activeSelf && !enemyCowImmune.activeSelf && !enemyCowSuperSaiyan.activeSelf)
+                {
+                    enemyCowSealed.SetActive(true);
+                    StatusActivity("sealed", "EnemyCow", true);
+                }
+                enemyCowSealedLeft.text = "<color=red>4</color>";
+                AudioManager.GetComponent<AudioPlayer>().PlaySound(Seal);
+                turnEnd = true;
+            }
+        }
+        else if(skillID == 12)
+        {
+            if(MyCow.nowMP < 50)
+            {
+                WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+                AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
+            }
+            else
+            {
+                MyCow.nowMP -= 50;
+                BattleLog.text += MyCow.cowName + "의 우유 20L 마시기! <color=green>" + (MyCow.maxHP * 3 / 10) + "</color>의 체력을 회복!\n";
+                MyCow.nowHP += (EnemyCow.maxHP * 3 / 10);
                 if(MyCow.nowHP > MyCow.maxHP) MyCow.nowHP = MyCow.maxHP;
-                if(MyCow.nowMP > MyCow.maxMP) MyCow.nowMP = MyCow.maxMP;
                 cowBlindLeft.text = "<color=red>0</color>";
                 cowBlind.SetActive(false);
                 if(cowOnFire.activeSelf)
@@ -1055,374 +1364,68 @@ public class BullFightScript : MonoBehaviour
                 AudioManager.GetComponent<AudioPlayer>().PlaySound(Drinking);
                 turnEnd = true;
             }
-            else if(skillID == 3)
-            {
-                if(MyCow.nowMP < 20)
-                {
-                    WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
-                    AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
-                }
-                else
-                {
-                    MyCow.nowMP -= 20;
-                    if(cowBlind.activeSelf)
-                    {
-                        BattleLog.text += MyCow.cowName + "의 거름차기! 하지만 빗나갔다!\n";
-                        AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
-                    }
-                    else
-                    {
-                        if(enemyCowBalanced.activeSelf)
-                        {
-                            BattleLog.text += MyCow.cowName + "의 거름차기! 하지만" + EnemyCow.cowName + "은(는) 회피했다!\n";
-                            AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
-                        }
-                        else
-                        {
-                            AudioManager.GetComponent<AudioPlayer>().PlaySound(KickManure);
-                            if(enemyCowImmune.activeSelf || enemyCowSuperSaiyan.activeSelf)
-                            {
-                                BattleLog.text += MyCow.cowName + "의 거름차기! 하지만 " + EnemyCow.cowName + "은(는) 면역!\n";
-                            }
-                            else
-                            {
-                                BattleLog.text += MyCow.cowName + "의 거름차기! " + EnemyCow.cowName + "은(는) 실명에 걸렸다!\n";
-                                enemyCowBlind.SetActive(true);
-                                enemyCowBlindLeft.text = "<color=red>4</color>";
-                            }
-                        }
-                    }
-                    turnEnd = true;
-                }
-            }
-            else if(skillID == 4)
-            {
-                if(MyCow.nowMP < 30)
-                {
-                    WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
-                    AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
-                }
-                else
-                {
-                    MyCow.nowMP -= 30;
-                    for(int i=0; i<3; i++)
-                    {
-                        if(cowBlind.activeSelf)
-                        {
-                            BattleLog.text += MyCow.cowName + "의 3단컴보! 하지만 빗나갔다!\n";
-                            AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
-                        }
-                        else
-                        {
-                            if(enemyCowBalanced.activeSelf)
-                            {
-                                BattleLog.text += MyCow.cowName + "의 3단컴보! 하지만" + EnemyCow.cowName + "은(는) 회피했다!\n";
-                                AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
-                            }
-                            else
-                            {
-                                int dmg = 0;
-                                if(MyCow.atkDmg - EnemyCow.armor > 0)
-                                {
-                                   dmg = MyCow.atkDmg - EnemyCow.armor;
-                                }
-                                else
-                                {
-                                    dmg = 0;
-                                }
-                                if(enemyCowSteelization.activeSelf) dmg /= 2;
-                                BattleLog.text += MyCow.cowName + "의 3단컴보! " + EnemyCow.cowName + "에게 <color=red>" + dmg +"</color>의 데미지를 입혔다!\n";
-                                EnemyCow.nowHP -= dmg;
-                                StartCoroutine("Combo");
-                            }
-                        }
-                    }
-                    turnEnd = true;
-                }
-            }
-            else if(skillID == 5)
-            {
-                if(MyCow.nowMP < 40)
-                {
-                    WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
-                    AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
-                }
-                else
-                {
-                    MyCow.nowMP -= 40;
-                    int dmg = 500;
-                    if(enemyCowSteelization.activeSelf) dmg /= 2;
-                    BattleLog.text += MyCow.cowName + "의 불고기! " + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
-                    EnemyCow.nowHP -= dmg;
-                    if(!enemyCowOnFire.activeSelf && !enemyCowImmune.activeSelf && !enemyCowSuperSaiyan.activeSelf)
-                    {
-                        enemyCowOnFire.SetActive(true);
-                        StatusActivity("onFire", "EnemyCow", true);
-                    }
-                    enemyCowOnFireLeft.text = "<color=red>4</color>";
-                    AudioManager.GetComponent<AudioPlayer>().PlaySound(Fire);
-                    turnEnd = true;
-
-                }
-            }
-            else if(skillID == 6)
-            {
-                if(MyCow.nowMP < 30)
-                {
-                    WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
-                    AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
-                }
-                else
-                {
-                    MyCow.nowMP -= 30;
-                    BattleLog.text += MyCow.cowName + "의 크로이츠펠트 야곱병! " + MyCow.cowName + "은(는) 광폭 상태가 되었다!\n";
-                    if(!cowRage.activeSelf)
-                    {
-                        cowRage.SetActive(true);
-                        StatusActivity("rage", "MyCow", true);
-                    }
-                    cowRageLeft.text = "<color=blue>6</color>";
-                    AudioManager.GetComponent<AudioPlayer>().PlaySound(Rage);
-                    turnEnd = true;
-                }
-            }
-            else if(skillID == 7)
-            {
-                if(MyCow.nowMP < 30)
-                {
-                    WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
-                    AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
-                }
-                else
-                {
-                    MyCow.nowMP -= 30;
-                    int dmg = 500;
-                    if(enemyCowSteelization.activeSelf) dmg /= 2;
-                    BattleLog.text += MyCow.cowName + "의 샤우팅! " + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
-                    EnemyCow.nowHP -= dmg;
-                    if(enemyCowRage.activeSelf)
-                    {
-                        enemyCowRage.SetActive(false);
-                        StatusActivity("rage", "EnemyCow", false);
-                    }
-                    enemyCowBalanced.SetActive(false);
-                    enemyCowBalancedLeft.text = "<color=blue>0</color>";
-                    enemyCowImmune.SetActive(false);
-                    enemyCowImmuneLeft.text = "<color=blue>0</color>";
-                    enemyCowSteelization.SetActive(false);
-                    enemyCowSteelizationLeft.text = "<color=blue>0</color>";
-                    if(enemyCowSuperSaiyan.activeSelf)
-                    {
-                        enemyCowSuperSaiyan.SetActive(false);
-                        StatusActivity("superSaiyan", "EnemyCow", false);
-                    }
-                    AudioManager.GetComponent<AudioPlayer>().PlaySound(Shouting);
-                    turnEnd = true;
-
-                }
-            }
-            else if(skillID == 8)
-            {
-                if(MyCow.nowMP < 50)
-                {
-                    WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
-                    AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
-                }
-                else
-                {
-                    MyCow.nowMP -= 50;
-                    BattleLog.text += MyCow.cowName + "의 균형잡기! " + MyCow.cowName + "은(는) 균형 상태가 되었다!\n";
-                    cowBlindLeft.text = "<color=red>0</color>";
-                    cowBlind.SetActive(false);
-                    if(cowOnFire.activeSelf)
-                    {
-                        cowOnFireLeft.text = "<color=red>0</color>";
-                        cowOnFire.SetActive(false);
-                        StatusActivity("onFire", "MyCow", false);
-                    }
-                    if(cowSealed.activeSelf)
-                    {
-                        cowSealedLeft.text = "<color=red>0</color>";
-                        cowSealed.SetActive(false);
-                        StatusActivity("sealed", "MyCow", false);
-                    }
-                    cowImmuneLeft.text = "<color=blue>6</color>";
-                    cowImmune.SetActive(true);
-                    cowBalancedLeft.text = "<color=blue>6</color>";
-                    cowBalanced.SetActive(true);
-                    turnEnd = true;
-                }
-            }
-            else if(skillID == 9)
-            {
-                BattleLog.text += MyCow.cowName + "의 운기조식! <color=blue>200</color>의 활력을 회복!\n";
-                MyCow.nowMP += 200;
-                if(MyCow.nowMP > MyCow.maxMP) MyCow.nowMP = MyCow.maxMP;
-                AudioManager.GetComponent<AudioPlayer>().PlaySound(Heal);
-                turnEnd = true;
-            }
-            else if(skillID == 10)
-            {
-                if(MyCow.nowMP < 50)
-                {
-                    WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
-                    AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
-                }
-                else
-                {
-                    MyCow.nowMP -= 50;
-                    if(cowBlind.activeSelf)
-                    {
-                        BattleLog.text += MyCow.cowName + "의 총쏘기! 하지만 빗나갔다!\n";
-                        AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
-                    }
-                    else
-                    {
-                        if(enemyCowBalanced.activeSelf)
-                        {
-                            BattleLog.text += MyCow.cowName + "의 총쏘기! 하지만" + EnemyCow.cowName + "은(는) 회피했다!\n";
-                            AudioManager.GetComponent<AudioPlayer>().PlaySound(AvoidSound);
-                        }
-                        else
-                        {
-                            int dmg = 0;
-                            if(MyCow.atkDmg * 5 - EnemyCow.armor > 0)
-                            {
-                                dmg = MyCow.atkDmg * 5 - EnemyCow.armor;
-                            }
-                            else
-                            {
-                                dmg = 0;
-                            }
-                            if(enemyCowSteelization.activeSelf) dmg /= 2;
-                            BattleLog.text += MyCow.cowName + "의 총쏘기! " + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
-                            EnemyCow.nowHP -= dmg;
-                            AudioManager.GetComponent<AudioPlayer>().PlaySound(GunFire);
-                        }
-                    }
-                    turnEnd = true;
-                }
-            }
-            else if(skillID == 11)
-            {
-                if(MyCow.nowMP < 80)
-                {
-                    WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
-                    AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
-                }
-                else
-                {
-                    MyCow.nowMP -= 80;
-                    int dmg = 2500;
-                    if(enemyCowSteelization.activeSelf) dmg /= 2;
-                    BattleLog.text += MyCow.cowName + "의 봉인! " + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
-                    EnemyCow.nowHP -= dmg;
-                    if(!enemyCowSealed.activeSelf && !enemyCowImmune.activeSelf && !enemyCowSuperSaiyan.activeSelf)
-                    {
-                        enemyCowSealed.SetActive(true);
-                        StatusActivity("sealed", "EnemyCow", true);
-                    }
-                    enemyCowSealedLeft.text = "<color=red>4</color>";
-                    AudioManager.GetComponent<AudioPlayer>().PlaySound(Seal);
-                    turnEnd = true;
-                }
-            }
-            else if(skillID == 12)
-            {
-                if(MyCow.nowMP < 50)
-                {
-                    WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
-                    AudioManager.GetComponent<AudioPlayer>().PlaySound(WarningSound);
-                }
-                else
-                {
-                    BattleLog.text += MyCow.cowName + "의 우유 20L 마시기! <color=green>" + (MyCow.maxHP * 3 / 10) + "</color>의 체력을 회복!\n";
-                    MyCow.nowHP += (EnemyCow.maxHP * 3 / 10);
-                    if(MyCow.nowHP > MyCow.maxHP) MyCow.nowHP = MyCow.maxHP;
-                    cowBlindLeft.text = "<color=red>0</color>";
-                    cowBlind.SetActive(false);
-                    if(cowOnFire.activeSelf)
-                    {
-                        cowOnFireLeft.text = "<color=red>0</color>";
-                        cowOnFire.SetActive(false);
-                        StatusActivity("onFire", "MyCow", false);
-                    }
-                    if(cowSealed.activeSelf)
-                    {
-                        cowSealedLeft.text = "<color=red>0</color>";
-                        cowSealed.SetActive(false);
-                        StatusActivity("sealed", "MyCow", false);
-                    }
-                    AudioManager.GetComponent<AudioPlayer>().PlaySound(Drinking);
-                    turnEnd = true;
-                }
-            }
-            else if(skillID == 13)
-            {
-                BattleLog.text += MyCow.cowName + "의 철과 같은 단단함!" + MyCow.cowName + "은(는) 단단해졌다!\n";
-                cowSteelizationLeft.text = "<color=blue>2</color>";
-                cowSteelization.SetActive(true);
-                turnEnd = true;
-            }
-            else if(skillID == 14)
-            {
-                if(MyCow.nowMP < 100)
-                {
-                    WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
-                }
-                else
-                {
-                    BattleLog.text += MyCow.cowName + "의 초사이언 변신!" + MyCow.cowName + "은(는) 초사이언이 되었다!\n";
-                    cowBlindLeft.text = "<color=red>0</color>";
-                    cowBlind.SetActive(false);
-                    if(cowOnFire.activeSelf)
-                    {
-                        cowOnFireLeft.text = "<color=red>0</color>";
-                        cowOnFire.SetActive(false);
-                        StatusActivity("onFire", "MyCow", false);
-                    }
-                    if(cowSealed.activeSelf)
-                    {
-                        cowSealedLeft.text = "<color=red>0</color>";
-                        cowSealed.SetActive(false);
-                        StatusActivity("sealed", "MyCow", false);
-                    }
-                    cowSuperSaiyanLeft.text = "<color=blue>8</color>";
-                    cowSuperSaiyan.SetActive(true);
-                    AudioManager.GetComponent<AudioPlayer>().PlaySound(SuperSaiyanTransformation);
-                    turnEnd = true;
-                }
-            }
-
-            if(EnemyCow.nowHP <= 0)
-            {
-                BattleWin();
-                return;
-            }
-            
-            if(turnEnd == true)
-            {
-                WarningMessage.text = "";
-                scroll_rect.verticalNormalizedPosition = 0.0f;
-                myTurn = false;
-                turn++;
-                // 시간 딜레이
-                Invoke("EnemyAct", 3.0f);
-                turnEnd = false;
-            }
         }
-    }
-    IEnumerator Combo()
-    {
-        for(int i=0; i<3; i++)
+        else if(skillID == 13)
         {
-            yield return new WaitForSeconds(0.5f);
-            AudioManager.GetComponent<AudioPlayer>().PlaySound(Hit);
+            BattleLog.text += MyCow.cowName + "의 철과 같은 단단함!" + MyCow.cowName + "은(는) 단단해졌다!\n";
+            cowSteelizationLeft.text = "<color=blue>2</color>";
+            cowSteelization.SetActive(true);
+            turnEnd = true;
+        }
+        else if(skillID == 14)
+        {
+            if(MyCow.nowMP < 100)
+            {
+                WarningMessage.text = "<color=blue>활력</color>이 부족합니다!";
+            }
+            else
+            {
+                MyCow.nowMP -= 100;
+                BattleLog.text += MyCow.cowName + "의 초사이언 변신!" + MyCow.cowName + "은(는) 초사이언이 되었다!\n";
+                cowBlindLeft.text = "<color=red>0</color>";
+                cowBlind.SetActive(false);
+                if(cowOnFire.activeSelf)
+                {
+                    cowOnFireLeft.text = "<color=red>0</color>";
+                    cowOnFire.SetActive(false);
+                    StatusActivity("onFire", "MyCow", false);
+                }
+                if(cowSealed.activeSelf)
+                {
+                    cowSealedLeft.text = "<color=red>0</color>";
+                    cowSealed.SetActive(false);
+                    StatusActivity("sealed", "MyCow", false);
+                }
+                cowSuperSaiyanLeft.text = "<color=blue>8</color>";
+                cowSuperSaiyan.SetActive(true);
+                AudioManager.GetComponent<AudioPlayer>().PlaySound(SuperSaiyanTransformation);
+                turnEnd = true;
+            }
+        }
+        yield return new WaitForSeconds(0.5f);
+        if(EnemyCow.nowHP <= 0)
+        {
+            StartCoroutine(BattleWin());
+        }
+        else if(turnEnd == true)
+        {
+            turn++;
+            myTurn = false;
+            StatusCheck();
+            turnText.text = "상대의 턴!";
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(EnemyAct());
+        }
+        else
+        {
+            myTurn = true;
         }
     }
 
-    public void EnemyAct(){
-        Debug.Log(EnemyCow.cowName);
+    IEnumerator EnemyAct()
+    {
+        WarningMessage.text = "";
+        
         if(EnemyCow.cowName == "젖소")
         {
             if((EnemyCow.nowHP/EnemyCow.maxHP) < 0.5)
@@ -1887,9 +1890,14 @@ public class BullFightScript : MonoBehaviour
             }
             
         }
-        turn++;
+        yield return new WaitForSeconds(0.5f);
+        scroll_rect.verticalNormalizedPosition = 0.0f;
         StatusCheck();
+        turn++;
+        turnEnd = false;
         myTurn = true;
+        turnText.text = "나의 턴!";
+        
     }
 
     public void EnemySkill(string skill_name)
@@ -2212,7 +2220,7 @@ public class BullFightScript : MonoBehaviour
         }
     }
 
-    public void BattleWin()
+    IEnumerator BattleWin()
     {
         Debug.Log("승리!");
         AudioManager.GetComponent<AudioPlayer>().PlayMusic(Fanfare, false);
@@ -2355,7 +2363,7 @@ public class BullFightScript : MonoBehaviour
             // SceneManager.LoadScene("EndingScene");
             // return;
 
-        
+        yield return new WaitForSeconds(0.5f);
     }
     public GameObject Cowshed;
     public GameObject BullFight;

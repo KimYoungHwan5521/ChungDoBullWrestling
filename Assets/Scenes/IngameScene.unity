@@ -8339,7 +8339,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 40
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 4
     m_MaxSize: 75
     m_Alignment: 2
@@ -55574,7 +55574,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 98847db22e89f224eb39e1924cf81634, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
