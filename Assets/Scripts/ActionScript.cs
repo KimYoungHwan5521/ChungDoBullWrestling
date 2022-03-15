@@ -14,7 +14,7 @@ public class ActionScript : MonoBehaviour
     public Text DialogMessage;
     public int debtRepaymentEventCheck = 0;
     public GameObject InventoryToSell;
-    public GameObject[] Slot;
+    public GameObject[] Slot, IsEquiped;
     
     public Text TimeText;
     public int dialogIndex = 0;
@@ -107,6 +107,7 @@ public class ActionScript : MonoBehaviour
                                     if(i < Player.inventory.Count)
                                     {
                                         itemInfo[1].text = (Player.inventory[i].itemPrice / 2).ToString();
+                                        IsEquiped[i].SetActive(Player.inventory[i].isEquiped); 
                                     }
                                     else
                                     {

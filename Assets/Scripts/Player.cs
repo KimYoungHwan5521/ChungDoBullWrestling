@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     }
 
     public Text GoldText;
-    public GameObject[] Slot;
+    public GameObject[] Slot, IsEquiped;
     // Update is called once per frame
     void Update()
     {
@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
             Text[] itemInfo = Slot[i].GetComponentsInChildren<Text>();
             itemInfo[0].text = i < inventory.Count ? inventory[i].itemName : "";
             itemInfo[1].text = i < inventory.Count ? inventory[i].count.ToString() : "";
-
+            if(i < inventory.Count) IsEquiped[i].SetActive(Player.inventory[i].isEquiped);
         }
     }
     

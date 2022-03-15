@@ -112,11 +112,14 @@ public class ButtonsScript : MonoBehaviour
     public void OnClickCow()
     {
         Cow_Status.SetActive(true);
+        ToVillage.SetActive(false);
     }
 
     public void OnClickCowStatusClose()
     {
         Cow_Status.SetActive(false);
+        ToVillage.SetActive(true);
+        To_Village.SetActive(false);
     }
 
     public GameObject EquipmentSetting;
@@ -456,10 +459,13 @@ public class ButtonsScript : MonoBehaviour
     public void OnClickFarmer()
     {
         PlowingSelect.SetActive(true);
+        ToVillage.SetActive(false);
     }
     public void OnClickPlowingSelectClose()
     {
         PlowingSelect.SetActive(false);
+        ToVillage.SetActive(true);
+        To_Village.SetActive(false);
     }
 
     // Top menu bar

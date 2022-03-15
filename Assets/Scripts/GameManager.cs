@@ -51,10 +51,16 @@ public class GameManager : MonoBehaviour
 
     // market system
     public GameObject Food_Market;
+    public Button Food_Market_Button;
+    public Button Trinkets_Market_Button;
+    public Button Junkman_Button;
+    public Button Hidden_Market_Button;
     public GameObject Confirm_Purchase;
     public Text Purchase_Text;
     public GameObject Alert;
     public Text Alert_Text;
+    public GameObject ToVillage;
+    public GameObject To_Village;
     public static int slotnum = 0;
     public static int marketID = 0;
 
@@ -79,9 +85,22 @@ public class GameManager : MonoBehaviour
             SetMarketType("HiddenMarket");
         }
         Food_Market.SetActive(true);
+        Food_Market_Button.interactable = false;
+        Trinkets_Market_Button.interactable = false;
+        Junkman_Button.interactable = false;
+        Hidden_Market_Button.interactable = false;
+        HairbrushReinforcementButton.interactable = false;
+        ToVillage.SetActive(false);
     }
     public void OnClickFoodMarketClose(){
         Food_Market.SetActive(false);
+        Food_Market_Button.interactable = true;
+        Trinkets_Market_Button.interactable = true;
+        Junkman_Button.interactable = true;
+        Hidden_Market_Button.interactable = true;
+        HairbrushReinforcementButton.interactable = true;
+        ToVillage.SetActive(true);
+        To_Village.SetActive(false);
     }
 
     public GameObject[] Marchandise;
@@ -313,6 +332,7 @@ public class GameManager : MonoBehaviour
     }
 
     public GameObject HairbrushReinforcement;
+    public Button HairbrushReinforcementButton;
     public Text HairbrushNow;
     public Text HairbrushAfter;
     public Text HairbrushReinforcementCost;
@@ -354,11 +374,24 @@ public class GameManager : MonoBehaviour
             HairbrushReinforcementCost.text = (hairbrushAfter.itemPrice - hairbrushNow.itemPrice).ToString();
             HairbrushReinforcementPerformance.text = performance.ToString();
             HairbrushReinforcement.SetActive(true);
+            Food_Market_Button.interactable = false;
+            Trinkets_Market_Button.interactable = false;
+            Junkman_Button.interactable = false;
+            Hidden_Market_Button.interactable = false;
+            HairbrushReinforcementButton.interactable = false;
+            ToVillage.SetActive(false);
         }
     }
     public void OnClickHairbrushReinforcementClose()
     {
         HairbrushReinforcement.SetActive(false);
+        Food_Market_Button.interactable = true;
+        Trinkets_Market_Button.interactable = true;
+        Junkman_Button.interactable = true;
+        Hidden_Market_Button.interactable = true;
+        HairbrushReinforcementButton.interactable = true;
+        ToVillage.SetActive(true);
+        To_Village.SetActive(false);
     }
     public void OnClickHairbrushReinforcement()
     {
