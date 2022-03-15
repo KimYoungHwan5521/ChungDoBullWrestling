@@ -8,15 +8,17 @@ public class ActionScript : MonoBehaviour
     public static int intAction = 0;
     public static int intDayOfTheWeek = 0;
     public static int intDate = 0;
+    public static int randomForHiddenMarket = 0;
 
     public GameObject DebtRepaymentEvent;
     public Text DialogMessage;
     public int debtRepaymentEventCheck = 0;
     public GameObject InventoryToSell;
     public GameObject[] Slot;
-    // Update is called once per frame
+    
     public Text TimeText;
     public int dialogIndex = 0;
+    public Text DayOfTheWeekText;
     void Update()
     {
         if(intAction % 3 == 0)
@@ -33,6 +35,15 @@ public class ActionScript : MonoBehaviour
         }
         intDate = intAction / 3;
         intDayOfTheWeek = intDate % 7;
+        if(intDayOfTheWeek == 0) DayOfTheWeekText.text = "<color=red>Sun</color>";
+        else if(intDayOfTheWeek == 1) DayOfTheWeekText.text = "Mon";
+        else if(intDayOfTheWeek == 2) DayOfTheWeekText.text = "Tus";
+        else if(intDayOfTheWeek == 3) DayOfTheWeekText.text = "Wed";
+        else if(intDayOfTheWeek == 4) DayOfTheWeekText.text = "Thu";
+        else if(intDayOfTheWeek == 5) DayOfTheWeekText.text = "Fri";
+        else DayOfTheWeekText.text = "<color=blue>Sat</color>";
+
+        if(intDayOfTheWeek == 0) randomForHiddenMarket = Random.Range(0,3);
 
         if(intDate % 28 == 3 && debtRepaymentEventCheck == intDate / 28)
         {
@@ -328,8 +339,19 @@ public class ActionScript : MonoBehaviour
             }
             else if(Player.inventory[foodnum].itemName == "소고기")
             {
-                MyCow.maxHP += 200;
-                MyCow.nowHP = MyCow.maxHP;
+                int r = Random.Range(0,5);
+                if(r == 0)
+                {
+                    AlertText.text = MyCow.cowName + "이(가) 소고기를 먹고 탈이 났습니다.. (최대 체력 -50)";
+                    MyCow.maxHP -= 50;
+                    MyCow.nowHP = MyCow.maxHP;
+                    Alert.SetActive(true);
+                }
+                else
+                {
+                    MyCow.maxHP += 200;
+                    MyCow.nowHP = MyCow.maxHP;
+                }
             }
             FoodSelect.SetActive(false);
             if(Player.inventory[foodnum].count == 1)

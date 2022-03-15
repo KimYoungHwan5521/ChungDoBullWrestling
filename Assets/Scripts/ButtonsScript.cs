@@ -33,6 +33,7 @@ public class ButtonsScript : MonoBehaviour
         AudioManager.GetComponent<AudioPlayer>().PlayMusic(TownTheme);
     }
 
+    public GameObject HiddenMerchant;
     void Update()
     {
         CowName.text = MyCow.cowName;
@@ -87,6 +88,14 @@ public class ButtonsScript : MonoBehaviour
         else
         {
             CowCondition.text = "<color=maroon>" + MyCow.condition.ToString() + "</color>";
+        }
+        if(ActionScript.intDayOfTheWeek == 5 && ActionScript.intAction % 3 == 2)
+        {
+            HiddenMerchant.SetActive(true);
+        }
+        else
+        {
+            HiddenMerchant.SetActive(false);
         }
 
     }

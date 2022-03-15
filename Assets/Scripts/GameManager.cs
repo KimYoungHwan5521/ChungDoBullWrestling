@@ -74,6 +74,10 @@ public class GameManager : MonoBehaviour
         {
             SetMarketType("Junkman");
         }
+        else if(marketID == 4)
+        {
+            SetMarketType("HiddenMarket");
+        }
         Food_Market.SetActive(true);
     }
     public void OnClickFoodMarketClose(){
@@ -95,7 +99,9 @@ public class GameManager : MonoBehaviour
         }
         if(market == "FoodMarket")
         {
-            CurItemList = AllItemList.FindAll(x => x.itemType == "먹이");
+            CurItemList = AllItemList.FindAll(x => x.itemName == "건초");
+            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "비료"));
+            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "고기"));
             for(int i=0; i<Marchandise.Length; i++)
             {
                 Marchandise[i].SetActive(i<CurItemList.Count);
@@ -107,9 +113,14 @@ public class GameManager : MonoBehaviour
         }
         else if(market == "TrinketsMarket")
         {
-            CurItemList = AllItemList.FindAll(x => x.itemType == "장비(머리)");
-            CurItemList.AddRange(AllItemList.FindAll(x => x.itemType == "장비(몸)"));
-            CurItemList.AddRange(AllItemList.FindAll(x => x.itemType == "장비(다리)"));
+            CurItemList = AllItemList.FindAll(x => x.itemName == "은투구");
+            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "금투구"));
+            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "은갑옷"));
+            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "금갑옷"));
+            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "은편자"));
+            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "금편자"));
+            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "운동화"));
+            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "구두"));
             for(int i=0; i<Marchandise.Length; i++)
             {
                 Marchandise[i].SetActive(i<CurItemList.Count);
@@ -141,6 +152,31 @@ public class GameManager : MonoBehaviour
                     itemInfo[1].text = "";
                 }
             }
+        }
+        else if(market == "HiddenMarket")
+        {
+            CurItemList = AllItemList.FindAll(x => x.itemName == "소고기");
+            if(ActionScript.randomForHiddenMarket == 0)
+            {
+                CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "다이아투구"));
+            }
+            else if(ActionScript.randomForHiddenMarket == 1)
+            {
+                CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "다이아갑옷"));
+            }
+            else
+            {
+                CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "다이아편자"));
+            }
+            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "건초 묶음"));
+            for(int i=0; i<Marchandise.Length; i++)
+            {
+                Marchandise[i].SetActive(i<CurItemList.Count);
+                Text[] itemInfo = Marchandise[i].GetComponentsInChildren<Text>();
+                itemInfo[0].text = i < CurItemList.Count ? CurItemList[i].itemName : "";
+                itemInfo[1].text = i < CurItemList.Count ? CurItemList[i].itemPrice : "";
+            }
+            
         }
         else
         {
@@ -224,6 +260,8 @@ public class GameManager : MonoBehaviour
             {
                 Player.gold -= price;
                 bool chk = false;
+                bool hay = false;
+                if(CurItemList[slotnum].itemName == "건초 묶음") hay = true;
                 for(int i=0;i<Player.inventory.Count;i++)
                 {
                     if(Player.inventory[i].itemName == CurItemList[slotnum].itemName)
@@ -232,15 +270,36 @@ public class GameManager : MonoBehaviour
                         chk = true;
                         break;
                     }
+                    if(hay && Player.inventory[i].itemName == "건초")
+                    {
+                        Player.inventory[i].count += 5;
+                        chk = true;
+                        break;
+                    }
                 }
                 if(!chk)
                 {
                     Player.Item item = new Player.Item();
-                    item.itemName = CurItemList[slotnum].itemName;
-                    item.itemType = CurItemList[slotnum].itemType;
-                    item.itemPrice = price;
-                    item.itemExplain = CurItemList[slotnum].itemExplain;
-                    Player.inventory.Add(item);
+                    if(hay)
+                    {
+                        Item tempHay = AllItemList.Find(x => x.itemName == "건초");
+                        item.itemName = tempHay.itemName;
+                        item.itemType = tempHay.itemType;
+                        item.itemPrice = price;
+                        item.itemExplain = tempHay.itemExplain;
+                        item.count = 5;
+                        Player.inventory.Add(item);
+                        // Player.Item tempHay2 = Player.inventory.Find(x => x.itemName == "건초");
+                        // tempHay2.count += 4;
+                    }
+                    else
+                    {
+                        item.itemName = CurItemList[slotnum].itemName;
+                        item.itemType = CurItemList[slotnum].itemType;
+                        item.itemPrice = price;
+                        item.itemExplain = CurItemList[slotnum].itemExplain;
+                        Player.inventory.Add(item);
+                    }
                 }
                 Alert_Text.text = "성공적으로 구매하였습니다.";
                 AudioManager.GetComponent<AudioPlayer>().PlaySound(sellingSound);

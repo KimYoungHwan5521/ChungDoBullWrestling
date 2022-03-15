@@ -100,6 +100,43 @@ public class MyCow : MonoBehaviour
                 atkDmg -= 100;
             }
         }
+        else if(equipmentName == "다이아투구")
+        {
+            if(equiped)
+            {
+                armor += 200;
+            }
+            else
+            {
+                armor -= 200;
+            }
+        }
+        else if(equipmentName == "다이아갑옷")
+        {
+            if(equiped)
+            {
+                armor += 200;
+            }
+            else
+            {
+                armor -= 200;
+            }
+        }
+        else if(equipmentName == "다이아편자")
+        {
+            if(equiped)
+            {
+                atkDmg += 200;
+            }
+            else
+            {
+                atkDmg -= 200;
+            }
+        }
+        else
+        {
+            Debug.Log("Wrong equipmentName!");
+        }
     }
     
 }
