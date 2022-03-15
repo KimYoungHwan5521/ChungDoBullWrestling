@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public static int gold = 2000;
+    public static int gold = 200000;
     public class Item
     {
         public string itemName;

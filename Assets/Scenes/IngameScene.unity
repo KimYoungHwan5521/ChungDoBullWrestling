@@ -35771,6 +35771,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HPbar: {fileID: 779858421}
   MPbar: {fileID: 256461182}
+  Alert1: {fileID: 1448618752}
+  AlertText1: {fileID: 1862222730}
 --- !u!1 &1283528086
 GameObject:
   m_ObjectHideFlags: 0
