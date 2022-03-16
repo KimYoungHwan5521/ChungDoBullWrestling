@@ -289,7 +289,7 @@ public class ActionScript : MonoBehaviour
         {
             if(intAction % 3 == 2)
             {
-                ConfirmText.text = "행동을 소모하여 '장터 알바(야간)' 행동을 하시겠습니까?\n";
+                ConfirmText.text = "행동을 소모하여 '장터 알바(야간)' 행동을 하시겠습니까?\n(컨디션 -35)";
             }
             else
             {
@@ -314,11 +314,25 @@ public class ActionScript : MonoBehaviour
         ConfirmText.text += "'" + Player.inventory[slotNum].itemName + "' 선택됨";
         ConfirmAction.SetActive(true);
     }
+    public Button Food_Market_Button;
+    public Button Trinkets_Market_Button;
+    public Button Junkman_Button;
+    public Button Hidden_Market_Button;
+    public Button HairbrushReinforcementButton;
+    public GameObject ToVillage;
+    public GameObject To_Village;
     public void OnClickConfirmActionConfirm()
     {
         ConfirmAction.SetActive(false);
         CowStatus.SetActive(false);
         Market.SetActive(false);
+        Food_Market_Button.interactable = true;
+        Trinkets_Market_Button.interactable = true;
+        Junkman_Button.interactable = true;
+        Hidden_Market_Button.interactable = true;
+        HairbrushReinforcementButton.interactable = true;
+        ToVillage.SetActive(true);
+        To_Village.SetActive(false);
         if(ActionID == 0)
         {
             MyCow.hunger += 30;
@@ -450,6 +464,14 @@ public class ActionScript : MonoBehaviour
             if(MyCow.cleanliness < 0) MyCow.cleanliness = 0;
         }
         if(MyCow.condition < 0) MyCow.condition = 0;
+
+        if(MyCow.condition == 0)
+        {
+            AlertText.text = MyCow.cowName + "의 컨디션이 0이 되었습니다.\n하루동안 휴식합니다.\n(행동 3 스킵)";
+            Alert.SetActive(true);
+            intAction += 3;
+            MyCow.condition = 30;
+        }
     }
     public GameObject TrainingSelect;
     public void OnClickTrainingSelect()

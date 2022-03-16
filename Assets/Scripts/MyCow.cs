@@ -23,16 +23,77 @@ public class MyCow : MonoBehaviour
     public Text AlertText1;
     public static GameObject Alert;
     public static Text AlertText;
+
     void Start()
     {
         Alert = Alert1;
         AlertText = AlertText1;
     }
 
+    public Image HungerBar;
+    public Text HungerBarText;
+    public Image CleanlinessBar;
+    public Text CleanlinessBarText;
+    public Image ConditionBar;
+    public Text ConditionBarText;
     void Update()
     {
         HPbar.fillAmount = (float)nowHP / (float)maxHP;
         MPbar.fillAmount = (float)nowMP / (float)maxMP;
+        HungerBar.fillAmount = (float) hunger / 100;
+        HungerBarText.text = hunger.ToString() + "/100";
+        CleanlinessBar.fillAmount = (float) cleanliness / 100;
+        CleanlinessBarText.text = cleanliness.ToString() + "/100";
+        ConditionBar.fillAmount = (float) condition / 100;
+        ConditionBarText.text = condition.ToString() + "/100";
+        if(hunger > 70)
+        {
+            HungerBar.color = new Color(0, 1, 0);
+        }
+        else if(hunger > 40)
+        {
+            HungerBar.color = new Color(1, 1, 0);
+        }
+        else if(hunger > 10)
+        {
+            HungerBar.color = new Color(1, 0, 0);
+        }
+        else
+        {
+            HungerBar.color = new Color(0.5f, 0, 0);
+        }
+        if(cleanliness > 70)
+        {
+            CleanlinessBar.color = new Color(0, 1, 0);
+        }
+        else if(cleanliness > 40)
+        {
+            CleanlinessBar.color = new Color(1, 1, 0);
+        }
+        else if(cleanliness > 10)
+        {
+            CleanlinessBar.color = new Color(1, 0, 0);
+        }
+        else
+        {
+            CleanlinessBar.color = new Color(0.5f, 0, 0);
+        }
+        if(condition > 70)
+        {
+            ConditionBar.color = new Color(0, 1, 0);
+        }
+        else if(condition > 40)
+        {
+            ConditionBar.color = new Color(1, 1, 0);
+        }
+        else if(condition > 10)
+        {
+            ConditionBar.color = new Color(1, 0, 0);
+        }
+        else
+        {
+            ConditionBar.color = new Color(0.5f, 0, 0);
+        }
     }
 
     public static Player.Item setCheck1, setCheck2;
