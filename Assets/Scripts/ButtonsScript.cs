@@ -472,6 +472,7 @@ public class ButtonsScript : MonoBehaviour
     public GameObject Inventory;
     public GameObject Calender;
     public GameObject[] CalenderDates, IsTheDateExpired;
+    public GameObject Settings;
     public void OnClickInventory()
     {
         Inventory.SetActive(true);
@@ -491,5 +492,13 @@ public class ButtonsScript : MonoBehaviour
     public void OnClickCalenderClose()
     {
         Calender.SetActive(false);
+    }
+    public void OnClickSettings()
+    {
+        Settings.SetActive(true);
+    }
+    public void OnClickSettingsClose()
+    {
+        Settings.SetActive(false);
     }
 }
