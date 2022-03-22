@@ -2328,6 +2328,8 @@ public class BullFightScript : MonoBehaviour
         }
     }
 
+    public Image EnemyCowImage;
+    public Sprite[] EnemyCowSprites;
     IEnumerator BattleWin()
     {
         Debug.Log("승리!");
@@ -2395,7 +2397,7 @@ public class BullFightScript : MonoBehaviour
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("누렁이", 1500, 150, 30);
             dialogID = 1;
-                
+            EnemyCowImage.sprite = EnemyCowSprites[1];
         }
         else if(EnemyCow.cowName == "누렁이")
         {

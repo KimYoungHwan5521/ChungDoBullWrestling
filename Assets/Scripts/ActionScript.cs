@@ -103,7 +103,9 @@ public class ActionScript : MonoBehaviour
                                 {
                                     Slot[i].SetActive(i<Player.inventory.Count);
                                     Text[] itemInfo = Slot[i].GetComponentsInChildren<Text>();
+                                    Image itemImage = Slot[i].GetComponentInChildren<Image>();
                                     itemInfo[0].text = i < Player.inventory.Count ? Player.inventory[i].itemName : "";
+                                    itemImage.sprite = i < Player.inventory.Count ? Player.inventory[i].itemSprite : null;
                                     if(i < Player.inventory.Count)
                                     {
                                         itemInfo[1].text = (Player.inventory[i].itemPrice / 2).ToString();
@@ -183,6 +185,7 @@ public class ActionScript : MonoBehaviour
     public GameObject Alert;
     public Text AlertText;
     public static int ActionID = 0;
+    public static int hairbrushPerformance = 15;
 
     public GameObject FoodSelect;
     public GameObject[] FoodSlot;
@@ -208,6 +211,7 @@ public class ActionScript : MonoBehaviour
             for(int i=0; i<FoodSlot.Length; i++)
             {
                 Text[] itemInfo = FoodSlot[i].GetComponentsInChildren<Text>();
+                Image itemImage = FoodSlot[i].GetComponentInChildren<Image>();
                 if(i<Player.inventory.Count)
                 {
                     if(Player.inventory[i].itemType == "먹이")
@@ -215,6 +219,7 @@ public class ActionScript : MonoBehaviour
                         FoodSlot[i].SetActive(true);
                         itemInfo[0].text = Player.inventory[i].itemName;
                         itemInfo[1].text = Player.inventory[i].count.ToString();
+                        itemImage.sprite = i < Player.inventory.Count ? Player.inventory[i].itemSprite : null;
                     }
                     else
                     {
@@ -229,7 +234,7 @@ public class ActionScript : MonoBehaviour
         }
         else if(ActionID == 1)
         {
-            ConfirmText.text = "행동을 소모하여 '털 빗겨주기' 행동을 하시겠습니까? (컨디션 +15)";
+            ConfirmText.text = "행동을 소모하여 '털 빗겨주기' 행동을 하시겠습니까? (컨디션 +" + hairbrushPerformance + ")";
             ConfirmAction.SetActive(true);
         }
         else if(ActionID == 2)
@@ -380,7 +385,7 @@ public class ActionScript : MonoBehaviour
         }
         else if(ActionID == 1)
         {
-            MyCow.condition += 15;
+            MyCow.condition += hairbrushPerformance;
             if(MyCow.condition > 100) MyCow.condition = 100;
         }
         else if(ActionID == 2)

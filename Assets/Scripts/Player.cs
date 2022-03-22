@@ -12,20 +12,23 @@ public class Player : MonoBehaviour
         public string itemType;
         public int itemPrice;
         public string itemExplain;
-        // public Sprite itemImage;
+        public Sprite itemSprite;
         public int count = 1;
         public bool isEquiped = false;
     }
     public static List<Item> inventory = new List<Item>();
 
     // Start is called before the first frame update
+    public GameObject GameManager;
     void Start()
     {
+        Sprite[] itemSprites = GameManager.GetComponent<GameManager>().ItemSprites;
         Item item = new Item();
         item.itemName = "할아버지의 유품";
         item.itemType = "기타";
         item.itemPrice = 60000;
         item.itemExplain = "할아버지가 남긴 유품이자 집안의 가보이다. 비싸보인다.";
+        item.itemSprite = itemSprites[0];
         inventory.Add(item);
 
         item = new Item();
@@ -33,6 +36,7 @@ public class Player : MonoBehaviour
         item.itemType = "빗";
         item.itemPrice = 0;
         item.itemExplain = "빗 LV 0. 낡아서 이가 다 빠진 빗. 소의 털을 겨우 빗을 수 있어보인다.";
+        item.itemSprite = itemSprites[2];
         inventory.Add(item);
     }
 
@@ -46,8 +50,10 @@ public class Player : MonoBehaviour
         {
             Slot[i].SetActive(i<inventory.Count);
             Text[] itemInfo = Slot[i].GetComponentsInChildren<Text>();
+            Image itemImage = Slot[i].GetComponentInChildren<Image>();
             itemInfo[0].text = i < inventory.Count ? inventory[i].itemName : "";
             itemInfo[1].text = i < inventory.Count ? inventory[i].count.ToString() : "";
+            itemImage.sprite = i < inventory.Count ? inventory[i].itemSprite : null;
             if(i < inventory.Count) IsEquiped[i].SetActive(Player.inventory[i].isEquiped);
         }
     }

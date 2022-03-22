@@ -8,19 +8,19 @@ using Newtonsoft.Json;
 [System.Serializable]
 public class Item
 {
-    public Item(string _Name, string _Type, string _Price, string _Explain)
+    public Item(string _Name, string _Type, string _Price, string _Explain, string _SpriteID)
     {
         itemName = _Name;
         itemType = _Type;
         itemPrice = _Price;
         itemExplain = _Explain;
+        itemSpriteID = _SpriteID;
     }
     public string itemName;
     public string itemType;
     public string itemPrice;
     public string itemExplain;
-    // public Sprite itemImage;
-    // public int count = 1;
+    public string itemSpriteID;
 }
 
 public class GameManager : MonoBehaviour
@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public AudioPlayer AudioManager;
     public AudioClip sellingSound;
 
+    public Sprite[] ItemSprites;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,11 +40,11 @@ public class GameManager : MonoBehaviour
             string[] row = line[i].Split('\t');
             if(i == 0)
             {
-                AllItemList.Add(new Item(row[0], row[1], row[2], row[3]));
+                AllItemList.Add(new Item(row[0], row[1], row[2], row[3], row[4]));
             }
             else
             {
-                AllItemList.Add(new Item(row[0].Substring(1), row[1], row[2], row[3]));
+                AllItemList.Add(new Item(row[0].Substring(1), row[1], row[2], row[3], row[4]));
             }
         }
         SetMarketType("FoodMarket");
@@ -125,8 +126,10 @@ public class GameManager : MonoBehaviour
             {
                 Marchandise[i].SetActive(i<CurItemList.Count);
                 Text[] itemInfo = Marchandise[i].GetComponentsInChildren<Text>();
+                Image itemImage = Marchandise[i].GetComponentInChildren<Image>();
                 itemInfo[0].text = i < CurItemList.Count ? CurItemList[i].itemName : "";
                 itemInfo[1].text = i < CurItemList.Count ? CurItemList[i].itemPrice : "";
+                itemImage.sprite = i < CurItemList.Count ? ItemSprites[int.Parse(CurItemList[i].itemSpriteID)] : null;
 
             }
         }
@@ -144,8 +147,10 @@ public class GameManager : MonoBehaviour
             {
                 Marchandise[i].SetActive(i<CurItemList.Count);
                 Text[] itemInfo = Marchandise[i].GetComponentsInChildren<Text>();
+                Image itemImage = Marchandise[i].GetComponentInChildren<Image>();
                 itemInfo[0].text = i < CurItemList.Count ? CurItemList[i].itemName : "";
                 itemInfo[1].text = i < CurItemList.Count ? CurItemList[i].itemPrice : "";
+                itemImage.sprite = i < CurItemList.Count ? ItemSprites[int.Parse(CurItemList[i].itemSpriteID)] : null;
             }
         }
         else if(market == "Junkman")
@@ -153,13 +158,15 @@ public class GameManager : MonoBehaviour
             CurItemList = new List<Item>();
             for(int i=0; i<Player.inventory.Count; i++)
             {
-                CurItemList.Add(new Item(Player.inventory[i].itemName, Player.inventory[i].itemType, Player.inventory[i].itemPrice.ToString(), Player.inventory[i].itemExplain));
+                CurItemList.Add(new Item(Player.inventory[i].itemName, Player.inventory[i].itemType, Player.inventory[i].itemPrice.ToString(), Player.inventory[i].itemExplain, Player.inventory[i].itemSprite.name.Substring(4)));
             }
             for(int i=0; i<Marchandise.Length; i++)
             {
                 Marchandise[i].SetActive(i<CurItemList.Count);
                 Text[] itemInfo = Marchandise[i].GetComponentsInChildren<Text>();
+                Image itemImage = Marchandise[i].GetComponentInChildren<Image>();
                 itemInfo[0].text = i < CurItemList.Count ? CurItemList[i].itemName : "";
+                itemImage.sprite = i < CurItemList.Count ? ItemSprites[int.Parse(CurItemList[i].itemSpriteID)] : null;
                 if(i < CurItemList.Count)
                 {
                     int priceInt = int.Parse(CurItemList[i].itemPrice) / 2;
@@ -192,8 +199,10 @@ public class GameManager : MonoBehaviour
             {
                 Marchandise[i].SetActive(i<CurItemList.Count);
                 Text[] itemInfo = Marchandise[i].GetComponentsInChildren<Text>();
+                Image itemImage = Marchandise[i].GetComponentInChildren<Image>();
                 itemInfo[0].text = i < CurItemList.Count ? CurItemList[i].itemName : "";
                 itemInfo[1].text = i < CurItemList.Count ? CurItemList[i].itemPrice : "";
+                itemImage.sprite = i < CurItemList.Count ? ItemSprites[int.Parse(CurItemList[i].itemSpriteID)] : null;
             }
             
         }
@@ -306,10 +315,9 @@ public class GameManager : MonoBehaviour
                         item.itemType = tempHay.itemType;
                         item.itemPrice = price;
                         item.itemExplain = tempHay.itemExplain;
+                        item.itemSprite = ItemSprites[11];
                         item.count = 5;
                         Player.inventory.Add(item);
-                        // Player.Item tempHay2 = Player.inventory.Find(x => x.itemName == "건초");
-                        // tempHay2.count += 4;
                     }
                     else
                     {
@@ -317,6 +325,7 @@ public class GameManager : MonoBehaviour
                         item.itemType = CurItemList[slotnum].itemType;
                         item.itemPrice = price;
                         item.itemExplain = CurItemList[slotnum].itemExplain;
+                        item.itemSprite = ItemSprites[int.Parse(CurItemList[slotnum].itemSpriteID)];
                         Player.inventory.Add(item);
                     }
                 }
@@ -333,6 +342,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject HairbrushReinforcement;
     public Button HairbrushReinforcementButton;
+    public Image HairbrushNowImage;
+    public Image HairbrushAfterImage;
     public Text HairbrushNow;
     public Text HairbrushAfter;
     public Text HairbrushReinforcementCost;
@@ -341,10 +352,11 @@ public class GameManager : MonoBehaviour
 
     public GameObject ConfirmHairbrushReinforcement;
     public Text ConfirmHairbrushReinforcementText;
+    public static int performance = 20;
     public void OnClickHairbrushReinforcementMerchant()
     {
         hairbrushNow = Player.inventory.Find(x => x.itemType == "빗");
-        if(hairbrushNow.itemExplain.Substring(5,1) == "2")
+        if(hairbrushNow.itemExplain.Substring(5,1) == "4")
         {
             Alert_Text.text = "이미 빗이 최고레벨 입니다.";
             Alert.SetActive(true);
@@ -352,23 +364,44 @@ public class GameManager : MonoBehaviour
         else
         {
             hairbrushAfter = new Player.Item();
-            int performance = 0;
             if(hairbrushNow.itemExplain.Substring(5,1) == "0")
             {
                 hairbrushAfter.itemName = "중고 빗";
                 hairbrushAfter.itemType = "빗";
-                hairbrushAfter.itemPrice = 2000;
+                hairbrushAfter.itemPrice = 1000;
                 hairbrushAfter.itemExplain = "빗 LV 1. 중고지만 적당히 빗질이 된다.";
-                performance = 25;
+                hairbrushAfter.itemSprite = ItemSprites[3];
+                performance = 20;
             }
             else if(hairbrushNow.itemExplain.Substring(5,1) == "1")
             {
                 hairbrushAfter.itemName = "빛나는 빗";
                 hairbrushAfter.itemType = "빗";
-                hairbrushAfter.itemPrice = 4000;
+                hairbrushAfter.itemPrice = 3000;
                 hairbrushAfter.itemExplain = "빗 LV 2. 빗겨주기만 해도 기분이 좋아진다.";
+                hairbrushAfter.itemSprite = ItemSprites[4];
+                performance = 25;
+            }
+            else if(hairbrushNow.itemExplain.Substring(5,1) == "2")
+            {
+                hairbrushAfter.itemName = "은 빗";
+                hairbrushAfter.itemType = "빗";
+                hairbrushAfter.itemPrice = 6000;
+                hairbrushAfter.itemExplain = "빗 LV 3. 이 빗으로 빗겨주면 피로가 풀리는듯 하다.";
+                hairbrushAfter.itemSprite = ItemSprites[5];
+                performance = 30;
+            }
+            else if(hairbrushNow.itemExplain.Substring(5,1) == "3")
+            {
+                hairbrushAfter.itemName = "금 빗";
+                hairbrushAfter.itemType = "빗";
+                hairbrushAfter.itemPrice = 10000;
+                hairbrushAfter.itemExplain = "빗 LV 4. 빗이 나인가 내가 빗인가.";
+                hairbrushAfter.itemSprite = ItemSprites[6];
                 performance = 40;
             }
+            HairbrushNowImage.sprite = hairbrushNow.itemSprite;
+            HairbrushAfterImage.sprite = hairbrushAfter.itemSprite;
             HairbrushNow.text = hairbrushNow.itemName;
             HairbrushAfter.text = hairbrushAfter.itemName;
             HairbrushReinforcementCost.text = (hairbrushAfter.itemPrice - hairbrushNow.itemPrice).ToString();
@@ -410,6 +443,7 @@ public class GameManager : MonoBehaviour
             Player.gold -= hairbrushAfter.itemPrice - hairbrushNow.itemPrice;
             Player.inventory.Remove(hairbrushNow);
             Player.inventory.Add(hairbrushAfter);
+            ActionScript.hairbrushPerformance = performance;
             Alert_Text.text = "성공적으로 강화했습니다.";
         }
         Alert.SetActive(true);
@@ -423,6 +457,13 @@ public class GameManager : MonoBehaviour
         Confirm_Purchase.SetActive(false);
         ConfirmHairbrushReinforcement.SetActive(false);
         HairbrushReinforcement.SetActive(false);
+        Food_Market_Button.interactable = true;
+        Trinkets_Market_Button.interactable = true;
+        Junkman_Button.interactable = true;
+        Hidden_Market_Button.interactable = true;
+        HairbrushReinforcementButton.interactable = true;
+        ToVillage.SetActive(true);
+        To_Village.SetActive(false);
     }
 
 
