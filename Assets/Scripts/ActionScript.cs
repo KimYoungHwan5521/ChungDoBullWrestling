@@ -21,19 +21,23 @@ public class ActionScript : MonoBehaviour
     public Text DayOfTheWeekText;
     void Update()
     {
-        if(intAction % 3 == 0)
+        if(intAction % 4 == 0)
         {
             TimeText.text = "아침";
         }
-        else if(intAction % 3 == 1)
+        else if(intAction % 4 == 1)
         {
             TimeText.text = "점심";
         }
-        else if(intAction % 3 == 2)
+        else if(intAction % 4 == 2)
         {
             TimeText.text = "저녁";
         }
-        intDate = intAction / 3;
+        else if(intAction % 4 == 3)
+        {
+            TimeText.text = "밤";
+        }
+        intDate = intAction / 4;
         intDayOfTheWeek = intDate % 7;
         if(intDayOfTheWeek == 0) DayOfTheWeekText.text = "<color=red>Sun</color>";
         else if(intDayOfTheWeek == 1) DayOfTheWeekText.text = "Mon";
@@ -292,7 +296,7 @@ public class ActionScript : MonoBehaviour
         }
         else if(ActionID == 501)
         {
-            if(intAction % 3 == 2)
+            if(intAction % 4 == 2 || intAction % 4 == 3)
             {
                 ConfirmText.text = "행동을 소모하여 '장터 알바(야간)' 행동을 하시겠습니까?\n(컨디션 -35)";
             }
@@ -326,6 +330,8 @@ public class ActionScript : MonoBehaviour
     public Button HairbrushReinforcementButton;
     public GameObject ToVillage;
     public GameObject To_Village;
+
+    public static bool energyDrink = false;
     public void OnClickConfirmActionConfirm()
     {
         ConfirmAction.SetActive(false);
@@ -455,12 +461,18 @@ public class ActionScript : MonoBehaviour
 
         // end action
         intAction += 1;
+        if(intAction % 4 == 3 && !energyDrink)
+        {
+            intAction++;
+        }
         if(MyCow.hunger <= 70) MyCow.condition -= 5;
         if(MyCow.hunger <= 40) MyCow.condition -= 5;
         if(MyCow.hunger <= 10) MyCow.condition -= 10;
         MyCow.hunger -= 5;
         if(MyCow.hunger < 0) MyCow.hunger = 0;
-        if(intAction % 3 == 0) 
+
+
+        if(intAction % 4 == 0) 
         {
             if(MyCow.cleanliness <= 70) MyCow.condition -= 15;
             if(MyCow.cleanliness <= 40) MyCow.condition -= 15;
@@ -474,7 +486,7 @@ public class ActionScript : MonoBehaviour
         {
             AlertText.text = MyCow.cowName + "의 컨디션이 0이 되었습니다.\n하루동안 휴식합니다.\n(행동 3 스킵)";
             Alert.SetActive(true);
-            intAction += 3;
+            intAction += 4;
             MyCow.condition = 30;
         }
     }

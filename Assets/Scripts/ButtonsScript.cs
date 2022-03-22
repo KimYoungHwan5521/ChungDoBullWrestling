@@ -89,7 +89,7 @@ public class ButtonsScript : MonoBehaviour
         {
             CowCondition.text = "<color=maroon>" + MyCow.condition.ToString() + "</color>";
         }
-        if(ActionScript.intDayOfTheWeek == 5 && ActionScript.intAction % 3 == 2)
+        if(ActionScript.intDayOfTheWeek == 5 && ActionScript.intAction % 4 == 2)
         {
             HiddenMerchant.SetActive(true);
         }

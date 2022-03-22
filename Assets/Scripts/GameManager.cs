@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
 
     public void SetMarketType(string market)
     {
-        if(ActionScript.intAction % 3 == 2)
+        if(ActionScript.intAction % 4 == 2 || ActionScript.intAction % 4 == 3)
         {
             PartTimeJobText.text = "장터 알바 하기(야간)\n\n돈 +2500냥\n컨디션 -35";
         }
