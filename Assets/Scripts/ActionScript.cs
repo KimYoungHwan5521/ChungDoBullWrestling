@@ -15,6 +15,7 @@ public class ActionScript : MonoBehaviour
     public int debtRepaymentEventCheck = 0;
     public GameObject InventoryToSell;
     public GameObject[] Slot, IsEquiped;
+    public Text PlayerGold;
     
     public Text TimeText;
     public int dialogIndex = 0;
@@ -49,6 +50,7 @@ public class ActionScript : MonoBehaviour
 
         if(intDayOfTheWeek == 0) randomForHiddenMarket = Random.Range(0,3);
 
+        PlayerGold.text = Player.gold.ToString();
         if(intDate % 28 == 3 && debtRepaymentEventCheck == intDate / 28)
         {
             DebtRepaymentEvent.SetActive(true);
@@ -196,119 +198,124 @@ public class ActionScript : MonoBehaviour
     public void OnClickAction(int actionID)
     {
         ActionID = actionID;
-        ConfirmAction.SetActive(true);
-        if(ActionID == 0)
+        if(intAction % 4 == 0 && intDayOfTheWeek % 7 == 6)
         {
-            ConfirmAction.SetActive(false);
-            FoodSelect.SetActive(true);
-            int count = 0;
-            for(int i=0; i<Player.inventory.Count; i++)
+            AlertText.text = "토요일 아침에는 대회 경기에 참가해야합니다!";
+            Alert.SetActive(true);
+        }
+        else
+        {
+            ConfirmAction.SetActive(true);
+            if(ActionID == 0)
             {
-                if(Player.inventory[i].itemType == "먹이") count++;
-            } 
-            if(count == 0)
-            {
-                FoodSelect.SetActive(false);
-                AlertText.text = "줄 수 있는 먹이가 없습니다. 장터에서 구매해보세요!";
-                Alert.SetActive(true);
-            }
-            for(int i=0; i<FoodSlot.Length; i++)
-            {
-                Text[] itemInfo = FoodSlot[i].GetComponentsInChildren<Text>();
-                Image itemImage = FoodSlot[i].GetComponentInChildren<Image>();
-                if(i<Player.inventory.Count)
+                ConfirmAction.SetActive(false);
+                FoodSelect.SetActive(true);
+                int count = 0;
+                for(int i=0; i<Player.inventory.Count; i++)
                 {
-                    if(Player.inventory[i].itemType == "먹이")
+                    if(Player.inventory[i].itemType == "먹이") count++;
+                } 
+                if(count == 0)
+                {
+                    FoodSelect.SetActive(false);
+                    AlertText.text = "줄 수 있는 먹이가 없습니다. 장터에서 구매해보세요!";
+                    Alert.SetActive(true);
+                }
+                for(int i=0; i<FoodSlot.Length; i++)
+                {
+                    Text[] itemInfo = FoodSlot[i].GetComponentsInChildren<Text>();
+                    Image itemImage = FoodSlot[i].GetComponentInChildren<Image>();
+                    if(i<Player.inventory.Count)
                     {
-                        FoodSlot[i].SetActive(true);
-                        itemInfo[0].text = Player.inventory[i].itemName;
-                        itemInfo[1].text = Player.inventory[i].count.ToString();
-                        itemImage.sprite = i < Player.inventory.Count ? Player.inventory[i].itemSprite : null;
+                        if(Player.inventory[i].itemType == "먹이")
+                        {
+                            FoodSlot[i].SetActive(true);
+                            itemInfo[0].text = Player.inventory[i].itemName;
+                            itemInfo[1].text = Player.inventory[i].count.ToString();
+                            itemImage.sprite = i < Player.inventory.Count ? Player.inventory[i].itemSprite : null;
+                        }
+                        else
+                        {
+                            FoodSlot[i].SetActive(false);
+                        }
                     }
                     else
                     {
                         FoodSlot[i].SetActive(false);
                     }
                 }
+            }
+            else if(ActionID == 1)
+            {
+                ConfirmText.text = "행동을 소모하여 '털 빗겨주기' 행동을 하시겠습니까? (컨디션 +" + hairbrushPerformance + ")";
+                ConfirmAction.SetActive(true);
+            }
+            else if(ActionID == 2)
+            {
+                ConfirmText.text = "행동을 소모하여 '사육장 청소하기' 행동을 하시겠습니까? (청결도 +100)";
+                ConfirmAction.SetActive(true);
+            }
+            else if(ActionID == 301)
+            {
+                ConfirmText.text = "행동을 소모하여 '훈련하기' 행동을 하시겠습니까?\n";
+                ConfirmText.text += "'뿔 다듬기' 선택됨";
+                ConfirmAction.SetActive(true);
+            }
+            else if(ActionID == 302)
+            {
+                ConfirmText.text = "행동을 소모하여 '훈련하기' 행동을 하시겠습니까?\n";
+                ConfirmText.text += "'오래 달리기' 선택됨";
+                ConfirmAction.SetActive(true);
+            }
+            else if(ActionID == 303)
+            {
+                ConfirmText.text = "행동을 소모하여 '훈련하기' 행동을 하시겠습니까?\n";
+                ConfirmText.text += "'차력' 선택됨";
+                ConfirmAction.SetActive(true);
+            }
+            else if(ActionID == 304)
+            {
+                ConfirmText.text = "행동을 소모하여 '훈련하기' 행동을 하시겠습니까?\n";
+                ConfirmText.text += "'미트치기' 선택됨";
+                ConfirmAction.SetActive(true);
+            }
+            else if(ActionID == 305)
+            {
+                ConfirmText.text = "행동을 소모하여 '훈련하기' 행동을 하시겠습니까?\n";
+                ConfirmText.text += "'철사장' 선택됨";
+                ConfirmAction.SetActive(true);
+            }
+            else if(ActionID == 401)
+            {
+                ConfirmText.text = "행동을 소모하여 '밭매기 알바' 행동을 하시겠습니까?\n";
+                ConfirmText.text += "'기름진 비옥한 땅' 선택됨";
+                ConfirmAction.SetActive(true);
+            }
+            else if(ActionID == 402)
+            {
+                ConfirmText.text = "행동을 소모하여 '밭매기 알바' 행동을 하시겠습니까?\n";
+                ConfirmText.text += "'건조한 땅' 선택됨";
+                ConfirmAction.SetActive(true);
+            }
+            else if(ActionID == 403)
+            {
+                ConfirmText.text = "행동을 소모하여 '밭매기 알바' 행동을 하시겠습니까?\n";
+                ConfirmText.text += "'돌 많은 척박한 땅' 선택됨";
+                ConfirmAction.SetActive(true);
+            }
+            else if(ActionID == 501)
+            {
+                if(intAction % 4 == 2 || intAction % 4 == 3)
+                {
+                    ConfirmText.text = "행동을 소모하여 '장터 알바(야간)' 행동을 하시겠습니까?\n(컨디션 -35)";
+                }
                 else
                 {
-                    FoodSlot[i].SetActive(false);
+                    ConfirmText.text = "행동을 소모하여 '장터 알바' 행동을 하시겠습니까?\n";
                 }
+                ConfirmAction.SetActive(true);
             }
-        }
-        else if(ActionID == 1)
-        {
-            ConfirmText.text = "행동을 소모하여 '털 빗겨주기' 행동을 하시겠습니까? (컨디션 +" + hairbrushPerformance + ")";
-            ConfirmAction.SetActive(true);
-        }
-        else if(ActionID == 2)
-        {
-            ConfirmText.text = "행동을 소모하여 '사육장 청소하기' 행동을 하시겠습니까? (청결도 +100)";
-            ConfirmAction.SetActive(true);
-        }
-        else if(ActionID == 301)
-        {
-            ConfirmText.text = "행동을 소모하여 '훈련하기' 행동을 하시겠습니까?\n";
-            ConfirmText.text += "'뿔 다듬기' 선택됨";
-            ConfirmAction.SetActive(true);
-        }
-        else if(ActionID == 302)
-        {
-            ConfirmText.text = "행동을 소모하여 '훈련하기' 행동을 하시겠습니까?\n";
-            ConfirmText.text += "'오래 달리기' 선택됨";
-            ConfirmAction.SetActive(true);
-        }
-        else if(ActionID == 303)
-        {
-            ConfirmText.text = "행동을 소모하여 '훈련하기' 행동을 하시겠습니까?\n";
-            ConfirmText.text += "'차력' 선택됨";
-            ConfirmAction.SetActive(true);
-        }
-        else if(ActionID == 304)
-        {
-            ConfirmText.text = "행동을 소모하여 '훈련하기' 행동을 하시겠습니까?\n";
-            ConfirmText.text += "'미트치기' 선택됨";
-            ConfirmAction.SetActive(true);
-        }
-        else if(ActionID == 305)
-        {
-            ConfirmText.text = "행동을 소모하여 '훈련하기' 행동을 하시겠습니까?\n";
-            ConfirmText.text += "'철사장' 선택됨";
-            ConfirmAction.SetActive(true);
-        }
-        else if(ActionID == 401)
-        {
-            ConfirmText.text = "행동을 소모하여 '밭매기 알바' 행동을 하시겠습니까?\n";
-            ConfirmText.text += "'기름진 비옥한 땅' 선택됨";
-            ConfirmAction.SetActive(true);
-        }
-        else if(ActionID == 402)
-        {
-            ConfirmText.text = "행동을 소모하여 '밭매기 알바' 행동을 하시겠습니까?\n";
-            ConfirmText.text += "'건조한 땅' 선택됨";
-            ConfirmAction.SetActive(true);
-        }
-        else if(ActionID == 403)
-        {
-            ConfirmText.text = "행동을 소모하여 '밭매기 알바' 행동을 하시겠습니까?\n";
-            ConfirmText.text += "'돌 많은 척박한 땅' 선택됨";
-            ConfirmAction.SetActive(true);
-        }
-        else if(ActionID == 501)
-        {
-            if(intAction % 4 == 2 || intAction % 4 == 3)
-            {
-                ConfirmText.text = "행동을 소모하여 '장터 알바(야간)' 행동을 하시겠습니까?\n(컨디션 -35)";
-            }
-            else
-            {
-                ConfirmText.text = "행동을 소모하여 '장터 알바' 행동을 하시겠습니까?\n";
-            }
-            ConfirmAction.SetActive(true);
-        }
-        else if(ActionID == 502)
-        {
-            // 장터 야간알바
+
         }
     }
     public void OnClickFoodSelectClose()

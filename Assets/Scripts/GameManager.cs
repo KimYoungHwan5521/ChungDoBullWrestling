@@ -106,8 +106,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] Marchandise;
     public Text PartTimeJobText;
-
-    public void SetMarketType(string market)
+    void Update()
     {
         if(ActionScript.intAction % 4 == 2 || ActionScript.intAction % 4 == 3)
         {
@@ -117,6 +116,10 @@ public class GameManager : MonoBehaviour
         {
             PartTimeJobText.text = "장터 알바 하기\n\n돈 +500냥";
         }
+    }
+
+    public void SetMarketType(string market)
+    {
         if(market == "FoodMarket")
         {
             CurItemList = AllItemList.FindAll(x => x.itemName == "건초");
@@ -445,6 +448,15 @@ public class GameManager : MonoBehaviour
             Player.inventory.Add(hairbrushAfter);
             ActionScript.hairbrushPerformance = performance;
             Alert_Text.text = "성공적으로 강화했습니다.";
+            ConfirmHairbrushReinforcement.SetActive(false);
+            HairbrushReinforcement.SetActive(false);
+            Food_Market_Button.interactable = true;
+            Trinkets_Market_Button.interactable = true;
+            Junkman_Button.interactable = true;
+            Hidden_Market_Button.interactable = true;
+            HairbrushReinforcementButton.interactable = true;
+            ToVillage.SetActive(true);
+            To_Village.SetActive(false);
         }
         Alert.SetActive(true);
     }
@@ -455,15 +467,6 @@ public class GameManager : MonoBehaviour
     public void OnClickAlertCinfirm(){
         Alert.SetActive(false);
         Confirm_Purchase.SetActive(false);
-        ConfirmHairbrushReinforcement.SetActive(false);
-        HairbrushReinforcement.SetActive(false);
-        Food_Market_Button.interactable = true;
-        Trinkets_Market_Button.interactable = true;
-        Junkman_Button.interactable = true;
-        Hidden_Market_Button.interactable = true;
-        HairbrushReinforcementButton.interactable = true;
-        ToVillage.SetActive(true);
-        To_Village.SetActive(false);
     }
 
 

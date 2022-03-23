@@ -11,7 +11,7 @@ public class MyCow : MonoBehaviour
     public static int nowHP = 1000;
     public static int maxMP = 100;
     public static int nowMP = 100;
-    public static int atkDmg = 10;
+    public static int atkDmg = 100;
     public static int armor = 10;
     public Image HPbar;
     public Image MPbar;

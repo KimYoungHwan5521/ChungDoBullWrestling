@@ -98,6 +98,25 @@ public class ButtonsScript : MonoBehaviour
             HiddenMerchant.SetActive(false);
         }
 
+        // calender
+        if(calenderPage == 1)
+        {
+            TrunPageLeft.interactable = false;
+        }
+        else if(calenderPage == 4)
+        {
+            TrunPageRight.interactable = false;
+        }
+        else
+        {
+            TrunPageLeft.interactable = true;
+            TrunPageRight.interactable = true;
+        }
+        for(int i=0;i<4;i++)
+        {
+            CalenderPages[i].SetActive(calenderPage == i + 1);
+        }
+
     }
     // cowshed
     public GameObject Cow_Status;
@@ -492,6 +511,18 @@ public class ButtonsScript : MonoBehaviour
     public void OnClickCalenderClose()
     {
         Calender.SetActive(false);
+    }
+    public Button TrunPageLeft;
+    public Button TrunPageRight;
+    public int calenderPage = 1;
+    public GameObject[] CalenderPages;
+    public void OnClickCalenderTurnPageLeft()
+    {
+        calenderPage--;
+    }
+    public void OnClickCalenderTurnPageRight()
+    {
+        calenderPage++;
     }
     public void OnClickSettings()
     {
