@@ -139,10 +139,10 @@ public class GameManager : MonoBehaviour
         else if(market == "TrinketsMarket")
         {
             CurItemList = AllItemList.FindAll(x => x.itemName == "은투구");
-            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "금투구"));
             CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "은갑옷"));
-            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "금갑옷"));
             CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "은편자"));
+            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "금투구"));
+            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "금갑옷"));
             CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "금편자"));
             CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "운동화"));
             CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "구두"));

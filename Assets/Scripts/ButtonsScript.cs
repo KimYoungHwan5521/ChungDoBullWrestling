@@ -443,8 +443,22 @@ public class ButtonsScript : MonoBehaviour
     // market
 
     // stadium
+    public GameObject ConfirmFight;
     public void OnClickFight()
     {
+        if(ActionScript.intAction % 4 == 0 && ActionScript.intDayOfTheWeek % 7 == 6)
+        {
+            ConfirmFight.SetActive(true);
+        }
+        else
+        {
+            AlertText.text = "지금은 경기 시간이 아닙니다.";
+            Alert.SetActive(true);
+        }
+    }
+    public void OnClickConfirmFightConfirm()
+    {
+        ConfirmFight.SetActive(false);
         if(EnemyCow.cowName == "카우보이소")
         {
             AudioManager.GetComponent<AudioPlayer>().PlayMusic(CowboyCowTheme);
@@ -470,6 +484,10 @@ public class ButtonsScript : MonoBehaviour
         BullFight.SetActive(true);
         ImageVS.SetActive(true);
         TopMenuBar.SetActive(false);
+    }
+    public void OnClickConfirmFightDeny()
+    {
+        ConfirmFight.SetActive(false);
     }
 
     // field

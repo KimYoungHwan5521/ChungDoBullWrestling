@@ -491,10 +491,21 @@ public class ActionScript : MonoBehaviour
 
         if(MyCow.condition == 0)
         {
-            AlertText.text = MyCow.cowName + "의 컨디션이 0이 되었습니다.\n하루동안 휴식합니다.\n(행동 3 스킵)";
-            Alert.SetActive(true);
-            intAction += 4;
-            MyCow.condition = 30;
+            if(intAction % 28 > 20)
+            {
+                int skipedActions = 24 - intAction;
+                AlertText.text = MyCow.cowName + "의 컨디션이 0이 되었습니다.\n경기 전까지 휴식합니다.\n(행동 " + (skipedActions - 1) + " 스킵)";
+                Alert.SetActive(true);
+                intAction += skipedActions;
+                MyCow.condition += (skipedActions - 1) * 10;
+            }
+            else
+            {
+                AlertText.text = MyCow.cowName + "의 컨디션이 0이 되었습니다.\n하루동안 휴식합니다.\n(행동 3 스킵)";
+                Alert.SetActive(true);
+                intAction += 4;
+                MyCow.condition = 30;
+            }
         }
     }
     public GameObject TrainingSelect;
