@@ -662,7 +662,7 @@ public class BullFightScript : MonoBehaviour
             if(enemyCowRageLeftInt == 0)
             {
                 enemyCowRage.SetActive(false);
-                StatusActivity("rage", "MyCow", false);
+                StatusActivity("rage", "EnemyCow", false);
             }
         }
         if(cowBalanced.activeSelf)
@@ -2343,6 +2343,7 @@ public class BullFightScript : MonoBehaviour
 
     public Image EnemyCowImage;
     public Sprite[] EnemyCowSprites;
+    public static int enemyCowSprite;
     IEnumerator BattleWin()
     {
         Debug.Log("승리!");
@@ -2410,7 +2411,7 @@ public class BullFightScript : MonoBehaviour
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("누렁이", 2000, 400, 50);
             dialogID = 1;
-            EnemyCowImage.sprite = EnemyCowSprites[dialogID];
+            enemyCowSprite = dialogID;
         }
         else if(EnemyCow.cowName == "누렁이")
         {
@@ -2418,7 +2419,7 @@ public class BullFightScript : MonoBehaviour
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("우건마", 3000, 300, 100);
             dialogID = 2;
-            EnemyCowImage.sprite = EnemyCowSprites[dialogID];
+            enemyCowSprite = dialogID;
         }
         else if(EnemyCow.cowName == "우건마")
         {
@@ -2426,7 +2427,7 @@ public class BullFightScript : MonoBehaviour
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("불판에서 뛰쳐나온 소", 4000, 500, 100);
             dialogID = 3;
-            EnemyCowImage.sprite = EnemyCowSprites[dialogID];
+            enemyCowSprite = dialogID;
         }
         else if(EnemyCow.cowName == "불판에서 뛰쳐나온 소")
         {
@@ -2434,7 +2435,7 @@ public class BullFightScript : MonoBehaviour
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("미친소", 6000, 600, 200);
             dialogID = 4;
-            EnemyCowImage.sprite = EnemyCowSprites[dialogID];
+            enemyCowSprite = dialogID;
         }
         else if(EnemyCow.cowName == "미친소")
         {
@@ -2442,7 +2443,7 @@ public class BullFightScript : MonoBehaviour
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("롹커소", 8000, 800, 300);
             dialogID = 5;
-            EnemyCowImage.sprite = EnemyCowSprites[dialogID];
+            enemyCowSprite = dialogID;
         }
         else if(EnemyCow.cowName == "롹커소")
         {
@@ -2450,7 +2451,7 @@ public class BullFightScript : MonoBehaviour
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("시소", 10000, 1000, 400);
             dialogID = 6;
-            EnemyCowImage.sprite = EnemyCowSprites[dialogID];
+            enemyCowSprite = dialogID;
         }
         else if(EnemyCow.cowName == "시소")
         {
@@ -2458,7 +2459,7 @@ public class BullFightScript : MonoBehaviour
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("조소", 12000, 1200, 700);
             dialogID = 7;
-            EnemyCowImage.sprite = EnemyCowSprites[dialogID];
+            enemyCowSprite = dialogID;
         }
         else if(EnemyCow.cowName == "조소")
         {
@@ -2466,7 +2467,7 @@ public class BullFightScript : MonoBehaviour
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("카우보이소", 14000, 1400, 600);
             dialogID = 8;
-            EnemyCowImage.sprite = EnemyCowSprites[dialogID];
+            enemyCowSprite = dialogID;
         }
         else if(EnemyCow.cowName == "카우보이소")
         {
@@ -2474,7 +2475,7 @@ public class BullFightScript : MonoBehaviour
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("인도소", 16000, 1600, 700);
             dialogID = 9;
-            EnemyCowImage.sprite = EnemyCowSprites[dialogID];
+            enemyCowSprite = dialogID;
         }
         else if(EnemyCow.cowName == "인도소")
         {
@@ -2482,7 +2483,7 @@ public class BullFightScript : MonoBehaviour
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("마법'소'녀", 18000, 1800, 800);
             dialogID = 10;
-            EnemyCowImage.sprite = EnemyCowSprites[dialogID];
+            enemyCowSprite = dialogID;
         }
         else if(EnemyCow.cowName == "마법'소'녀")
         {
@@ -2490,7 +2491,7 @@ public class BullFightScript : MonoBehaviour
             WarningMessage.text = "승리!";
             EnemyCow.SetEnemyStatus("독일소", 20000, 2000, 1200);
             dialogID = 11;
-            EnemyCowImage.sprite = EnemyCowSprites[dialogID];
+            enemyCowSprite = dialogID;
         }
             // Debug.Log("클리어!");
             // SceneManager.LoadScene("EndingScene");
@@ -2506,6 +2507,7 @@ public class BullFightScript : MonoBehaviour
     public void BattleOver()
     {
         AudioManager.GetComponent<AudioPlayer>().PlayMusic(TownTheme);
+        EnemyCowImage.sprite = EnemyCowSprites[enemyCowSprite];
         ActionScript.intAction++;
         BattleLog.text = "";
         ToVillage.SetActive(true);

@@ -133,65 +133,72 @@ public class ButtonsScript : MonoBehaviour
         Cow_Status.SetActive(true);
         ToVillage.SetActive(false);
     }
-
+    public GameObject FoodSelect;
     public void OnClickCowStatusClose()
     {
         Cow_Status.SetActive(false);
         ToVillage.SetActive(true);
         To_Village.SetActive(false);
+        EquipmentSetting.SetActive(false);
+        EquipmentSelect.SetActive(false);
+        FoodSelect.SetActive(false);
     }
 
     public GameObject EquipmentSetting;
     public GameObject EquipmentSelect;
     public GameObject[] EquipmentSlot, IsEquiped;
+    public Image EquipedItemHeadImage, EquipedItemBodyImage, EquipedItemLegsImage;
 
     public void OnClickEquipmentSetting()
     {
-            List<Player.Item> equipedItemsHead = Player.inventory.FindAll(x => x.itemType == "장비(머리)");
-            List<Player.Item> equipedItemsBody = Player.inventory.FindAll(x => x.itemType == "장비(몸)");
-            List<Player.Item> equipedItemsLegs = Player.inventory.FindAll(x => x.itemType == "장비(다리)");
-            if(equipedItemsHead != null)
+        List<Player.Item> equipedItemsHead = Player.inventory.FindAll(x => x.itemType == "장비(머리)");
+        List<Player.Item> equipedItemsBody = Player.inventory.FindAll(x => x.itemType == "장비(몸)");
+        List<Player.Item> equipedItemsLegs = Player.inventory.FindAll(x => x.itemType == "장비(다리)");
+        if(equipedItemsHead != null)
+        {
+            Player.Item equipedItemHead = equipedItemsHead.Find(x => x.isEquiped == true);
+            if(equipedItemHead != null)
             {
-                Player.Item equipedItemHead = equipedItemsHead.Find(x => x.isEquiped == true);
-                if(equipedItemHead != null)
-                {
-                    EquipmentNameHead.text = equipedItemHead.itemName;
-                    UnEquipHead.SetActive(true);
-                }
-                else
-                {
-                    EquipmentNameHead.text = "없음";
-                    UnEquipHead.SetActive(false);
-                }
+                EquipmentNameHead.text = equipedItemHead.itemName;
+                EquipedItemHeadImage.sprite = equipedItemHead.itemSprite;
+                UnEquipHead.SetActive(true);
             }
-            if(equipedItemsBody != null)
+            else
             {
-                Player.Item equipedItemBody = equipedItemsBody.Find(x => x.isEquiped == true);
-                if(equipedItemBody != null)
-                {
-                    EquipmentNameBody.text = equipedItemBody.itemName;
-                    UnEquipBody.SetActive(true);
-                }
-                else
-                {
-                    EquipmentNameBody.text = "없음";
-                    UnEquipBody.SetActive(false);
-                }
+                EquipmentNameHead.text = "없음";
+                UnEquipHead.SetActive(false);
             }
-            if(equipedItemsLegs != null)
+        }
+        if(equipedItemsBody != null)
+        {
+            Player.Item equipedItemBody = equipedItemsBody.Find(x => x.isEquiped == true);
+            if(equipedItemBody != null)
             {
-                Player.Item equipedItemLegs = equipedItemsLegs.Find(x => x.isEquiped == true);
-                if(equipedItemLegs != null)
-                {
-                    EquipmentNameLegs.text = equipedItemLegs.itemName;
-                    UnEquipLegs.SetActive(true);
-                }
-                else
-                {
-                    EquipmentNameLegs.text = "없음";
-                    UnEquipLegs.SetActive(false);
-                }
+                EquipmentNameBody.text = equipedItemBody.itemName;
+                EquipedItemBodyImage.sprite = equipedItemBody.itemSprite;
+                UnEquipBody.SetActive(true);
             }
+            else
+            {
+                EquipmentNameBody.text = "없음";
+                UnEquipBody.SetActive(false);
+            }
+        }
+        if(equipedItemsLegs != null)
+        {
+            Player.Item equipedItemLegs = equipedItemsLegs.Find(x => x.isEquiped == true);
+            if(equipedItemLegs != null)
+            {
+                EquipmentNameLegs.text = equipedItemLegs.itemName;
+                EquipedItemLegsImage.sprite = equipedItemLegs.itemSprite;
+                UnEquipLegs.SetActive(true);
+            }
+            else
+            {
+                EquipmentNameLegs.text = "없음";
+                UnEquipLegs.SetActive(false);
+            }
+        }
         EquipmentSetting.SetActive(true);
     }
     public void OnClickEquipmentSettingClose()
@@ -215,6 +222,7 @@ public class ButtonsScript : MonoBehaviour
         for(int i=0; i<EquipmentSlot.Length; i++)
         {
             Text[] itemInfo = EquipmentSlot[i].GetComponentsInChildren<Text>();
+            Image itemImage = EquipmentSlot[i].GetComponentInChildren<Image>();
             if(i<Player.inventory.Count)
             {
                 if(Player.inventory[i].itemType == "장비(머리)")
@@ -222,6 +230,7 @@ public class ButtonsScript : MonoBehaviour
                     EquipmentSlot[i].SetActive(true);
                     itemInfo[0].text = Player.inventory[i].itemName;
                     itemInfo[1].text = Player.inventory[i].count.ToString();
+                    itemImage.sprite = i < Player.inventory.Count ? Player.inventory[i].itemSprite : null;
                     IsEquiped[i].SetActive(Player.inventory[i].isEquiped);  
                 }
                 else
@@ -252,6 +261,7 @@ public class ButtonsScript : MonoBehaviour
         for(int i=0; i<EquipmentSlot.Length; i++)
         {
             Text[] itemInfo = EquipmentSlot[i].GetComponentsInChildren<Text>();
+            Image itemImage = EquipmentSlot[i].GetComponentInChildren<Image>();
             if(i<Player.inventory.Count)
             {
                 if(Player.inventory[i].itemType == "장비(몸)")
@@ -259,6 +269,7 @@ public class ButtonsScript : MonoBehaviour
                     EquipmentSlot[i].SetActive(true);
                     itemInfo[0].text = Player.inventory[i].itemName;
                     itemInfo[1].text = Player.inventory[i].count.ToString();
+                    itemImage.sprite = i < Player.inventory.Count ? Player.inventory[i].itemSprite : null;
                     IsEquiped[i].SetActive(Player.inventory[i].isEquiped);  
                 }
                 else
@@ -289,6 +300,7 @@ public class ButtonsScript : MonoBehaviour
         for(int i=0; i<EquipmentSlot.Length; i++)
         {
             Text[] itemInfo = EquipmentSlot[i].GetComponentsInChildren<Text>();
+            Image itemImage = EquipmentSlot[i].GetComponentInChildren<Image>();
             if(i<Player.inventory.Count)
             {
                 if(Player.inventory[i].itemType == "장비(다리)")
@@ -296,6 +308,7 @@ public class ButtonsScript : MonoBehaviour
                     EquipmentSlot[i].SetActive(true);
                     itemInfo[0].text = Player.inventory[i].itemName;
                     itemInfo[1].text = Player.inventory[i].count.ToString();
+                    itemImage.sprite = i < Player.inventory.Count ? Player.inventory[i].itemSprite : null;
                     IsEquiped[i].SetActive(Player.inventory[i].isEquiped);  
                 }
                 else
@@ -321,6 +334,7 @@ public class ButtonsScript : MonoBehaviour
         if(Player.inventory[equipmentNum].itemType == "장비(머리)")
         {
             EquipmentNameHead.text = Player.inventory[equipmentNum].itemName;
+            EquipedItemHeadImage.sprite = Player.inventory[equipmentNum].itemSprite;
             UnEquipHead.SetActive(true);
             List<Player.Item> equipedItems = Player.inventory.FindAll(x => x.itemType == "장비(머리)");
             Player.Item equipedItem = equipedItems.Find(x => x.isEquiped == true);
@@ -333,6 +347,7 @@ public class ButtonsScript : MonoBehaviour
         else if(Player.inventory[equipmentNum].itemType == "장비(몸)")
         {
             EquipmentNameBody.text = Player.inventory[equipmentNum].itemName;
+            EquipedItemBodyImage.sprite = Player.inventory[equipmentNum].itemSprite;
             UnEquipBody.SetActive(true);
             List<Player.Item> equipedItems = Player.inventory.FindAll(x => x.itemType == "장비(몸)");
             Player.Item equipedItem = equipedItems.Find(x => x.isEquiped == true);
@@ -345,6 +360,7 @@ public class ButtonsScript : MonoBehaviour
         else if(Player.inventory[equipmentNum].itemType == "장비(다리)")
         {
             EquipmentNameLegs.text = Player.inventory[equipmentNum].itemName;
+            EquipedItemLegsImage.sprite = Player.inventory[equipmentNum].itemSprite;
             UnEquipLegs.SetActive(true);
             List<Player.Item> equipedItems = Player.inventory.FindAll(x => x.itemType == "장비(다리)");
             Player.Item equipedItem = equipedItems.Find(x => x.isEquiped == true);

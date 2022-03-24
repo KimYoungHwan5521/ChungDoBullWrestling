@@ -491,7 +491,7 @@ public class ActionScript : MonoBehaviour
 
         if(MyCow.condition == 0)
         {
-            if(intAction % 28 > 20)
+            if(intAction % 28 > 20 && intAction % 28 < 24)
             {
                 int skipedActions = 24 - intAction;
                 AlertText.text = MyCow.cowName + "의 컨디션이 0이 되었습니다.\n경기 전까지 휴식합니다.\n(행동 " + (skipedActions - 1) + " 스킵)";

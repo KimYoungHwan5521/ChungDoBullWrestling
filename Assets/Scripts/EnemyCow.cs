@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class EnemyCow : MonoBehaviour
 {
     public static string cowName = "젖소";
-    public static int maxHP = 1000;
-    public static int nowHP = 1000;
+    public static int maxHP = 1500;
+    public static int nowHP = 1500;
     public static int atkDmg = 200;
     public static int armor = 10;
     public Image HPbar;
