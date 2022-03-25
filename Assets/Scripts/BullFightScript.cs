@@ -20,41 +20,25 @@ public class BullFightScript : MonoBehaviour
     public Text Skill_Explanation;
 
     // Buffs/Debuffs
-    public GameObject cowBlind;
-    public GameObject enemyCowBlind;
-    public GameObject cowRage;
-    public GameObject enemyCowRage;
-    public GameObject cowBalanced;
-    public GameObject enemyCowBalanced;
-    public GameObject cowOnFire;
-    public GameObject enemyCowOnFire;
-    public GameObject cowImmune;
-    public GameObject enemyCowImmune;
-    public GameObject cowSealed;
-    public GameObject enemyCowSealed;
-    public GameObject cowSteelization;
-    public GameObject enemyCowSteelization;
-    public GameObject cowSuperSaiyan;
-    public GameObject enemyCowSuperSaiyan;
+    public GameObject cowBlind, enemyCowBlind;
+    public GameObject cowRage, enemyCowRage;
+    public GameObject cowBalanced, enemyCowBalanced;
+    public GameObject cowOnFire, enemyCowOnFire;
+    public GameObject cowImmune, enemyCowImmune;
+    public GameObject cowSealed, enemyCowSealed;
+    public GameObject cowSteelization, enemyCowSteelization;
+    public GameObject cowSuperSaiyan, enemyCowSuperSaiyan;
     public GameObject cowElectricShock;
     
     // Buff/Debuffs left turns
-    public Text cowBlindLeft;
-    public Text enemyCowBlindLeft;
-    public Text cowRageLeft;
-    public Text enemyCowRageLeft;
-    public Text cowBalancedLeft;
-    public Text enemyCowBalancedLeft;
-    public Text cowOnFireLeft;
-    public Text enemyCowOnFireLeft;
-    public Text cowImmuneLeft;
-    public Text enemyCowImmuneLeft;
-    public Text cowSealedLeft;
-    public Text enemyCowSealedLeft;
-    public Text cowSteelizationLeft;
-    public Text enemyCowSteelizationLeft;
-    public Text cowSuperSaiyanLeft;
-    public Text enemyCowSuperSaiyanLeft;
+    public Text cowBlindLeft, enemyCowBlindLeft;
+    public Text cowRageLeft, enemyCowRageLeft;
+    public Text cowBalancedLeft, enemyCowBalancedLeft;
+    public Text cowOnFireLeft, enemyCowOnFireLeft;
+    public Text cowImmuneLeft, enemyCowImmuneLeft;
+    public Text cowSealedLeft, enemyCowSealedLeft;
+    public Text cowSteelizationLeft, enemyCowSteelizationLeft;
+    public Text cowSuperSaiyanLeft, enemyCowSuperSaiyanLeft;
     public Text cowElectricShockLeft;
 
     // Progress
@@ -76,51 +60,10 @@ public class BullFightScript : MonoBehaviour
     public static bool NotCowClear = false;
 
     public GameObject ImageVS;
-    public GameObject Skill3;
-    public GameObject Skill4;
-    public GameObject Skill5;
-    public GameObject Skill6;
-    public GameObject Skill7;
-    public GameObject Skill8;
-    public GameObject Skill9;
-    public GameObject Skill10;
-    public GameObject Skill11;
-    public GameObject Skill12;
-    public GameObject Skill13;
-    public GameObject Skill14;
-    public GameObject Skill15;
-
-    public Button btnSkill1;
-    public Button btnSkill2;
-    public Button btnSkill3;
-    public Button btnSkill4;
-    public Button btnSkill5;
-    public Button btnSkill6;
-    public Button btnSkill7;
-    public Button btnSkill8;
-    public Button btnSkill9;
-    public Button btnSkill10;
-    public Button btnSkill11;
-    public Button btnSkill12;
-    public Button btnSkill13;
-    public Button btnSkill14;
-    public Button btnSkill15;
-
-    public GameObject Skill1Blocked;
-    public GameObject Skill2Blocked;
-    public GameObject Skill3Blocked;
-    public GameObject Skill4Blocked;
-    public GameObject Skill5Blocked;
-    public GameObject Skill6Blocked;
-    public GameObject Skill7Blocked;
-    public GameObject Skill8Blocked;
-    public GameObject Skill9Blocked;
-    public GameObject Skill10Blocked;
-    public GameObject Skill11Blocked;
-    public GameObject Skill12Blocked;
-    public GameObject Skill13Blocked;
-    public GameObject Skill14Blocked;
-    public GameObject Skill15Blocked;
+    public GameObject Skill3, Skill4, Skill5, Skill6, Skill7, Skill8, Skill9, Skill10, Skill11, Skill12, Skill13, Skill14, Skill15;
+    public Button btnSkill1, btnSkill2, btnSkill3, btnSkill4, btnSkill5, btnSkill6, btnSkill7, btnSkill8, btnSkill9, btnSkill10, btnSkill11, btnSkill12, btnSkill13, btnSkill14, btnSkill15;
+    public GameObject Skill1Blocked, Skill2Blocked, Skill3Blocked, Skill4Blocked, Skill5Blocked, Skill6Blocked, Skill7Blocked, Skill8Blocked, Skill9Blocked, Skill10Blocked;
+    public GameObject Skill11Blocked, Skill12Blocked, Skill13Blocked, Skill14Blocked, Skill15Blocked;
 
     public ScrollRect scroll_rect;
     public void MouseOverToSkill(int skillID)
@@ -284,10 +227,14 @@ public class BullFightScript : MonoBehaviour
     public int dialogID = 0;
     public int dialogIndex = 0;
     public GameObject GameManager;
+    public Text CowHPText, CowMPText, EnemyCowHPText;
     void Update()
     {
         Debug.Log(turn);
         Sprite[] itemSprites = GameManager.GetComponent<GameManager>().ItemSprites;
+        CowHPText.text = "<color=red>" + MyCow.nowHP + "/" + MyCow.maxHP + "</color>";
+        CowMPText.text = "<color=lime>" + MyCow.nowMP + "/" + MyCow.maxMP + "</color>";
+        EnemyCowHPText.text = "<color=red>" + EnemyCow.nowHP + "/" + EnemyCow.maxHP + "</color>";
         if(dialogID == 1)
         {
             if(Input.anyKeyDown)
