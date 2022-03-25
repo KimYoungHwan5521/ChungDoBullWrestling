@@ -166,6 +166,7 @@ public class ButtonsScript : MonoBehaviour
             else
             {
                 EquipmentNameHead.text = "없음";
+                EquipedItemHeadImage.sprite = null;
                 UnEquipHead.SetActive(false);
             }
         }
@@ -181,6 +182,7 @@ public class ButtonsScript : MonoBehaviour
             else
             {
                 EquipmentNameBody.text = "없음";
+                EquipedItemBodyImage.sprite = null;
                 UnEquipBody.SetActive(false);
             }
         }
@@ -196,6 +198,7 @@ public class ButtonsScript : MonoBehaviour
             else
             {
                 EquipmentNameLegs.text = "없음";
+                EquipedItemLegsImage.sprite = null;
                 UnEquipLegs.SetActive(false);
             }
         }

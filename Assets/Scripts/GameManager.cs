@@ -294,6 +294,7 @@ public class GameManager : MonoBehaviour
             Player.gold += int.Parse(CurItemList[slotnum].itemPrice) / 2;
             if(Player.inventory[slotnum].count == 1)
             {
+                if(Player.inventory[slotnum].isEquiped) MyCow.Equiped(false, Player.inventory[slotnum].itemName);
                 Player.inventory.RemoveAt(slotnum);
                 Alert_Text.text = "성공적으로 판매 하였습니다.";
             }
