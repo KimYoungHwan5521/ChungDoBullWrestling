@@ -344,6 +344,39 @@ public class MyCow : MonoBehaviour
                 }
             }
         }
+        else if(equipmentName == "화관")
+        {
+            if(equiped)
+            {
+                atkDmg += 10;
+            }
+            else
+            {
+                atkDmg -= 10;
+            }
+        }
+        else if(equipmentName == "운동화")
+        {
+            if(equiped)
+            {
+                armor += 10;
+            }
+            else
+            {
+                armor -= 10;
+            }
+        }
+        else if(equipmentName == "구두")
+        {
+            if(equiped)
+            {
+                atkDmg += 30;
+            }
+            else
+            {
+                armor -= 30;
+            }
+        }
         else
         {
             Debug.Log("Wrong equipmentName!");

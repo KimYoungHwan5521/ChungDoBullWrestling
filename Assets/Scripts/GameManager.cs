@@ -138,14 +138,15 @@ public class GameManager : MonoBehaviour
         }
         else if(market == "TrinketsMarket")
         {
-            CurItemList = AllItemList.FindAll(x => x.itemName == "은투구");
+            CurItemList = AllItemList.FindAll(x => x.itemName == "화관");
+            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "운동화"));
+            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "구두"));
+            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "은투구"));
             CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "은갑옷"));
             CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "은편자"));
             CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "금투구"));
             CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "금갑옷"));
             CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "금편자"));
-            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "운동화"));
-            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "구두"));
             for(int i=0; i<Marchandise.Length; i++)
             {
                 Marchandise[i].SetActive(i<CurItemList.Count);
@@ -235,6 +236,9 @@ public class GameManager : MonoBehaviour
         ItemExplain.SetActive(false);
     }
 
+    public GameObject FoodCount;
+    public Text FoodCountText;
+    public static int FoodCountInt = 1;
     public void OnClickFoodMarchandise(int slotNum)
     {
         slotnum = slotNum;
@@ -258,10 +262,31 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Purchase_Text.text = CurItemList[slotNum].itemName + "을(를)" + CurItemList[slotNum].itemPrice + "냥에 구매 합니까?";
+            Purchase_Text.text = CurItemList[slotNum].itemName + "을(를) " + CurItemList[slotNum].itemPrice + "냥에 구매 합니까?";
+            FoodCountInt = 1;
+            if(CurItemList[slotNum].itemType == "먹이" || CurItemList[slotNum].itemType == "물약") 
+            {
+                FoodCount.SetActive(true);
+                FoodCountText.text = "1";
+                Purchase_Text.text = CurItemList[slotNum].itemName + " 1개를 " + CurItemList[slotNum].itemPrice + "냥에 구매 합니까?";
+            }
         }
         Confirm_Purchase.SetActive(true);
-        
+    }
+    public void OnClickFoodCountUp()
+    {   
+        FoodCountInt++;
+        FoodCountText.text = FoodCountInt.ToString();
+        Purchase_Text.text = CurItemList[slotnum].itemName + " " + FoodCountInt + "개를 " + int.Parse(CurItemList[slotnum].itemPrice) * FoodCountInt + "냥에 구매 합니까?";
+    }
+    public void OnClickFoodCountDown()
+    {
+        if(FoodCountInt > 1)
+        {
+            FoodCountInt--;
+            FoodCountText.text = FoodCountInt.ToString();
+            Purchase_Text.text = CurItemList[slotnum].itemName + " " + FoodCountInt + "개를 " + int.Parse(CurItemList[slotnum].itemPrice) * FoodCountInt + "냥에 구매 합니까?";
+        }
     }
     public void OnClickConfirmPurchaseConfirm(){
         if(marketID == 3)
@@ -283,13 +308,13 @@ public class GameManager : MonoBehaviour
         else
         {
             int price = int.Parse(CurItemList[slotnum].itemPrice);
-            if(Player.gold < price)
+            if(Player.gold < price * FoodCountInt)
             {
                 Alert_Text.text = "소지금이 부족합니다.";
             }
             else
             {
-                Player.gold -= price;
+                Player.gold -= price * FoodCountInt;
                 bool chk = false;
                 bool hay = false;
                 if(CurItemList[slotnum].itemName == "건초 묶음") hay = true;
@@ -297,13 +322,13 @@ public class GameManager : MonoBehaviour
                 {
                     if(Player.inventory[i].itemName == CurItemList[slotnum].itemName)
                     {
-                        Player.inventory[i].count++;
+                        Player.inventory[i].count += FoodCountInt;
                         chk = true;
                         break;
                     }
                     if(hay && Player.inventory[i].itemName == "건초")
                     {
-                        Player.inventory[i].count += 5;
+                        Player.inventory[i].count += 5 * FoodCountInt;
                         chk = true;
                         break;
                     }
@@ -319,7 +344,7 @@ public class GameManager : MonoBehaviour
                         item.itemPrice = price;
                         item.itemExplain = tempHay.itemExplain;
                         item.itemSprite = ItemSprites[11];
-                        item.count = 5;
+                        item.count = 5 * FoodCountInt;
                         Player.inventory.Add(item);
                     }
                     else
@@ -329,6 +354,7 @@ public class GameManager : MonoBehaviour
                         item.itemPrice = price;
                         item.itemExplain = CurItemList[slotnum].itemExplain;
                         item.itemSprite = ItemSprites[int.Parse(CurItemList[slotnum].itemSpriteID)];
+                        item.count = FoodCountInt;
                         Player.inventory.Add(item);
                     }
                 }
@@ -336,11 +362,13 @@ public class GameManager : MonoBehaviour
                 AudioManager.GetComponent<AudioPlayer>().PlaySound(sellingSound);
             }
         }
+        FoodCount.SetActive(false);
         Alert.SetActive(true);
     }
     public void OnClickConfirmPurchaseDeny()
     {
         Confirm_Purchase.SetActive(false);
+        FoodCount.SetActive(false);
     }
 
     public GameObject HairbrushReinforcement;
