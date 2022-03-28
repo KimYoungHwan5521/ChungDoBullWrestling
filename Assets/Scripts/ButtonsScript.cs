@@ -34,6 +34,12 @@ public class ButtonsScript : MonoBehaviour
     }
 
     public GameObject HiddenMerchant;
+    public static int tutorialInt = 0;
+    public GameObject TutorialDialogWindow;
+    public Text TutorialDialog;
+    public GameObject TutorialVillageHead;
+    public GameObject Arrow;
+    public Button Cow;
     void Update()
     {
         CowName.text = MyCow.cowName;
@@ -115,6 +121,91 @@ public class ButtonsScript : MonoBehaviour
         for(int i=0;i<4;i++)
         {
             CalenderPages[i].SetActive(calenderPage == i + 1);
+        }
+        
+        // tutorial
+        if(tutorialInt < 12)
+        {
+            ToVillage.SetActive(false);
+            RectTransform ArrowRect = Arrow.GetComponentInChildren<RectTransform>();
+            Button[] CowStatusButtons = Cow_Status.GetComponentsInChildren<Button>();
+            Cow.interactable = false;
+            for(int i=0; i < CowStatusButtons.Length; i++)
+            {
+                CowStatusButtons[i].interactable = false;
+            }
+            if(Input.anyKeyDown)
+            {
+                if(tutorialInt == 0)
+                {
+                    TutorialDialog.text = "자, 소를 키우기로 했으니 내가 기본적인 건 알려주겠네";
+                }
+                else if(tutorialInt == 1)
+                {
+                    Arrow.SetActive(true);
+                    TutorialDialog.text = "먼저 하루에는 기본적으로 '아침', '점심', '저녁' 총 3번 행동을 할 수 있네";
+                    ArrowRect.anchoredPosition = new Vector3(-400, 475, 0);
+                    Arrow.transform.localEulerAngles = new Vector3(0, 0, 90);
+                }
+                else if(tutorialInt == 2)
+                {
+                    TutorialDialog.text = "행동을 소모하는 행동은 먹이주기, 사육장 청소하기, 빗질하기, 훈련하기, 알바, 경기 등이 있네";
+                }
+                else if(tutorialInt == 3)
+                {
+                    TutorialDialog.text = "소를 클릭하면 소의 상태를 확인할 수 있네";
+                    ArrowRect.anchoredPosition = new Vector3(-150, -180, 0);
+                    Arrow.transform.localEulerAngles = new Vector3(0, 0, 0);
+                }
+                else if(tutorialInt == 4)
+                {
+                    TutorialDialog.text = "소 상태창은 이렇게 생겼고, 여기서 소의 '허기', '청결도', '컨디션'을 확인할 수 있네";
+                    Cow_Status.SetActive(true);
+                    ArrowRect.anchoredPosition = new Vector3(-840, -270, 0);
+                }
+                else if(tutorialInt== 5)
+                {
+                    TutorialDialog.text = "'허기'는 매 행동후 5씩 닳아지고 70이하가 되면 다음 행동 후 컨디션을 떯어뜨리게 되네";
+                }
+                else if(tutorialInt== 6)
+                {
+                    ArrowRect.anchoredPosition = new Vector3(-840, -370, 0);
+                    TutorialDialog.text = "'청결도'는 매일 아침 10씩 닳아지고 70이하가 되면 다음날 아침 컨디션을 떯어뜨리게 되네";
+                }
+                else if(tutorialInt== 7)
+                {
+                    ArrowRect.anchoredPosition = new Vector3(-840, -470, 0);
+                    TutorialDialog.text = "'컨디션'은 허기나 청결도로도 떨어질 수 있고, 행동마다 컨디션을 떨어뜨리는 정도가 다르네";
+                }
+                else if(tutorialInt== 8)
+                {
+                    TutorialDialog.text = "'컨디션'이 0이되면 소는 하루동안 휴식을 해야하고, 컨디션이 50 미만인 체로 경기를 치르게 되면 제실력을 발휘하지 못할 수 있네";
+                }
+                else if(tutorialInt== 9)
+                {
+                    Arrow.transform.localEulerAngles = new Vector3(0, 0, 90);
+                    ArrowRect.anchoredPosition = new Vector3(530, 470, 0);
+                    TutorialDialog.text = "'허기', '청결도', '컨디션'은 탑 메뉴바 에서도 확인할 수 있네";
+                }
+                else if(tutorialInt== 10)
+                {
+                    Arrow.SetActive(false);
+                    TutorialDialog.text = "경기는 매주 토요일 아침이네, 마을도 한번 둘러보고, 경기 일정을 잡아둘테니 경기장에 찾아와 내게 말을 걸면 다음 상대에 대한 정보를 알려 주겠네";
+                }
+                else
+                {
+                    Cow.interactable = true;
+                    for(int i=0; i < CowStatusButtons.Length; i++)
+                    {
+                        CowStatusButtons[i].interactable = true;
+                    }
+                    TutorialVillageHead.SetActive(false);
+                    Cow_Status.SetActive(false);
+                    TutorialDialogWindow.SetActive(false);
+                    ToVillage.SetActive(true);
+                }
+                tutorialInt++;
+            }
         }
 
     }
@@ -471,7 +562,7 @@ public class ButtonsScript : MonoBehaviour
         }
         else
         {
-            AlertText.text = "지금은 경기 시간이 아닙니다.";
+            AlertText.text = "지금은 경기 시간이 아닙니다.\n경기는 매주 토요일 아침에 있습니다.";
             Alert.SetActive(true);
         }
     }
