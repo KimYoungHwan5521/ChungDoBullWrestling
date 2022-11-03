@@ -269,7 +269,7 @@ public class MyCow : MonoBehaviour
             setCheck2 = Player.inventory.Find(x => x.itemName == "다이아편자");
             if(equiped)
             {
-                armor += 200;
+                armor += 250;
                 if(setCheck1 != null && setCheck2 != null)
                 {
                     if(setCheck1.isEquiped && setCheck2.isEquiped)
@@ -280,7 +280,7 @@ public class MyCow : MonoBehaviour
             }
             else
             {
-                armor -= 200;
+                armor -= 250;
                 if(setCheck1 != null && setCheck2 != null)
                 {
                     if(setCheck1.isEquiped && setCheck2.isEquiped)
@@ -296,7 +296,7 @@ public class MyCow : MonoBehaviour
             setCheck2 = Player.inventory.Find(x => x.itemName == "다이아편자");
             if(equiped)
             {
-                armor += 200;
+                armor += 250;
                 if(setCheck1 != null && setCheck2 != null)
                 {
                     if(setCheck1.isEquiped && setCheck2.isEquiped)
@@ -307,7 +307,7 @@ public class MyCow : MonoBehaviour
             }
             else
             {
-                armor -= 200;
+                armor -= 250;
                 if(setCheck1 != null && setCheck2 != null)
                 {
                     if(setCheck1.isEquiped && setCheck2.isEquiped)
@@ -323,7 +323,7 @@ public class MyCow : MonoBehaviour
             setCheck2 = Player.inventory.Find(x => x.itemName == "다이아투구");
             if(equiped)
             {
-                atkDmg += 200;
+                atkDmg += 250;
                 if(setCheck1 != null && setCheck2 != null)
                 {
                     if(setCheck1.isEquiped && setCheck2.isEquiped)
@@ -334,7 +334,7 @@ public class MyCow : MonoBehaviour
             }
             else
             {
-                atkDmg -= 200;
+                atkDmg -= 250;
                 if(setCheck1 != null && setCheck2 != null)
                 {
                     if(setCheck1.isEquiped && setCheck2.isEquiped)
@@ -415,13 +415,13 @@ public class MyCow : MonoBehaviour
         {
             if(onoff)
             {
-                AlertText.text = "다이아세트 효과 발동 (공격력 +200)";
+                AlertText.text = "다이아세트 효과 발동 (공격력 +250)";
                 Alert.SetActive(true);
-                atkDmg += 200;
+                atkDmg += 250;
             }
             else
             {
-                atkDmg -= 200;
+                atkDmg -= 250;
             }
         }
         else

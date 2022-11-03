@@ -179,7 +179,7 @@ public class ButtonsScript : MonoBehaviour
                 }
                 else if(tutorialInt== 8)
                 {
-                    TutorialDialog.text = "'컨디션'이 0이되면 소는 하루동안 휴식을 해야하고, 컨디션이 50 미만인 체로 경기를 치르게 되면 제실력을 발휘하지 못할 수 있네";
+                    TutorialDialog.text = "'컨디션'이 0이되면 소는 하루동안 휴식을 해야해서 그냥 하루를 날리는 셈이 되지.";
                 }
                 else if(tutorialInt== 9)
                 {
@@ -190,7 +190,7 @@ public class ButtonsScript : MonoBehaviour
                 else if(tutorialInt== 10)
                 {
                     Arrow.SetActive(false);
-                    TutorialDialog.text = "경기는 매주 토요일 아침이네, 마을도 한번 둘러보고, 경기 일정을 잡아둘테니 경기장에 찾아와 내게 말을 걸면 다음 상대에 대한 정보를 알려 주겠네";
+                    TutorialDialog.text = "경기는 매주 토요일 아침이네, 마을도 한번 둘러보고, 경기 일정을 잡아둘테니 경기장에 찾아와 내게 말을 걸게, 그때 다음 상대에 대한 정보를 알려 주겠네";
                 }
                 else
                 {
@@ -577,13 +577,17 @@ public class ButtonsScript : MonoBehaviour
         {
             AudioManager.GetComponent<AudioPlayer>().PlayMusic(ElephantCowTheme);
         }
-        else if(EnemyCow.cowName == "일본소")
+        else if(EnemyCow.cowName == "마법'소'녀")
         {
             AudioManager.GetComponent<AudioPlayer>().PlayMusic(JapaneseCowTheme);
         }
         else if(EnemyCow.cowName == "독일소" || EnemyCow.cowName == "롹커소")
         {
             AudioManager.GetComponent<AudioPlayer>().PlayMusic(GermanCowTheme);
+        }
+        else if(EnemyCow.cowName == "우주소" || EnemyCow.cowName == "초사이언소" || EnemyCow.cowName == "건담소" || EnemyCow.cowName == "소 아님")
+        {
+            AudioManager.GetComponent<AudioPlayer>().PlayMusic(BattleTheme2);
         }
         else
         {

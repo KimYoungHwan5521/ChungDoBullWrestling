@@ -20,6 +20,9 @@ public class ActionScript : MonoBehaviour
     public Text TimeText;
     public int dialogIndex = 0;
     public Text DayOfTheWeekText;
+    public int dateCheck = 0;
+    public GameObject DateChange;
+    public Text DateChangeText;
     void Update()
     {
         if(intAction % 4 == 0)
@@ -51,6 +54,21 @@ public class ActionScript : MonoBehaviour
         if(intDayOfTheWeek == 0) randomForHiddenMarket = Random.Range(0,3);
 
         PlayerGold.text = Player.gold.ToString();
+
+        if(intDate == dateCheck)
+        {
+            string dow = "";
+            if(intDayOfTheWeek == 0) dow = "일요일";
+            else if(intDayOfTheWeek == 1) dow = "월요일";
+            else if(intDayOfTheWeek == 2) dow = "화요일";
+            else if(intDayOfTheWeek == 3) dow = "수요일";
+            else if(intDayOfTheWeek == 4) dow = "목요일";
+            else if(intDayOfTheWeek == 5) dow = "금요일";
+            else dow = "토요일";
+            DateChangeText.text = dow + "\n빚 상환까지 <color=red>" + (debtRepaymentEventCheck * 28 + 3 - intDate).ToString() + "</color>일";
+            DateChange.SetActive(true);
+        }
+
         if(intDate % 28 == 3 && debtRepaymentEventCheck == intDate / 28)
         {
             DebtRepaymentEvent.SetActive(true);
@@ -138,6 +156,12 @@ public class ActionScript : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void OnClickDateChangeOK()
+    {
+        dateCheck++;
+        DateChange.SetActive(false);
     }
     
     public GameObject SellConfirm;
@@ -357,34 +381,23 @@ public class ActionScript : MonoBehaviour
             if(MyCow.hunger > 100) MyCow.hunger = 100;
             if(Player.inventory[foodnum].itemName == "건초")
             {
-                MyCow.maxHP += 50;
+                MyCow.maxHP += 100;
                 MyCow.nowHP = MyCow.maxHP;
             }
             else if(Player.inventory[foodnum].itemName == "비료")
             {
-                MyCow.maxHP += 100;
+                MyCow.maxHP += 200;
                 MyCow.nowHP = MyCow.maxHP;
             }
             else if(Player.inventory[foodnum].itemName == "고기")
             {
-                MyCow.maxHP += 150;
+                MyCow.maxHP += 300;
                 MyCow.nowHP = MyCow.maxHP;
             }
             else if(Player.inventory[foodnum].itemName == "소고기")
             {
-                int r = Random.Range(0,5);
-                if(r == 0)
-                {
-                    AlertText.text = MyCow.cowName + "이(가) 소고기를 먹고 탈이 났습니다.. (최대 체력 -50)";
-                    MyCow.maxHP -= 50;
-                    MyCow.nowHP = MyCow.maxHP;
-                    Alert.SetActive(true);
-                }
-                else
-                {
-                    MyCow.maxHP += 200;
-                    MyCow.nowHP = MyCow.maxHP;
-                }
+                MyCow.maxHP += 400;
+                MyCow.nowHP = MyCow.maxHP;
             }
             FoodSelect.SetActive(false);
             if(Player.inventory[foodnum].count == 1)
@@ -437,13 +450,13 @@ public class ActionScript : MonoBehaviour
         else if(ActionID == 401)
         {
             Player.gold += 1000;
-            MyCow.condition -= 15;
+            MyCow.condition -= 5;
             if(MyCow.condition < 0) MyCow.condition = 0;
         }
         else if(ActionID == 402)
         {
             Player.gold += 1500;
-            MyCow.condition -= 20;
+            MyCow.condition -= 15;
             if(MyCow.condition < 0) MyCow.condition = 0;
         }
         else if(ActionID == 403)

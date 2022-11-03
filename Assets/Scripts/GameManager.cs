@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
     public GameObject To_Village;
     public static int slotnum = 0;
     public static int marketID = 0;
+    public Text Merchant_Mention;
 
     public AudioClip sellingAudio;
 
@@ -84,6 +85,14 @@ public class GameManager : MonoBehaviour
         else if(marketID == 4)
         {
             SetMarketType("HiddenMarket");
+        }
+        if(marketID == 3)
+        {
+            Merchant_Mention.text = "물건을 판매 해보게나";
+        }
+        else
+        {
+            Merchant_Mention.text = "물건을 구매 해보게나";
         }
         Food_Market.SetActive(true);
         Food_Market_Button.interactable = false;
