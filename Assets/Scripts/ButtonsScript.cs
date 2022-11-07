@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.IO;
 
 public class ButtonsScript : MonoBehaviour
 {
@@ -663,5 +664,75 @@ public class ButtonsScript : MonoBehaviour
     public void OnClickSettingsClose()
     {
         Settings.SetActive(false);
+    }
+    public GameObject OpenSaveFilesTab;
+    public GameObject SaveFilesTab;
+    bool[] savefilechecks = new bool[3];
+    public Text[] TextSaveFile;
+    public Text[] TextSavedTime;
+    public bool saveorload = true;
+    public Text TextIsItSave;
+    public void OnClickOpenSaveFilesTab(bool SaveOrLoad) // false = save, true = load
+    {
+        saveorload = SaveOrLoad;
+        if(saveorload)
+        {
+            TextIsItSave.text = "불러오기";
+        }
+        else
+        {
+            TextIsItSave.text = "저장하기";
+        }
+        for(int i=0;i<3;i++)
+        {
+            if(File.Exists(DataManager.instance.path + $"{i}"))
+            {
+                savefilechecks[i] = true;
+                DataManager.instance.nowSlot = i;
+                DataManager.instance.LoadData();
+                string temp;
+                int intDate = DataManager.instance.savedData.intDate;
+                if(intDate % 7 == 0) temp = "<color=red>일요일</color>";
+                else if(intDate % 7 == 1) temp = "월요일";
+                else if(intDate % 7 == 2) temp = "화요일";
+                else if(intDate % 7 == 3) temp = "수요일";
+                else if(intDate % 7 == 4) temp = "목요일";
+                else if(intDate % 7 == 5) temp = "금요일";
+                else temp = "<color=blue>토요일</color>";
+                TextSaveFile[i].text = (intDate / 7 + 1).ToString() + "주차" + temp;
+                TextSavedTime[i].text = DataManager.instance.savedTime;
+            }
+            else
+            {
+                TextSaveFile[i].text = "빈 슬롯";
+                TextSavedTime[i].text = "";
+            }
+        }
+        SaveFilesTab.SetActive(true);
+    }
+    public void OnClickCloseSaveFilesTap()
+    {
+        SaveFilesTab.SetActive(false);
+    }
+    public void SaveSlot(int slotnum)
+    {
+        DataManager.instance.nowSlot = slotnum;
+        if(saveorload)
+        {
+            if(savefilechecks[slotnum])
+            {
+                DataManager.instance.LoadData();
+                // 데이터 연동
+            }
+        }
+        else
+        {
+            if(savefilechecks[slotnum])
+            {
+                // 덮어쓰기 체크
+            }
+            DataManager.instance.SaveData();
+            print("저장됨");
+        }
     }
 }
