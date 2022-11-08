@@ -722,7 +722,7 @@ public class ButtonsScript : MonoBehaviour
             if(savefilechecks[slotnum])
             {
                 DataManager.instance.LoadData();
-                // 데이터 연동
+                DataManager.instance.IntegrateLoadedData();
             }
         }
         else

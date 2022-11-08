@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
+using System.Linq;
 
 public class DataManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class DataManager : MonoBehaviour
     public string path;
     public int nowSlot;
     public string savedTime;
+    public List<Player.Item> inventory = new List<Player.Item>();
+    public string savedItems;
 
     private void Awake()
     {
@@ -24,6 +27,7 @@ public class DataManager : MonoBehaviour
         }
         DontDestroyOnLoad(this.gameObject);
 
+        // persistentDataPath -> C:\Users\[user name]\AppData\LocalLow\[company name]\[product name]
         path = Application.persistentDataPath + "/SAVE";
 
     }
@@ -33,64 +37,117 @@ public class DataManager : MonoBehaviour
         string data = File.ReadAllText(path + nowSlot.ToString());
         savedTime = File.GetLastWriteTime(path + nowSlot.ToString()).ToString("저장시간 : yyyy/MM/dd tt HH:mm:ss");
         savedData = JsonUtility.FromJson<SavedData>(data);
+        string itemdata = File.ReadAllText(path + "items" + nowSlot.ToString());
+        // inventory = JsonUtility.FromJson<Player.Item>(itemdata);
+        
+    }
+
+    public void IntegrateLoadedData()
+    {
+        // 플레이어
+        Player.gold = savedData.gold;
+        Player.inventory = inventory.ToList();
+        // 소
+        MyCow.cowName = savedData.cowName;
+        MyCow.maxHP = savedData.maxHP;
+        MyCow.maxMP = savedData.maxMP;
+        MyCow.atkDmg = savedData.atkDmg;
+        MyCow.armor = savedData.armor;
+        MyCow.hunger = savedData.hunger;
+        MyCow.cleanliness = savedData.cleanliness;
+        MyCow.condition = savedData.condition;
+        // 게임진행도
+        BullFightScript.MilkCowClear = savedData.MilkCowClear;
+        BullFightScript.YelloCowClear = savedData.YelloCowClear;
+        BullFightScript.KangKeonCowClear = savedData.KangKeonCowClear;
+        BullFightScript.BurningCowClear = savedData.BurningCowClear;
+        BullFightScript.MadCowClear = savedData.MadCowClear;
+        BullFightScript.RockerCowClear = savedData.RockerCowClear;
+        BullFightScript.SeesawCowClear = savedData.SeesawCowClear;
+        BullFightScript.WoodCowClear = savedData.WoodCowClear;
+        BullFightScript.CowboyCowClear = savedData.CowboyCowClear;
+        BullFightScript.ElephantCowClear = savedData.ElephantCowClear;
+        BullFightScript.JapaneseCowClear = savedData.JapaneseCowClear;
+        BullFightScript.GermanCowClear = savedData.GermanCowClear;
+        BullFightScript.GalaxyCowClear = savedData.GalaxyCowClear;
+        BullFightScript.SuperSaiyanCowClear = savedData.SuperSaiyanCowClear;
+        BullFightScript.GunDamCowClear = savedData.GunDamCowClear;
+        BullFightScript.NotCowClear = savedData.NotCowClear;
+
+        ActionScript.intAction = savedData.intAction;
+        ActionScript.intDayOfTheWeek = savedData.intDayOfTheWeek;
+        ActionScript.intDate = savedData.intDate;
+        ActionScript.randomForHiddenMarket = savedData.randomForHiddenMarket;
+        ActionScript.debtRepaymentEventCheck = savedData.debtRepaymentEventCheck;
+        ActionScript.hairbrushPerformance = savedData.hairbrushPerformance;
+
     }
 
     public void SaveData()
     {
+        savedData = new SavedData();
         string data = JsonUtility.ToJson(savedData);
+        // print(data);
+        inventory = Player.inventory.ToList();
+        // for(int i=0;i<inventory.Count;i++)
+        // {
+        //     print(inventory[i].itemName);
+        // }
+        string itemdata = JsonUtility.ToJson(inventory);
+        print(itemdata);
         File.WriteAllText(path + nowSlot.ToString(), data);
+        File.WriteAllText(path + "items" + nowSlot.ToString(), itemdata);
     }
 
     public class SavedData
     {
-        // 아이템 세트효과 발동후 저장하고 불러왔을때 유지 되는지 확인해보기
-
         // 플레이어
-        public int gold;
-        public class Item
-        {
-            public string itemName;
-            public string itemType;
-            public int itemPrice;
-            public string itemExplain;
-            public Sprite itemSprite;
-            public int count = 1;
-            public bool isEquiped = false;
-        }
+        public int gold = Player.gold;
         // 소
-        public string cowName;
-        public int maxHP;
-        public int maxMP;
-        public int atkDmg;
-        public int armor;
-        public int hunger;
-        public int cleanliness;
-        public int condition;
+        public string cowName = MyCow.cowName;
+        public int maxHP = MyCow.maxHP;
+        public int maxMP = MyCow.maxMP;
+        public int atkDmg = MyCow.atkDmg;
+        public int armor = MyCow.armor;
+        public int hunger = MyCow.hunger;
+        public int cleanliness = MyCow.cleanliness;
+        public int condition = MyCow.condition;
         // 게임진행도
-        public bool MilkCowClear;
-        public bool YelloCowClear;
-        public bool KangKeonCowClear;
-        public bool BurningCowClear;
-        public bool MadCowClear;
-        public bool RockerCowClear;
-        public bool SeesawCowClear;
-        public bool WoodCowClear;
-        public bool CowboyCowClear;
-        public bool ElephantCowClear;
-        public bool JapaneseCowClear;
-        public bool GermanCowClear;
-        public bool GalaxyCowClear;
-        public bool SuperSaiyanCowClear;
-        public bool GunDamCowClear;
-        public bool NotCowClear;
+        public bool MilkCowClear = BullFightScript.MilkCowClear;
+        public bool YelloCowClear = BullFightScript.YelloCowClear;
+        public bool KangKeonCowClear = BullFightScript.KangKeonCowClear;
+        public bool BurningCowClear = BullFightScript.BurningCowClear;
+        public bool MadCowClear = BullFightScript.MadCowClear;
+        public bool RockerCowClear = BullFightScript.RockerCowClear;
+        public bool SeesawCowClear = BullFightScript.SeesawCowClear;
+        public bool WoodCowClear = BullFightScript.WoodCowClear;
+        public bool CowboyCowClear = BullFightScript.CowboyCowClear;
+        public bool ElephantCowClear = BullFightScript.ElephantCowClear;
+        public bool JapaneseCowClear = BullFightScript.JapaneseCowClear;
+        public bool GermanCowClear = BullFightScript.GermanCowClear;
+        public bool GalaxyCowClear = BullFightScript.GalaxyCowClear;
+        public bool SuperSaiyanCowClear = BullFightScript.SuperSaiyanCowClear;
+        public bool GunDamCowClear = BullFightScript.GunDamCowClear;
+        public bool NotCowClear = BullFightScript.NotCowClear;
 
-        public int intAction;
-        public int intDayOfTheWeek;
-        public int intDate;
-        public int randomForHiddenMarket;
-        public int debtRepaymentEventCheck;
-        public int hairbrushPerformance;
-
+        public int intAction = ActionScript.intAction;
+        public int intDayOfTheWeek = ActionScript.intDayOfTheWeek;
+        public int intDate = ActionScript.intDate;
+        public int randomForHiddenMarket = ActionScript.randomForHiddenMarket;
+        public int debtRepaymentEventCheck = ActionScript.debtRepaymentEventCheck;
+        public int hairbrushPerformance = ActionScript.hairbrushPerformance;
     }
+
+    // [System.Serializable]
+    // public class SavedItems
+    // {
+    //     public string itemName;
+    //     public string itemType;
+    //     public int itemPrice;
+    //     public string itemExplain;
+    //     public Sprite itemSprite;
+    //     public int count;
+    //     public bool isEquiped;
+    // }
 
 }

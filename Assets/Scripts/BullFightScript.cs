@@ -230,7 +230,7 @@ public class BullFightScript : MonoBehaviour
     public Text CowHPText, CowMPText, EnemyCowHPText;
     void Update()
     {
-        Debug.Log(turn);
+        // Debug.Log(turn);
         Sprite[] itemSprites = GameManager.GetComponent<GameManager>().ItemSprites;
         CowHPText.text = "<color=red>" + MyCow.nowHP + "/" + MyCow.maxHP + "</color>";
         CowMPText.text = "<color=lime>" + MyCow.nowMP + "/" + MyCow.maxMP + "</color>";
@@ -855,12 +855,12 @@ public class BullFightScript : MonoBehaviour
             {
                 if(onoff)
                 {
-                    Debug.Log("onFire, MyCow, on " + MyCow.armor);
+                    // Debug.Log("onFire, MyCow, on " + MyCow.armor);
                     MyCow.armor -= 50;
                 }
                 else
                 {
-                    Debug.Log("onFire, MyCow, off " + MyCow.armor);
+                    // Debug.Log("onFire, MyCow, off " + MyCow.armor);
                     MyCow.armor += 50;
                 }
             }
@@ -882,13 +882,13 @@ public class BullFightScript : MonoBehaviour
             {
                 if(onoff)
                 {
-                    Debug.Log("rage, MyCow, on " + MyCow.armor);
+                    // Debug.Log("rage, MyCow, on " + MyCow.armor);
                     MyCow.atkDmg += 200;
                     MyCow.armor += 200;
                 }
                 else
                 {
-                    Debug.Log("rage, MyCow, off " + MyCow.armor);
+                    // Debug.Log("rage, MyCow, off " + MyCow.armor);
                     MyCow.atkDmg -= 200;
                     MyCow.armor -= 200;
                 }

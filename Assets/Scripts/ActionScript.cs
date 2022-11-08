@@ -12,7 +12,7 @@ public class ActionScript : MonoBehaviour
 
     public GameObject DebtRepaymentEvent;
     public Text DialogMessage;
-    public int debtRepaymentEventCheck = 0;
+    public static int debtRepaymentEventCheck = 0;
     public GameObject InventoryToSell;
     public GameObject[] Slot, IsEquiped;
     public Text PlayerGold;

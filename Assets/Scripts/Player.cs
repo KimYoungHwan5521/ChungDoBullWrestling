@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public static int gold = 2000;
+    [System.Serializable]
     public class Item
     {
         public string itemName;
