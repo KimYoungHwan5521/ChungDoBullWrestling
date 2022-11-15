@@ -476,6 +476,7 @@ public class ButtonsScript : MonoBehaviour
         equipedItem.isEquiped = false;
         MyCow.Equiped(false, equipedItem.itemName);
         EquipmentNameHead.text = "없음";
+        EquipedItemHeadImage.sprite = null;
         UnEquipHead.SetActive(false);
     }
     public void OnClickUnEquipBody()
@@ -485,6 +486,7 @@ public class ButtonsScript : MonoBehaviour
         equipedItem.isEquiped = false;
         MyCow.Equiped(false, equipedItem.itemName);
         EquipmentNameBody.text = "없음";
+        EquipedItemBodyImage.sprite = null;
         UnEquipBody.SetActive(false);
     }
     public void OnClickUnEquipLegs()
@@ -494,6 +496,7 @@ public class ButtonsScript : MonoBehaviour
         equipedItem.isEquiped = false;
         MyCow.Equiped(false, equipedItem.itemName);
         EquipmentNameLegs.text = "없음";
+        EquipedItemLegsImage.sprite = null;
         UnEquipLegs.SetActive(false);
     }
     public void OnClickEquipmentSelectClose()
