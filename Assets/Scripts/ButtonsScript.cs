@@ -668,10 +668,14 @@ public class ButtonsScript : MonoBehaviour
     public GameObject OpenSaveFilesTab;
     public GameObject SaveFilesTab;
     bool[] savefilechecks = new bool[3];
+    public Button[] ButtonSaveFile;
+    public Button ButtonSaveFilesClose;
     public Text[] TextSaveFile;
     public Text[] TextSavedTime;
     public bool saveorload = true;
     public Text TextIsItSave;
+    public GameObject ConfirmSave;
+    public Text ConfirmSaveText;
     public void OnClickOpenSaveFilesTab(bool SaveOrLoad) // false = save, true = load
     {
         saveorload = SaveOrLoad;
@@ -721,18 +725,92 @@ public class ButtonsScript : MonoBehaviour
         {
             if(savefilechecks[slotnum])
             {
-                DataManager.instance.LoadData();
-                DataManager.instance.IntegrateLoadedData();
+                for(int i=0; i<3; i++)
+                {
+                    ButtonSaveFile[i].interactable = false;
+                }
+                ButtonSaveFilesClose.interactable = false;
+                ConfirmSaveText.text = (slotnum + 1).ToString() + "번 슬롯의 데이터를 로드 합니까?";
+                ConfirmSave.SetActive(true);
             }
         }
         else
         {
             if(savefilechecks[slotnum])
             {
-                // 덮어쓰기 체크
+                for(int i=0; i<3; i++)
+                {
+                    ButtonSaveFile[i].interactable = false;
+                }
+                ButtonSaveFilesClose.interactable = false;
+                ConfirmSaveText.text = (slotnum + 1).ToString() + "번 슬롯에 저장데이터가 있습니다. 덮어쓰겠습니까?";
+                ConfirmSave.SetActive(true);
             }
-            DataManager.instance.SaveData();
-            print("저장됨");
         }
+    }
+    public void ConfirmSaveOK()
+    {
+        for(int i=0; i<3; i++)
+        {
+            ButtonSaveFile[i].interactable = true;
+        }
+        ButtonSaveFilesClose.interactable = true;
+        if(saveorload)
+        {
+            DataManager.instance.LoadData();
+            DataManager.instance.IntegrateLoadedData();
+            for(int i=0; i<3; i++)
+            {
+                ButtonSaveFile[i].interactable = true;
+            }
+            ButtonSaveFilesClose.interactable = true;
+            ConfirmSave.SetActive(false);
+            SaveFilesTab.SetActive(false);
+            Settings.SetActive(false);
+        }
+        else
+        {
+            DataManager.instance.SaveData();
+            for(int i=0;i<3;i++)
+            {
+                if(File.Exists(DataManager.instance.path + $"{i}"))
+                {
+                    savefilechecks[i] = true;
+                    DataManager.instance.nowSlot = i;
+                    DataManager.instance.LoadData();
+                    string temp;
+                    int intDate = DataManager.instance.savedData.intDate;
+                    if(intDate % 7 == 0) temp = "<color=red>일요일</color>";
+                    else if(intDate % 7 == 1) temp = "월요일";
+                    else if(intDate % 7 == 2) temp = "화요일";
+                    else if(intDate % 7 == 3) temp = "수요일";
+                    else if(intDate % 7 == 4) temp = "목요일";
+                    else if(intDate % 7 == 5) temp = "금요일";
+                    else temp = "<color=blue>토요일</color>";
+                    TextSaveFile[i].text = (intDate / 7 + 1).ToString() + "주차" + temp;
+                    TextSavedTime[i].text = DataManager.instance.savedTime;
+                }
+                else
+                {
+                    TextSaveFile[i].text = "빈 슬롯";
+                    TextSavedTime[i].text = "";
+                }
+            }
+            for(int i=0; i<3; i++)
+            {
+                ButtonSaveFile[i].interactable = true;
+            }
+            ButtonSaveFilesClose.interactable = true;
+            ConfirmSave.SetActive(false);
+        }
+    }
+    public void ConfirmSaveDeny()
+    {
+        for(int i=0; i<3; i++)
+        {
+            ButtonSaveFile[i].interactable = true;
+        }
+        ButtonSaveFilesClose.interactable = true;
+        ConfirmSave.SetActive(false);
     }
 }

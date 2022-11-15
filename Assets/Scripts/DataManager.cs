@@ -37,16 +37,13 @@ public class DataManager : MonoBehaviour
         string data = File.ReadAllText(path + nowSlot.ToString());
         savedTime = File.GetLastWriteTime(path + nowSlot.ToString()).ToString("저장시간 : yyyy/MM/dd tt HH:mm:ss");
         savedData = JsonUtility.FromJson<SavedData>(data);
-        string itemdata = File.ReadAllText(path + "items" + nowSlot.ToString());
-        // inventory = JsonUtility.FromJson<Player.Item>(itemdata);
-        
     }
 
     public void IntegrateLoadedData()
     {
         // 플레이어
         Player.gold = savedData.gold;
-        Player.inventory = inventory.ToList();
+        Player.inventory = savedData.inventory.ToList();
         // 소
         MyCow.cowName = savedData.cowName;
         MyCow.maxHP = savedData.maxHP;
@@ -86,23 +83,20 @@ public class DataManager : MonoBehaviour
     public void SaveData()
     {
         savedData = new SavedData();
+        for(int i=0;i<Player.inventory.Count;i++)
+        {
+            savedData.inventory.Add(Player.inventory[i]);
+        }
         string data = JsonUtility.ToJson(savedData);
-        // print(data);
-        inventory = Player.inventory.ToList();
-        // for(int i=0;i<inventory.Count;i++)
-        // {
-        //     print(inventory[i].itemName);
-        // }
-        string itemdata = JsonUtility.ToJson(inventory);
-        print(itemdata);
         File.WriteAllText(path + nowSlot.ToString(), data);
-        File.WriteAllText(path + "items" + nowSlot.ToString(), itemdata);
     }
 
+    [System.Serializable]
     public class SavedData
     {
         // 플레이어
         public int gold = Player.gold;
+        public List<Player.Item> inventory = new List<Player.Item>();
         // 소
         public string cowName = MyCow.cowName;
         public int maxHP = MyCow.maxHP;
@@ -137,17 +131,5 @@ public class DataManager : MonoBehaviour
         public int debtRepaymentEventCheck = ActionScript.debtRepaymentEventCheck;
         public int hairbrushPerformance = ActionScript.hairbrushPerformance;
     }
-
-    // [System.Serializable]
-    // public class SavedItems
-    // {
-    //     public string itemName;
-    //     public string itemType;
-    //     public int itemPrice;
-    //     public string itemExplain;
-    //     public Sprite itemSprite;
-    //     public int count;
-    //     public bool isEquiped;
-    // }
 
 }
