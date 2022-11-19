@@ -37,6 +37,7 @@ public class ButtonsScript : MonoBehaviour
     public GameObject HiddenMerchant;
     public static int tutorialInt = 0;
     public GameObject TutorialDialogWindow;
+    public GameObject DialogNext;
     public Text TutorialDialog;
     public GameObject TutorialVillageHead;
     public GameObject Arrow;
@@ -127,7 +128,10 @@ public class ButtonsScript : MonoBehaviour
         // tutorial
         if(tutorialInt < 12)
         {
+            TutorialVillageHead.SetActive(true);
+            TutorialDialogWindow.SetActive(true);
             ToVillage.SetActive(false);
+            DialogNext.SetActive(false);
             RectTransform ArrowRect = Arrow.GetComponentInChildren<RectTransform>();
             Button[] CowStatusButtons = Cow_Status.GetComponentsInChildren<Button>();
             Cow.interactable = false;
@@ -202,6 +206,7 @@ public class ButtonsScript : MonoBehaviour
                     }
                     TutorialVillageHead.SetActive(false);
                     Cow_Status.SetActive(false);
+                    DialogNext.SetActive(true);
                     TutorialDialogWindow.SetActive(false);
                     ToVillage.SetActive(true);
                 }
@@ -558,6 +563,8 @@ public class ButtonsScript : MonoBehaviour
 
     // stadium
     public GameObject ConfirmFight;
+    public Button ButtonFightStart;
+    public Button ButtonVillageHead;
     public void OnClickFight()
     {
         if(ActionScript.intAction % 4 == 0 && ActionScript.intDayOfTheWeek % 7 == 6)
@@ -606,6 +613,194 @@ public class ButtonsScript : MonoBehaviour
     public void OnClickConfirmFightDeny()
     {
         ConfirmFight.SetActive(false);
+    }
+    public int dialogIndex;
+    public void OnClickVillageHead()
+    {
+        dialogIndex = 0;
+        ButtonFightStart.interactable = false;
+        ButtonVillageHead.interactable = false;
+        TutorialDialogWindow.SetActive(true);
+        ToVillage.SetActive(false);
+        if(EnemyCow.cowName == "젖소")
+        {
+            TutorialDialog.text = "다음 상대는 옆집 이씨네 젖소네";
+        }
+        else if(EnemyCow.cowName == "누렁이")
+        {
+            TutorialDialog.text = "다음 상대는 옆마을 정씨네 누렁이네";
+        }
+        else if(EnemyCow.cowName == "우건마")
+        {
+            TutorialDialog.text = "다음 상대는 아랫마을 최씨네 소일세";
+        }
+        else if(EnemyCow.cowName == "불판에서 뛰쳐나온 소")
+        {
+            TutorialDialog.text = "다음 상대는 옆마을에서 구워 먹으려다가 불판에서 뛰쳐 나온 소라고 하네";
+        }
+        else if(EnemyCow.cowName == "미친소")
+        {
+            TutorialDialog.text = "다음 상대는 미친소네";
+        }
+        else if(EnemyCow.cowName == "롹커소")
+        {
+            TutorialDialog.text = "다음 상대는 롹커소네";
+        }
+        else if(EnemyCow.cowName == "시소")
+        {
+            TutorialDialog.text = "다음 상대는 시소네";
+        }
+        else if(EnemyCow.cowName == "조소")
+        {
+            TutorialDialog.text = "다음 상대는 조소네";
+        }
+        else if(EnemyCow.cowName == "카우보이소")
+        {
+            TutorialDialog.text = "다음 상대는 미국 출신의 카우보이 소네";
+        }
+        else if(EnemyCow.cowName == "인도소")
+        {
+            TutorialDialog.text = "다음 상대는 인도출신의 소네";
+        }
+        else if(EnemyCow.cowName == "마법'소'녀")
+        {
+            TutorialDialog.text = "다음 상대는 일본 출신의 소네";
+        }
+        else if(EnemyCow.cowName == "독일소")
+        {
+            TutorialDialog.text = "다음 상대는 독일 출신의 소네";
+        }
+        else
+        {
+            TutorialDialog.text = "다음 소는 내가 정보가 전혀 없네";
+            dialogIndex += 10;
+        }
+
+    }
+    public void OnClickDialogNext()
+    {
+        dialogIndex++;
+        if(dialogIndex > 10)
+        {
+            ButtonFightStart.interactable = true;
+            ButtonVillageHead.interactable = true;
+            TutorialDialogWindow.SetActive(false);
+            ToVillage.SetActive(true);
+            To_Village.SetActive(false);
+            dialogIndex = 0;
+        }
+        if(EnemyCow.cowName == "젖소")
+        {
+            if(dialogIndex == 1)
+            {
+                TutorialDialog.text = "초반에 힘빼지 말고 녀석이 지쳤을 때에 몰아치는게 좋아보이네";
+                dialogIndex += 10;
+            }
+        }
+        else if(EnemyCow.cowName == "누렁이")
+        {
+            if(dialogIndex == 1)
+            {
+                TutorialDialog.text = "거름을 걷어차서 눈이 안보이게 한다고 하네";
+            }
+            else if(dialogIndex == 2)
+            {
+                TutorialDialog.text = "눈이 안보이면 공격을 맞출수가 없으니까 눈부터 씻는게 좋을걸세";
+                dialogIndex += 10;
+            }
+        }
+        else if(EnemyCow.cowName == "우건마")
+        {
+            if(dialogIndex == 1)
+            {
+                TutorialDialog.text = "무시무시한 컴보 공격을 사용한다고 하더구만";
+            }
+            else if(dialogIndex == 2)
+            {
+                TutorialDialog.text = "눈이라도 멀게하지 않으면 힘든 상대가 될걸세";
+                dialogIndex += 10;
+            }
+        }
+        else if(EnemyCow.cowName == "불판에서 뛰쳐나온 소")
+        {
+            if(dialogIndex == 1)
+            {
+                TutorialDialog.text = "덕분에 화속성 마법을 쓰게 된것 같더구먼";
+                dialogIndex += 10;
+            }
+        }
+        else if(EnemyCow.cowName == "미친소")
+        {
+            if(dialogIndex == 1)
+            {
+                TutorialDialog.text = "아주 싸움꾼이라 몸이 튼튼해서 물리공격은 잘 안통하는것 같더구먼";
+                dialogIndex += 10;
+            }
+        }
+        else if(EnemyCow.cowName == "롹커소")
+        {
+            if(dialogIndex == 1)
+            {
+                TutorialDialog.text = "특별한 점은 없어보이네";
+                dialogIndex += 10;
+            }
+        }
+        else if(EnemyCow.cowName == "시소")
+        {
+            if(dialogIndex == 1)
+            {
+                TutorialDialog.text = "시소 위에만 살아서 균형을 잘잡아 물리공격을 흘리는듯 하네\n태극권 처럼 말이야";
+                dialogIndex += 10;
+            }
+        }
+        else if(EnemyCow.cowName == "조소")
+        {
+            if(dialogIndex == 1)
+            {
+                TutorialDialog.text = "흠.. 나무로 깎아서 불에 잘붙을거 같아 보이는구만";
+                dialogIndex += 10;
+            }
+        }
+        else if(EnemyCow.cowName == "카우보이소")
+        {
+            if(dialogIndex == 1)
+            {
+                TutorialDialog.text = "세계대회부터는 내가 정보가 많이 없어서 도움이 못되겠구만..";
+                dialogIndex += 10;
+            }
+        }
+        else if(EnemyCow.cowName == "인도소")
+        {
+            if(dialogIndex == 1)
+            {
+                TutorialDialog.text = "이야 인도는 소가 참 어마어마하게 크더구만!\n깜짝 놀랄걸세";
+                dialogIndex += 10;
+            }
+        }
+        else if(EnemyCow.cowName == "마법'소'녀")
+        {
+            if(dialogIndex == 1)
+            {
+                TutorialDialog.text = "소가 아주 귀엽더구만";
+                dialogIndex += 10;
+            }
+        }
+        else if(EnemyCow.cowName == "독일소")
+        {
+            if(dialogIndex == 1)
+            {
+                TutorialDialog.text = "독일산이라고 써있었어";
+                dialogIndex += 10;
+            }
+        }
+        else
+        {
+            if(dialogIndex == 0)
+            {
+                TutorialDialog.text = "다음 소는 내가 정보가 전혀 없네";
+                dialogIndex += 10;
+            }
+        }
     }
 
     // field

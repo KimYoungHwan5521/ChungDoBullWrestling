@@ -23,6 +23,10 @@ public class ActionScript : MonoBehaviour
     public int dateCheck = 0;
     public GameObject DateChange;
     public Text DateChangeText;
+    void Start()
+    {
+        dateCheck = 1;
+    }
     void Update()
     {
         if(intAction % 4 == 0)
@@ -55,7 +59,9 @@ public class ActionScript : MonoBehaviour
 
         PlayerGold.text = Player.gold.ToString();
 
-        if(intDate == dateCheck)
+        print("intDate" + intDate);
+        print("dateCheck" + dateCheck);
+        if(intDate == dateCheck && intDate > 0)
         {
             string dow = "";
             if(intDayOfTheWeek == 0) dow = "일요일";
@@ -65,7 +71,14 @@ public class ActionScript : MonoBehaviour
             else if(intDayOfTheWeek == 4) dow = "목요일";
             else if(intDayOfTheWeek == 5) dow = "금요일";
             else dow = "토요일";
-            DateChangeText.text = dow + "\n빚 상환까지 <color=red>" + (debtRepaymentEventCheck * 28 + 3 - intDate).ToString() + "</color>일";
+            if(intDate > 3)
+            {
+                DateChangeText.text = dow + "\n빚 상환까지 <color=red>" + (debtRepaymentEventCheck * 28 + 3 - intDate).ToString() + "</color>일";
+            }
+            else
+            {
+                DateChangeText.text = dow;
+            }
             DateChange.SetActive(true);
         }
 
