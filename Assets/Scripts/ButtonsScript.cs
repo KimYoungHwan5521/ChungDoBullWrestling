@@ -174,12 +174,12 @@ public class ButtonsScript : MonoBehaviour
                 }
                 else if(tutorialInt== 5)
                 {
-                    TutorialDialog.text = "'허기'는 매 행동후 5씩 닳아지고 70이하가 되면 다음 행동 후 컨디션을 떯어뜨리게 되네";
+                    TutorialDialog.text = "'허기'는 매 행동후 5씩 닳아지고 <color=orange>70</color>이하가 되면 다음 행동 후 컨디션을 떯어뜨리게 되네";
                 }
                 else if(tutorialInt== 6)
                 {
                     ArrowRect.anchoredPosition = new Vector3(-840, -370, 0);
-                    TutorialDialog.text = "'청결도'는 매일 아침 10씩 닳아지고 70이하가 되면 다음날 아침 컨디션을 떯어뜨리게 되네";
+                    TutorialDialog.text = "'청결도'는 매일 아침 10씩 닳아지고 <color=orange>70</color>이하가 되면 다음날 아침 컨디션을 떯어뜨리게 되네";
                 }
                 else if(tutorialInt== 7)
                 {
