@@ -222,6 +222,8 @@ public class BullFightScript : MonoBehaviour
     public bool turnEnd;
     public Text turnText;
     public int turn;
+    public GameObject MyTurn;
+    public GameObject EnemyTurn;
 
     // Update is called once per frame
     public int dialogID = 0;
@@ -1464,6 +1466,8 @@ public class BullFightScript : MonoBehaviour
             myTurn = false;
             StatusCheck();
             turnText.text = "상대의 턴!";
+            MyTurn.SetActive(false);
+            EnemyTurn.SetActive(true);
             yield return new WaitForSeconds(1f);
             StartCoroutine(EnemyAct());
         }
@@ -2038,6 +2042,8 @@ public class BullFightScript : MonoBehaviour
         turnEnd = false;
         myTurn = true;
         turnText.text = "나의 턴!";
+        MyTurn.SetActive(true);
+        EnemyTurn.SetActive(false);
         
     }
 
