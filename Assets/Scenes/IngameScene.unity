@@ -6392,7 +6392,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 887.4624, y: 700}
+  m_SizeDelta: {x: 678.5051, y: 700}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &142944837
 MonoBehaviour:
@@ -28547,6 +28547,8 @@ MonoBehaviour:
   TutorialVillageHead: {fileID: 572104048}
   Arrow: {fileID: 1556486789}
   Cow: {fileID: 1428077375}
+  _fadeTime: 1
+  ToVillageSR: {fileID: 2045444353}
   Cow_Status: {fileID: 1061754144}
   CowName: {fileID: 2112287748}
   CowMaxHP: {fileID: 1853533250}
@@ -28593,6 +28595,8 @@ MonoBehaviour:
   ConfirmFight: {fileID: 1469288882}
   ButtonFightStart: {fileID: 1532090096}
   ButtonVillageHead: {fileID: 1381626756}
+  ButtonSave: {fileID: 219668265}
+  ButtonLoad: {fileID: 1386897596}
   dialogIndex: 0
   Farmer: {fileID: 375532982}
   PlowingSelect: {fileID: 737491694}
@@ -32921,7 +32925,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.6055723, y: 1}
+  m_AnchorMax: {x: 0.69844216, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -49391,7 +49395,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 0225a1c8c6dabd34a9fadf8480958d73, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -62069,6 +62073,8 @@ MonoBehaviour:
   TopMenuBar: {fileID: 1347479375}
   ToVillage: {fileID: 2045444350}
   To_Village: {fileID: 834205503}
+  ButtonSave: {fileID: 219668265}
+  ButtonLoad: {fileID: 1386897596}
 --- !u!4 &1279139674
 Transform:
   m_ObjectHideFlags: 0
@@ -72610,7 +72616,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 711163532}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.6055723
+  m_Size: 0.69844216
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -88117,8 +88123,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -144, y: -114}
-  m_SizeDelta: {x: 1400, y: 1000}
+  m_AnchoredPosition: {x: -124.497314, y: -114}
+  m_SizeDelta: {x: 1611.7437, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1797715033
 GameObject:
@@ -97421,8 +97427,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.1218, y: -82}
-  m_SizeDelta: {x: 1362.5376, y: 800}
+  m_AnchoredPosition: {x: 1.0573, y: -82}
+  m_SizeDelta: {x: 1571.4949, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1957962840
 MonoBehaviour:
@@ -100976,14 +100982,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 0.03529412}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 98847db22e89f224eb39e1924cf81634, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -59,8 +59,6 @@ public class ActionScript : MonoBehaviour
 
         PlayerGold.text = Player.gold.ToString();
 
-        print("intDate" + intDate);
-        print("dateCheck" + dateCheck);
         if(intDate == dateCheck && intDate > 0)
         {
             string dow = "";

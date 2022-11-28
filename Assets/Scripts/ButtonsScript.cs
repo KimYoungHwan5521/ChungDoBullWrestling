@@ -32,6 +32,7 @@ public class ButtonsScript : MonoBehaviour
     void Start()
     {
         AudioManager.GetComponent<AudioPlayer>().PlayMusic(TownTheme);
+        _fadeTime = 6f;
     }
 
     public GameObject HiddenMerchant;
@@ -42,6 +43,9 @@ public class ButtonsScript : MonoBehaviour
     public GameObject TutorialVillageHead;
     public GameObject Arrow;
     public Button Cow;
+    float time = 0;
+    public float _fadeTime = 10f;
+    public Image ToVillageSR;
     void Update()
     {
         CowName.text = MyCow.cowName;
@@ -213,6 +217,21 @@ public class ButtonsScript : MonoBehaviour
                 tutorialInt++;
             }
         }
+
+        // ToVillage fade effect
+        if(time < _fadeTime / 2)
+        {
+            ToVillageSR.color = new Color(0, 1, 0, 0.05f * (1 - time / (_fadeTime / 2)));
+        }
+        else if(time < _fadeTime)
+        {
+            ToVillageSR.color = new Color(0, 1, 0, 0.05f * (2 - _fadeTime / time));
+        }
+        else
+        {
+            time = 0;
+        }
+        time += Time.deltaTime;
 
     }
     // cowshed
@@ -565,6 +584,8 @@ public class ButtonsScript : MonoBehaviour
     public GameObject ConfirmFight;
     public Button ButtonFightStart;
     public Button ButtonVillageHead;
+    public Button ButtonSave;
+    public Button ButtonLoad;
     public void OnClickFight()
     {
         if(ActionScript.intAction % 4 == 0 && ActionScript.intDayOfTheWeek % 7 == 6)
@@ -609,6 +630,8 @@ public class ButtonsScript : MonoBehaviour
         BullFight.SetActive(true);
         ImageVS.SetActive(true);
         TopMenuBar.SetActive(false);
+        ButtonSave.interactable = false;
+        ButtonLoad.interactable = false;
     }
     public void OnClickConfirmFightDeny()
     {

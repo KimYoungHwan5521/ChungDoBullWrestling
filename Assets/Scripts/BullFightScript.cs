@@ -2754,6 +2754,8 @@ public class BullFightScript : MonoBehaviour
     public GameObject TopMenuBar;
     public GameObject ToVillage;
     public GameObject To_Village;
+    public Button ButtonSave;
+    public Button ButtonLoad;
     public void BattleOver()
     {
         AudioManager.GetComponent<AudioPlayer>().PlayMusic(TownTheme);
@@ -2765,6 +2767,8 @@ public class BullFightScript : MonoBehaviour
         Cowshed.SetActive(true);
         BullFight.SetActive(false);
         TopMenuBar.SetActive(true);
+        ButtonSave.interactable = true;
+        ButtonLoad.interactable = true;
     }
 
 }
