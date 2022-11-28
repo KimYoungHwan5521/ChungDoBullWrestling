@@ -29,6 +29,7 @@ public class BullFightScript : MonoBehaviour
     public GameObject cowSteelization, enemyCowSteelization;
     public GameObject cowSuperSaiyan, enemyCowSuperSaiyan;
     public GameObject cowElectricShock;
+    public GameObject cowExhaustion, enemyCowExhaustion;
     
     // Buff/Debuffs left turns
     public Text cowBlindLeft, enemyCowBlindLeft;
@@ -221,6 +222,12 @@ public class BullFightScript : MonoBehaviour
             Skill_Name.text = "<color=red>감전</color>";
             Mana_Required.text = "";
             Skill_Explanation.text = "물리공격을 사용할 수 없게된다.";
+        }
+        else if(skillID == 1009)
+        {
+            Skill_Name.text = "<color=red>탈진</color>";
+            Mana_Required.text = "";
+            Skill_Explanation.text = "매턴마다 최대체력에 비례한 피해를 입습니다.";
         }
         else
         {
@@ -873,6 +880,24 @@ public class BullFightScript : MonoBehaviour
                 StatusActivity("electricShock", "MyCow", false);
             }
         }
+        if(cowExhaustion.activeSelf)
+        {
+            int dmg = MyCow.maxHP / 10;
+            if(cowSteelization.activeSelf) dmg /= 2;
+            MyCow.nowHP -= dmg;
+            if(MyCow.nowHP <= 0)
+            {
+                // GameOver();
+            }
+            dmg = EnemyCow.maxHP / 10;
+            if(enemyCowSteelization.activeSelf) dmg /= 2;
+            EnemyCow.nowHP -= dmg;
+            if(EnemyCow.nowHP <= 0)
+            {
+                StartCoroutine(BattleWin());
+            }
+
+        }
     }
 
     // Status activity
@@ -1117,7 +1142,7 @@ public class BullFightScript : MonoBehaviour
         else if(skillID == 2)
         {
             AudioManager.GetComponent<AudioPlayer>().PlaySound(Drinking);
-            BattleLog.text += MyCow.cowName + "의 우유마시기! <color=green>" + (MyCow.maxHP / 5) + "</color>의 체력과 <color=blue>50</color>의 활력을 회복!\n";
+            BattleLog.text += MyCow.cowName + "의 우유마시기! <color=green>" + (MyCow.maxHP / 5) + "</color>의 체력과 <color=blue>50</color>의 활력을 회복!\n해로운 상태가 제거 되었다!\n";
             MyCow.nowHP += (MyCow.maxHP / 5);
             MyCow.nowMP += 50;
             if(MyCow.nowHP > MyCow.maxHP) MyCow.nowHP = MyCow.maxHP;
@@ -1285,7 +1310,7 @@ public class BullFightScript : MonoBehaviour
                 int dmg = 500;
                 if(enemyCowSteelization.activeSelf) dmg /= 2;
                 AudioManager.GetComponent<AudioPlayer>().PlaySound(Shouting);
-                BattleLog.text += MyCow.cowName + "의 샤우팅! " + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+                BattleLog.text += MyCow.cowName + "의 샤우팅! " + EnemyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n이로운 상태를 제거했다!\n";
                 EnemyCow.nowHP -= dmg;
                 if(enemyCowRage.activeSelf)
                 {
@@ -1424,7 +1449,7 @@ public class BullFightScript : MonoBehaviour
             {
                 MyCow.nowMP -= 50;
                 AudioManager.GetComponent<AudioPlayer>().PlaySound(Drinking);
-                BattleLog.text += MyCow.cowName + "의 우유 20L 마시기! <color=green>" + (MyCow.maxHP * 2 / 3) + "</color>의 체력을 회복!\n";
+                BattleLog.text += MyCow.cowName + "의 우유 20L 마시기! <color=green>" + (MyCow.maxHP * 2 / 3) + "</color>의 체력을 회복!\n해로운 상태가 제거 되었다!\n";
                 MyCow.nowHP += (MyCow.maxHP * 2 / 3);
                 if(MyCow.nowHP > MyCow.maxHP) MyCow.nowHP = MyCow.maxHP;
                 cowBlindLeft.text = "<color=red>0</color>";
@@ -1491,6 +1516,10 @@ public class BullFightScript : MonoBehaviour
         {
             turn++;
             myTurn = false;
+            if(turn > 30){ 
+                cowExhaustion.SetActive(true);
+                enemyCowExhaustion.SetActive(true);
+            }
             StatusCheck();
             turnText.text = "상대의 턴!";
             MyTurn.SetActive(false);
@@ -2127,12 +2156,12 @@ public class BullFightScript : MonoBehaviour
             }
             if(skill_name == "우유마시기")
             {
-                BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! <color=green>" + (EnemyCow.maxHP / 10) + "</color>의 체력을 회복!\n";
+                BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! <color=green>" + (EnemyCow.maxHP / 10) + "</color>의 체력을 회복!\n해로운 상태가 해제되었다!\n";
                 EnemyCow.nowHP += (EnemyCow.maxHP / 10);
             }
             else if(skill_name == "우유 20L 마시기" || skill_name == "큐어")
             {
-                BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! <color=green>" + (EnemyCow.maxHP * 3 / 10) + "</color>의 체력을 회복!\n";
+                BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! <color=green>" + (EnemyCow.maxHP * 3 / 10) + "</color>의 체력을 회복!\n해로운 상태가 해제되었다!\n";
                 EnemyCow.nowHP += (EnemyCow.maxHP * 3 / 10);
             }
             if(EnemyCow.nowHP > EnemyCow.maxHP) EnemyCow.nowHP = EnemyCow.maxHP;
@@ -2298,7 +2327,7 @@ public class BullFightScript : MonoBehaviour
             {
                 AudioManager.GetComponent<AudioPlayer>().PlaySound(Elephant);
             }
-            BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! " + MyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n";
+            BattleLog.text += EnemyCow.cowName + "의 " + skill_name + "! " + MyCow.cowName + "에게 <color=red>" + dmg + "</color>의 피해를 입혔다!\n이로운 상태가 제거 되었다!\n";
             MyCow.nowHP -= dmg;
             if(cowRage.activeSelf)
             {
@@ -2653,6 +2682,11 @@ public class BullFightScript : MonoBehaviour
         if(cowElectricShock.activeSelf)
         {
             StatusActivity("electricShock", "MyCow", false);
+        }
+        if(cowExhaustion.activeSelf)
+        {
+            cowExhaustion.SetActive(false);
+            enemyCowExhaustion.SetActive(false);
         }
 
         // set EnemyCow
