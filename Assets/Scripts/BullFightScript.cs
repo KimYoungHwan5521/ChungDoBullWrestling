@@ -41,6 +41,16 @@ public class BullFightScript : MonoBehaviour
     public Text cowSuperSaiyanLeft, enemyCowSuperSaiyanLeft;
     public Text cowElectricShockLeft;
 
+    public Text cowBlindLeft2, enemyCowBlindLeft2;
+    public Text cowRageLeft2, enemyCowRageLeft2;
+    public Text cowBalancedLeft2, enemyCowBalancedLeft2;
+    public Text cowOnFireLeft2, enemyCowOnFireLeft2;
+    public Text cowImmuneLeft2, enemyCowImmuneLeft2;
+    public Text cowSealedLeft2, enemyCowSealedLeft2;
+    public Text cowSteelizationLeft2, enemyCowSteelizationLeft2;
+    public Text cowSuperSaiyanLeft2, enemyCowSuperSaiyanLeft2;
+    public Text cowElectricShockLeft2;
+
     // Progress
     public static bool MilkCowClear = false;
     public static bool YelloCowClear = false;
@@ -232,7 +242,6 @@ public class BullFightScript : MonoBehaviour
     public Text CowHPText, CowMPText, EnemyCowHPText;
     void Update()
     {
-        // Debug.Log(turn);
         Sprite[] itemSprites = GameManager.GetComponent<GameManager>().ItemSprites;
         CowHPText.text = "<color=red>" + MyCow.nowHP + "/" + MyCow.maxHP + "</color>";
         CowMPText.text = "<color=lime>" + MyCow.nowMP + "/" + MyCow.maxMP + "</color>";
@@ -598,6 +607,24 @@ public class BullFightScript : MonoBehaviour
                 dialogIndex++;
             }
         }
+        
+        cowBlindLeft2.text = "<color=red>" + (int.Parse(cowBlindLeft.text.Substring(11,1)) / 2).ToString() + "</color>";
+        enemyCowBlindLeft2.text = "<color=red>" + (int.Parse(enemyCowBlindLeft.text.Substring(11,1)) / 2).ToString() + "</color>";
+        cowRageLeft2.text = "<color=blue>" + (int.Parse(cowRageLeft.text.Substring(12,1)) / 2).ToString() + "</color>";
+        enemyCowRageLeft2.text = "<color=blue>" + (int.Parse(enemyCowRageLeft.text.Substring(12,1)) / 2).ToString() + "</color>";
+        cowBalancedLeft2.text = "<color=blue>" + (int.Parse(cowBalancedLeft.text.Substring(12,1)) / 2).ToString() + "</color>";
+        enemyCowBalancedLeft2.text = "<color=blue>" + (int.Parse(enemyCowBalancedLeft.text.Substring(12,1)) / 2).ToString() + "</color>";
+        cowOnFireLeft2.text = "<color=red>" + (int.Parse(cowOnFireLeft.text.Substring(11,1)) / 2).ToString() + "</color>";
+        enemyCowOnFireLeft2.text = "<color=red>" + (int.Parse(enemyCowOnFireLeft.text.Substring(11,1)) / 2).ToString() + "</color>";
+        cowImmuneLeft2.text = "<color=blue>" + (int.Parse(cowImmuneLeft.text.Substring(12,1)) / 2).ToString() + "</color>";
+        enemyCowImmuneLeft2.text = "<color=blue>" + (int.Parse(enemyCowImmuneLeft.text.Substring(12,1)) / 2).ToString() + "</color>";
+        cowSealedLeft2.text = "<color=red>" + (int.Parse(cowSealedLeft.text.Substring(11,1)) / 2).ToString() + "</color>";
+        enemyCowSealedLeft2.text = "<color=red>" + (int.Parse(enemyCowSealedLeft.text.Substring(11,1)) / 2).ToString() + "</color>";
+        cowSteelizationLeft2.text = "<color=blue>" + (int.Parse(cowSteelizationLeft.text.Substring(12,1)) / 2).ToString() + "</color>";
+        enemyCowSteelizationLeft2.text = "<color=blue>" + (int.Parse(enemyCowSteelizationLeft.text.Substring(12,1)) / 2).ToString() + "</color>";
+        cowSuperSaiyanLeft2.text = "<color=blue>" + (int.Parse(cowSuperSaiyanLeft.text.Substring(12,1)) / 2).ToString() + "</color>";
+        enemyCowSuperSaiyanLeft2.text = "<color=blue>" + (int.Parse(enemyCowSuperSaiyanLeft.text.Substring(12,1)) / 2).ToString() + "</color>";
+        cowElectricShockLeft2.text = "<color=red>" + (int.Parse(cowElectricShockLeft.text.Substring(11,1)) / 2).ToString() + "</color>";
 
     }
     
