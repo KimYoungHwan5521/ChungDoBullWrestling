@@ -7,7 +7,6 @@ using System.Linq;
 
 public class DataManager : MonoBehaviour
 {
-    public static DataManager instance;
     public SavedData savedData = new SavedData();
     public string path;
     public int nowSlot;
@@ -15,6 +14,8 @@ public class DataManager : MonoBehaviour
     public List<Player.Item> inventory = new List<Player.Item>();
     public string savedItems;
 
+    // 데이터 매니져는 싱글톤으로 존재하는게 좋다.
+    public static DataManager instance;
     private void Awake()
     {
         if(instance == null)
@@ -78,61 +79,61 @@ public class DataManager : MonoBehaviour
         ActionScript.debtRepaymentEventCheck = savedData.debtRepaymentEventCheck;
         ActionScript.hairbrushPerformance = savedData.hairbrushPerformance;
 
-        Cowshed.SetActive(false);
-        Village.SetActive(false);
-        Market.SetActive(false);
-        Field.SetActive(false);
-        Stadium.SetActive(false);
-        ToVillage.SetActive(false);
-        if(savedData.whereAmI == 0)
-        {
-            Cowshed.SetActive(true);
-            ToVillage.SetActive(true);
-        }
-        else if (savedData.whereAmI == 1)
-        {
-            Village.SetActive(true);
-        }
-        else if(savedData.whereAmI == 2)
-        {
-            Market.SetActive(true);
-            ToVillage.SetActive(true);
-        }
-        else if(savedData.whereAmI == 3)
-        {
-            Field.SetActive(true);
-            ToVillage.SetActive(true);
-        }
-        else if(savedData.whereAmI == 4)
-        {
-            Stadium.SetActive(true);
-            ToVillage.SetActive(true);
-        }
+        // Cowshed.SetActive(false);
+        // Village.SetActive(false);
+        // Market.SetActive(false);
+        // Field.SetActive(false);
+        // Stadium.SetActive(false);
+        // ToVillage.SetActive(false);
+        // if(savedData.whereAmI == 0)
+        // {
+        //     Cowshed.SetActive(true);
+        //     ToVillage.SetActive(true);
+        // }
+        // else if (savedData.whereAmI == 1)
+        // {
+        //     Village.SetActive(true);
+        // }
+        // else if(savedData.whereAmI == 2)
+        // {
+        //     Market.SetActive(true);
+        //     ToVillage.SetActive(true);
+        // }
+        // else if(savedData.whereAmI == 3)
+        // {
+        //     Field.SetActive(true);
+        //     ToVillage.SetActive(true);
+        // }
+        // else if(savedData.whereAmI == 4)
+        // {
+        //     Stadium.SetActive(true);
+        //     ToVillage.SetActive(true);
+        // }
     }
 
     public void SaveData()
     {
         savedData = new SavedData();
-        if(Cowshed.activeSelf)
-        {
-            savedData.whereAmI = 0;
-        }
-        else if(Village.activeSelf)
-        {
-            savedData.whereAmI = 1;
-        }
-        else if(Market.activeSelf)
-        {
-            savedData.whereAmI = 2;
-        }
-        else if(Field.activeSelf)
-        {
-            savedData.whereAmI = 3;
-        }
-        else
-        {
-            savedData.whereAmI = 4;
-        }
+        // if(Cowshed.activeSelf)
+        // {
+        //     savedData.whereAmI = 0;
+        // }
+        // else if(Village.activeSelf)
+        // {
+        //     savedData.whereAmI = 1;
+        // }
+        // else if(Market.activeSelf)
+        // {
+        //     savedData.whereAmI = 2;
+        // }
+        // else if(Field.activeSelf)
+        // {
+        //     savedData.whereAmI = 3;
+        // }
+        // else
+        // {
+        //     savedData.whereAmI = 4;
+        // }
         for(int i=0;i<Player.inventory.Count;i++)
         {
             savedData.inventory.Add(Player.inventory[i]);
@@ -141,12 +142,12 @@ public class DataManager : MonoBehaviour
         File.WriteAllText(path + nowSlot.ToString(), data);
     }
 
-    public GameObject Cowshed;
-    public GameObject Village;
-    public GameObject Market;
-    public GameObject Field;
-    public GameObject Stadium;
-    public GameObject ToVillage;
+    // public GameObject Cowshed;
+    // public GameObject Village;
+    // public GameObject Market;
+    // public GameObject Field;
+    // public GameObject Stadium;
+    // public GameObject ToVillage;
     [System.Serializable]
     public class SavedData
     {
@@ -188,7 +189,7 @@ public class DataManager : MonoBehaviour
         public int hairbrushPerformance = ActionScript.hairbrushPerformance;
 
         // 캐릭터 위치
-        public int whereAmI;
+        // public int whereAmI;
     }
 
 }
