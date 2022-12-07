@@ -38,7 +38,6 @@ public class ButtonsScript : MonoBehaviour
     public GameObject HiddenMerchant;
     public static int tutorialInt = 0;
     public GameObject TutorialDialogWindow;
-    public GameObject DialogNext;
     public Text TutorialDialog;
     public GameObject TutorialVillageHead;
     public GameObject Arrow;
@@ -135,7 +134,6 @@ public class ButtonsScript : MonoBehaviour
             TutorialVillageHead.SetActive(true);
             TutorialDialogWindow.SetActive(true);
             ToVillage.SetActive(false);
-            DialogNext.SetActive(false);
             RectTransform ArrowRect = Arrow.GetComponentInChildren<RectTransform>();
             Button[] CowStatusButtons = Cow_Status.GetComponentsInChildren<Button>();
             Cow.interactable = false;
@@ -210,7 +208,6 @@ public class ButtonsScript : MonoBehaviour
                     }
                     TutorialVillageHead.SetActive(false);
                     Cow_Status.SetActive(false);
-                    DialogNext.SetActive(true);
                     TutorialDialogWindow.SetActive(false);
                     ToVillage.SetActive(true);
                 }
