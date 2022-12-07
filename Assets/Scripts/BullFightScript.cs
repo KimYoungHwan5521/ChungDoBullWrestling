@@ -763,7 +763,8 @@ public class BullFightScript : MonoBehaviour
             MyCow.nowHP -= dmg;
             if(MyCow.nowHP <= 0)
             {
-                // GameOver();
+                DataManager.ending = 1;
+                SceneManager.LoadScene("EndingScene");
             }
             if(cowOnFireLeftInt == 0)
             {
@@ -2810,9 +2811,31 @@ public class BullFightScript : MonoBehaviour
             dialogID = 15;
             enemyCowSprite = dialogID;
         }
-            // Debug.Log("클리어!");
-            // SceneManager.LoadScene("EndingScene");
-            // return;
+        else if(EnemyCow.cowName == "소 아님")
+        {
+            Debug.Log("클리어!");
+            Player.Item itemCheck1, itemCheck2, itemCheck3, itemCheck4;
+            itemCheck1 = Player.inventory.Find(x => x.itemName == "할아버지의 유품");
+            itemCheck2 = Player.inventory.Find(x => x.itemName == "지역대회 우승 트로피");
+            itemCheck3 = Player.inventory.Find(x => x.itemName == "전국대회 우승 트로피");
+            itemCheck4 = Player.inventory.Find(x => x.itemName == "세계대회 우승 트로피");
+            if(itemCheck2 != null && itemCheck3 != null && itemCheck4 != null)
+            {
+                if(itemCheck1 != null)
+                {
+                    DataManager.ending = 2;
+                }
+                else
+                {
+                    DataManager.ending = 3;
+                }
+            }
+            else
+            {
+                DataManager.ending = 4;
+            }
+            SceneManager.LoadScene("EndingScene");
+        }
 
         yield return new WaitForSeconds(0.5f);
     }

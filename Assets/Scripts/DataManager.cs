@@ -13,6 +13,7 @@ public class DataManager : MonoBehaviour
     public string savedTime;
     public List<Player.Item> inventory = new List<Player.Item>();
     public string savedItems;
+    public static int ending = 0;
 
     // 데이터 매니져는 싱글톤으로 존재하는게 좋다.
     public static DataManager instance;

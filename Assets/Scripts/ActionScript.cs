@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ActionScript : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class ActionScript : MonoBehaviour
     public int dateCheck = 0;
     public GameObject DateChange;
     public Text DateChangeText;
+    public bool gameover_dept = false;
     void Start()
     {
         dateCheck = 1;
@@ -129,7 +131,7 @@ public class ActionScript : MonoBehaviour
                             if(Player.gold + capital < 30000)
                             {
                                 DialogMessage.text = "빚 상환금을 갚지 못하였습니다..";
-                                // GameOver();
+                                gameover_dept = true;
                             }
                             else
                             {
@@ -157,6 +159,11 @@ public class ActionScript : MonoBehaviour
                     }
                     if(dialogIndex == 2)
                     {
+                        if(gameover_dept)
+                        {
+                            DataManager.ending = 0;
+                            SceneManager.LoadScene("EndingScene");
+                        }
                         InventoryToSell.SetActive(false);
                         DebtRepaymentEvent.SetActive(false);
                         debtRepaymentEventCheck++;
