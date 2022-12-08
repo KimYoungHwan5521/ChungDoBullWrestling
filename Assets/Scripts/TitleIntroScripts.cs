@@ -68,21 +68,18 @@ public class TitleIntroScripts : MonoBehaviour
 
     // intro
     public Image introImage;
-    public Sprite imageSprite1;
-    public Sprite imageSprite2;
+    public Sprite[] introSprites;
     public int count = 0;
 
     public void OnClickIntro(){
-        if(count == 0)
-        {
-            introImage.sprite = imageSprite1;
-        }
-        else if(count == 1)
-        {
-            introImage.sprite = imageSprite2;
-        }else
+        if(introSprites.Length < count + 1)
         {
             SceneManager.LoadScene("IngameScene");
+            count = 0;
+        }
+        else
+        {
+            introImage.sprite = introSprites[count];
         }
         count += 1;
     }
@@ -90,5 +87,82 @@ public class TitleIntroScripts : MonoBehaviour
     public void OnClickIntroSkip()
     {
         SceneManager.LoadScene("IngameScene");
+        count = 0;
     }
+
+    // ending
+    public Image endingImage;
+    public Sprite[] endingSprites0, endingSprites1, endingSprites2, endingSprites3, endingSprites4;
+    
+    public void OnClickEnding(){
+        if(DataManager.ending == 0)
+        {
+            if(endingSprites0.Length < count + 1)
+            {
+                SceneManager.LoadScene("TitleScene");
+                count = 0;
+            }
+            else
+            {
+                endingImage.sprite = endingSprites0[count];
+            }
+        }
+        else if(DataManager.ending == 1)
+        {
+            if(endingSprites1.Length < count + 1)
+            {
+                SceneManager.LoadScene("TitleScene");
+                count = 0;
+            }
+            else
+            {
+                endingImage.sprite = endingSprites1[count];
+            }
+        }
+        else if(DataManager.ending == 2)
+        {
+            if(endingSprites2.Length < count + 1)
+            {
+                SceneManager.LoadScene("TitleScene");
+                count = 0;
+            }
+            else
+            {
+                endingImage.sprite = endingSprites2[count];
+            }
+        }
+        else if(DataManager.ending == 3)
+        {
+            if(endingSprites3.Length < count + 1)
+            {
+                SceneManager.LoadScene("TitleScene");
+                count = 0;
+            }
+            else
+            {
+                endingImage.sprite = endingSprites3[count];
+            }
+        }
+        else if(DataManager.ending == 4)
+        {
+            if(endingSprites4.Length < count + 1)
+            {
+                SceneManager.LoadScene("TitleScene");
+                count = 0;
+            }
+            else
+            {
+                endingImage.sprite = endingSprites4[count];
+            }
+        }
+        count += 1;
+    }
+
+    public void OnClickEndingSkip()
+    {
+        SceneManager.LoadScene("TitleScene");
+        count = 0;
+    }
+
+
 }

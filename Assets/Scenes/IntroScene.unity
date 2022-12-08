@@ -260,7 +260,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 38f776c341013e44eb6defb215b800fb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: de204bcc7051b024ebf4eaf2f64a2e40, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -363,10 +363,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8759912a0c63ef4cb51b9b7e6c9d308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SaveFilesTab: {fileID: 0}
+  TextSaveFile: []
+  TextSavedTime: []
   introImage: {fileID: 541987022}
-  imageSprite1: {fileID: 21300000, guid: 1a282da77a1c2fb48b197991d8ddd3aa, type: 3}
-  imageSprite2: {fileID: 21300000, guid: 3d54cea8504c09842bda568753c9ed98, type: 3}
+  introSprites:
+  - {fileID: 21300000, guid: 75939ef6702678941ab371e048a3779d, type: 3}
+  - {fileID: 21300000, guid: 14cd7cf3dbbe5ec45877721ba29f441d, type: 3}
+  - {fileID: 21300000, guid: 03315fb7a5703be499e6194a3d2f1685, type: 3}
+  - {fileID: 21300000, guid: 8248b482de17bb942afcfd87cbd3a1af, type: 3}
+  - {fileID: 21300000, guid: 207a0049c7f6d8b41af5545cb56cd7ba, type: 3}
+  - {fileID: 21300000, guid: 01812b277e886264ea86ddb2f5ffaebe, type: 3}
   count: 0
+  endingImage: {fileID: 0}
+  endingSprites0: []
+  endingSprites1: []
+  endingSprites2: []
+  endingSprites3: []
+  endingSprites4: []
 --- !u!4 &1227511397
 Transform:
   m_ObjectHideFlags: 0
