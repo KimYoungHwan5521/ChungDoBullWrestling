@@ -82,10 +82,10 @@ public class ActionScript : MonoBehaviour
             DateChange.SetActive(true);
         }
 
-        if(intDate % 28 == 3 && debtRepaymentEventCheck == intDate / 28)
+        if(intDate % 28 >= 3 && debtRepaymentEventCheck == intDate / 28)
         {
             DebtRepaymentEvent.SetActive(true);
-            if(intDate == 3)
+            if(intDate < 30)
             {
                 if(Input.anyKeyDown)
                 {
@@ -520,6 +520,7 @@ public class ActionScript : MonoBehaviour
         }
         if(MyCow.condition < 0) MyCow.condition = 0;
 
+        print("intAction: " + intAction.ToString());
         if(MyCow.condition == 0)
         {
             if(intAction % 28 > 20 && intAction % 28 < 24)
@@ -528,7 +529,7 @@ public class ActionScript : MonoBehaviour
                 int skipedActions = 24 - (intAction % 28) + energyDrinkInt;
                 AlertText.text = MyCow.cowName + "의 컨디션이 0이 되었습니다.\n경기 전까지 휴식합니다.\n(행동 " + skipedActions + " 스킵)";
                 Alert.SetActive(true);
-                intAction += skipedActions + 1;
+                intAction += skipedActions;
                 MyCow.condition += skipedActions * 10;
             }
             else if(intAction % 28 == 24)

@@ -888,7 +888,8 @@ public class BullFightScript : MonoBehaviour
             MyCow.nowHP -= dmg;
             if(MyCow.nowHP <= 0)
             {
-                // GameOver();
+                DataManager.ending = 1;
+                SceneManager.LoadScene("EndingScene");
             }
             dmg = EnemyCow.maxHP / 10;
             if(enemyCowSteelization.activeSelf) dmg /= 2;
@@ -2094,6 +2095,11 @@ public class BullFightScript : MonoBehaviour
         }
         yield return new WaitForSeconds(0.5f);
         scroll_rect.verticalNormalizedPosition = 0.0f;
+        if(MyCow.nowHP <= 0)
+        {
+            DataManager.ending = 1;
+            SceneManager.LoadScene("EndingScene");
+        }
         StatusCheck();
         turn++;
         turnEnd = false;
