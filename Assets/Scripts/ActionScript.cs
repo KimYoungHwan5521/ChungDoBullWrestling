@@ -25,6 +25,8 @@ public class ActionScript : MonoBehaviour
     public GameObject DateChange;
     public Text DateChangeText;
     public bool gameover_dept = false;
+
+    public GameObject[] Soils;
     void Start()
     {
         dateCheck = 1;
@@ -173,6 +175,31 @@ public class ActionScript : MonoBehaviour
                     if(cont) dialogIndex++;
                 }
             }
+        }
+
+        if(MyCow.cleanliness <= 70)
+        {
+            Soils[0].SetActive(true);
+        }
+        else if(MyCow.cleanliness <= 40)
+        {
+            Soils[1].SetActive(true);
+            Soils[2].SetActive(true);
+        }
+        else if(MyCow.cleanliness <= 10)
+        {
+            Soils[3].SetActive(true);
+            Soils[4].SetActive(true);
+            Soils[5].SetActive(true);
+        }
+        else
+        {
+            Soils[0].SetActive(false);
+            Soils[1].SetActive(false);
+            Soils[2].SetActive(false);
+            Soils[3].SetActive(false);
+            Soils[4].SetActive(false);
+            Soils[5].SetActive(false);
         }
     }
 
