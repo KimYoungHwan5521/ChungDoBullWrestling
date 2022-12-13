@@ -13,7 +13,7 @@ public class IntroScript : MonoBehaviour
     public void OnClickIntro(){
         if(introSprites.Length < count + 1)
         {
-            SceneManager.LoadScene("IngameScene");
+            LoadingSceneManager.LoadScene("IngameScene");
             count = 0;
         }
         else
@@ -25,7 +25,7 @@ public class IntroScript : MonoBehaviour
 
     public void OnClickIntroSkip()
     {
-        SceneManager.LoadScene("IngameScene");
+        LoadingSceneManager.LoadScene("IngameScene");
         count = 0;
     }
 }

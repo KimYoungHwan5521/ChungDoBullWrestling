@@ -14,7 +14,7 @@ public class TitleScript : MonoBehaviour
     
     public void OnClickStart()
     {
-        SceneManager.LoadScene("IntroScene");
+        LoadingSceneManager.LoadScene("IntroScene");
     }
 
     public GameObject SaveFilesTab;
@@ -57,7 +57,7 @@ public class TitleScript : MonoBehaviour
 
     public void Load(int slotnum)
     {
-        SceneManager.LoadScene("IngameScene");
+        LoadingSceneManager.LoadScene("IngameScene");
         ButtonsScript.tutorialInt = 12;
         DataManager.instance.nowSlot = slotnum;
         DataManager.instance.LoadData();
