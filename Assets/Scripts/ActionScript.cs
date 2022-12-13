@@ -27,6 +27,8 @@ public class ActionScript : MonoBehaviour
     public bool gameover_dept = false;
 
     public GameObject[] Soils;
+    public GameObject[] TrainingLevel2;
+    public GameObject FieldPartTimeJob2, FieldPartTimeJob3;
     void Start()
     {
         dateCheck = 1;
@@ -200,6 +202,29 @@ public class ActionScript : MonoBehaviour
             Soils[3].SetActive(false);
             Soils[4].SetActive(false);
             Soils[5].SetActive(false);
+        }
+
+        if(BullFightScript.BurningCowClear)
+        {
+            FieldPartTimeJob2.SetActive(true);
+        }
+        else
+        {
+            FieldPartTimeJob2.SetActive(false);
+        }
+        if(BullFightScript.WoodCowClear)
+        {
+            FieldPartTimeJob3.SetActive(true);
+            TrainingLevel2[0].SetActive(true);
+            TrainingLevel2[1].SetActive(true);
+            TrainingLevel2[2].SetActive(true);
+        }
+        else
+        {
+            FieldPartTimeJob3.SetActive(false);
+            TrainingLevel2[0].SetActive(false);
+            TrainingLevel2[1].SetActive(false);
+            TrainingLevel2[2].SetActive(false);
         }
     }
 
@@ -465,62 +490,71 @@ public class ActionScript : MonoBehaviour
         }
         else if(ActionID == 301)
         {
-            MyCow.atkDmg += 10;
+            MyCow.atkDmg += 20;
+            MyCow.condition -= 15;
             TrainingSelect.SetActive(false);
         }
         else if(ActionID == 302)
         {
-            MyCow.maxMP += 5;
+            MyCow.maxMP += 10;
+            MyCow.condition -= 10;
             MyCow.nowMP = MyCow.maxMP;
             TrainingSelect.SetActive(false);
         }
         else if(ActionID == 303)
         {
-            MyCow.armor += 10;
-            MyCow.condition -= 5;
-            TrainingSelect.SetActive(false);
-        }
-        else if(ActionID == 304)
-        {
-            MyCow.atkDmg += 20;
-            MyCow.condition -= 15;
-            TrainingSelect.SetActive(false);
-        }
-        else if(ActionID == 305)
-        {
             MyCow.armor += 20;
             MyCow.condition -= 20;
             TrainingSelect.SetActive(false);
         }
+        else if(ActionID == 304)
+        {
+            MyCow.atkDmg += 30;
+            MyCow.condition -= 30;
+            TrainingSelect.SetActive(false);
+        }
+        else if(ActionID == 305)
+        {
+            MyCow.armor += 30;
+            MyCow.condition -= 40;
+            TrainingSelect.SetActive(false);
+        }
+        else if(ActionID == 306)
+        {
+            MyCow.maxMP += 20;
+            MyCow.condition -= 30;
+            MyCow.nowMP = MyCow.maxMP;
+            TrainingSelect.SetActive(false);
+        }
         else if(ActionID == 401)
         {
-            Player.gold += 1000;
-            MyCow.condition -= 5;
+            Player.gold += 2000;
+            MyCow.condition -= 30;
             if(MyCow.condition < 0) MyCow.condition = 0;
         }
         else if(ActionID == 402)
         {
-            Player.gold += 1500;
-            MyCow.condition -= 15;
+            Player.gold += 3000;
+            MyCow.condition -= 45;
             if(MyCow.condition < 0) MyCow.condition = 0;
         }
         else if(ActionID == 403)
         {
-            Player.gold += 2000;
-            MyCow.condition -= 30;
+            Player.gold += 4000;
+            MyCow.condition -= 60;
             if(MyCow.condition < 0) MyCow.condition = 0;
         }
         else if(ActionID == 501)
         {
             if(intAction % 3 == 2)
             {
-                Player.gold += 2500;
-                MyCow.condition -= 35;
+                Player.gold += 3000;
+                MyCow.condition -= 40;
                 if(MyCow.condition < 0) MyCow.condition = 0;
             }
             else
             {
-                Player.gold += 500;
+                Player.gold += 1000;
             }
         }
 

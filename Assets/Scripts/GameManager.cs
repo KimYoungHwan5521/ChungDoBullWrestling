@@ -119,11 +119,11 @@ public class GameManager : MonoBehaviour
     {
         if(ActionScript.intAction % 4 == 2 || ActionScript.intAction % 4 == 3)
         {
-            PartTimeJobText.text = "장터 알바 하기(야간)\n\n돈 +2500냥\n컨디션 -35";
+            PartTimeJobText.text = "장터 알바 하기(야간)\n\n돈 +3000냥\n컨디션 -40";
         }
         else
         {
-            PartTimeJobText.text = "장터 알바 하기\n\n돈 +500냥";
+            PartTimeJobText.text = "장터 알바 하기\n\n돈 +1000냥";
         }
     }
 
