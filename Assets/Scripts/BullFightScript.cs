@@ -242,11 +242,11 @@ public class BullFightScript : MonoBehaviour
     public GameObject MyTurn;
     public GameObject EnemyTurn;
 
-    // Update is called once per frame
-    public int dialogID = 0;
+    public static int dialogID = 0;
     public int dialogIndex = 0;
     public GameObject GameManager;
     public Text CowHPText, CowMPText, EnemyCowHPText;
+    // Update is called once per frame
     void Update()
     {
         Sprite[] itemSprites = GameManager.GetComponent<GameManager>().ItemSprites;

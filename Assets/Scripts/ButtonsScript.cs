@@ -599,9 +599,12 @@ public class ButtonsScript : MonoBehaviour
             Alert.SetActive(true);
         }
     }
+    public Image EnemyCowPoster;
+    public Sprite[] EnemyCowSprites;
     public void OnClickConfirmFightConfirm()
     {
         ConfirmFight.SetActive(false);
+        EnemyCowPoster.sprite = EnemyCowSprites[BullFightScript.dialogID];
         if(EnemyCow.cowName == "카우보이소")
         {
             AudioManager.GetComponent<AudioPlayer>().PlayMusic(CowboyCowTheme);

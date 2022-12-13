@@ -4797,6 +4797,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 113700014}
   m_CullTransparentMesh: 1
+--- !u!1 &113701783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 113701784}
+  - component: {fileID: 113701786}
+  - component: {fileID: 113701785}
+  m_Layer: 22
+  m_Name: Cow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &113701784
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113701783}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1682369013}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -600, y: 47}
+  m_SizeDelta: {x: 600, y: 500}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &113701785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113701783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: b909175f87ce40c42a789b6fecdf0939, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &113701786
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113701783}
+  m_CullTransparentMesh: 1
 --- !u!1 &113852849
 GameObject:
   m_ObjectHideFlags: 0
@@ -29468,6 +29543,24 @@ MonoBehaviour:
   ButtonVillageHead: {fileID: 1381626756}
   ButtonSave: {fileID: 219668265}
   ButtonLoad: {fileID: 1386897596}
+  EnemyCowPoster: {fileID: 742803568}
+  EnemyCowSprites:
+  - {fileID: 21300000, guid: f9734264d93a7ae47b41d29c89b3da2a, type: 3}
+  - {fileID: 21300000, guid: 81305d18c84dec84ba3f1b5a355f8aad, type: 3}
+  - {fileID: 21300000, guid: 13dc6d9e5921d574ab188623d6b6a42e, type: 3}
+  - {fileID: 21300000, guid: af2d3f4bff9457c47baa21522c304900, type: 3}
+  - {fileID: 21300000, guid: 7503a2d240c7ced47811275ab9a4cac5, type: 3}
+  - {fileID: 21300000, guid: bb2a82b78f41da548bfd6d53ff4b6d71, type: 3}
+  - {fileID: 21300000, guid: a6336457d80bd8647be28114007cfd3d, type: 3}
+  - {fileID: 21300000, guid: 84f7181767d8e4443890506796fc067b, type: 3}
+  - {fileID: 21300000, guid: 5d323532629895c4fb3c25fdeae97d4b, type: 3}
+  - {fileID: 21300000, guid: f3a17f8ecb51dee4d843ff0004014708, type: 3}
+  - {fileID: 21300000, guid: 0f7449b5563eac84d900bdc198b89614, type: 3}
+  - {fileID: 21300000, guid: 0c855ad300e413844abe418f6354b922, type: 3}
+  - {fileID: 21300000, guid: 26d87d5e930029e47978e9b89b36608f, type: 3}
+  - {fileID: 21300000, guid: a769f8302ee05c5469e582090b1d2562, type: 3}
+  - {fileID: 21300000, guid: 5659f80db211520419962861c9f5ce28, type: 3}
+  - {fileID: 21300000, guid: f956ff59bb1e6ba49996821b2703357b, type: 3}
   dialogIndex: 0
   Farmer: {fileID: 375532982}
   PlowingSelect: {fileID: 737491694}
@@ -35258,6 +35351,81 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 37.8492, y: -17.5}
   m_SizeDelta: {x: 100, y: 65}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &742803567
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 742803570}
+  - component: {fileID: 742803569}
+  - component: {fileID: 742803568}
+  m_Layer: 22
+  m_Name: EnemyCow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &742803568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742803567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: f9734264d93a7ae47b41d29c89b3da2a, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &742803569
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742803567}
+  m_CullTransparentMesh: 1
+--- !u!224 &742803570
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742803567}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1682369013}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 715, y: 47}
+  m_SizeDelta: {x: 600, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &743800023
 GameObject:
@@ -63646,7 +63814,6 @@ MonoBehaviour:
   turn: 0
   MyTurn: {fileID: 16779216}
   EnemyTurn: {fileID: 1370587237}
-  dialogID: 0
   dialogIndex: 0
   GameManager: {fileID: 623144560}
   CowHPText: {fileID: 302244456}
@@ -84949,7 +85116,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1682369013
 RectTransform:
   m_ObjectHideFlags: 0
@@ -84962,13 +85129,15 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 414259773}
+  - {fileID: 113701784}
+  - {fileID: 742803570}
   m_Father: {fileID: 1898838220}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -166.20044, y: -79}
-  m_SizeDelta: {x: 2546.4, y: 1440}
+  m_AnchoredPosition: {x: -169.78687, y: -80.793335}
+  m_SizeDelta: {x: 2560.7466, y: 1443.5867}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1682369014
 MonoBehaviour:
