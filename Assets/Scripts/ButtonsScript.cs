@@ -134,6 +134,8 @@ public class ButtonsScript : MonoBehaviour
             TutorialVillageHead.SetActive(true);
             TutorialDialogWindow.SetActive(true);
             ToVillage.SetActive(false);
+            ButtonSave.interactable = false;
+            ButtonLoad.interactable = false;
             RectTransform ArrowRect = Arrow.GetComponentInChildren<RectTransform>();
             Button[] CowStatusButtons = Cow_Status.GetComponentsInChildren<Button>();
             Cow.interactable = false;
@@ -210,6 +212,8 @@ public class ButtonsScript : MonoBehaviour
                     Cow_Status.SetActive(false);
                     TutorialDialogWindow.SetActive(false);
                     ToVillage.SetActive(true);
+                    ButtonSave.interactable = true;
+                    ButtonLoad.interactable = true;
                 }
                 tutorialInt++;
             }
