@@ -377,6 +377,87 @@ public class MyCow : MonoBehaviour
                 armor -= 30;
             }
         }
+        else if(equipmentName == "마법소녀 모자")
+        {
+            setCheck1 = Player.inventory.Find(x => x.itemName == "마법소녀 망토");
+            setCheck2 = Player.inventory.Find(x => x.itemName == "마법소녀 구두");
+            if(equiped)
+            {
+                armor += 250;
+                if(setCheck1 != null && setCheck2 != null)
+                {
+                    if(setCheck1.isEquiped && setCheck2.isEquiped)
+                    {
+                        SetItemSynergy("마법소녀세트", true);
+                    }
+                }
+            }
+            else
+            {
+                armor -= 250;
+                if(setCheck1 != null && setCheck2 != null)
+                {
+                    if(setCheck1.isEquiped && setCheck2.isEquiped)
+                    {
+                        SetItemSynergy("마법소녀세트", false);
+                    }
+                }
+            }
+        }
+        else if(equipmentName == "마법소녀 망토")
+        {
+            setCheck1 = Player.inventory.Find(x => x.itemName == "마법소녀 모자");
+            setCheck2 = Player.inventory.Find(x => x.itemName == "마법소녀 구두");
+            if(equiped)
+            {
+                armor += 250;
+                if(setCheck1 != null && setCheck2 != null)
+                {
+                    if(setCheck1.isEquiped && setCheck2.isEquiped)
+                    {
+                        SetItemSynergy("마법소녀세트", true);
+                    }
+                }
+            }
+            else
+            {
+                armor -= 250;
+                if(setCheck1 != null && setCheck2 != null)
+                {
+                    if(setCheck1.isEquiped && setCheck2.isEquiped)
+                    {
+                        SetItemSynergy("마법소녀세트", false);
+                    }
+                }
+            }
+        }
+        else if(equipmentName == "마법소녀 구두")
+        {
+            setCheck1 = Player.inventory.Find(x => x.itemName == "마법소녀 망토");
+            setCheck2 = Player.inventory.Find(x => x.itemName == "마법소녀 모자");
+            if(equiped)
+            {
+                atkDmg += 250;
+                if(setCheck1 != null && setCheck2 != null)
+                {
+                    if(setCheck1.isEquiped && setCheck2.isEquiped)
+                    {
+                        SetItemSynergy("마법소녀세트", true);
+                    }
+                }
+            }
+            else
+            {
+                atkDmg -= 250;
+                if(setCheck1 != null && setCheck2 != null)
+                {
+                    if(setCheck1.isEquiped && setCheck2.isEquiped)
+                    {
+                        SetItemSynergy("마법소녀세트", false);
+                    }
+                }
+            }
+        }
         else
         {
             Debug.Log("Wrong equipmentName!");
@@ -422,6 +503,21 @@ public class MyCow : MonoBehaviour
             else
             {
                 atkDmg -= 250;
+            }
+        }
+        else if(set == "마법소녀세트")
+        {
+            if(onoff)
+            {
+                AlertText.text = "마법소녀세트 효과 발동 (최대활력 +100)";
+                Alert.SetActive(true);
+                maxMP += 100;
+                nowMP = maxMP;
+            }
+            else
+            {
+                maxMP -= 100;
+                nowMP = maxMP;
             }
         }
         else

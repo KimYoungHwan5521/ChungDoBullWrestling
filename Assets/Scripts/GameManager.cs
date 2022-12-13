@@ -153,9 +153,18 @@ public class GameManager : MonoBehaviour
             CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "은투구"));
             CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "은갑옷"));
             CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "은편자"));
-            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "금투구"));
-            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "금갑옷"));
-            CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "금편자"));
+            if(BullFightScript.BurningCowClear)
+            {
+                CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "금투구"));
+                CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "금갑옷"));
+                CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "금편자"));
+            }
+            if(BullFightScript.JapaneseCowClear)
+            {
+                CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "마법소녀 모자"));
+                CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "마법소녀 망토"));
+                CurItemList.AddRange(AllItemList.FindAll(x => x.itemName == "마법소녀 구두"));
+            }
             for(int i=0; i<Marchandise.Length; i++)
             {
                 Marchandise[i].SetActive(i<CurItemList.Count);
