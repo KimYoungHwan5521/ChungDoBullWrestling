@@ -323,7 +323,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1227511396}
-        m_TargetAssemblyTypeName: TitleIntroScripts, Assembly-CSharp
+        m_TargetAssemblyTypeName: IntroScript, Assembly-CSharp
         m_MethodName: OnClickIntro
         m_Mode: 1
         m_Arguments:
@@ -360,12 +360,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1227511395}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8759912a0c63ef4cb51b9b7e6c9d308, type: 3}
+  m_Script: {fileID: 11500000, guid: b7ffd97f268bd26449bdea4d5214837b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SaveFilesTab: {fileID: 0}
-  TextSaveFile: []
-  TextSavedTime: []
   introImage: {fileID: 541987022}
   introSprites:
   - {fileID: 21300000, guid: 75939ef6702678941ab371e048a3779d, type: 3}
@@ -375,12 +372,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 207a0049c7f6d8b41af5545cb56cd7ba, type: 3}
   - {fileID: 21300000, guid: 01812b277e886264ea86ddb2f5ffaebe, type: 3}
   count: 0
-  endingImage: {fileID: 0}
-  endingSprites0: []
-  endingSprites1: []
-  endingSprites2: []
-  endingSprites3: []
-  endingSprites4: []
 --- !u!4 &1227511397
 Transform:
   m_ObjectHideFlags: 0
@@ -562,7 +553,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1227511396}
-        m_TargetAssemblyTypeName: TitleIntroScripts, Assembly-CSharp
+        m_TargetAssemblyTypeName: IntroScript, Assembly-CSharp
         m_MethodName: OnClickIntroSkip
         m_Mode: 1
         m_Arguments:

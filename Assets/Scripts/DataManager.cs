@@ -49,7 +49,9 @@ public class DataManager : MonoBehaviour
         // 소
         MyCow.cowName = savedData.cowName;
         MyCow.maxHP = savedData.maxHP;
+        MyCow.nowHP = savedData.maxHP;
         MyCow.maxMP = savedData.maxMP;
+        MyCow.nowMP = savedData.maxMP;
         MyCow.atkDmg = savedData.atkDmg;
         MyCow.armor = savedData.armor;
         MyCow.hunger = savedData.hunger;
