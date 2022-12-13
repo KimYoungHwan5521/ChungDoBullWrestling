@@ -1073,4 +1073,20 @@ public class ButtonsScript : MonoBehaviour
         ButtonSaveFilesClose.interactable = true;
         ConfirmSave.SetActive(false);
     }
+
+    public GameObject GoTitleConfirm;
+    public void OnClickGoTitle()
+    {
+        GoTitleConfirm.SetActive(true);
+    }
+    public void ConfirmGoTitle()
+    {
+        SceneManager.LoadScene("TitleScene");
+        DataManager.instance.LoadInitialData();
+        DataManager.instance.IntegrateLoadedData();
+    }
+    public void DenyGoTitle()
+    {
+        GoTitleConfirm.SetActive(false);
+    }
 }

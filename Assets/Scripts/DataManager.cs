@@ -7,6 +7,7 @@ using System.Linq;
 
 public class DataManager : MonoBehaviour
 {
+    public SavedData initialData = new SavedData();
     public SavedData savedData = new SavedData();
     public string path;
     public int nowSlot;
@@ -29,7 +30,12 @@ public class DataManager : MonoBehaviour
         }
         DontDestroyOnLoad(this.gameObject);
 
+        initialData = new SavedData();
+
+
+        string data = JsonUtility.ToJson(initialData);
         // persistentDataPath -> C:\Users\[user name]\AppData\LocalLow\[company name]\[product name]
+        File.WriteAllText(Application.persistentDataPath + "/initialData", data);
         path = Application.persistentDataPath + "/SAVE";
 
     }
@@ -38,6 +44,12 @@ public class DataManager : MonoBehaviour
     {
         string data = File.ReadAllText(path + nowSlot.ToString());
         savedTime = File.GetLastWriteTime(path + nowSlot.ToString()).ToString("저장시간 : yyyy/MM/dd tt HH:mm:ss");
+        savedData = JsonUtility.FromJson<SavedData>(data);
+    }
+
+    public void LoadInitialData()
+    {
+        string data = File.ReadAllText(Application.persistentDataPath + "/initialData");
         savedData = JsonUtility.FromJson<SavedData>(data);
     }
 

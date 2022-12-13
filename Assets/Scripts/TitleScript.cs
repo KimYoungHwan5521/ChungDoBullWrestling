@@ -7,6 +7,10 @@ using System.IO;
 
 public class TitleScript : MonoBehaviour
 {
+    void Start()
+    {
+        // DataManager.instance.SaveInitialData();
+    }
     
     public void OnClickStart()
     {
