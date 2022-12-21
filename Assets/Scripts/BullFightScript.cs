@@ -641,7 +641,10 @@ public class BullFightScript : MonoBehaviour
         myTurn = true;
         turn = 1;
         turnText.text = "나의 턴!";
-
+        MyCow.nowHP = MyCow.maxHP;
+        MyCow.nowMP = MyCow.maxMP;
+        EnemyCow.nowHP = EnemyCow.maxHP;
+        
         if(MilkCowClear)
         {
             Skill3.SetActive(true);
@@ -2636,8 +2639,6 @@ public class BullFightScript : MonoBehaviour
         Debug.Log("승리!");
         AudioManager.GetComponent<AudioPlayer>().PlayMusic(Fanfare, false);
         // cow status initialize
-        MyCow.nowHP = MyCow.maxHP;
-        MyCow.nowMP = MyCow.maxMP;
         cowBlind.SetActive(false);
         enemyCowBlind.SetActive(false);
         if(cowOnFire.activeSelf)

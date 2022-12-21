@@ -86,6 +86,7 @@ public class DataManager : MonoBehaviour
         BullFightScript.SuperSaiyanCowClear = savedData.SuperSaiyanCowClear;
         BullFightScript.GunDamCowClear = savedData.GunDamCowClear;
         BullFightScript.NotCowClear = savedData.NotCowClear;
+        BullFightScript.dialogID = savedData.dialogID;
 
         ActionScript.intAction = savedData.intAction;
         ActionScript.intDayOfTheWeek = savedData.intDayOfTheWeek;
@@ -195,6 +196,7 @@ public class DataManager : MonoBehaviour
         public bool SuperSaiyanCowClear = BullFightScript.SuperSaiyanCowClear;
         public bool GunDamCowClear = BullFightScript.GunDamCowClear;
         public bool NotCowClear = BullFightScript.NotCowClear;
+        public int dialogID = BullFightScript.dialogID;
 
         public int intAction = ActionScript.intAction;
         public int intDayOfTheWeek = ActionScript.intDayOfTheWeek;
