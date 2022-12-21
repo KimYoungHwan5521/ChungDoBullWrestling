@@ -21,7 +21,7 @@ public class ActionScript : MonoBehaviour
     public Text TimeText;
     public int dialogIndex = 0;
     public Text DayOfTheWeekText;
-    public int dateCheck = 0;
+    public static int dateCheck = 0;
     public GameObject DateChange;
     public Text DateChangeText;
     public bool gameover_dept = false;

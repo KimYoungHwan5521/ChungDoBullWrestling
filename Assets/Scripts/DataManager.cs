@@ -86,13 +86,14 @@ public class DataManager : MonoBehaviour
         BullFightScript.SuperSaiyanCowClear = savedData.SuperSaiyanCowClear;
         BullFightScript.GunDamCowClear = savedData.GunDamCowClear;
         BullFightScript.NotCowClear = savedData.NotCowClear;
-        BullFightScript.dialogID = savedData.dialogID;
+        BullFightScript.enemyCowID = savedData.enemyCowID;
 
         ActionScript.intAction = savedData.intAction;
         ActionScript.intDayOfTheWeek = savedData.intDayOfTheWeek;
         ActionScript.intDate = savedData.intDate;
         ActionScript.randomForHiddenMarket = savedData.randomForHiddenMarket;
         ActionScript.debtRepaymentEventCheck = savedData.debtRepaymentEventCheck;
+        ActionScript.dateCheck = savedData.dateCheck;
         ActionScript.hairbrushPerformance = savedData.hairbrushPerformance;
 
         // Cowshed.SetActive(false);
@@ -196,13 +197,14 @@ public class DataManager : MonoBehaviour
         public bool SuperSaiyanCowClear = BullFightScript.SuperSaiyanCowClear;
         public bool GunDamCowClear = BullFightScript.GunDamCowClear;
         public bool NotCowClear = BullFightScript.NotCowClear;
-        public int dialogID = BullFightScript.dialogID;
+        public int enemyCowID = BullFightScript.enemyCowID;
 
         public int intAction = ActionScript.intAction;
         public int intDayOfTheWeek = ActionScript.intDayOfTheWeek;
         public int intDate = ActionScript.intDate;
         public int randomForHiddenMarket = ActionScript.randomForHiddenMarket;
         public int debtRepaymentEventCheck = ActionScript.debtRepaymentEventCheck;
+        public int dateCheck = ActionScript.dateCheck;
         public int hairbrushPerformance = ActionScript.hairbrushPerformance;
 
         // 캐릭터 위치

@@ -633,7 +633,7 @@ public class ButtonsScript : MonoBehaviour
     public void OnClickConfirmFightConfirm()
     {
         ConfirmFight.SetActive(false);
-        EnemyCowPoster.sprite = EnemyCowSprites[BullFightScript.dialogID];
+        EnemyCowPoster.sprite = EnemyCowSprites[BullFightScript.enemyCowID];
         if(EnemyCow.cowName == "카우보이소")
         {
             AudioManager.GetComponent<AudioPlayer>().PlayMusic(CowboyCowTheme);
