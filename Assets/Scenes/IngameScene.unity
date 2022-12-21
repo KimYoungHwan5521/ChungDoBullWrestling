@@ -8851,7 +8851,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d933236b4f517d04e9d4af06c44e355f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3527e9814e396a6429c5aeac876c79fc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -14379,7 +14379,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d933236b4f517d04e9d4af06c44e355f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b294f8652b3ad074c97d1b844bdb8ec0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -21280,7 +21280,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d933236b4f517d04e9d4af06c44e355f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 13e91061facc5a54694d5c7b64aecefd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -29783,7 +29783,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15373490da44134aa16a6fa15982b19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameManager: {fileID: 623144560}
   GoldText: {fileID: 1517411394}
   Slot:
   - {fileID: 1268054806}
@@ -30009,6 +30008,7 @@ MonoBehaviour:
   JapaneseCowTheme: {fileID: 8300000, guid: da8a7218dd2cf8d419cb109648688d38, type: 3}
   GermanCowTheme: {fileID: 8300000, guid: 3e8e52c083548eb46bdaf83be3096f7d, type: 3}
   BattleTheme2: {fileID: 8300000, guid: 4aa9f591677572141bd93792e756518d, type: 3}
+  GameManager: {fileID: 623144560}
   HiddenMerchant: {fileID: 2055483280}
   TutorialDialogWindow: {fileID: 507366219}
   TutorialDialog: {fileID: 659503429}
@@ -44768,7 +44768,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d933236b4f517d04e9d4af06c44e355f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c316e40ba9ad8eb44807009c5f9feec6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -60628,7 +60628,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d933236b4f517d04e9d4af06c44e355f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4a41ee0ed57ad7f46bc130374f36f142, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -62614,7 +62614,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d933236b4f517d04e9d4af06c44e355f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 81d7a8c46c89e404ab8549dfc0b3d768, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -69906,7 +69906,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d933236b4f517d04e9d4af06c44e355f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84626245ef7052447ac5cec572c801f3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -86610,7 +86610,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d933236b4f517d04e9d4af06c44e355f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: deb85630770fcb54cb0fed699dc02675, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -105670,7 +105670,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d933236b4f517d04e9d4af06c44e355f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 677c48829398eb34cabf53594b7ae25a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

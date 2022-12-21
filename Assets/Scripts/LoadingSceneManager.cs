@@ -34,7 +34,7 @@ public class LoadingSceneManager : MonoBehaviour
             if(op.progress < 0.9f)
             {
                 ProgressBar.fillAmount = Mathf.Lerp(ProgressBar.fillAmount, op.progress, timer);
-                ProgressText.text = ProgressBar.fillAmount.ToString() + " %";
+                ProgressText.text = (ProgressBar.fillAmount * 100).ToString() + " %";
                 if(ProgressBar.fillAmount >= op.progress)
                 {
                     timer = 0f;
@@ -43,7 +43,7 @@ public class LoadingSceneManager : MonoBehaviour
             else
             {
                 ProgressBar.fillAmount = Mathf.Lerp(ProgressBar.fillAmount, 1f, timer);
-                ProgressText.text = ProgressBar.fillAmount.ToString() + " %";
+                ProgressText.text = (ProgressBar.fillAmount * 100).ToString() + " %";
                 if(ProgressBar.fillAmount == 1.0f)
                 {
                     op.allowSceneActivation = true;

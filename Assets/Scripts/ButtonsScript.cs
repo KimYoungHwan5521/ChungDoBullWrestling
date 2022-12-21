@@ -34,7 +34,7 @@ public class ButtonsScript : MonoBehaviour
         AudioManager.GetComponent<AudioPlayer>().PlayMusic(TownTheme);
         _fadeTime = 6f;
     }
-
+    public GameObject GameManager;
     public GameObject HiddenMerchant;
     public static int tutorialInt = 0;
     public GameObject TutorialDialogWindow;
@@ -200,6 +200,22 @@ public class ButtonsScript : MonoBehaviour
                 {
                     Arrow.SetActive(false);
                     TutorialDialog.text = "경기는 매주 토요일 아침이네, 마을도 한번 둘러보고, 경기 일정을 잡아둘테니 경기장에 찾아와 내게 말을 걸게, 그때 다음 상대에 대한 정보를 알려 주겠네";
+                    Sprite[] itemSprites = GameManager.GetComponent<GameManager>().ItemSprites;
+                    Player.Item item = new Player.Item();
+                    item.itemName = "할아버지의 유품";
+                    item.itemType = "기타";
+                    item.itemPrice = 60000;
+                    item.itemExplain = "할아버지가 남긴 유품이자 집안의 가보이다. 비싸보인다.";
+                    item.itemSprite = itemSprites[0];
+                    Player.inventory.Add(item);
+
+                    item = new Player.Item();
+                    item.itemName = "이빨 빠진 빗";
+                    item.itemType = "빗";
+                    item.itemPrice = 0;
+                    item.itemExplain = "빗 LV 0. 낡아서 이가 다 빠진 빗. 소의 털을 겨우 빗을 수 있어보인다.";
+                    item.itemSprite = itemSprites[2];
+                    Player.inventory.Add(item);
                 }
                 else
                 {
@@ -233,6 +249,19 @@ public class ButtonsScript : MonoBehaviour
             time = 0;
         }
         time += Time.deltaTime;
+
+        // Esc
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(Settings.activeSelf)
+            {
+                Settings.SetActive(false);
+            }
+            else
+            {
+                Settings.SetActive(true);
+            }
+        }
 
     }
     // cowshed
