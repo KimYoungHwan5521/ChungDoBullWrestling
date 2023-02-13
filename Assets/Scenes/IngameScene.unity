@@ -30070,17 +30070,17 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f9734264d93a7ae47b41d29c89b3da2a, type: 3}
   - {fileID: 21300000, guid: 81305d18c84dec84ba3f1b5a355f8aad, type: 3}
   - {fileID: 21300000, guid: 13dc6d9e5921d574ab188623d6b6a42e, type: 3}
-  - {fileID: 21300000, guid: af2d3f4bff9457c47baa21522c304900, type: 3}
-  - {fileID: 21300000, guid: 7503a2d240c7ced47811275ab9a4cac5, type: 3}
-  - {fileID: 21300000, guid: bb2a82b78f41da548bfd6d53ff4b6d71, type: 3}
-  - {fileID: 21300000, guid: a6336457d80bd8647be28114007cfd3d, type: 3}
+  - {fileID: 21300000, guid: 31d23f1b318ff274cb17fdec488d88c3, type: 3}
+  - {fileID: 21300000, guid: 94163fa53ffd29848a62821e6deea2ab, type: 3}
+  - {fileID: 21300000, guid: ac004b6aa092bf4438096fa5dd46f069, type: 3}
+  - {fileID: 21300000, guid: 980c18cef201c294d9070709a8ad28fa, type: 3}
   - {fileID: 21300000, guid: 84f7181767d8e4443890506796fc067b, type: 3}
-  - {fileID: 21300000, guid: 5d323532629895c4fb3c25fdeae97d4b, type: 3}
+  - {fileID: 21300000, guid: 8f88860d810f11140b2bbd393534d4da, type: 3}
   - {fileID: 21300000, guid: f3a17f8ecb51dee4d843ff0004014708, type: 3}
-  - {fileID: 21300000, guid: 0f7449b5563eac84d900bdc198b89614, type: 3}
-  - {fileID: 21300000, guid: 0c855ad300e413844abe418f6354b922, type: 3}
+  - {fileID: 21300000, guid: 319118bc758c33a49974ff194b1dfb71, type: 3}
+  - {fileID: 21300000, guid: c89e929b251d0bc49bd450a0c39e348a, type: 3}
   - {fileID: 21300000, guid: 26d87d5e930029e47978e9b89b36608f, type: 3}
-  - {fileID: 21300000, guid: a769f8302ee05c5469e582090b1d2562, type: 3}
+  - {fileID: 21300000, guid: bdc6d89121a4b0f45928d84f0c7b7ed9, type: 3}
   - {fileID: 21300000, guid: 5659f80db211520419962861c9f5ce28, type: 3}
   - {fileID: 21300000, guid: f956ff59bb1e6ba49996821b2703357b, type: 3}
   dialogIndex: 0
@@ -30418,7 +30418,6 @@ MonoBehaviour:
   TimeText: {fileID: 1735351572}
   dialogIndex: 0
   DayOfTheWeekText: {fileID: 402343270}
-  dateCheck: 0
   DateChange: {fileID: 1193113423}
   DateChangeText: {fileID: 1654736719}
   gameover_dept: 0
@@ -37402,7 +37401,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b909175f87ce40c42a789b6fecdf0939, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 34c79ee92019c7e4984a4f4509a17e73, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -54063,7 +54062,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cd1c1dd795f22af48918aa7a96a42deb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 319118bc758c33a49974ff194b1dfb71, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -64736,6 +64735,7 @@ MonoBehaviour:
   turn: 0
   MyTurn: {fileID: 16779216}
   EnemyTurn: {fileID: 1370587237}
+  dialogID: 0
   dialogIndex: 0
   GameManager: {fileID: 623144560}
   CowHPText: {fileID: 302244456}
@@ -71469,7 +71469,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b909175f87ce40c42a789b6fecdf0939, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 34c79ee92019c7e4984a4f4509a17e73, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

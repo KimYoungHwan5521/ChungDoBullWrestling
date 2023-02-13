@@ -14,6 +14,7 @@ public class TitleScript : MonoBehaviour
     
     public void OnClickStart()
     {
+        ButtonsScript.tutorialInt = 0;
         LoadingSceneManager.LoadScene("IntroScene");
     }
 
