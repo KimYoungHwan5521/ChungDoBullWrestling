@@ -704,125 +704,128 @@ public class ButtonsScript : MonoBehaviour
     }
     public void OnClickDialogNext()
     {
-        dialogIndex++;
-        if(dialogIndex > 10)
+        if(tutorialInt > 11)
         {
-            ButtonFightStart.interactable = true;
-            ButtonVillageHead.interactable = true;
-            TutorialDialogWindow.SetActive(false);
-            ToVillage.SetActive(true);
-            dialogIndex = 0;
-        }
-        if(EnemyCow.cowName == "젖소")
-        {
-            if(dialogIndex == 1)
+            dialogIndex++;
+            if(dialogIndex > 10)
             {
-                TutorialDialog.text = "초반에 힘빼지 말고 녀석이 지쳤을 때에 몰아치는게 좋아보이네";
-                dialogIndex += 10;
+                ButtonFightStart.interactable = true;
+                ButtonVillageHead.interactable = true;
+                TutorialDialogWindow.SetActive(false);
+                ToVillage.SetActive(true);
+                dialogIndex = 0;
             }
-        }
-        else if(EnemyCow.cowName == "누렁이")
-        {
-            if(dialogIndex == 1)
+            if(EnemyCow.cowName == "젖소")
             {
-                TutorialDialog.text = "거름을 걷어차서 눈이 안보이게 한다고 하네";
+                if(dialogIndex == 1)
+                {
+                    TutorialDialog.text = "초반에 힘빼지 말고 녀석이 지쳤을 때에 몰아치는게 좋아보이네";
+                    dialogIndex += 10;
+                }
             }
-            else if(dialogIndex == 2)
+            else if(EnemyCow.cowName == "누렁이")
             {
-                TutorialDialog.text = "눈이 안보이면 공격을 맞출수가 없으니까 눈부터 씻는게 좋을걸세";
-                dialogIndex += 10;
+                if(dialogIndex == 1)
+                {
+                    TutorialDialog.text = "거름을 걷어차서 눈이 안보이게 한다고 하네";
+                }
+                else if(dialogIndex == 2)
+                {
+                    TutorialDialog.text = "눈이 안보이면 공격을 맞출수가 없으니까 눈부터 씻는게 좋을걸세";
+                    dialogIndex += 10;
+                }
             }
-        }
-        else if(EnemyCow.cowName == "우건마")
-        {
-            if(dialogIndex == 1)
+            else if(EnemyCow.cowName == "우건마")
             {
-                TutorialDialog.text = "무시무시한 컴보 공격을 사용한다고 하더구만";
+                if(dialogIndex == 1)
+                {
+                    TutorialDialog.text = "무시무시한 컴보 공격을 사용한다고 하더구만";
+                }
+                else if(dialogIndex == 2)
+                {
+                    TutorialDialog.text = "눈이라도 멀게하지 않으면 힘든 상대가 될걸세";
+                    dialogIndex += 10;
+                }
             }
-            else if(dialogIndex == 2)
+            else if(EnemyCow.cowName == "불판에서 뛰쳐나온 소")
             {
-                TutorialDialog.text = "눈이라도 멀게하지 않으면 힘든 상대가 될걸세";
-                dialogIndex += 10;
+                if(dialogIndex == 1)
+                {
+                    TutorialDialog.text = "덕분에 화속성 마법을 쓰게 된것 같더구먼";
+                    dialogIndex += 10;
+                }
             }
-        }
-        else if(EnemyCow.cowName == "불판에서 뛰쳐나온 소")
-        {
-            if(dialogIndex == 1)
+            else if(EnemyCow.cowName == "미친소")
             {
-                TutorialDialog.text = "덕분에 화속성 마법을 쓰게 된것 같더구먼";
-                dialogIndex += 10;
+                if(dialogIndex == 1)
+                {
+                    TutorialDialog.text = "아주 싸움꾼이라 몸이 튼튼해서 물리공격은 잘 안통하는것 같더구먼";
+                    dialogIndex += 10;
+                }
             }
-        }
-        else if(EnemyCow.cowName == "미친소")
-        {
-            if(dialogIndex == 1)
+            else if(EnemyCow.cowName == "롹커소")
             {
-                TutorialDialog.text = "아주 싸움꾼이라 몸이 튼튼해서 물리공격은 잘 안통하는것 같더구먼";
-                dialogIndex += 10;
+                if(dialogIndex == 1)
+                {
+                    TutorialDialog.text = "특별한 점은 없어보이네";
+                    dialogIndex += 10;
+                }
             }
-        }
-        else if(EnemyCow.cowName == "롹커소")
-        {
-            if(dialogIndex == 1)
+            else if(EnemyCow.cowName == "시소")
             {
-                TutorialDialog.text = "특별한 점은 없어보이네";
-                dialogIndex += 10;
+                if(dialogIndex == 1)
+                {
+                    TutorialDialog.text = "시소 위에만 살아서 균형을 잘잡아 물리공격을 흘리는듯 하네\n태극권 처럼 말이야";
+                    dialogIndex += 10;
+                }
             }
-        }
-        else if(EnemyCow.cowName == "시소")
-        {
-            if(dialogIndex == 1)
+            else if(EnemyCow.cowName == "조소")
             {
-                TutorialDialog.text = "시소 위에만 살아서 균형을 잘잡아 물리공격을 흘리는듯 하네\n태극권 처럼 말이야";
-                dialogIndex += 10;
+                if(dialogIndex == 1)
+                {
+                    TutorialDialog.text = "흠.. 나무로 깎아서 불에 잘붙을거 같아 보이는구만";
+                    dialogIndex += 10;
+                }
             }
-        }
-        else if(EnemyCow.cowName == "조소")
-        {
-            if(dialogIndex == 1)
+            else if(EnemyCow.cowName == "카우보이소")
             {
-                TutorialDialog.text = "흠.. 나무로 깎아서 불에 잘붙을거 같아 보이는구만";
-                dialogIndex += 10;
+                if(dialogIndex == 1)
+                {
+                    TutorialDialog.text = "세계대회부터는 내가 정보가 많이 없어서 도움이 못되겠구만..";
+                    dialogIndex += 10;
+                }
             }
-        }
-        else if(EnemyCow.cowName == "카우보이소")
-        {
-            if(dialogIndex == 1)
+            else if(EnemyCow.cowName == "인도소")
             {
-                TutorialDialog.text = "세계대회부터는 내가 정보가 많이 없어서 도움이 못되겠구만..";
-                dialogIndex += 10;
+                if(dialogIndex == 1)
+                {
+                    TutorialDialog.text = "이야 인도는 소가 참 어마어마하게 크더구만!\n깜짝 놀랄걸세";
+                    dialogIndex += 10;
+                }
             }
-        }
-        else if(EnemyCow.cowName == "인도소")
-        {
-            if(dialogIndex == 1)
+            else if(EnemyCow.cowName == "마법'소'녀")
             {
-                TutorialDialog.text = "이야 인도는 소가 참 어마어마하게 크더구만!\n깜짝 놀랄걸세";
-                dialogIndex += 10;
+                if(dialogIndex == 1)
+                {
+                    TutorialDialog.text = "소가 아주 귀엽더구만";
+                    dialogIndex += 10;
+                }
             }
-        }
-        else if(EnemyCow.cowName == "마법'소'녀")
-        {
-            if(dialogIndex == 1)
+            else if(EnemyCow.cowName == "독일소")
             {
-                TutorialDialog.text = "소가 아주 귀엽더구만";
-                dialogIndex += 10;
+                if(dialogIndex == 1)
+                {
+                    TutorialDialog.text = "독일산이라고 써있었어";
+                    dialogIndex += 10;
+                }
             }
-        }
-        else if(EnemyCow.cowName == "독일소")
-        {
-            if(dialogIndex == 1)
+            else
             {
-                TutorialDialog.text = "독일산이라고 써있었어";
-                dialogIndex += 10;
-            }
-        }
-        else
-        {
-            if(dialogIndex == 0)
-            {
-                TutorialDialog.text = "다음 소는 내가 정보가 전혀 없네";
-                dialogIndex += 10;
+                if(dialogIndex == 0)
+                {
+                    TutorialDialog.text = "다음 소는 내가 정보가 전혀 없네";
+                    dialogIndex += 10;
+                }
             }
         }
     }
