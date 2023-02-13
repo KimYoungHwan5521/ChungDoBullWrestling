@@ -32,7 +32,6 @@ public class ButtonsScript : MonoBehaviour
     void Start()
     {
         AudioManager.GetComponent<AudioPlayer>().PlayMusic(TownTheme);
-        _fadeTime = 6f;
     }
     public GameObject GameManager;
     public GameObject HiddenMerchant;
@@ -42,8 +41,6 @@ public class ButtonsScript : MonoBehaviour
     public GameObject TutorialVillageHead;
     public GameObject Arrow;
     public Button Cow;
-    float time = 0;
-    public float _fadeTime = 10f;
     public Image ToVillageSR;
     void Update()
     {
@@ -235,21 +232,6 @@ public class ButtonsScript : MonoBehaviour
             }
         }
 
-        // ToVillage fade effect
-        if(time < _fadeTime / 2)
-        {
-            ToVillageSR.color = new Color(0, 1, 0, 0.05f * (1 - time / (_fadeTime / 2)));
-        }
-        else if(time < _fadeTime)
-        {
-            ToVillageSR.color = new Color(0, 1, 0, 0.05f * (2 - _fadeTime / time));
-        }
-        else
-        {
-            time = 0;
-        }
-        time += Time.deltaTime;
-
         // Esc
         if(Input.GetKeyDown(KeyCode.Escape))
         {
@@ -284,7 +266,6 @@ public class ButtonsScript : MonoBehaviour
     {
         Cow_Status.SetActive(false);
         ToVillage.SetActive(true);
-        To_Village.SetActive(false);
         EquipmentSetting.SetActive(false);
         EquipmentSelect.SetActive(false);
         FoodSelect.SetActive(false);
@@ -559,14 +540,6 @@ public class ButtonsScript : MonoBehaviour
     }
 
     public GameObject ToVillage;
-    public GameObject To_Village;
-    public void MouseOverToVillage(){
-        To_Village.SetActive(true);
-    }
-
-    public void MouseExitToVillage(){
-        To_Village.SetActive(false);
-    }
 
     public void OnClickToVillage(){
         Cowshed.SetActive(false);
@@ -584,28 +557,24 @@ public class ButtonsScript : MonoBehaviour
         Village.SetActive(false);
         Cowshed.SetActive(true);
         ToVillage.SetActive(true);
-        To_Village.SetActive(false);
     }
     public void OnClickMarket()
     {
         Village.SetActive(false);
         Market.SetActive(true);
         ToVillage.SetActive(true);
-        To_Village.SetActive(false);
     }
     public void OnClickStadium()
     {
         Village.SetActive(false);
         Stadium.SetActive(true);
         ToVillage.SetActive(true);
-        To_Village.SetActive(false);
     }
     public void OnClickField()
     {
         Village.SetActive(false);
         Field.SetActive(true);
         ToVillage.SetActive(true);
-        To_Village.SetActive(false);
     }
 
     // market
@@ -742,7 +711,6 @@ public class ButtonsScript : MonoBehaviour
             ButtonVillageHead.interactable = true;
             TutorialDialogWindow.SetActive(false);
             ToVillage.SetActive(true);
-            To_Village.SetActive(false);
             dialogIndex = 0;
         }
         if(EnemyCow.cowName == "젖소")
@@ -871,7 +839,6 @@ public class ButtonsScript : MonoBehaviour
     {
         PlowingSelect.SetActive(false);
         ToVillage.SetActive(true);
-        To_Village.SetActive(false);
     }
 
     // Top menu bar
