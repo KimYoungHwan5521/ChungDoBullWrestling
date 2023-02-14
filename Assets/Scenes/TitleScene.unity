@@ -1584,6 +1584,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 946780623}
   m_CullTransparentMesh: 1
+--- !u!1 &1096978190
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1096978191}
+  - component: {fileID: 1096978192}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1096978191
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096978190}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1246.9792, y: 716.92114, z: -8394.155}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1522859467}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1096978192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096978190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33c71f2b3056ee14bbb7536a478d28ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicPlayer: {fileID: 1522859466}
+  soundPlayer: {fileID: 0}
+  masterMixer: {fileID: 0}
+  BGMSlider: {fileID: 0}
+  SESlider: {fileID: 0}
+  BGMOn: {fileID: 0}
+  SEOn: {fileID: 0}
 --- !u!1 &1444372304
 GameObject:
   m_ObjectHideFlags: 0
@@ -1767,6 +1818,133 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1522859465
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1522859467}
+  - component: {fileID: 1522859466}
+  m_Layer: 0
+  m_Name: BGM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1522859466
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522859465}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 8993812176336502512, guid: 176e8df20a607684caa5b7d57816b1aa, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1522859467
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522859465}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1096978191}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1568252019
 GameObject:
   m_ObjectHideFlags: 0
@@ -1824,7 +2002,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1283d2f0837305949b71f6b3e3b0e2ba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5f43980f6075a3948902c61211b85dd9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1951,6 +2129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9358f4f59dcef64d976623eb4b2c7e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AudioManager: {fileID: 1096978192}
+  TitleTheme: {fileID: 8300000, guid: 2293eebe76cf4354287dcd78ab5a5320, type: 3}
   SaveFilesTab: {fileID: 673740105}
   TextSaveFile:
   - {fileID: 723377835}
@@ -1986,6 +2166,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fc0980336523b34b9a8d26680fc5e27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialData:
+    gold: 2000
+    inventory: []
+    cowName: "\uC18C"
+    maxHP: 1000
+    maxMP: 100
+    atkDmg: 100
+    armor: 10
+    hunger: 100
+    cleanliness: 100
+    condition: 100
+    MilkCowClear: 0
+    YelloCowClear: 0
+    KangKeonCowClear: 0
+    BurningCowClear: 0
+    MadCowClear: 0
+    RockerCowClear: 0
+    SeesawCowClear: 0
+    WoodCowClear: 0
+    CowboyCowClear: 0
+    ElephantCowClear: 0
+    JapaneseCowClear: 0
+    GermanCowClear: 0
+    GalaxyCowClear: 0
+    SuperSaiyanCowClear: 0
+    GunDamCowClear: 0
+    NotCowClear: 0
+    enemyCowID: 0
+    intAction: 0
+    intDayOfTheWeek: 0
+    intDate: 0
+    randomForHiddenMarket: 0
+    debtRepaymentEventCheck: 0
+    dateCheck: 1
+    hairbrushPerformance: 15
   savedData:
     gold: 2000
     inventory: []
@@ -2013,11 +2228,13 @@ MonoBehaviour:
     SuperSaiyanCowClear: 0
     GunDamCowClear: 0
     NotCowClear: 0
+    enemyCowID: 0
     intAction: 0
     intDayOfTheWeek: 0
     intDate: 0
     randomForHiddenMarket: 2
     debtRepaymentEventCheck: 0
+    dateCheck: 1
     hairbrushPerformance: 15
   path: 
   nowSlot: 0

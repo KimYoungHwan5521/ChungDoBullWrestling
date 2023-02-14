@@ -7,9 +7,12 @@ using System.IO;
 
 public class TitleScript : MonoBehaviour
 {
+    public AudioPlayer AudioManager;
+    public AudioClip TitleTheme;
     void Start()
     {
         // DataManager.instance.SaveInitialData();
+        AudioManager.GetComponent<AudioPlayer>().PlayMusic(TitleTheme, true);
     }
     
     public void OnClickStart()
