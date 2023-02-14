@@ -61,7 +61,6 @@ public class GameManager : MonoBehaviour
     public GameObject Alert;
     public Text Alert_Text;
     public GameObject ToVillage;
-    public GameObject To_Village;
     public static int slotnum = 0;
     public static int marketID = 0;
     public Text Merchant_Mention;
@@ -110,7 +109,6 @@ public class GameManager : MonoBehaviour
         Hidden_Market_Button.interactable = true;
         HairbrushReinforcementButton.interactable = true;
         ToVillage.SetActive(true);
-        To_Village.SetActive(false);
     }
 
     public GameObject[] Marchandise;
@@ -474,7 +472,6 @@ public class GameManager : MonoBehaviour
         Hidden_Market_Button.interactable = true;
         HairbrushReinforcementButton.interactable = true;
         ToVillage.SetActive(true);
-        To_Village.SetActive(false);
     }
     public void OnClickHairbrushReinforcement()
     {
@@ -503,7 +500,6 @@ public class GameManager : MonoBehaviour
             Hidden_Market_Button.interactable = true;
             HairbrushReinforcementButton.interactable = true;
             ToVillage.SetActive(true);
-            To_Village.SetActive(false);
         }
         Alert.SetActive(true);
     }

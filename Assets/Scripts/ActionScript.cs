@@ -430,7 +430,6 @@ public class ActionScript : MonoBehaviour
     public Button Hidden_Market_Button;
     public Button HairbrushReinforcementButton;
     public GameObject ToVillage;
-    public GameObject To_Village;
 
     public static bool energyDrink = false;
     public void OnClickConfirmActionConfirm()
@@ -444,7 +443,6 @@ public class ActionScript : MonoBehaviour
         Hidden_Market_Button.interactable = true;
         HairbrushReinforcementButton.interactable = true;
         ToVillage.SetActive(true);
-        To_Village.SetActive(false);
         if(ActionID == 0)
         {
             MyCow.hunger += 30;

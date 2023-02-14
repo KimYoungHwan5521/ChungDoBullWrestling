@@ -2896,7 +2896,6 @@ public class BullFightScript : MonoBehaviour
     public GameObject BullFight;
     public GameObject TopMenuBar;
     public GameObject ToVillage;
-    public GameObject To_Village;
     public Button ButtonSave;
     public Button ButtonLoad;
     public void BattleOver()
@@ -2906,7 +2905,6 @@ public class BullFightScript : MonoBehaviour
         ActionScript.intAction++;
         BattleLog.text = "";
         ToVillage.SetActive(true);
-        To_Village.SetActive(false);
         Cowshed.SetActive(true);
         BullFight.SetActive(false);
         TopMenuBar.SetActive(true);
