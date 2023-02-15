@@ -634,6 +634,15 @@ public class BullFightScript : MonoBehaviour
         enemyCowSuperSaiyanLeft2.text = "<color=blue>" + (int.Parse(enemyCowSuperSaiyanLeft.text.Substring(12,1)) / 2).ToString() + "</color>";
         cowElectricShockLeft2.text = "<color=red>" + (int.Parse(cowElectricShockLeft.text.Substring(11,1)) / 2).ToString() + "</color>";
 
+        if(WarningMessage.text == "")
+        {
+            WarningMessageBox.SetActive(false);
+        }
+        else
+        {
+            WarningMessageBox.SetActive(true);
+        }
+
     }
     
     public void OnClickOK()
@@ -1118,6 +1127,7 @@ public class BullFightScript : MonoBehaviour
     }
 
     public Text BattleLog;
+    public GameObject WarningMessageBox;
     public Text WarningMessage;
 
     public void OnClickSkill(int skillID){

@@ -647,51 +647,51 @@ public class ButtonsScript : MonoBehaviour
         ButtonVillageHead.interactable = false;
         TutorialDialogWindow.SetActive(true);
         ToVillage.SetActive(false);
-        if(EnemyCow.cowName == "젖소")
+        if(BullFightScript.enemyCowID == 0)
         {
             TutorialDialog.text = "다음 상대는 옆집 이씨네 젖소네";
         }
-        else if(EnemyCow.cowName == "누렁이")
+        else if(BullFightScript.enemyCowID == 1)
         {
             TutorialDialog.text = "다음 상대는 옆마을 정씨네 누렁이네";
         }
-        else if(EnemyCow.cowName == "우건마")
+        else if(BullFightScript.enemyCowID == 2)
         {
             TutorialDialog.text = "다음 상대는 아랫마을 최씨네 소일세";
         }
-        else if(EnemyCow.cowName == "불판에서 뛰쳐나온 소")
+        else if(BullFightScript.enemyCowID == 3)
         {
             TutorialDialog.text = "다음 상대는 옆마을에서 구워 먹으려다가 불판에서 뛰쳐 나온 소라고 하네";
         }
-        else if(EnemyCow.cowName == "미친소")
+        else if(BullFightScript.enemyCowID == 4)
         {
             TutorialDialog.text = "다음 상대는 미친소네";
         }
-        else if(EnemyCow.cowName == "롹커소")
+        else if(BullFightScript.enemyCowID == 5)
         {
             TutorialDialog.text = "다음 상대는 롹커소네";
         }
-        else if(EnemyCow.cowName == "시소")
+        else if(BullFightScript.enemyCowID == 6)
         {
             TutorialDialog.text = "다음 상대는 시소네";
         }
-        else if(EnemyCow.cowName == "조소")
+        else if(BullFightScript.enemyCowID == 7)
         {
             TutorialDialog.text = "다음 상대는 조소네";
         }
-        else if(EnemyCow.cowName == "카우보이소")
+        else if(BullFightScript.enemyCowID == 8)
         {
             TutorialDialog.text = "다음 상대는 미국 출신의 카우보이 소네";
         }
-        else if(EnemyCow.cowName == "인도소")
+        else if(BullFightScript.enemyCowID == 9)
         {
             TutorialDialog.text = "다음 상대는 인도출신의 소네";
         }
-        else if(EnemyCow.cowName == "마법'소'녀")
+        else if(BullFightScript.enemyCowID == 10)
         {
             TutorialDialog.text = "다음 상대는 일본 출신의 소네";
         }
-        else if(EnemyCow.cowName == "독일소")
+        else if(BullFightScript.enemyCowID == 11)
         {
             TutorialDialog.text = "다음 상대는 독일 출신의 소네";
         }
@@ -715,7 +715,7 @@ public class ButtonsScript : MonoBehaviour
                 ToVillage.SetActive(true);
                 dialogIndex = 0;
             }
-            if(EnemyCow.cowName == "젖소")
+            if(BullFightScript.enemyCowID == 0)
             {
                 if(dialogIndex == 1)
                 {
@@ -723,7 +723,7 @@ public class ButtonsScript : MonoBehaviour
                     dialogIndex += 10;
                 }
             }
-            else if(EnemyCow.cowName == "누렁이")
+            else if(BullFightScript.enemyCowID == 1)
             {
                 if(dialogIndex == 1)
                 {
@@ -735,7 +735,7 @@ public class ButtonsScript : MonoBehaviour
                     dialogIndex += 10;
                 }
             }
-            else if(EnemyCow.cowName == "우건마")
+            else if(BullFightScript.enemyCowID == 2)
             {
                 if(dialogIndex == 1)
                 {
@@ -747,7 +747,7 @@ public class ButtonsScript : MonoBehaviour
                     dialogIndex += 10;
                 }
             }
-            else if(EnemyCow.cowName == "불판에서 뛰쳐나온 소")
+            else if(BullFightScript.enemyCowID == 3)
             {
                 if(dialogIndex == 1)
                 {
@@ -755,7 +755,7 @@ public class ButtonsScript : MonoBehaviour
                     dialogIndex += 10;
                 }
             }
-            else if(EnemyCow.cowName == "미친소")
+            else if(BullFightScript.enemyCowID == 4)
             {
                 if(dialogIndex == 1)
                 {
@@ -763,7 +763,7 @@ public class ButtonsScript : MonoBehaviour
                     dialogIndex += 10;
                 }
             }
-            else if(EnemyCow.cowName == "롹커소")
+            else if(BullFightScript.enemyCowID == 5)
             {
                 if(dialogIndex == 1)
                 {
@@ -771,7 +771,7 @@ public class ButtonsScript : MonoBehaviour
                     dialogIndex += 10;
                 }
             }
-            else if(EnemyCow.cowName == "시소")
+            else if(BullFightScript.enemyCowID == 6)
             {
                 if(dialogIndex == 1)
                 {
@@ -779,7 +779,7 @@ public class ButtonsScript : MonoBehaviour
                     dialogIndex += 10;
                 }
             }
-            else if(EnemyCow.cowName == "조소")
+            else if(BullFightScript.enemyCowID == 7)
             {
                 if(dialogIndex == 1)
                 {
@@ -787,7 +787,7 @@ public class ButtonsScript : MonoBehaviour
                     dialogIndex += 10;
                 }
             }
-            else if(EnemyCow.cowName == "카우보이소")
+            else if(BullFightScript.enemyCowID == 8)
             {
                 if(dialogIndex == 1)
                 {
@@ -795,7 +795,7 @@ public class ButtonsScript : MonoBehaviour
                     dialogIndex += 10;
                 }
             }
-            else if(EnemyCow.cowName == "인도소")
+            else if(BullFightScript.enemyCowID == 9)
             {
                 if(dialogIndex == 1)
                 {
@@ -803,7 +803,7 @@ public class ButtonsScript : MonoBehaviour
                     dialogIndex += 10;
                 }
             }
-            else if(EnemyCow.cowName == "마법'소'녀")
+            else if(BullFightScript.enemyCowID == 0)
             {
                 if(dialogIndex == 1)
                 {
@@ -811,7 +811,7 @@ public class ButtonsScript : MonoBehaviour
                     dialogIndex += 10;
                 }
             }
-            else if(EnemyCow.cowName == "독일소")
+            else if(BullFightScript.enemyCowID == 10)
             {
                 if(dialogIndex == 1)
                 {
