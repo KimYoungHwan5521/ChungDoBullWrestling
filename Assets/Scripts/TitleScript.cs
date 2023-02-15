@@ -27,7 +27,7 @@ public class TitleScript : MonoBehaviour
 
     public void OnClickLoad()
     {
-        for(int i=0;i<3;i++)
+        for(int i=0;i<20;i++)
         {
             if(File.Exists(DataManager.instance.path + $"{i}"))
             {
@@ -61,11 +61,14 @@ public class TitleScript : MonoBehaviour
 
     public void Load(int slotnum)
     {
-        LoadingSceneManager.LoadScene("IngameScene");
-        ButtonsScript.tutorialInt = 12;
-        DataManager.instance.nowSlot = slotnum;
-        DataManager.instance.LoadData();
-        DataManager.instance.IntegrateLoadedData();
+        if(File.Exists(DataManager.instance.path + slotnum))
+        {
+            LoadingSceneManager.LoadScene("IngameScene");
+            ButtonsScript.tutorialInt = 12;
+            DataManager.instance.nowSlot = slotnum;
+            DataManager.instance.LoadData();
+            DataManager.instance.IntegrateLoadedData();
+        }
 
     }
 
