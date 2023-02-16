@@ -22,6 +22,10 @@ public class AudioPlayer : MonoBehaviour
         musicPlayer.time = 0;
         musicPlayer.Play();
     }
+    public void MusicStop()
+    {
+        musicPlayer.Stop();
+    }
     public void PlaySound(AudioClip clip)
     {
         soundPlayer.clip = clip;

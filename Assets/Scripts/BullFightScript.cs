@@ -254,7 +254,19 @@ public class BullFightScript : MonoBehaviour
         CowHPText.text = "<color=red>" + MyCow.nowHP + "/" + MyCow.maxHP + "</color>";
         CowMPText.text = "<color=lime>" + MyCow.nowMP + "/" + MyCow.maxMP + "</color>";
         EnemyCowHPText.text = "<color=red>" + EnemyCow.nowHP + "/" + EnemyCow.maxHP + "</color>";
-        if(dialogID == 1)
+        if(dialogID == -1)
+        {
+            if(Input.anyKeyDown)
+            {
+                if(dialogIndex==0)
+                {
+                    DataManager.ending = 1;
+                    SceneManager.LoadScene("EndingScene");
+                }
+                dialogIndex++;
+            }
+        }
+        else if(dialogID == 1)
         {
             if(Input.anyKeyDown)
             {
@@ -769,7 +781,7 @@ public class BullFightScript : MonoBehaviour
         }
     }
 
-    public void StatusCheck()
+    IEnumerator StatusCheck()
     {
         if(cowBlind.activeSelf)
         {
@@ -836,8 +848,9 @@ public class BullFightScript : MonoBehaviour
             MyCow.nowHP -= dmg;
             if(MyCow.nowHP <= 0)
             {
-                DataManager.ending = 1;
-                SceneManager.LoadScene("EndingScene");
+                WarningMessage.text = "패배..";
+                AudioManager.GetComponent<AudioPlayer>().MusicStop();
+                dialogID = -1;
             }
             if(cowOnFireLeftInt == 0)
             {
@@ -961,8 +974,9 @@ public class BullFightScript : MonoBehaviour
             MyCow.nowHP -= dmg;
             if(MyCow.nowHP <= 0)
             {
-                DataManager.ending = 1;
-                SceneManager.LoadScene("EndingScene");
+                WarningMessage.text = "패배..";
+                AudioManager.GetComponent<AudioPlayer>().MusicStop();
+                dialogID = -1;
             }
             dmg = EnemyCow.maxHP / 10;
             if(enemyCowSteelization.activeSelf) dmg /= 2;
@@ -973,6 +987,7 @@ public class BullFightScript : MonoBehaviour
             }
 
         }
+        yield return null;
     }
 
     // Status activity
@@ -1596,7 +1611,7 @@ public class BullFightScript : MonoBehaviour
                 cowExhaustion.SetActive(true);
                 enemyCowExhaustion.SetActive(true);
             }
-            StatusCheck();
+            StartCoroutine(StatusCheck());
             turnText.text = "상대의 턴!";
             MyTurn.SetActive(false);
             EnemyTurn.SetActive(true);
@@ -2171,10 +2186,11 @@ public class BullFightScript : MonoBehaviour
         scroll_rect.verticalNormalizedPosition = 0.0f;
         if(MyCow.nowHP <= 0)
         {
-            DataManager.ending = 1;
-            SceneManager.LoadScene("EndingScene");
+            WarningMessage.text = "패배..";
+            AudioManager.GetComponent<AudioPlayer>().MusicStop();
+            dialogID = -1;
         }
-        StatusCheck();
+        StartCoroutine(StatusCheck());
         turn++;
         turnEnd = false;
         myTurn = true;
