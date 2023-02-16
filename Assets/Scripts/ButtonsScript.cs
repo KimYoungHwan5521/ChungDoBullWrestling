@@ -891,7 +891,7 @@ public class ButtonsScript : MonoBehaviour
     }
     public GameObject OpenSaveFilesTab;
     public GameObject SaveFilesTab;
-    bool[] savefilechecks = new bool[3];
+    bool[] savefilechecks = new bool[20];
     public Button[] ButtonSaveFile;
     public Button ButtonSaveFilesClose;
     public Text[] TextSaveFile;
