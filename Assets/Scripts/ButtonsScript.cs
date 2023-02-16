@@ -949,7 +949,7 @@ public class ButtonsScript : MonoBehaviour
         {
             if(savefilechecks[slotnum])
             {
-                for(int i=0; i<3; i++)
+                for(int i=0; i<20; i++)
                 {
                     ButtonSaveFile[i].interactable = false;
                 }
@@ -962,7 +962,7 @@ public class ButtonsScript : MonoBehaviour
         {
             if(savefilechecks[slotnum])
             {
-                for(int i=0; i<3; i++)
+                for(int i=0; i<20; i++)
                 {
                     ButtonSaveFile[i].interactable = false;
                 }
@@ -973,7 +973,7 @@ public class ButtonsScript : MonoBehaviour
             else
             {
                 DataManager.instance.SaveData();
-                for(int i=0;i<3;i++)
+                for(int i=0;i<20;i++)
                 {
                     if(File.Exists(DataManager.instance.path + $"{i}"))
                     {
@@ -998,7 +998,7 @@ public class ButtonsScript : MonoBehaviour
                         TextSavedTime[i].text = "";
                     }
                 }
-                for(int i=0; i<3; i++)
+                for(int i=0; i<20; i++)
                 {
                     ButtonSaveFile[i].interactable = true;
                 }
@@ -1009,7 +1009,7 @@ public class ButtonsScript : MonoBehaviour
     }
     public void ConfirmSaveOK()
     {
-        for(int i=0; i<3; i++)
+        for(int i=0; i<20; i++)
         {
             ButtonSaveFile[i].interactable = true;
         }
@@ -1018,7 +1018,7 @@ public class ButtonsScript : MonoBehaviour
         {
             DataManager.instance.LoadData();
             DataManager.instance.IntegrateLoadedData();
-            for(int i=0; i<3; i++)
+            for(int i=0; i<20; i++)
             {
                 ButtonSaveFile[i].interactable = true;
             }
@@ -1030,7 +1030,7 @@ public class ButtonsScript : MonoBehaviour
         else
         {
             DataManager.instance.SaveData();
-            for(int i=0;i<3;i++)
+            for(int i=0;i<20;i++)
             {
                 if(File.Exists(DataManager.instance.path + $"{i}"))
                 {
@@ -1055,7 +1055,7 @@ public class ButtonsScript : MonoBehaviour
                     TextSavedTime[i].text = "";
                 }
             }
-            for(int i=0; i<3; i++)
+            for(int i=0; i<20; i++)
             {
                 ButtonSaveFile[i].interactable = true;
             }
@@ -1065,7 +1065,7 @@ public class ButtonsScript : MonoBehaviour
     }
     public void ConfirmSaveDeny()
     {
-        for(int i=0; i<3; i++)
+        for(int i=0; i<20; i++)
         {
             ButtonSaveFile[i].interactable = true;
         }
